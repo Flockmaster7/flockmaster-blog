@@ -1,0 +1,11 @@
+{
+	"name": "@bin",
+	"scripts": {
+		"dev:blogs": "pnpm -F @bin/flockmaster-blogs dev",
+		"dev:service": "pnpm -F @bin/flockmaster-blogs-service dev"
+	},
+	"devDependencies": {
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.4"
+	}
+}
