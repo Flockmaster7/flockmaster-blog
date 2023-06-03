@@ -13,7 +13,7 @@ const sequelize = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
 	] // 数据库模板存放地址
 });
 
-// sequelize.sync({ force: false });
+// sequelize.sync({ force: true });
 
 sequelize
 	.authenticate()

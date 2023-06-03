@@ -1,5 +1,5 @@
-export interface Result<T> {
-	status: number;
+export interface ResultType<T> {
+	code: number;
 	data: T;
 	message: string;
 }

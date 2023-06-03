@@ -1,5 +1,7 @@
 import { Context } from 'koa';
 import UserService from '../service/userService';
+import Result from '../utils/Result';
+import ERROR from '../utils/Error';
 
 const userService = new UserService();
 
@@ -12,17 +14,12 @@ class UserController {
 		const { user_name, password } = ctx.request.body;
 		try {
 			const res = await userService.createUser(user_name, password);
-			ctx.body = {
-				code: 0,
-				message: '用户注册成功',
-				result: {
-					id: res.id,
-					user_name: res.user_name
-				}
-			};
+			let data = res;
+			delete data.password;
+			ctx.body = new Result(200, '用户注册成功', data);
 		} catch (error) {
 			console.error(error);
-			// ctx.app.emit('error', userRegisterError, ctx);
+			ctx.app.emit('error', ERROR.userRegisterError, ctx);
 		}
 	}
 }
