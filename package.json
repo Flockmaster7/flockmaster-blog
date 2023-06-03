@@ -2,7 +2,11 @@
 	"name": "@bin",
 	"scripts": {
 		"dev:blogs": "pnpm -F @bin/flockmaster-blogs dev",
-		"dev:service": "pnpm -F @bin/flockmaster-blogs-service dev"
+		"dev:service": "pnpm -F @bin/flockmaster-blogs-service dev",
+		"build:blogs": "pnpm -F @bin/flockmaster-blogs build",
+		"build:service": "pnpm -F @bin/flockmaster-blogs-service build",
+		"start:blogs": "pnpm -F @bin/flockmaster-blogs start",
+		"start:service": "pnpm -F @bin/flockmaster-blogs-service start"
 	},
 	"devDependencies": {
 		"ts-node": "^10.9.1",

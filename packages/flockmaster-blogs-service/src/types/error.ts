@@ -1,5 +1,5 @@
-export interface errorReturnType {
+export interface ErrorReturnType<T> {
 	code: string | number;
 	message: string;
-	result: string;
+	result: T;
 }

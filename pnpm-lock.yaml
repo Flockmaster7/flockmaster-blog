@@ -38,6 +38,9 @@ importers:
       '@types/koa-router':
         specifier: ^7.4.4
         version: 7.4.4
+      '@types/koa2-cors':
+        specifier: ^2.0.2
+        version: 2.0.2
       '@types/node':
         specifier: ^20.2.5
         version: 20.2.5
@@ -470,6 +473,12 @@ packages:
 
   /@types/koa-router@7.4.4:
     resolution: {integrity: sha512-3dHlZ6CkhgcWeF6wafEUvyyqjWYfKmev3vy1PtOmr0mBc3wpXPU5E8fBBd4YQo5bRpHPfmwC5yDaX7s4jhIN6A==}
+    dependencies:
+      '@types/koa': 2.13.6
+    dev: false
+
+  /@types/koa2-cors@2.0.2:
+    resolution: {integrity: sha512-S7D//zbF0oJJJ7l6eFT2ThXPCjxHOv84HKMKiZPmVu51Bf4GWZGbTZDedIoUo/aXEIwTnfKbSiod/vqidfDwjg==}
     dependencies:
       '@types/koa': 2.13.6
     dev: false

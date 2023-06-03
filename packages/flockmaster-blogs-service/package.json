@@ -6,7 +6,9 @@
     "@": ".",
     "@root": "./src"
   },
-  "_moduleDirectories": ["node_modules_custom"],
+  "_moduleDirectories": [
+    "node_modules_custom"
+  ],
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon ./src/index.ts",
@@ -20,6 +22,7 @@
   "dependencies": {
     "@types/koa": "^2.13.6",
     "@types/koa-router": "^7.4.4",
+    "@types/koa2-cors": "^2.0.2",
     "@types/node": "^20.2.5",
     "@types/validator": "^13.7.17",
     "bcryptjs": "^2.4.3",

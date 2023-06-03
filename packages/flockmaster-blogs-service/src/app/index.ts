@@ -2,14 +2,24 @@ import path from 'path';
 // Koa业务
 import Koa from 'koa';
 import { koaBody } from 'koa-body';
+import cors from 'koa2-cors'; // 跨域处理
 // import parameter from 'koa-parameter';
 // import koaStatic from 'koa-static';
 import errHandler from './errHandler';
 import router from '../router/index';
+import { corsHandler } from '../middleware/cors';
+// import sequelize from '../db/index';
 
 const parameter = require('koa-parameter');
 const koaStatic = require('koa-static');
 const logger = require('koa-logger');
+const sequelize = require('../db/index');
+
+// // 初始化模型
+// sequelize.addModels([
+// 	`${path.resolve(__dirname, '../model')}/*.ts`,
+// 	`${path.resolve(__dirname, '../model')}/*.js`
+// ]);
 
 const app = new Koa();
 
@@ -46,6 +56,9 @@ parameter(app);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+
+// 跨域
+app.use(cors(corsHandler));
 
 app.on('error', errHandler);
 

@@ -1,6 +1,6 @@
 import { Context } from 'koa';
-import { errorReturnType } from '../types/error';
-const errHandler = (err: errorReturnType, ctx: Context) => {
+import { ErrorReturnType } from '../types/error';
+const errHandler = <T>(err: ErrorReturnType<T>, ctx: Context) => {
 	let status = 500;
 	switch (err.code) {
 		case '10001':

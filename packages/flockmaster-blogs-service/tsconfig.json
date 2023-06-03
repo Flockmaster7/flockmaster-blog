@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "ES2015", // 目标js版本
+      "target": "es6", // 目标js版本
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true, 
       "useDefineForClassFields": true, 
@@ -9,12 +9,14 @@
       "outDir": "./dist",
       "esModuleInterop": true, 
       "forceConsistentCasingInFileNames": true,
-      "strict": true, 
+      "strict": false, 
       "skipLibCheck": true 
     },
      "include": [
       "src/**/*",
+      "src/**/*.ts",
       "index.d.ts"
     ],
-    "exclude": ["node_modules", "dist", "public"]
+    "exclude": ["node_modules", "dist", "public"],
+    "ts-node": { "esm": true }
 }
