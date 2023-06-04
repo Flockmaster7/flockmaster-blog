@@ -1,11 +1,14 @@
 ## 前言
 
-本项目为个人博客项目，目标是实现一个前后端分离的个人博客，目前还未开发完毕
+本项目为个人博客项目，目标是实现一个前后端分离的个人博客
 
 ## 启动命令
 
+安装依赖：pnpm install<br>
+
 前端：pnpm run dev:blogs<br>
-后端:   pnpm run dev:service<br>
+
+后端：pnpm run dev:service<br>
 
 ## 技术栈
 
