@@ -13,7 +13,7 @@ export default {
 	userDoesNotExist: errorForm('10004', '用户不存在', ''),
 	userLoginError: errorForm('10005', '用户登录失败', ''),
 	validatPasswordError: errorForm('10006', '密码错误', ''),
-	tokenExpiredError: errorForm('10101', 'token已过期', ''),
+	tokenExpiredError: errorForm('401', 'token已过期', ''),
 	invalidTokenError: errorForm('10102', '无效token', ''),
 	userChangePasswordError: errorForm('10007', '修改密码失败', '')
 };
