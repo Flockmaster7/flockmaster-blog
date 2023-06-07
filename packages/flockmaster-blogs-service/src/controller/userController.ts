@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Context } from 'koa';
+import { Context, Next } from 'koa';
 import UserService from '../service/userService';
 import Result from '../utils/Result';
 import ERROR from '../utils/Error';
@@ -38,6 +38,22 @@ class UserController {
 		} catch (error) {
 			console.error(error);
 			ctx.app.emit('error', ERROR.userRegisterError, ctx);
+		}
+	}
+
+	async updatePassword(ctx: Context) {
+		try {
+			const { password } = ctx.request.body;
+			const id = ctx.state.userInfo.id;
+			const res = await userService.updateUser({ id, password });
+			if (res) {
+				ctx.body = new Result(200, '修改密码成功', 'success');
+			} else {
+				ctx.body = new Result(200, '修改密码失败', 'fail');
+			}
+		} catch (error) {
+			console.error('修改密码失败', error);
+			ctx.app.emit('error', ERROR.userChangePasswordError, ctx);
 		}
 	}
 }

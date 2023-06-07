@@ -4,7 +4,8 @@ import {
 	loginOrRegisterFormValidator,
 	userVerify,
 	cryptPassword,
-	verifyLogin
+	verifyLogin,
+	userIsExist
 } from '../middleware/userMiddleware';
 
 const router = new Router({ prefix: '/users' });
@@ -24,6 +25,14 @@ router.post(
 	userVerify,
 	cryptPassword,
 	userController.register
+);
+
+router.post(
+	'/updatepwd',
+	loginOrRegisterFormValidator,
+	userIsExist,
+	cryptPassword,
+	userController.updatePassword
 );
 
 module.exports = router;

@@ -9,6 +9,8 @@ const errHandler = <T>(err: ErrorReturnType<T>, ctx: Context) => {
 		case '10002':
 			status = 409;
 			break;
+		case '10006':
+			status = 400;
 		default:
 			status = 500;
 			break;

@@ -1,5 +1,5 @@
 import User from '../model/User';
-import { GetUserInfoParamsType } from '../types/user';
+import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
 
 class UserService {
 	async createUser(user_name: string, password: string): Promise<User> {
@@ -31,6 +31,13 @@ class UserService {
 			where: wrapper
 		});
 		return res ? res.dataValues : null;
+	}
+
+	async updateUser(userInfo: UpdateUserInfoParamsType) {
+		const wrapper = { id: userInfo.id };
+		const res = await User.update(userInfo, { where: wrapper });
+		console.log(res);
+		return res[0] > 0 ? true : false;
 	}
 }
 

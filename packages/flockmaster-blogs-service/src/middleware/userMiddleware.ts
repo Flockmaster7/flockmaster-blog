@@ -66,4 +66,29 @@ const verifyLogin = async (ctx: Context, next: Next) => {
 	await next();
 };
 
-export { loginOrRegisterFormValidator, userVerify, cryptPassword, verifyLogin };
+//查看账号是否已存在
+const userIsExist = async (ctx: Context, next: Next) => {
+	const { user_name } = ctx.request.body;
+	try {
+		const res = await userService.getUserInfo({ user_name });
+		console.log(res);
+		ctx.state.userInfo = res;
+		if (!res) {
+			console.error('用户不存在', { user_name });
+			ctx.app.emit('error', ERROR.userAlreadExist, ctx);
+			return;
+		}
+	} catch (error) {
+		console.error('用户不存在', { user_name });
+		// ctx.app.emit('error', ERROR.userRegisterError, ctx);
+	}
+	await next();
+};
+
+export {
+	loginOrRegisterFormValidator,
+	userVerify,
+	cryptPassword,
+	verifyLogin,
+	userIsExist
+};
