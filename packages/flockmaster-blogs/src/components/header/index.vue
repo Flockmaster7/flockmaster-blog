@@ -10,7 +10,7 @@
 			</div>
 		</div>
 		<div class="rightBox">
-			<div class="avater">
+			<div class="avater" @click="toUserDetail">
 				<img src="@/static/images/login_bg.png" alt="" />
 			</div>
 		</div>
@@ -18,7 +18,12 @@
 </template>
 
 <script setup lang="ts">
+	import { useRouter } from 'vue-router';
 	import { navLinkList } from './nav';
+	const router = useRouter();
+	const toUserDetail = () => {
+		router.push('/my');
+	};
 </script>
 
 <style lang="scss" scoped>

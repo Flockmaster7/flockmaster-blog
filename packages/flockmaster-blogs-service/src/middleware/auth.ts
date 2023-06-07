@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import processEnv from '../config/config.default';
 import Error from '../utils/Error';
 const auth = async (ctx: Context, next: Next) => {
-	const { authorization = '' } = ctx.request.body;
+	const { authorization = '' } = ctx.request.header;
 	const token = authorization.replace('Bearer ', '');
 	try {
 		const user = jwt.verify(token, processEnv.JWT_SECRET as string);

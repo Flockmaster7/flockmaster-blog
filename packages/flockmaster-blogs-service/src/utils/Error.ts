@@ -15,5 +15,7 @@ export default {
 	validatPasswordError: errorForm('10006', '密码错误', ''),
 	tokenExpiredError: errorForm('401', 'token已过期', ''),
 	invalidTokenError: errorForm('10102', '无效token', ''),
-	userChangePasswordError: errorForm('10007', '修改密码失败', '')
+	userChangePasswordError: errorForm('10007', '修改密码失败', ''),
+	getUserInfoError: errorForm('10008', '获取用户信息失败', ''),
+	updateUserInfoError: errorForm('10009', '修改用户信息失败', '')
 };

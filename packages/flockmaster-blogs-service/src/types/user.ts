@@ -8,6 +8,8 @@ export interface GetUserInfoParamsType {
 	user_name?: string;
 	password?: string;
 	is_admin?: number;
+	name?: string;
+	description?: string;
 }
 
 export interface UpdateUserInfoParamsType {

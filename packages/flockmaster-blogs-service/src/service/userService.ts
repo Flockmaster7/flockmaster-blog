@@ -19,15 +19,26 @@ class UserService {
 		id,
 		user_name,
 		password,
-		is_admin
+		is_admin,
+		name,
+		description
 	}: GetUserInfoParamsType) {
 		const wrapper = {};
 		id && Object.assign(wrapper, { id });
 		user_name && Object.assign(wrapper, { user_name });
 		password && Object.assign(wrapper, { password });
 		is_admin && Object.assign(wrapper, { is_admin });
+		name && Object.assign(wrapper, { name });
+		description && Object.assign(wrapper, { description });
 		const res = await User.findOne({
-			attributes: ['id', 'user_name', 'password', 'is_admin'],
+			attributes: [
+				'id',
+				'user_name',
+				'password',
+				'is_admin',
+				'name',
+				'description'
+			],
 			where: wrapper
 		});
 		return res ? res.dataValues : null;

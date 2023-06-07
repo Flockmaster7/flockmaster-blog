@@ -7,6 +7,7 @@ import {
 	verifyLogin,
 	userIsExist
 } from '../middleware/userMiddleware';
+import { auth } from '../middleware/auth';
 
 const router = new Router({ prefix: '/users' });
 
@@ -34,5 +35,9 @@ router.post(
 	cryptPassword,
 	userController.updatePassword
 );
+
+router.get('/getUserInfo', auth, userController.getUserInfo);
+
+router.post('/updateUserInfo', auth, userController.updateUserInfo);
 
 module.exports = router;
