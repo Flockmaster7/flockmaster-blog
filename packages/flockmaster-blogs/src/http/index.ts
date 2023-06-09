@@ -6,6 +6,7 @@ import axios, {
 import cache from '@/utils/cache';
 import { useRouter } from 'vue-router';
 import type { HttpResponse } from '@/types/http.d.ts';
+import { isLogin } from '@/utils/isLogin';
 
 const router = useRouter();
 const redirectToLogin = (path: string) => {
@@ -23,7 +24,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
-	if (cache.getCache('TOKEN')) {
+	if (isLogin()) {
 		config.headers.Authorization = cache.getCache('TOKEN');
 	}
 	//  else {

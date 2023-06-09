@@ -2,8 +2,8 @@
 	<div class="header-container">
 		<div class="leftBox">
 			<div class="logo">
-				<img src="@/static/images/logo/vite.svg" alt="" />
 				<div class="logo--text">Flockmaster</div>
+				<div class="logo--logo">blogs</div>
 			</div>
 			<div class="navLink" v-for="(item, index) in navLinkList">
 				<router-link :to="item.src">{{ item.title }}</router-link>
@@ -20,8 +20,10 @@
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import { navLinkList } from './nav';
+	import { isLogin } from '@/utils/isLogin';
 	const router = useRouter();
 	const toUserDetail = () => {
+		if (!isLogin()) return;
 		router.push('/my');
 	};
 </script>
@@ -55,6 +57,12 @@
 					font-size: 24px;
 					font-weight: 700;
 					margin-left: 5px;
+				}
+
+				&--logo {
+					position: relative;
+					left: 5px;
+					bottom: 5px;
 				}
 			}
 

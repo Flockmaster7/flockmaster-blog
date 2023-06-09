@@ -4,10 +4,17 @@ import type {
 	LoginResType,
 	UserRegisterForm,
 	RegisterResType,
-	UserUpdatePasswordForm
+	UserUpdatePasswordForm,
+	UpdateUserInfoFrom,
+	GetUserInfoResType
 } from '@/types/index.d.ts';
 import type { HttpResponse } from '@/types/http.d.ts';
 
+/**
+ * 登录
+ * @param data 表单
+ * @returns LoginResType
+ */
 export const login = (data: UserLoginForm) => {
 	return request<HttpResponse<LoginResType>>({
 		url: '/users/login',
@@ -16,6 +23,11 @@ export const login = (data: UserLoginForm) => {
 	});
 };
 
+/**
+ * 注册
+ * @param data 表单
+ * @returns RegisterResType
+ */
 export const register = (data: UserRegisterForm) => {
 	return request<HttpResponse<RegisterResType>>({
 		url: '/users/register',
@@ -24,9 +36,38 @@ export const register = (data: UserRegisterForm) => {
 	});
 };
 
+/**
+ * 修改密码
+ * @param data 表单
+ * @returns string
+ */
 export const updatePassword = (data: UserUpdatePasswordForm) => {
 	return request<HttpResponse<string>>({
 		url: '/users/updatepwd',
+		method: 'POST',
+		data
+	});
+};
+
+/**
+ * 获取用户信息
+ * @returns string
+ */
+export const getUserInfo = () => {
+	return request<HttpResponse<GetUserInfoResType>>({
+		url: '/users/getUserInfo',
+		method: 'GET'
+	});
+};
+
+/**
+ * 修改用户信息
+ * @param data 信息表单
+ * @returns GetUserInfoResType
+ */
+export const updateUserInfo = (data: UpdateUserInfoFrom) => {
+	return request<HttpResponse<string>>({
+		url: '/users/updateUserInfo',
 		method: 'POST',
 		data
 	});

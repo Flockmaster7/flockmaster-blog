@@ -3,4 +3,5 @@ interface ImportMetaEnv {
 	VITE_APP_TITLE: string;
 	VITE_ACCESS_TOKEN: string;
 	VITE_BASEURL: string;
+	VITE_USERINFO: string;
 }

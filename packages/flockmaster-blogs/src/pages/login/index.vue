@@ -137,9 +137,21 @@
 <script setup lang="ts">
 	import { reactive, ref } from 'vue';
 	import type { FormInstance, FormRules } from 'element-plus';
-	import { login, register, updatePassword } from '@/http/user/index';
+	import { ElMessage } from 'element-plus';
+	import { storeToRefs } from 'pinia';
+	import {
+		getUserInfo,
+		login,
+		register,
+		updatePassword
+	} from '@/http/user/index';
 	import cache from '@/utils/cache';
 	import { useRouter } from 'vue-router';
+	import { userStore } from '@/store/user';
+	import { GetUserInfoResType } from '@/types';
+
+	const store = userStore();
+	const { userInfo } = storeToRefs(store);
 
 	const router = useRouter();
 
@@ -157,7 +169,11 @@
 				console.log('登录校验不通过');
 			}
 			const { data: res } = await login(loginForm);
-			alert('登录成功');
+			ElMessage({
+				message: '登录成功',
+				type: 'success'
+			});
+			getUserProfile();
 			cache.setCache(import.meta.env.VITE_ACCESS_TOKEN, res.data.token);
 			router.push('/');
 		});
@@ -242,6 +258,18 @@
 	};
 
 	const showForgetPassword = () => {};
+
+	// 获取用户信息
+	const getUserProfile = async () => {
+		const { data: res } = await getUserInfo();
+		if (res.code === 200) {
+			userInfo.value = res.data;
+			cache.setCache<GetUserInfoResType>(
+				import.meta.env.VITE_USERINFO,
+				res.data
+			);
+		}
+	};
 </script>
 
 <style lang="scss" scoped>

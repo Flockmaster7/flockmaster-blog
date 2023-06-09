@@ -1,12 +1,10 @@
+import { GetUserInfoResType } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const userStore = defineStore('user', () => {
-	const count = ref(0);
+	const userInfo = ref<GetUserInfoResType>();
+	const type = ref<string>('read');
 
-	function increment() {
-		count.value++;
-	}
-
-	return { count, increment };
+	return { userInfo, type };
 });

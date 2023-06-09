@@ -1,9 +1,9 @@
-const getCache = (key: string) => {
-	return window.localStorage.getItem(key);
+const getCache = <T>(key: string): T => {
+	return JSON.parse(window.localStorage.getItem(key) as string);
 };
 
-const setCache = (key: string, value: string) => {
-	window.localStorage.setItem(key, value);
+const setCache = <T>(key: string, value: T) => {
+	window.localStorage.setItem(key, JSON.stringify(value));
 };
 
 const removeCache = (key: string) => {
