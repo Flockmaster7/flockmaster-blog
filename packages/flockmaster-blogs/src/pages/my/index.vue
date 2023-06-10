@@ -35,19 +35,15 @@
 </template>
 
 <script setup lang="ts">
-	import { onMounted, ref } from 'vue';
 	import blogList from './blogList.vue';
-	import { ElMessage } from 'element-plus';
 	import updateUserForm from './updateUserForm.vue';
+	import { getUserInfo } from '@/http/user';
 	import { userStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
-	import getUserProfile from '@/hooks/useGetUserInfo';
+	import { ref } from 'vue';
 	const user = userStore();
-	const { type } = storeToRefs(user);
-
-	// 获取用户信息
-	const userInfo = await getUserProfile();
-
+	const { userInfo } = storeToRefs(user);
+	const type = ref('read');
 	const handlerUpdate = () => {
 		type.value = 'edit';
 	};

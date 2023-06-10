@@ -1,7 +1,5 @@
 <template>
-	<Layout>
-		<router-view></router-view>
-	</Layout>
+	<div>我是首页</div>
 </template>
 
 <script setup lang="ts">

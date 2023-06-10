@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "@types/axios": "^0.14.0",
     "@types/markdown-it": "^12.2.3",
     "axios": "^1.4.0",
     "element-plus": "^2.3.6",
     "markdown-it": "^13.0.1",
+    "path-browserify": "^1.0.1",
     "pinia": "^2.0.36",
     "postcss-pxtorem": "^6.0.0",
     "vue": "^3.3.1",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
+    "@types/path-browserify": "^1.0.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "node-sass": "^9.0.0",
     "sass": "^1.62.1",
