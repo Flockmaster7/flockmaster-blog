@@ -5,7 +5,6 @@ import {
 	DataType,
 	DeletedAt
 } from 'sequelize-typescript';
-import { UserModel } from '../types/user';
 
 @Table({ tableName: 'user' })
 export default class User extends Model<User> {

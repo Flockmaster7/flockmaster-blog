@@ -16,6 +16,7 @@
      "include": [
       "src/**/*",
       "src/**/*.ts",
+      "src/**/*.js",
       "index.d.ts"
     ],
     "exclude": ["node_modules", "dist", "public"],

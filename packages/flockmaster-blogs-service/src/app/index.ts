@@ -8,6 +8,7 @@ import cors from 'koa2-cors'; // 跨域处理
 import errHandler from './errHandler';
 import router from '../router/index';
 import { corsHandler } from '../middleware/cors';
+import Result from '../utils/Result';
 // import sequelize from '../db/index';
 
 const parameter = require('koa-parameter');
@@ -28,6 +29,17 @@ const app = new Koa();
 
 // require("babel-register");
 
+// 添加全局异常处理
+app.use(async (ctx, next) => {
+	try {
+		await next();
+	} catch (error: any) {
+		console.error(error);
+		ctx.status = error.statusCode || 500;
+		ctx.body = new Result(500, '全局异常', 'error');
+	}
+});
+
 // 日志
 app.use(logger());
 
@@ -41,7 +53,7 @@ app.use(
 	})
 );
 // 可以通过路径访问静态资源
-app.use(koaStatic(path.resolve(__dirname, '../upload')));
+app.use(koaStatic(path.resolve(__dirname, '../static')));
 // app.use(parameter(app))
 parameter(app);
 

@@ -17,5 +17,9 @@ export default {
 	invalidTokenError: errorForm('10102', '无效token', ''),
 	userChangePasswordError: errorForm('10007', '修改密码失败', ''),
 	getUserInfoError: errorForm('10008', '获取用户信息失败', ''),
-	updateUserInfoError: errorForm('10009', '修改用户信息失败', '')
+	updateUserInfoError: errorForm('10009', '修改用户信息失败', ''),
+	uploadError: errorForm('20001', '上传失败', ''),
+	markdownRenderError: errorForm('20002', 'md文件解析失败', ''),
+	createBlogFormValidatorError: errorForm('20003', '参数错误', ''),
+	createBlogError: errorForm('20004', '发布博客失败', '')
 };
