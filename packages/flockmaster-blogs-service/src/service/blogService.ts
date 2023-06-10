@@ -55,7 +55,13 @@ class BlogService {
 					[Op.like]: `%${wrapper?.content_text}%`
 				}
 			});
-		// 没有传限制条件
+		if (wrapper.classify)
+			filter.push({
+				classify: {
+					[Op.like]: `%${wrapper?.classify}%`
+				}
+			});
+		// 传了限制条件
 		if (filter.length !== 0) {
 			option.where = filter;
 		}

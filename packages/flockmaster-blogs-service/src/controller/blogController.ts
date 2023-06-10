@@ -22,11 +22,12 @@ class BlogController {
 
 	async createBlog(ctx: Context) {
 		try {
-			const { id, author, title } = ctx.request.body;
+			const { id, author, title, classify } = ctx.request.body;
 			const params = {
 				id,
 				author,
-				title
+				title,
+				classify
 			};
 			const data = await blogService.createBlog(params);
 			ctx.body = new Result(200, '发布博客成功', data);
@@ -40,12 +41,14 @@ class BlogController {
 			const { pageSize, pageNum } = ctx.params;
 			if (!pageSize || !pageNum)
 				return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
-			const { content_text, author, title, order } = ctx.request.body;
+			const { content_text, author, title, order, classify } =
+				ctx.request.body;
 			const wrapper = {};
 			content_text && Object.assign(wrapper, { content_text });
 			author && Object.assign(wrapper, { author });
 			title && Object.assign(wrapper, { title });
 			order && Object.assign(wrapper, { order });
+			classify && Object.assign(wrapper, { classify });
 			const data = await blogService.getBlogList(
 				pageNum,
 				pageSize,
