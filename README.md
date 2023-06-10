@@ -16,9 +16,10 @@
 
 前端： vue3、pinia、ts、vite<br>
 
-后端： koa2、sequalize、ts、mysql<br>
+后端： koa2、sequalize-typescript、ts、mysql5.7<br>
 
 ## 后续计划
 
-购买腾讯云或阿里云进行部署
+购买腾讯云或阿里云进行部署<br>
 
+h5<br>

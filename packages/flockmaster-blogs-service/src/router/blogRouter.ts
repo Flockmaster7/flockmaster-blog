@@ -26,4 +26,8 @@ router.post(
 	blogController.createBlog
 );
 
+router.get('/getdetail/:id', blogController.getBlogDetail);
+
+router.post('/getList/:pageNum?/:pageSize?', blogController.getBlogList);
+
 module.exports = router;

@@ -49,19 +49,10 @@ export const createBlogFormValidator = async (ctx: Context, next: Next) => {
 		const { id, author, title } = ctx.request.body;
 		if (!id || !author || !title) {
 			console.error('参数不能为空', ctx.request.body);
-			return ctx.app.emit(
-				'error',
-				ERROR.createBlogFormValidatorError,
-				ctx
-			);
+			return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
 		}
 	} catch (error) {
-		return ctx.app.emit(
-			'error',
-			ERROR.createBlogFormValidatorError,
-			ctx,
-			error
-		);
+		return ctx.app.emit('error', ERROR.FormValidatorError, ctx, error);
 	}
 	await next();
 };

@@ -5,3 +5,11 @@ export interface BlogObject {
 	content_html?: string;
 	content_text?: string;
 }
+
+export interface BlogFind {
+	id?: number;
+	author?: string;
+	title?: string;
+	content_text?: string;
+	order?: string;
+}

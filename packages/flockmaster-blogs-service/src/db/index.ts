@@ -14,7 +14,12 @@ const sequelize = new Sequelize(
 		models: [
 			`${path.resolve(__dirname, '../model')}/*.ts`,
 			`${path.resolve(__dirname, '../model')}/*.js`
-		] // 数据库模板存放地址
+		], // 数据库模板存放地址
+		// 配置日期格式
+		dialectOptions: {
+			dateStrings: true,
+			typeCast: true
+		}
 	}
 );
 

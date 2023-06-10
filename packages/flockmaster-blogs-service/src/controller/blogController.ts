@@ -34,6 +34,41 @@ class BlogController {
 			ctx.app.emit('error', ERROR.createBlogError, ctx, error);
 		}
 	}
+
+	async getBlogList(ctx: Context) {
+		try {
+			const { pageSize, pageNum } = ctx.params;
+			if (!pageSize || !pageNum)
+				return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
+			const { content_text, author, title, order } = ctx.request.body;
+			const wrapper = {};
+			content_text && Object.assign(wrapper, { content_text });
+			author && Object.assign(wrapper, { author });
+			title && Object.assign(wrapper, { title });
+			order && Object.assign(wrapper, { order });
+			const data = await blogService.getBlogList(
+				pageNum,
+				pageSize,
+				wrapper
+			);
+			ctx.body = new Result(200, '获取博客列表成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getBlogListError, ctx, error);
+		}
+	}
+
+	async getBlogDetail(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			if (!id)
+				return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
+			console.log(id);
+			const data = await blogService.getBlogInfo(id);
+			ctx.body = new Result(200, '获取文章详情成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getBlogDetailError, ctx, error);
+		}
+	}
 }
 
 export default BlogController;

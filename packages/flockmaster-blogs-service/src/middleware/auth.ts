@@ -1,7 +1,7 @@
 import { Context, Next } from 'koa';
 import jwt from 'jsonwebtoken';
 import processEnv from '../config/config.default';
-import Error from '../utils/Error';
+import ERROR from '../utils/Error';
 const auth = async (ctx: Context, next: Next) => {
 	const { authorization = '' } = ctx.request.header;
 	const token = authorization.replace('Bearer ', '');
@@ -13,14 +13,23 @@ const auth = async (ctx: Context, next: Next) => {
 		switch (error.name) {
 			case 'TokenExpiredError':
 				console.error('token已过期', error);
-				return ctx.app.emit('error', Error.tokenExpiredError, ctx);
+				return ctx.app.emit('error', ERROR.tokenExpiredError, ctx);
 			case 'JsonWebTokenError':
 				console.error('无效的token', error);
-				return ctx.app.emit('error', Error.invalidTokenError, ctx);
+				return ctx.app.emit('error', ERROR.invalidTokenError, ctx);
 		}
 		return;
 	}
 	await next();
 };
 
-export { auth };
+const isAdmin = async (ctx: Context, next: Next) => {
+	const { is_admin } = ctx.state.user;
+	if (!is_admin) {
+		console.error('没有管理员权限', ctx.state.user);
+		return ctx.app.emit('error', ERROR.hasNotAdminPermission, ctx);
+	}
+	await next();
+};
+
+export { auth, isAdmin };

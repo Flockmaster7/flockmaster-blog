@@ -18,8 +18,11 @@ export default {
 	userChangePasswordError: errorForm('10007', '修改密码失败', ''),
 	getUserInfoError: errorForm('10008', '获取用户信息失败', ''),
 	updateUserInfoError: errorForm('10009', '修改用户信息失败', ''),
+	hasNotAdminPermission: errorForm('10010', '没有管理员权限', ''),
 	uploadError: errorForm('20001', '上传失败', ''),
 	markdownRenderError: errorForm('20002', 'md文件解析失败', ''),
-	createBlogFormValidatorError: errorForm('20003', '参数错误', ''),
-	createBlogError: errorForm('20004', '发布博客失败', '')
+	FormValidatorError: errorForm('20003', '参数错误', ''),
+	createBlogError: errorForm('20004', '发布博客失败', ''),
+	getBlogDetailError: errorForm('20005', '获取文章详情失败', ''),
+	getBlogListError: errorForm('20005', '获取文章列表失败', '')
 };
