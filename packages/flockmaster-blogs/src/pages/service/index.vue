@@ -1,7 +1,45 @@
 <template>
-	<div>我是后端</div>
+	<div class="container">
+		<el-card v-for="(item, index) in blogList" :key="item.id">
+			<div @click="gotoBlogDetail(item.id)">
+				<blog-item :blog="item"></blog-item>
+			</div>
+		</el-card>
+	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import { onMounted } from 'vue';
+	import { useBlogStore } from '@/store/blog';
+	import { storeToRefs } from 'pinia';
+	import blogItem from '@/pages/home/components/blogItem.vue';
+	import { useRouter } from 'vue-router';
 
-<style scoped></style>
+	const store = useBlogStore();
+	const router = useRouter();
+
+	const { blogList } = storeToRefs(store);
+
+	onMounted(() => {
+		store.getBlogList(1, 10, {
+			author: 'flockmaster',
+			classify: '2'
+		});
+	});
+
+	const gotoBlogDetail = (id: number) => {
+		router.push('/blog/detail?id=' + id);
+	};
+</script>
+
+<style lang="scss" scoped>
+	.el-card {
+		width: 868px;
+	}
+	.container {
+		margin: 15px;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+</style>

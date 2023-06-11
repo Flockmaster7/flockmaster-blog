@@ -8,7 +8,9 @@
 		</div>
 		<div class="mainBox">
 			<div class="navLink" v-for="(item, index) in navLinkList">
-				<router-link :to="item.src">{{ item.title }}</router-link>
+				<router-link :to="item.src" @click="changeTag">{{
+					item.title
+				}}</router-link>
 			</div>
 		</div>
 		<div class="search">
@@ -37,6 +39,12 @@
 	const toUserDetail = () => {
 		if (!isLogin()) return;
 		router.push('/my');
+	};
+
+	const changeTag = () => {
+		window.scrollTo({
+			top: 0
+		});
 	};
 
 	const searchText = ref('');
@@ -89,14 +97,14 @@
 				width: 100px;
 				height: 100%;
 				text-align: center;
-				// border-left: 2px solid skyblue;
 
 				a {
 					color: black;
 				}
 
 				a:hover {
-					color: rgb(190, 47, 47);
+					font-weight: 700;
+					color: rgb(51, 49, 49);
 				}
 			}
 		}

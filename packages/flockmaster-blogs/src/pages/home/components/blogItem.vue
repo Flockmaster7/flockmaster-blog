@@ -10,11 +10,9 @@
 			</div>
 			<!-- <div class="author">{{ blog.author }}</div> -->
 			<div class="classify">
-				<div class="tag" v-for="(item, index) in tagList">
-					<el-tag :color="item.color">
-						{{ blog.classify === '1' ? '前端' : '后端' }}
-					</el-tag>
-				</div>
+				<el-tag :color="blog.classify === '1' ? 'pink' : 'blue'">
+					{{ blog.classify === '1' ? '前端' : '后端' }}
+				</el-tag>
 			</div>
 		</div>
 	</div>
@@ -83,6 +81,7 @@
 
 			.classify {
 				display: flex;
+				color: #fff;
 				.tag {
 					margin-right: 5px;
 				}

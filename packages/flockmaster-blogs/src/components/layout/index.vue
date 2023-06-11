@@ -5,7 +5,9 @@
 		</div>
 	</div>
 	<div class="layout-container--main">
-		<router-view></router-view>
+		<Transition>
+			<router-view></router-view>
+		</Transition>
 	</div>
 </template>
 
@@ -25,10 +27,11 @@
 
 <style lang="scss" scoped>
 	.layout-container--header {
+		position: sticky;
+		top: 0px;
+		z-index: 999;
 		background-color: #fff;
 		.header {
-			position: sticky;
-			top: 83px;
 			width: 1350px;
 			margin: 0 auto;
 		}
@@ -36,5 +39,16 @@
 	.layout-container--main {
 		width: 1200px;
 		margin: 0 auto;
+	}
+
+	// 切换路由动画
+	.v-enter-active,
+	.v-leave-active {
+		transition: opacity 1.5s ease;
+	}
+
+	.v-enter-from,
+	.v-leave-to {
+		opacity: 0;
 	}
 </style>

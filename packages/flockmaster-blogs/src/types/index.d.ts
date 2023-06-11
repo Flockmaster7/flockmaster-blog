@@ -78,3 +78,11 @@ export interface GetBlogDetailResType {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export interface GetWorkListResType {
+	id: number;
+	title: string;
+	image: string;
+	des: string;
+	url: string;
+}

@@ -147,10 +147,10 @@
 	} from '@/http/user/index';
 	import cache from '@/utils/cache';
 	import { useRouter } from 'vue-router';
-	import { userStore } from '@/store/user';
+	import { useUserStore } from '@/store/user';
 	import { GetUserInfoResType } from '@/types';
 
-	const store = userStore();
+	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
 
 	const router = useRouter();
