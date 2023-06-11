@@ -1,7 +1,9 @@
 <template>
 	<div class="container">
 		<el-card v-for="(item, index) in blogList" :key="item.id">
-			<blog-item :blog="item"></blog-item>
+			<div @click="gotoBlogDetail(item.id)">
+				<blog-item :blog="item"></blog-item>
+			</div>
 		</el-card>
 	</div>
 </template>
@@ -11,7 +13,10 @@
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import blogItem from '@/pages/home/components/blogItem.vue';
+	import { useRouter } from 'vue-router';
+
 	const store = useBlogStore();
+	const router = useRouter();
 
 	const { blogList } = storeToRefs(store);
 
@@ -20,6 +25,10 @@
 			author: 'flockmaster'
 		});
 	});
+
+	const gotoBlogDetail = (id: number) => {
+		router.push('/blog/detail?id=' + id);
+	};
 </script>
 
 <style lang="scss" scoped>
