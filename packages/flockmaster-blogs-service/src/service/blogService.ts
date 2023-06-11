@@ -31,7 +31,15 @@ class BlogService {
 		let option: any = {
 			offset: offset,
 			limit: pageSize * 1,
-			order: [['createdAt', 'DESC']]
+			order: [['createdAt', 'DESC']],
+			attributes: [
+				'id',
+				'title',
+				'author',
+				'classify',
+				'createdAt',
+				'updatedAt'
+			]
 		};
 		// 升序降序，默认降序
 		if (wrapper.order) option.order[0][1] = wrapper.order;
@@ -65,7 +73,6 @@ class BlogService {
 		if (filter.length !== 0) {
 			option.where = filter;
 		}
-
 		const { count, rows } = await Blog.findAndCountAll(option);
 		return {
 			pageNum,
@@ -83,6 +90,7 @@ class BlogService {
 				'id',
 				'author',
 				'title',
+				'classify',
 				'content_text',
 				'content_html',
 				'createdAt',
