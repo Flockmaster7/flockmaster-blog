@@ -43,11 +43,11 @@
 </template>
 
 <script setup lang="ts">
-	import { userStore } from '@/store/user';
+	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
 
-	const store = userStore();
+	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
 
 	const activeNames = ref(['1']);
@@ -93,7 +93,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 15px;
+		margin-top: 15px;
 		gap: 15px;
 		// 个人信息卡片
 		.info-card {

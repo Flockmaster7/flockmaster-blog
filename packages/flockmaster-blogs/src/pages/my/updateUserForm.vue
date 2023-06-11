@@ -32,10 +32,10 @@
 	import type { FormInstance, FormRules } from 'element-plus';
 	import { ElMessage } from 'element-plus';
 	import { reactive, ref } from 'vue';
-	import { userStore } from '@/store/user';
+	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 
-	const user = userStore();
+	const user = useUserStore();
 	const { type } = storeToRefs(user);
 
 	const userInfo = ref(

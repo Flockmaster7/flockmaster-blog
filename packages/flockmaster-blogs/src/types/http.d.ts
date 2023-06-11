@@ -4,3 +4,10 @@ export interface HttpResponse<T = any> {
 	data: T;
 	message: string;
 }
+
+export interface PageRequest<T> {
+	pageNum: string;
+	pageSize: string;
+	total: number;
+	rows: T[];
+}

@@ -11,11 +11,11 @@
 
 <script setup lang="ts">
 	import Header from '@/components/header/index.vue';
-	import { userStore } from '@/store/user';
+	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { onMounted } from 'vue';
 
-	const store = userStore();
+	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
 
 	onMounted(() => {

@@ -3,7 +3,7 @@ import { GetUserInfoResType } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const userStore = defineStore('user', () => {
+export const useUserStore = defineStore('user', () => {
 	const userInfo = ref<GetUserInfoResType>({
 		id: 0,
 		user_name: '游客',

@@ -38,10 +38,10 @@
 	import blogList from './blogList.vue';
 	import updateUserForm from './updateUserForm.vue';
 	import { getUserInfo } from '@/http/user';
-	import { userStore } from '@/store/user';
+	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
-	const user = userStore();
+	const user = useUserStore();
 	const { userInfo } = storeToRefs(user);
 	const type = ref('read');
 	const handlerUpdate = () => {

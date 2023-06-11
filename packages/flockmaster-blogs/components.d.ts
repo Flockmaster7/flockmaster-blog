@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Aside: typeof import('./src/components/aside/index.vue')['default']
+    BlogItem: typeof import('./src/components/blogItem/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -24,6 +25,7 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElTag: typeof import('element-plus/es')['ElTag']
     Empty: typeof import('./src/components/empty/index.vue')['default']
     Footer: typeof import('./src/components/footer/index.vue')['default']
     Header: typeof import('./src/components/header/index.vue')['default']

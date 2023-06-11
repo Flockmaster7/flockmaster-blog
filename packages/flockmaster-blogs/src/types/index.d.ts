@@ -45,3 +45,36 @@ export interface GetUserInfoResType {
 	name: string;
 	description: string;
 }
+
+// 获取博客列表接口
+export interface getBlogListResType {
+	id: number;
+	title: string;
+	author: string;
+	classify: string;
+	content_html: string;
+	content_text: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+// 获取博客列表表单
+export interface GetBlogListForm {
+	author?: string;
+	title?: string;
+	content_text?: string;
+	order?: string;
+	classify?: string;
+}
+
+// 获取博客详情接口
+export interface GetBlogDetailResType {
+	id: number;
+	author: string;
+	title: string;
+	classify: string;
+	content_text: string;
+	content_html: string;
+	createdAt: string;
+	updatedAt: string;
+}
