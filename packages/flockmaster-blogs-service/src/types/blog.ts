@@ -5,6 +5,7 @@ export interface BlogObject {
 	classify?: string;
 	content_html?: string;
 	content_text?: string;
+	blog_image?: string;
 }
 
 export interface BlogFind {

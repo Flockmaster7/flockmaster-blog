@@ -24,5 +24,16 @@ export default {
 	FormValidatorError: errorForm('20003', '参数错误', ''),
 	createBlogError: errorForm('20004', '发布博客失败', ''),
 	getBlogDetailError: errorForm('20005', '获取文章详情失败', ''),
-	getBlogListError: errorForm('20005', '获取文章列表失败', '')
+	getBlogListError: errorForm('20005', '获取文章列表失败', ''),
+	createWorkError: errorForm('30001', '添加作品失败', ''),
+	updateWorkError: errorForm('30002', '修改作品失败', ''),
+	getWorkDetailError: errorForm('30003', '获取作品详情失败', ''),
+	getWorkListError: errorForm('30004', '获取作品列表失败', ''),
+	validatorIdError: errorForm('30005', '必须携带id', ''),
+	validatorPageError: errorForm('30006', '必须携带pageNum和pageSize', ''),
+	removeWorkError: errorForm('30007', '删除作品失败', ''),
+	createTagError: errorForm('30008', '添加标签失败', ''),
+	updateTagError: errorForm('30009', '修改标签失败', ''),
+	removeTagError: errorForm('30010', '删除标签失败', ''),
+	getTagListError: errorForm('30011', '获取作品列表失败', '')
 };

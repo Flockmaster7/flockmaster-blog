@@ -1,4 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+	Column,
+	DataType,
+	DeletedAt,
+	HasMany,
+	Model,
+	Table
+} from 'sequelize-typescript';
+import Tag from './Tag';
 
 @Table({ tableName: 'blog' })
 export default class Blog extends Model<Blog> {
@@ -36,4 +44,18 @@ export default class Blog extends Model<Blog> {
 		comment: '文章内容(text)'
 	})
 	content_text: string;
+
+	@Column({
+		type: DataType.STRING,
+		allowNull: true,
+		comment: '文章封面'
+	})
+	blog_image: string;
+
+	@DeletedAt
+	@Column({
+		type: DataType.DATE,
+		comment: '删除时间'
+	})
+	isDeleted: Date | null;
 }

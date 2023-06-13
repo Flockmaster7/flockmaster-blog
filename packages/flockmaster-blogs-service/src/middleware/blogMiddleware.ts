@@ -6,11 +6,30 @@ import path from 'path';
 
 const md = new MarkdownIt();
 
+// 校验上传图片格式
+export const verifyUploadImg = async (ctx: Context, next: Next) => {
+	try {
+		const { file } = ctx.request.files!;
+		const fileTypes = ['image/jpeg', 'image/png'];
+		if (!Array.isArray(file)) {
+			if (!fileTypes.includes(file.mimetype!)) {
+				return ctx.app.emit('error', ERROR.uploadError, ctx);
+			}
+			ctx.state.blog_img = file;
+		} else {
+			return ctx.app.emit('error', ERROR.uploadError, ctx);
+		}
+	} catch (error) {
+		return ctx.app.emit('error', ERROR.uploadError, ctx, error);
+	}
+	await next();
+};
+
 // 校验上传文件格式
 export const verifyUpload = async (ctx: Context, next: Next) => {
 	try {
 		const { file } = ctx.request.files!;
-		const fileTypes = ['image/jpeg', 'image/png', 'text/markdown'];
+		const fileTypes = ['text/markdown'];
 		if (!Array.isArray(file)) {
 			if (!fileTypes.includes(file.mimetype!)) {
 				return ctx.app.emit('error', ERROR.uploadError, ctx);
@@ -44,13 +63,16 @@ export const markdownRender = async (ctx: Context, next: Next) => {
 	await next();
 };
 
-export const createBlogFormValidator = async (ctx: Context, next: Next) => {
+export const validatorBlogForm = async (ctx: Context, next: Next) => {
 	try {
-		const { id, author, title } = ctx.request.body;
-		if (!id || !author || !title) {
-			console.error('参数不能为空', ctx.request.body);
-			return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
-		}
+		ctx.verifyParams({
+			author: 'string',
+			title: 'string',
+			classify: 'string',
+			blog_image: 'string',
+			content_html: 'string',
+			content_text: 'string'
+		});
 	} catch (error) {
 		return ctx.app.emit('error', ERROR.FormValidatorError, ctx, error);
 	}
