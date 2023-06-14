@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Tag from '../model/Tag';
 import { TagType } from '../types/tag';
 
@@ -10,14 +11,14 @@ class TagService {
 		return res.dataValues;
 	}
 
-	// 修改作品
+	// 修改标签
 	async modifyTag(id: number, tag: TagType) {
 		const wrapper = { id };
 		const res = await Tag.update(tag, { where: wrapper });
 		return res[0] > 0 ? true : false;
 	}
 
-	// 删除作品
+	// 删除标签
 	async deleteTag(id: number) {
 		const wrapper = { id };
 		const res = await Tag.destroy({ where: wrapper });
@@ -39,7 +40,6 @@ class TagService {
 				'updatedAt'
 			]
 		});
-		console.log(count, rows);
 		return {
 			pageNum,
 			pageSize,
@@ -48,7 +48,19 @@ class TagService {
 		};
 	}
 
-	// 获取当前博客标签列表
-	async getCurrentList(id: number) {}
+	// 获取特定id标签列表
+	async getTagListByIdList(idList: number[]) {
+		const res = await Tag.findAll({
+			where: { id: { [Op.or]: idList } },
+			attributes: [
+				'id',
+				'tag_name',
+				'tag_color',
+				'tag_classify',
+				'createdAt'
+			]
+		});
+		return res ? res : null;
+	}
 }
 export default TagService;

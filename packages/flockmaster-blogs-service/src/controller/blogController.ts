@@ -3,8 +3,13 @@ import Result from '../utils/Result';
 import ERROR from '../utils/Error';
 import BlogService from '../service/blogService';
 import path from 'path';
+import TagService from '../service/tagService';
+import { BlogObject } from '../types/blog';
+import { TagType } from '../types/tag';
+import { useGetBlogTagById } from '../utils/useBlogTag';
 
 const blogService = new BlogService();
+const tagService = new TagService();
 
 class BlogController {
 	// 上传图片
@@ -55,17 +60,20 @@ class BlogController {
 				content_text
 			};
 			const data = await blogService.createBlog(params);
-			ctx.body = new Result(200, '发布博客成功', data);
+			// 添加博客对应的文章标签
+			const { tags } = ctx.request.body;
+			const res = await blogService.createBlog_tag(data.id, tags);
+			if (res) ctx.body = new Result(200, '发布博客成功', 'success');
+			else ctx.body = new Result(20004, '发布博客失败', 'fail');
 		} catch (error) {
 			ctx.app.emit('error', ERROR.createBlogError, ctx, error);
 		}
 	}
 
+	// 获取博客列表
 	async getBlogList(ctx: Context) {
 		try {
 			const { pageSize, pageNum } = ctx.params;
-			if (!pageSize || !pageNum)
-				return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
 			const { content_text, author, title, order, classify } =
 				ctx.request.body;
 			const wrapper = {};
@@ -85,16 +93,47 @@ class BlogController {
 		}
 	}
 
+	// 获取博客详情
 	async getBlogDetail(ctx: Context) {
 		try {
 			const { id } = ctx.params;
 			if (!id)
 				return ctx.app.emit('error', ERROR.FormValidatorError, ctx);
 			console.log(id);
-			const data = await blogService.getBlogInfo(id);
-			ctx.body = new Result(200, '获取文章详情成功', data);
+			const data = await blogService.getBlogInfo(id * 1);
+			if (data) {
+				// 获取博客对应的标签
+				const tags = await blogService.getBlog_tag(id * 1);
+				let idList: number[] = [];
+				if (tags) {
+					tags.forEach((item) => {
+						idList.push(item.dataValues.tag_id);
+					});
+					const tagData = await tagService.getTagListByIdList(idList);
+					const res = { ...data, tags: tagData };
+					ctx.body = new Result(200, '获取文章详情成功', res);
+				} else {
+					ctx.body = new Result(200, '获取文章详情成功', {
+						...data,
+						tags: []
+					});
+				}
+			} else {
+				ctx.app.emit('error', ERROR.getBlogDetailError, ctx);
+			}
 		} catch (error) {
 			ctx.app.emit('error', ERROR.getBlogDetailError, ctx, error);
+		}
+	}
+
+	// 获取标签对应博客列表
+	async getBlogListByTagId(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			const data = await blogService.getBlogListByTag(id * 1);
+			ctx.body = new Result(200, '获取博客列表成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getBlogListError, ctx, error);
 		}
 	}
 }

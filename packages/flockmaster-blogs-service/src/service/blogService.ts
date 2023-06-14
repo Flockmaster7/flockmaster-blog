@@ -1,9 +1,10 @@
 import Blog from '../model/Blog';
-import { BlogFind, BlogObject } from '../types/blog';
+import Blog_Tag from '../model/Blog_Tag';
+import { BlogFind, BlogObject, Blog_tagType } from '../types/blog';
 import { Op } from 'sequelize';
 class BlogService {
 	// 添加博客
-	async createBlog(blogObject: BlogObject) {
+	async createBlog(blogObject: BlogObject): Promise<Blog> {
 		const res = await Blog.create(blogObject as Blog);
 		console.log(res.dataValues);
 		return res.dataValues;
@@ -72,7 +73,7 @@ class BlogService {
 	}
 
 	//获取文章详情
-	async getBlogInfo(id: string | number) {
+	async getBlogInfo(id: string | number): Promise<Blog | null> {
 		const wrapper = { id };
 		const res = await Blog.findOne({
 			attributes: [
@@ -89,6 +90,40 @@ class BlogService {
 			where: wrapper
 		});
 		return res ? res.dataValues : null;
+	}
+
+	// 添加博客对应的文章标签
+	async createBlog_tag(id: number, tags: number[]): Promise<boolean> {
+		let addArr: Blog_tagType[] = [];
+		tags.forEach((item) => {
+			addArr.push({
+				blog_id: id,
+				tag_id: item
+			});
+		});
+		const res = await Blog_Tag.bulkCreate(addArr as Blog_Tag[]);
+		return res ? true : false;
+	}
+
+	// 获取博客对应标签
+	async getBlog_tag(id: number): Promise<Blog_Tag[] | null> {
+		const wrapper = { blog_id: id };
+		const res = await Blog_Tag.findAll({ where: wrapper });
+		return res ? res : null;
+	}
+
+	// 获取标签对应博客列表
+	async getBlogListByTag(id: number): Promise<Blog_Tag[] | null> {
+		const wrapper = { tag_id: id };
+		const res = await Blog_Tag.findAll({ where: wrapper });
+		let idList: number[] = [];
+		res.forEach((item) => {
+			idList.push(item.dataValues.blog_id);
+		});
+		const blogList = await Blog.findAll({
+			where: { id: { [Op.or]: idList } }
+		});
+		return res ? res : null;
 	}
 }
 

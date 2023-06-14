@@ -7,6 +7,7 @@ import {
 	verifyUpload,
 	verifyUploadImg
 } from '../middleware/blogMiddleware';
+import { validatorId, validatorPage } from '../middleware/validator';
 const router = new Router({ prefix: '/blog' });
 
 const blogController = new BlogController();
@@ -26,8 +27,19 @@ router.post('/uploadImg', auth, verifyUploadImg, blogController.uploadBlogImg);
 // 添加文章
 router.post('/create', auth, validatorBlogForm, blogController.createBlog);
 
-router.get('/getdetail/:id', blogController.getBlogDetail);
+router.get('/getdetail/:id', validatorId, blogController.getBlogDetail);
 
-router.post('/getList/:pageNum?/:pageSize?', blogController.getBlogList);
+router.post(
+	'/getList/:pageNum?/:pageSize?',
+	validatorPage,
+	blogController.getBlogList
+);
+
+// 获取标签对应博客列表
+router.get(
+	'/getBlogListByTag/:id',
+	validatorId,
+	blogController.getBlogListByTagId
+);
 
 module.exports = router;
