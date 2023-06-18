@@ -1,5 +1,5 @@
 <template>
-	<div class="my-container">
+	<!-- <div class="my-container">
 		<el-row justify="center">
 			<el-col :span="12">
 				<div class="main">
@@ -31,10 +31,14 @@
 				<updateUserForm v-show="type === 'edit'"></updateUserForm>
 			</el-col>
 		</el-row>
+	</div> -->
+	<div class="container">
+		<zbInfoItem :info="userInfo" />
 	</div>
 </template>
 
 <script setup lang="ts">
+	import zbInfoItem from '@/components/item/zb-infoItem.vue';
 	import blogList from './blogList.vue';
 	import updateUserForm from './updateUserForm.vue';
 	import { getUserInfo } from '@/http/user';
@@ -50,6 +54,13 @@
 </script>
 
 <style lang="scss" scoped>
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 100px;
+	}
+
 	.my-container {
 		// height: 100vh;
 	}

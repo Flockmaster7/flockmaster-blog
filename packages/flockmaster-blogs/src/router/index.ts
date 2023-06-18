@@ -2,8 +2,12 @@ import {
 	createRouter,
 	createWebHistory,
 	RouterOptions,
-	RouteRecordRaw
+	RouteRecordRaw,
+	RouteLocationNormalized,
+	NavigationGuardNext
 } from 'vue-router';
+import { ElMessage } from 'element-plus';
+import { isLogin } from '@/utils/login';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -63,6 +67,11 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/pages/blog/index.vue')
 			}
 		]
+	},
+	{
+		path: '/test',
+		name: 'Test',
+		component: () => import('@/test/index.vue')
 	}
 ];
 
@@ -73,5 +82,21 @@ const router = createRouter({
 	// 	return { top: 0 };
 	// }
 } as RouterOptions);
+
+// 设置全局路由守卫
+router.beforeEach(
+	(
+		to: RouteLocationNormalized,
+		from: RouteLocationNormalized,
+		next: NavigationGuardNext
+	) => {
+		if (to.path === '/login') {
+			next();
+		} else {
+			// to do
+		}
+		next();
+	}
+);
 
 export default router;

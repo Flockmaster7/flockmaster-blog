@@ -1,10 +1,10 @@
 <template>
 	<div class="container">
-		<el-card v-for="(item, index) in blogList" :key="item.id">
-			<div @click="gotoBlogDetail(item.id)">
-				<blog-item :blog="item"></blog-item>
+		<div v-for="(item, index) in blogList" :key="item.id">
+			<div @click="gotoBlogDetail(item.id)" class="item">
+				<zbBlogItem :blog="item"></zbBlogItem>
 			</div>
-		</el-card>
+		</div>
 	</div>
 </template>
 
@@ -12,7 +12,7 @@
 	import { onMounted } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import blogItem from '@/pages/home/components/blogItem.vue';
+	import zbBlogItem from '@/components/item/zb-blogItem.vue';
 	import { useRouter } from 'vue-router';
 
 	const store = useBlogStore();
@@ -33,13 +33,20 @@
 </script>
 
 <style lang="scss" scoped>
-	.el-card {
-		width: 868px;
-	}
 	.container {
+		padding: 20px 0;
+		background-color: $white;
 		margin: 15px;
 		display: flex;
-		flex-direction: column;
-		gap: 15px;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 30px;
+
+		.item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 </style>

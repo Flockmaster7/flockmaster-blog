@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="work-list">
 			<div v-for="(item, index) in workList" :key="item.id">
-				<div @click="gotoWorkDetail(item.url)">
+				<div @click="gotoWorkDetail(item.work_url)">
 					<work-item :work="item"></work-item>
 				</div>
 			</div>
@@ -12,23 +12,17 @@
 
 <script setup lang="ts">
 	import workItem from '@/pages/work/components/workItem.vue';
-	const workList = [
-		{
-			id: 1,
-			title: 'flockmaster-blogs',
-			image: '',
-			des: '个人博客',
-			url: 'https://gitee.com/Flockmaster_Li/flockmaster-blogs'
-		},
-		{
-			id: 2,
-			title: 'geek-h5',
-			image: '',
-			des: 'react校园博客',
-			url: 'https://gitee.com/Flockmaster_Li/geek-h5'
-		}
-	];
+	import { useWorkStore } from '@/store/work';
+	import { storeToRefs } from 'pinia';
+	import { ref } from 'vue';
 
+	const workStore = useWorkStore();
+	const params = ref({
+		pageNum: 1,
+		pageSize: 10
+	});
+	workStore.getWork(params.value.pageNum, params.value.pageSize);
+	const { workList } = storeToRefs(workStore);
 	const gotoWorkDetail = (url: string) => {
 		window.open(url);
 	};
@@ -42,7 +36,7 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			gap: 15px;
+			gap: 20px;
 		}
 	}
 </style>

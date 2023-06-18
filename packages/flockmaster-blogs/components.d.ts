@@ -24,6 +24,8 @@ declare module '@vue/runtime-core' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTag: typeof import('element-plus/es')['ElTag']
     Empty: typeof import('./src/components/empty/index.vue')['default']
@@ -34,5 +36,9 @@ declare module '@vue/runtime-core' {
     MyButton: typeof import('./src/components/my-button.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ZbBlogItem: typeof import('./src/components/item/zb-blogItem.vue')['default']
+    ZbBookItem: typeof import('./src/components/zb-bookItem.vue')['default']
+    ZbInfoItem: typeof import('./src/components/item/zb-infoItem.vue')['default']
+    ZbItemInBook: typeof import('./src/components/magic/zb-itemInBook.vue')['default']
   }
 }

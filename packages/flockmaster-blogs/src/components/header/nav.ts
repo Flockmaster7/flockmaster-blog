@@ -18,10 +18,10 @@ export const navLinkList = [
 		title: '作品',
 		src: '/work',
 		name: ''
-	},
-	{
-		title: '关于',
-		src: '/about',
-		name: ''
 	}
+	// {
+	// 	title: '关于',
+	// 	src: '/about',
+	// 	name: ''
+	// }
 ];

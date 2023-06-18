@@ -8,6 +8,7 @@
 				<text class="description">{{ userInfo.description }}</text>
 			</div>
 		</el-card>
+		<!-- <zbInfoItem :info="userInfo"></zbInfoItem> -->
 		<!-- 站点信息卡片 -->
 		<el-card>
 			<el-collapse v-model="activeNames" @change="handleChange">

@@ -2,6 +2,8 @@ import { Context, Next } from 'koa';
 import jwt from 'jsonwebtoken';
 import processEnv from '../config/config.default';
 import ERROR from '../utils/Error';
+
+// 判断token
 const auth = async (ctx: Context, next: Next) => {
 	const { authorization = '' } = ctx.request.header;
 	const token = authorization.replace('Bearer ', '');
@@ -23,6 +25,7 @@ const auth = async (ctx: Context, next: Next) => {
 	await next();
 };
 
+// 判断是否为管理员
 const isAdmin = async (ctx: Context, next: Next) => {
 	const { is_admin } = ctx.state.user;
 	if (!is_admin) {

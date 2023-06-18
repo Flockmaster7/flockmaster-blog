@@ -8,6 +8,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useBlogStore = defineStore('blog', () => {
+	const blogTotal = ref(0);
 	const blogList = ref<getBlogListResType[]>([]);
 	const blogDeatil = ref<GetBlogDetailResType>({
 		id: 0,
@@ -26,7 +27,10 @@ export const useBlogStore = defineStore('blog', () => {
 		data: GetBlogListForm
 	) => {
 		const { data: res } = await getArticleList(pageNum, pageSize, data);
-		if (res.code === 200) blogList.value = res.data.rows;
+		if (res.code === 200) {
+			blogList.value = res.data.rows;
+			blogTotal.value = res.data.total;
+		}
 	};
 
 	const getBlogDetail = async (id: number) => {
@@ -38,6 +42,7 @@ export const useBlogStore = defineStore('blog', () => {
 		blogList,
 		blogDeatil,
 		getBlogDetail,
-		getBlogList
+		getBlogList,
+		blogTotal
 	};
 });

@@ -79,10 +79,13 @@ export interface GetBlogDetailResType {
 	updatedAt: string;
 }
 
+// 获取作品列表接口
+
 export interface GetWorkListResType {
-	id: number;
-	title: string;
-	image: string;
-	des: string;
-	url: string;
+	id?: number;
+	work_title: string;
+	work_des: string;
+	work_url: string;
+	createdAt: string;
+	updatedAt: string;
 }

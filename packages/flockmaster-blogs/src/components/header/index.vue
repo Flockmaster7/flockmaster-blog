@@ -13,16 +13,28 @@
 				}}</router-link>
 			</div>
 		</div>
-		<div class="search">
+		<!-- <div class="search">
 			<el-input
 				v-model="searchText"
 				placeholder="你想要的这里都有"
 				:suffix-icon="Search" />
-		</div>
+		</div> -->
 		<div class="rightBox">
 			<div class="avater" @click="toUserDetail">
 				<img src="@/static/images/login_bg.png" alt="" />
 			</div>
+			<el-popconfirm
+				width="220"
+				confirm-button-text="确定"
+				cancel-button-text="取消"
+				:icon="InfoFilled"
+				icon-color="$themeColor"
+				@confirm="confirm"
+				title="是否退出登录？">
+				<template #reference>
+					<el-icon color="#fff" :size="20"><Tools /></el-icon>
+				</template>
+			</el-popconfirm>
 		</div>
 	</div>
 </template>
@@ -30,8 +42,9 @@
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import { navLinkList } from './nav';
-	import { isLogin } from '@/utils/isLogin';
+	import { isLogin, logout } from '@/utils/login';
 	import { Search } from '@element-plus/icons-vue';
+	import { InfoFilled } from '@element-plus/icons-vue';
 	import { ref } from 'vue';
 
 	const router = useRouter();
@@ -47,6 +60,12 @@
 		});
 	};
 
+	// 退出登录
+	const confirm = () => {
+		console.log(11);
+		logout();
+	};
+
 	const searchText = ref('');
 </script>
 
@@ -56,7 +75,7 @@
 		justify-content: space-around;
 		align-items: center;
 		padding: 10px 60px;
-		background-color: #fff;
+		background-color: $themeColor;
 
 		.leftBox {
 			display: flex;
@@ -115,6 +134,7 @@
 			align-items: center;
 			cursor: pointer;
 			.avater {
+				margin-right: 10px;
 				img {
 					width: 35px;
 					height: 35px;

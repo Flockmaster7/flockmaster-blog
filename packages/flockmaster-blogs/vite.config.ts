@@ -20,6 +20,16 @@ export default defineConfig({
 			// options
 		})
 	],
+	// 引入全局scss变量
+	css: {
+		preprocessorOptions: {
+			// 全局样式引入
+			scss: {
+				additionalData: '@import "./src/static//css/_variable.scss";',
+				javascriptEnabled: true
+			}
+		}
+	},
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src')

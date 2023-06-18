@@ -2,9 +2,9 @@
 	<div class="container">
 		<!-- 主体区域 -->
 		<div class="mian">
-			<Transition>
-				<router-view></router-view>
-			</Transition>
+			<!-- <Transition> -->
+			<router-view></router-view>
+			<!-- </Transition> -->
 		</div>
 		<!-- 右侧边栏 -->
 		<div class="aside">
@@ -26,13 +26,13 @@
 		}
 	}
 
-	.v-enter-active,
-	.v-leave-active {
-		transition: opacity 1.5s ease;
-	}
+	// .v-enter-active,
+	// .v-leave-active {
+	// 	transition: opacity 1.5s ease;
+	// }
 
-	.v-enter-from,
-	.v-leave-to {
-		opacity: 0;
-	}
+	// .v-enter-from,
+	// .v-leave-to {
+	// 	opacity: 0;
+	// }
 </style>

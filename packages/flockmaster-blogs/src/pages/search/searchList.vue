@@ -1,5 +1,5 @@
 <template>
-	<div>我是注册页</div>
+	<div>我是搜索页</div>
 </template>
 
 <script setup lang="ts"></script>
