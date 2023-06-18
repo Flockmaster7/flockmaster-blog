@@ -25,6 +25,7 @@ class WorkService {
 			attributes: [
 				'id',
 				'work_title',
+				'work_image',
 				'work_des',
 				'work_url',
 				'createdAt',
@@ -43,6 +44,7 @@ class WorkService {
 			attributes: [
 				'id',
 				'work_title',
+				'work_image',
 				'work_des',
 				'work_url',
 				'createdAt',

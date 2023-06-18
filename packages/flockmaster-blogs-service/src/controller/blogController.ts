@@ -16,9 +16,8 @@ class BlogController {
 	async uploadBlogImg(ctx: Context) {
 		try {
 			const blog_img = ctx.state.blog_img;
-			console.log('/static/blog_img.newFilename');
 			const res = {
-				blog_img: `/static/${blog_img.newFilename}`
+				blog_img: `/${blog_img.newFilename}`
 			};
 			ctx.body = new Result(200, '上传图片成功', res);
 		} catch (error) {

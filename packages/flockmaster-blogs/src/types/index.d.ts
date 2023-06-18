@@ -51,6 +51,7 @@ export interface getBlogListResType {
 	id: number;
 	title: string;
 	author: string;
+	blog_image: string;
 	classify: string;
 	content_html: string;
 	content_text: string;
@@ -72,6 +73,7 @@ export interface GetBlogDetailResType {
 	id: number;
 	author: string;
 	title: string;
+	blog_image: string;
 	classify: string;
 	content_text: string;
 	content_html: string;
@@ -83,6 +85,7 @@ export interface GetBlogDetailResType {
 
 export interface GetWorkListResType {
 	id?: number;
+	work_image: string;
 	work_title: string;
 	work_des: string;
 	work_url: string;

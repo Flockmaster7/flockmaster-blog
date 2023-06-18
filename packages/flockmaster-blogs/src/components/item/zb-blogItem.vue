@@ -1,7 +1,9 @@
 <template>
 	<div class="card">
 		<div class="imgBox">
-			<img src="@/static/images/test_blog_img.png" alt="" />
+			<img
+				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
+				alt="" />
 		</div>
 		<div class="content">
 			<div class="details">
@@ -32,6 +34,8 @@
 
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
+	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgEnvironment } from '@/constant/index';
 
 	export interface PropType {
 		blog: GetBlogDetailResType;

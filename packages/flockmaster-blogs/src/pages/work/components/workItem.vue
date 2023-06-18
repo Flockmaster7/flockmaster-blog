@@ -1,19 +1,32 @@
 <template>
 	<div class="work-item">
-		<div class="img"></div>
+		<div
+			class="img"
+			:style="{
+				backgroundImage: `url(${
+					getImgBaseUrl(imgEnvironment) + work.work_image
+				})`
+			}"></div>
 		<div class="title">{{ work.work_title }}</div>
 		<div class="des">{{ work.work_des }}</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgEnvironment } from '@/constant/index';
 	import { GetWorkListResType } from '@/types';
+	import { computed } from 'vue';
 
 	interface PropType {
 		work: GetWorkListResType;
 	}
 
 	const props = defineProps<PropType>();
+
+	const bgImage = computed(() => {
+		return props.work.work_image;
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -31,7 +44,6 @@
 			width: 100%;
 			height: 100%;
 			border-radius: 20px;
-			background-image: url('@/static/images/test_blog_img.png');
 			background-size: cover;
 			background-repeat: no-repeat;
 		}

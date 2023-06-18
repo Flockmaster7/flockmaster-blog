@@ -17,6 +17,7 @@ export const useBlogStore = defineStore('blog', () => {
 		classify: '1',
 		content_text: '',
 		content_html: '',
+		blog_image: '',
 		createdAt: '',
 		updatedAt: ''
 	});
