@@ -41,7 +41,8 @@ export default defineConfig({
 		port: 4000, //启动端口
 		proxy: {
 			'/api': {
-				target: 'http://localhost:7070', //实际请求地址
+				// target: 'http://159.75.177.56:7070', //实际请求地址
+				target: 'http://localhost:7070',
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/api/, '')
 			}

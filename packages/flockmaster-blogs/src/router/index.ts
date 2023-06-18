@@ -67,11 +67,6 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/pages/blog/index.vue')
 			}
 		]
-	},
-	{
-		path: '/test',
-		name: 'Test',
-		component: () => import('@/test/index.vue')
 	}
 ];
 

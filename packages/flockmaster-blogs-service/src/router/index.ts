@@ -4,7 +4,7 @@ import Router from 'koa-router';
 const router = new Router();
 
 fs.readdirSync(__dirname).forEach((item) => {
-	if (item != 'index.ts') {
+	if (item != 'index.ts' && item != 'index.js') {
 		let file = require('./' + item);
 		router.use(file.routes());
 	}
