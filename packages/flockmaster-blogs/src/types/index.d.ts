@@ -92,3 +92,13 @@ export interface GetWorkListResType {
 	createdAt: string;
 	updatedAt: string;
 }
+
+// 获取标签列表接口
+export interface GetTagListResType {
+	id: number;
+	tag_name: string;
+	tag_color: string;
+	tag_classify: string;
+	createdAt: string;
+	updatedAt: string;
+}

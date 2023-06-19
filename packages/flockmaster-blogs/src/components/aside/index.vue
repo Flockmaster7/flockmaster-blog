@@ -8,7 +8,6 @@
 				<text class="description">{{ userInfo.description }}</text>
 			</div>
 		</el-card>
-		<!-- <zbInfoItem :info="userInfo"></zbInfoItem> -->
 		<!-- 站点信息卡片 -->
 		<el-card>
 			<el-collapse v-model="activeNames" @change="handleChange">
@@ -40,22 +39,47 @@
 				</el-collapse-item>
 			</el-collapse>
 		</el-card>
+		<!-- 标签云卡片 -->
+		<el-card>
+			<el-collapse v-model="activeTag" @change="handleTagCollapseChange">
+				<el-collapse-item name="1">
+					<template #title>
+						<el-icon class="head-icon"><Guide /></el-icon>
+						<text class="head-text"> 标签云 </text>
+						<!-- TO DO -->
+						<!-- <div class="head-refresh">
+							<el-icon size="15"><RefreshRight /></el-icon>
+						</div> -->
+					</template>
+					<div class="tag-List">
+						<el-check-tag
+							v-for="(item, index) in tagList"
+							:key="item.id"
+							:checked="tagChecked.includes(item.id)"
+							color="skyblue"
+							@change="(status: boolean) => onChangeTag(status, item.id)"
+							>{{ item.tag_name }}</el-check-tag
+						>
+					</div>
+				</el-collapse-item>
+			</el-collapse>
+		</el-card>
 	</div>
 </template>
 
 <script setup lang="ts">
+	import { useTagStore } from '@/store/tag';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
 
+	// 用户信息、站点信息
 	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
-
 	const activeNames = ref(['1']);
 	const handleChange = (val: string[]) => {
 		console.log(val);
 	};
-
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {
@@ -79,6 +103,26 @@
 			default:
 				break;
 		}
+	};
+
+	//标签云
+	const tgStore = useTagStore();
+	const { tagList } = storeToRefs(tgStore);
+	const activeTag = ref(['1']);
+	const handleTagCollapseChange = (val: string[]) => {
+		console.log(val);
+	};
+
+	tgStore.getTgLIst(1, 10);
+	// 标签选中
+	const tagChecked = ref<number[]>([]);
+	const onChangeTag = (status: boolean, id: number) => {
+		if (status) tagChecked.value.push(id);
+		else {
+			let index = tagChecked.value.indexOf(id);
+			if (index !== -1) tagChecked.value.splice(index, 1);
+		}
+		// TO DO 获取标签对应的文章列表
 	};
 </script>
 
@@ -143,6 +187,17 @@
 				cursor: pointer;
 			}
 		}
+
+		// 标签云卡片
+		.tag-List {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			.el-check-tag.is-checked {
+				background-color: $themeColor;
+				color: #fff;
+			}
+		}
 	}
 
 	// 右侧卡片标题icon
@@ -155,5 +210,10 @@
 	.head-text {
 		font-size: 14px;
 		font-weight: 700;
+	}
+
+	// 右侧卡片刷新
+	.head-refresh {
+		margin-left: 10px;
 	}
 </style>
