@@ -3,8 +3,13 @@ import {
 	Column,
 	Table,
 	DataType,
-	DeletedAt
+	DeletedAt,
+	BelongsToMany
 } from 'sequelize-typescript';
+import User_Blog_Like from './User_Blog_Like';
+import Blog from './Blog';
+import User_Blog_Collect from './User_Blog_Collect';
+import User_Focus from './User_Focus';
 
 @Table({ tableName: 'user' })
 export default class User extends Model<User> {
@@ -45,10 +50,45 @@ export default class User extends Model<User> {
 	})
 	description: string;
 
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		defaultValue: 0,
+		comment: '关注量'
+	})
+	user_focus: number;
+
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		defaultValue: 0,
+		comment: '粉丝量'
+	})
+	user_fans: number;
+
+	@Column({
+		type: DataType.STRING,
+		allowNull: true,
+		comment: '用户头像'
+	})
+	user_image: string;
+
 	@DeletedAt
 	@Column({
 		type: DataType.DATE,
 		comment: '删除时间'
 	})
 	isDeleted: Date | null;
+
+	@BelongsToMany(() => Blog, () => User_Blog_Like)
+	likedBlogs: Blog[];
+
+	@BelongsToMany(() => Blog, () => User_Blog_Collect)
+	collectedBlogs: Blog[];
+
+	@BelongsToMany(() => User, () => User_Focus)
+	userFocus: User[];
+
+	@BelongsToMany(() => User, () => User_Focus)
+	userFans: User[];
 }

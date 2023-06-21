@@ -25,3 +25,23 @@ export const validatorPage = async (ctx: Context, next: Next) => {
 	}
 	await next();
 };
+
+// 校验上传图片格式
+export const verifyUploadImg = async (ctx: Context, next: Next) => {
+	try {
+		const { file } = ctx.request.files!;
+		const fileTypes = ['image/jpeg', 'image/png'];
+		if (!Array.isArray(file)) {
+			if (!fileTypes.includes(file.mimetype!)) {
+				return ctx.app.emit('error', ERROR.uploadError, ctx);
+			}
+			ctx.state.blog_img = file;
+			ctx.state.img = file;
+		} else {
+			return ctx.app.emit('error', ERROR.uploadError, ctx);
+		}
+	} catch (error) {
+		return ctx.app.emit('error', ERROR.uploadError, ctx, error);
+	}
+	await next();
+};

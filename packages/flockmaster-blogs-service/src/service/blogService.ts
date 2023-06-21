@@ -2,12 +2,43 @@ import Blog from '../model/Blog';
 import Blog_Tag from '../model/Blog_Tag';
 import { BlogFind, BlogObject, Blog_tagType } from '../types/blog';
 import { Op } from 'sequelize';
+import TagService from './tagService';
+import { TagType } from '../types/tag';
+import Tag from '../model/Tag';
+import Bolg_tagService from './blog_tagService';
+import User from '../model/User';
+import User_Blog_LikeService from './user_blog_likeService';
+import User_Blog_CollectService from './user_blog_collectService';
+
+const tagService = new TagService();
+const blogTagService = new Bolg_tagService();
+const user_blog_likeService = new User_Blog_LikeService();
+const user_blog_collectService = new User_Blog_CollectService();
 class BlogService {
 	// 添加博客
-	async createBlog(blogObject: BlogObject): Promise<Blog> {
-		const res = await Blog.create(blogObject as Blog);
-		console.log(res.dataValues);
-		return res.dataValues;
+	async createBlog(blogObject: BlogObject, tagIdList: number[]) {
+		let blog = await Blog.create(blogObject as Blog);
+		// 添加博客对应的标签
+		await blog.$add('tags', tagIdList);
+		return true;
+	}
+
+	// 删除博客 TO DO
+	async deleteBlog(id: number) {
+		const blog = await this.getBlogInfo(id);
+		let tagIdList: number[] = [];
+		// 废弃，暂时没有更好的方法
+		// blog?.tags.forEach((item) => {
+		// 	tagIdList.push(item.id);
+		// });
+		// const tagInstances = await Tag.findAll({ where: { id: tagIdList } });
+		// await blog?.$removeAssociation('tags', tagIdList);
+		// 删除中间表对应数据
+		const res1 = await blogTagService.deleteBlogTagByBlogId(id);
+		if (res1) {
+			const res = await Blog.destroy({ where: { id } });
+			return res > 0 ? true : false;
+		}
 	}
 
 	//获取文章列表
@@ -27,9 +58,19 @@ class BlogService {
 				'author',
 				'classify',
 				'blog_image',
+				'blog_read',
+				'blog_like',
+				'blog_collect',
 				'createdAt',
 				'updatedAt'
-			]
+			],
+			include: [
+				{
+					model: Tag,
+					attributes: ['id', 'tag_name', 'tag_classify']
+				}
+			],
+			through: { attributes: [] }
 		};
 		// 升序降序，默认降序
 		if (wrapper.order) option.order[0][1] = wrapper.order;
@@ -64,6 +105,7 @@ class BlogService {
 			option.where = filter;
 		}
 		const { count, rows } = await Blog.findAndCountAll(option);
+
 		return {
 			pageNum,
 			pageSize,
@@ -84,10 +126,19 @@ class BlogService {
 				'blog_image',
 				'content_text',
 				'content_html',
+				'blog_read',
+				'blog_like',
+				'blog_collect',
 				'createdAt',
 				'updatedAt'
 			],
-			where: wrapper
+			where: wrapper,
+			include: [
+				{
+					model: Tag,
+					attributes: ['id', 'tag_name', 'tag_classify']
+				}
+			]
 		});
 		return res ? res.dataValues : null;
 	}
@@ -113,17 +164,270 @@ class BlogService {
 	}
 
 	// 获取标签对应博客列表
-	async getBlogListByTag(id: number): Promise<Blog_Tag[] | null> {
-		const wrapper = { tag_id: id };
-		const res = await Blog_Tag.findAll({ where: wrapper });
-		let idList: number[] = [];
-		res.forEach((item) => {
-			idList.push(item.dataValues.blog_id);
+	async getBlogListByTag(
+		id: number,
+		pageNum: number = 1,
+		pageSize: number = 10
+	) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await Tag.findAndCountAll({
+			attributes: ['id', 'tag_name', 'tag_classify'],
+			where: {
+				id
+			},
+			include: [
+				{
+					model: Blog,
+					attributes: [
+						'id',
+						'author',
+						'title',
+						'classify',
+						'blog_image',
+						'blog_read',
+						'blog_like',
+						'blog_collect',
+						'createdAt',
+						'updatedAt'
+					],
+					include: [
+						{
+							model: Tag,
+							attributes: ['id', 'tag_name', 'tag_classify']
+						}
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
 		});
-		const blogList = await Blog.findAll({
-			where: { id: { [Op.or]: idList } }
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows: rows[0].dataValues.blog
+		};
+	}
+
+	//增加文章阅读量
+	async addRead(id: number) {
+		const blog = await Blog.findByPk(id);
+		const res = await Blog.update(
+			{ blog_read: blog?.dataValues.blog_read! + 1 },
+			{ where: { id } }
+		);
+		return res[0] > 0 ? true : false;
+	}
+
+	//点赞文章
+	async likeArticle(id: number, user: User) {
+		const blog = await Blog.findByPk(id);
+		const res = await Blog.update(
+			{ blog_like: blog?.dataValues.blog_like! + 1 },
+			{ where: { id } }
+		);
+		if (res[0] > 0) {
+			await blog?.$add('likedUsers', user.id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 取消点赞
+	async unlikeArticle(id: number, user: User) {
+		const blog = await Blog.findByPk(id);
+		const res = await Blog.update(
+			{ blog_like: blog?.dataValues.blog_like! - 1 },
+			{ where: { id } }
+		);
+		if (res[0] > 0) {
+			await user_blog_likeService.deleteUserBlogLikeById(id, user.id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 获取点赞的文章列表
+	async getLikeList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await User.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: Blog,
+					as: 'likedBlogs',
+					attributes: [
+						'id',
+						'author',
+						'title',
+						'classify',
+						'blog_image',
+						'blog_read',
+						'blog_like',
+						'blog_collect',
+						'createdAt',
+						'updatedAt'
+					],
+					include: [
+						{
+							model: Tag,
+							attributes: ['id', 'tag_name', 'tag_classify']
+						}
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
 		});
-		return res ? res : null;
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows: rows[0].dataValues.likedBlogs
+		};
+	}
+
+	// 获取某一文章点赞用户列表
+	async getLikeUserList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await Blog.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: User,
+					as: 'likedUsers',
+					attributes: [
+						'id',
+						'is_admin',
+						'name',
+						'user_image',
+						'description',
+						'user_focus',
+						'user_fans'
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
+		});
+		return {
+			total: count,
+			rows
+		};
+	}
+
+	//收藏文章
+	async collectArticle(id: number, user: User) {
+		const blog = await Blog.findByPk(id);
+		const res = await Blog.update(
+			{ blog_collect: blog?.dataValues.blog_collect! + 1 },
+			{ where: { id } }
+		);
+		if (res[0] > 0) {
+			await blog?.$add('collectedUsers', user.id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 取消收藏
+	async uncollectArticle(id: number, user: User) {
+		const blog = await Blog.findByPk(id);
+		const res = await Blog.update(
+			{ blog_collect: blog?.dataValues.blog_collect! - 1 },
+			{ where: { id } }
+		);
+		if (res[0] > 0) {
+			await user_blog_collectService.deleteUserBlogCollectById(
+				id,
+				user.id
+			);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 获取收藏的文章列表
+	async getCollectList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await User.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: Blog,
+					as: 'collectedBlogs',
+					attributes: [
+						'id',
+						'author',
+						'title',
+						'classify',
+						'blog_image',
+						'blog_read',
+						'blog_like',
+						'blog_collect',
+						'createdAt',
+						'updatedAt'
+					],
+					include: [
+						{
+							model: Tag,
+							attributes: ['id', 'tag_name', 'tag_classify']
+						}
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
+		});
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows: rows[0].dataValues.collectedBlogs
+		};
+	}
+
+	// 获取某一文章收藏用户列表
+	async getCollectUserList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await Blog.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: User,
+					as: 'collectedUsers',
+					attributes: [
+						'id',
+						'is_admin',
+						'name',
+						'user_image',
+						'description',
+						'user_focus',
+						'user_fans'
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
+		});
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows
+		};
 	}
 }
 

@@ -27,8 +27,10 @@ router.post('/uploadImg', auth, verifyUploadImg, blogController.uploadBlogImg);
 // 添加文章
 router.post('/create', auth, validatorBlogForm, blogController.createBlog);
 
+// 获取文章详情
 router.get('/getdetail/:id', validatorId, blogController.getBlogDetail);
 
+//获取文章列表
 router.post(
 	'/getList/:pageNum?/:pageSize?',
 	validatorPage,
@@ -37,9 +39,62 @@ router.post(
 
 // 获取标签对应博客列表
 router.get(
-	'/getBlogListByTag/:id',
+	'/getBlogListByTag/:pageNum?/:pageSize?/:id?',
 	validatorId,
+	validatorPage,
 	blogController.getBlogListByTagId
+);
+
+// 删除博客
+router.delete('/delete/:id?', auth, validatorId, blogController.removeBlog);
+
+// 文章阅读
+router.post('/read/:id?', validatorId, blogController.addBlogRead);
+
+// 文章点赞
+router.post('/like/:id?', auth, validatorId, blogController.likeBlog);
+
+// 文章取消点赞
+router.post('/unlike/:id?', auth, validatorId, blogController.unlikeBlog);
+
+// 获取点赞的文章列表
+router.get(
+	'/getUserLikeList/:pageNum?/:pageSize?',
+	auth,
+	validatorPage,
+	blogController.getUserLikeList
+);
+
+// 获取某一文章点赞用户列表
+router.get(
+	'/getBlogLikeUserList/:pageNum?/:pageSize?/:id?',
+	auth,
+	validatorId,
+	validatorPage,
+	blogController.getBlogLikeUserList
+);
+
+// 文章收藏
+router.post('/collect/:id?', auth, validatorId, blogController.collectBlog);
+
+// 文章取消收藏
+router.post('/uncollect/:id?', auth, validatorId, blogController.uncollectBlog);
+
+// 获取收藏的文章列表
+router.get(
+	'/getUserCollectList/:pageNum?/:pageSize?',
+	auth,
+	validatorPage,
+	blogController.getUserCollectList
+);
+
+// 获取某一文章收藏用户列表
+router.get(
+	'/getBlogCollectUserList/:pageNum?/:pageSize?/:id?',
+	auth,
+	validatorId,
+	validatorPage,
+	blogController.getBlogCollectUserList
 );
 
 module.exports = router;

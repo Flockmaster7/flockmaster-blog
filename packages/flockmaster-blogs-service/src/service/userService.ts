@@ -2,6 +2,7 @@ import User from '../model/User';
 import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
 
 class UserService {
+	// 添加用户
 	async createUser(user_name: string, password: string): Promise<User> {
 		const res = await User.create(
 			{
@@ -15,6 +16,7 @@ class UserService {
 		return res.dataValues;
 	}
 
+	// 获取用户信息
 	async getUserInfo({
 		id,
 		user_name,
@@ -37,18 +39,28 @@ class UserService {
 				'password',
 				'is_admin',
 				'name',
-				'description'
+				'user_image',
+				'description',
+				'user_focus',
+				'user_fans'
 			],
 			where: wrapper
 		});
 		return res ? res.dataValues : null;
 	}
 
+	// 更新用户信息
 	async updateUser(userInfo: UpdateUserInfoParamsType) {
 		const wrapper = { id: userInfo.id };
 		const res = await User.update(userInfo, { where: wrapper });
-		console.log(res);
 		return res[0] > 0 ? true : false;
+	}
+
+	// 删除用户
+	async deleteUser(id: number) {
+		const wrapper = { id };
+		const res = await User.destroy({ where: wrapper });
+		return res > 0 ? true : false;
 	}
 }
 

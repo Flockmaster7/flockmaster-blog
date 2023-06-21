@@ -13,6 +13,7 @@ export default {
 	userDoesNotExist: errorForm('10004', '用户不存在', ''),
 	userLoginError: errorForm('10005', '用户登录失败', ''),
 	validatPasswordError: errorForm('10006', '密码错误', ''),
+	removeUserError: errorForm('10007', '删除用户失败', ''),
 	tokenExpiredError: errorForm('401', 'token已过期', ''),
 	invalidTokenError: errorForm('10102', '无效token', ''),
 	userChangePasswordError: errorForm('10007', '修改密码失败', ''),
@@ -35,5 +36,23 @@ export default {
 	createTagError: errorForm('30008', '添加标签失败', ''),
 	updateTagError: errorForm('30009', '修改标签失败', ''),
 	removeTagError: errorForm('30010', '删除标签失败', ''),
-	getTagListError: errorForm('30011', '获取作品列表失败', '')
+	getTagListError: errorForm('30011', '获取作品列表失败', ''),
+	deleteBlogError: errorForm('30012', '删除博客失败', ''),
+	addBlogReadError: errorForm('30013', '增加阅读量失败', ''),
+	likeBlogError: errorForm('30014', '点赞失败', ''),
+	unlikeBlogError: errorForm('30014', '取消点赞失败', ''),
+	getUserLikeListError: errorForm('30015', '获取点赞的文章列表失败', ''),
+	getBlogLikeUserListError: errorForm(
+		'30016',
+		'获取某一文章点赞用户列表失败',
+		''
+	),
+	collectBlogError: errorForm('30016', '收藏失败', ''),
+	uncollectBlogError: errorForm('30017', '取消收藏失败', ''),
+	getUserCollectListError: errorForm('30018', '获取收藏的文章列表失败', ''),
+	getBlogCollectUserListError: errorForm(
+		'30019',
+		'获取某一文章收藏用户列表失败',
+		''
+	)
 };

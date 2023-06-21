@@ -19,4 +19,7 @@ export interface UpdateUserInfoParamsType {
 	is_admin?: number;
 	name?: string;
 	description?: string;
+	user_image?: string;
+	user_like?: number;
+	user_fans?: number;
 }

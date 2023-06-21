@@ -53,7 +53,7 @@ const sequelize = new Sequelize(
 // 	}
 // );
 
-// sequelize.sync({ force: false });
+// sequelize.sync({ force: true });
 
 sequelize
 	.authenticate()

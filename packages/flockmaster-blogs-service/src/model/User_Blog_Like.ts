@@ -1,18 +1,16 @@
 import {
-	AutoIncrement,
 	Column,
 	DataType,
 	DeletedAt,
 	ForeignKey,
 	Model,
-	PrimaryKey,
 	Table
 } from 'sequelize-typescript';
-import Tag from './Tag';
+import User from './User';
 import Blog from './Blog';
 
-@Table({ tableName: 'blog_tag' })
-export default class Blog_Tag extends Model<Blog_Tag> {
+@Table({ tableName: 'user_blog_like' })
+export default class User_Blog_Like extends Model<User_Blog_Like> {
 	@Column({
 		type: DataType.INTEGER,
 		allowNull: false,
@@ -22,6 +20,14 @@ export default class Blog_Tag extends Model<Blog_Tag> {
 	})
 	id: number = 1;
 
+	@ForeignKey(() => User)
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		comment: '用户id'
+	})
+	user_id: number;
+
 	@ForeignKey(() => Blog)
 	@Column({
 		type: DataType.INTEGER,
@@ -30,18 +36,10 @@ export default class Blog_Tag extends Model<Blog_Tag> {
 	})
 	blog_id: number;
 
-	@ForeignKey(() => Tag)
-	@Column({
-		type: DataType.INTEGER,
-		allowNull: true,
-		comment: '标签id'
-	})
-	tag_id: number;
-
-	@DeletedAt
-	@Column({
-		type: DataType.DATE,
-		comment: '删除时间'
-	})
-	isDeleted: Date | null;
+	// @DeletedAt
+	// @Column({
+	// 	type: DataType.DATE,
+	// 	comment: '删除时间'
+	// })
+	// isDeleted: Date | null;
 }

@@ -1,12 +1,17 @@
 import {
+	BelongsToMany,
 	Column,
 	DataType,
 	DeletedAt,
-	HasMany,
 	Model,
 	Table
 } from 'sequelize-typescript';
 import Tag from './Tag';
+import Blog_Tag from './Blog_Tag';
+import { BelongsToManyRemoveAssociationMixin } from 'sequelize/types';
+import User from './User';
+import User_Blog_Like from './User_Blog_Like';
+import User_Blog_Collect from './User_Blog_Collect';
 
 @Table({ tableName: 'blog' })
 export default class Blog extends Model<Blog> {
@@ -52,10 +57,50 @@ export default class Blog extends Model<Blog> {
 	})
 	blog_image: string;
 
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		defaultValue: 0,
+		comment: '文章阅读量'
+	})
+	blog_read: number;
+
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		defaultValue: 0,
+		comment: '文章点赞量'
+	})
+	blog_like: number;
+
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: true,
+		defaultValue: 0,
+		comment: '文章收藏量'
+	})
+	blog_collect: number;
+
 	@DeletedAt
 	@Column({
 		type: DataType.DATE,
 		comment: '删除时间'
 	})
 	isDeleted: Date | null;
+
+	@BelongsToMany(() => Tag, () => Blog_Tag)
+	tags: Tag[];
+
+	@BelongsToMany(() => User, () => User_Blog_Like)
+	likedUsers: User[];
+
+	@BelongsToMany(() => User, () => User_Blog_Collect)
+	collectedUsers: User[];
+
+	public $removeAssociation: <R extends Model>(
+		propertyKey: string,
+		instances: R | R[] | string[] | string | number[] | number,
+		options?: any
+	) => Promise<any>;
+	//
 }

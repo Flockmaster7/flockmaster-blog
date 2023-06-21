@@ -82,6 +82,19 @@ class WorkController {
 			ctx.app.emit('error', ERROR.removeWorkError, ctx, error);
 		}
 	}
+
+	// 上传作品背景
+	async uploadBgImg(ctx: Context) {
+		try {
+			const work_image = ctx.state.img;
+			const res = {
+				work_image: `/${work_image.newFilename}`
+			};
+			ctx.body = new Result(200, '上传背景图片成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.uploadError, ctx, error);
+		}
+	}
 }
 
 export default WorkController;

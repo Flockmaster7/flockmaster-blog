@@ -1,5 +1,5 @@
 import {
-	BelongsTo,
+	BelongsToMany,
 	Column,
 	DataType,
 	DeletedAt,
@@ -8,6 +8,7 @@ import {
 	Table
 } from 'sequelize-typescript';
 import Blog from './Blog';
+import Blog_Tag from './Blog_Tag';
 
 @Table({ tableName: 'tag' })
 export default class Tag extends Model<Tag> {
@@ -17,13 +18,6 @@ export default class Tag extends Model<Tag> {
 		comment: '标签名称'
 	})
 	tag_name: string;
-
-	@Column({
-		type: DataType.STRING,
-		allowNull: true,
-		comment: '标签颜色'
-	})
-	tag_color: string;
 
 	@Column({
 		type: DataType.STRING,
@@ -38,4 +32,7 @@ export default class Tag extends Model<Tag> {
 		comment: '删除时间'
 	})
 	isDeleted: Date | null;
+
+	@BelongsToMany(() => Blog, () => Blog_Tag)
+	blog: Blog[];
 }

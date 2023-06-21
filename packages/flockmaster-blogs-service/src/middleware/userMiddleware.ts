@@ -75,11 +75,29 @@ const userIsExist = async (ctx: Context, next: Next) => {
 		ctx.state.userInfo = res;
 		if (!res) {
 			console.error('用户不存在', { user_name });
-			ctx.app.emit('error', ERROR.userAlreadExist, ctx);
+			ctx.app.emit('error', ERROR.userDoesNotExist, ctx);
 			return;
 		}
 	} catch (error) {
 		console.error('用户不存在', { user_name });
+		// ctx.app.emit('error', ERROR.userRegisterError, ctx);
+	}
+	await next();
+};
+
+//根据id查看账号是否已存在
+const userIsExistById = async (ctx: Context, next: Next) => {
+	const id = ctx.params.id;
+	try {
+		const res = await userService.getUserInfo({ id });
+		ctx.state.userInfo = res;
+		if (!res) {
+			console.error('用户不存在', { id });
+			ctx.app.emit('error', ERROR.userDoesNotExist, ctx);
+			return;
+		}
+	} catch (error) {
+		console.error('用户不存在', { id });
 		// ctx.app.emit('error', ERROR.userRegisterError, ctx);
 	}
 	await next();
@@ -90,5 +108,6 @@ export {
 	userVerify,
 	cryptPassword,
 	verifyLogin,
-	userIsExist
+	userIsExist,
+	userIsExistById
 };

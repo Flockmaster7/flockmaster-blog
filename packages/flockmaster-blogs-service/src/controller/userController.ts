@@ -9,6 +9,7 @@ import User from '../model/User';
 const userService = new UserService();
 
 class UserController {
+	// 登录
 	async login(ctx: Context) {
 		try {
 			const { user_name } = ctx.request.body;
@@ -26,6 +27,7 @@ class UserController {
 		}
 	}
 
+	// 注册
 	async register(ctx: Context) {
 		try {
 			const { user_name, password: pwd } = ctx.request.body;
@@ -41,6 +43,7 @@ class UserController {
 		}
 	}
 
+	// 修改密码
 	async updatePassword(ctx: Context) {
 		try {
 			const { password } = ctx.request.body;
@@ -57,6 +60,7 @@ class UserController {
 		}
 	}
 
+	// 获取用户信息
 	async getUserInfo(ctx: Context) {
 		try {
 			let data = {};
@@ -73,6 +77,7 @@ class UserController {
 		}
 	}
 
+	// 修改用户信息
 	async updateUserInfo(ctx: Context) {
 		try {
 			const id = ctx.state.user.id;
@@ -87,6 +92,34 @@ class UserController {
 		} catch (error) {
 			console.error('修改用户信息失败', error);
 			ctx.app.emit('error', ERROR.updateUserInfoError, ctx);
+		}
+	}
+
+	// 上传头像
+	async uploadAvatar(ctx: Context) {
+		try {
+			const avatar = ctx.state.img;
+			const res = {
+				avatar: `/${avatar.newFilename}`
+			};
+			ctx.body = new Result(200, '上传头像成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.uploadError, ctx, error);
+		}
+	}
+
+	//删除用户
+	async removeUser(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			const res = await userService.deleteUser(id * 1);
+			if (res) {
+				ctx.body = new Result(200, '删除用户成功', 'success');
+			} else {
+				ctx.body = new Result(30010, '删除用户失败', 'fail');
+			}
+		} catch (error) {
+			ctx.app.emit('error', ERROR.removeUserError, ctx, error);
 		}
 	}
 }

@@ -6,7 +6,7 @@ class TagService {
 	// 添加标签
 	async addTag(tag: TagType) {
 		const res = await Tag.create(tag as Tag, {
-			fields: ['tag_name', 'tag_color', 'tag_classify']
+			fields: ['tag_name', 'tag_classify']
 		});
 		return res.dataValues;
 	}
@@ -34,7 +34,6 @@ class TagService {
 			attributes: [
 				'id',
 				'tag_name',
-				'tag_color',
 				'tag_classify',
 				'createdAt',
 				'updatedAt'
@@ -52,13 +51,7 @@ class TagService {
 	async getTagListByIdList(idList: number[]) {
 		const res = await Tag.findAll({
 			where: { id: { [Op.or]: idList } },
-			attributes: [
-				'id',
-				'tag_name',
-				'tag_color',
-				'tag_classify',
-				'createdAt'
-			]
+			attributes: ['id', 'tag_name', 'tag_classify', 'createdAt']
 		});
 		return res ? res : null;
 	}
