@@ -122,6 +122,70 @@ class UserController {
 			ctx.app.emit('error', ERROR.removeUserError, ctx, error);
 		}
 	}
+
+	// 关注用户
+	async follow(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			const user = ctx.state.user;
+			const res = await userService.followUser(id * 1, user);
+			if (res) {
+				ctx.body = new Result(200, '关注用户成功', 'success');
+			} else {
+				ctx.body = new Result(30010, '关注用户失败', 'fail');
+			}
+		} catch (error) {
+			ctx.app.emit('error', ERROR.focusUserError, ctx, error);
+		}
+	}
+
+	// 取消关注用户
+	async unfollow(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			const user = ctx.state.user;
+			const res = await userService.unfollowUser(id * 1, user);
+			if (res) {
+				ctx.body = new Result(200, '取消关注用户成功', 'success');
+			} else {
+				ctx.body = new Result(30010, '取消关注用户失败', 'fail');
+			}
+		} catch (error) {
+			ctx.app.emit('error', ERROR.unfocusUserError, ctx, error);
+		}
+	}
+
+	// 获取关注列表
+	async getUserFollowList(ctx: Context) {
+		try {
+			const { pageNum, pageSize } = ctx.params;
+			const { id } = ctx.state.user;
+			const data = await userService.getUserFocusList(
+				id * 1,
+				pageNum * 1,
+				pageSize * 1
+			);
+			ctx.body = new Result(200, '获取关注列表成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getUserFollowListError, ctx, error);
+		}
+	}
+
+	// 获取粉丝列表
+	async getUserFansList(ctx: Context) {
+		try {
+			const { pageNum, pageSize } = ctx.params;
+			const { id } = ctx.state.user;
+			const data = await userService.getUserFansList(
+				id * 1,
+				pageNum * 1,
+				pageSize * 1
+			);
+			ctx.body = new Result(200, '获取粉丝列表成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getUserFansListError, ctx, error);
+		}
+	}
 }
 
 export default UserController;

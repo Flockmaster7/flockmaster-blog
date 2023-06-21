@@ -9,7 +9,11 @@ import {
 	userIsExistById
 } from '../middleware/userMiddleware';
 import { auth, isAdmin } from '../middleware/auth';
-import { validatorId, verifyUploadImg } from '../middleware/validator';
+import {
+	validatorId,
+	validatorPage,
+	verifyUploadImg
+} from '../middleware/validator';
 
 const router = new Router({ prefix: '/users' });
 
@@ -63,6 +67,28 @@ router.delete(
 	validatorId,
 	userIsExistById,
 	userController.removeUser
+);
+
+// 关注用户
+router.post('/follow/:id?', auth, validatorId, userController.follow);
+
+// 取消关注用户
+router.post('/unfollow/:id?', auth, validatorId, userController.unfollow);
+
+// 获取关注列表
+router.get(
+	'/getUserFollow/:pageNum?/:pageSize?',
+	auth,
+	validatorPage,
+	userController.getUserFollowList
+);
+
+// 获取粉丝列表
+router.get(
+	'/getUserFans/:pageNum?/:pageSize?',
+	auth,
+	validatorPage,
+	userController.getUserFansList
 );
 
 module.exports = router;

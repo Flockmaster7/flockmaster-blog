@@ -1,6 +1,9 @@
 import User from '../model/User';
+import User_Focus from '../model/User_Focus';
 import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
+import User_FocusService from './user_focusService';
 
+const user_focusService = new User_FocusService();
 class UserService {
 	// 添加用户
 	async createUser(user_name: string, password: string): Promise<User> {
@@ -61,6 +64,121 @@ class UserService {
 		const wrapper = { id };
 		const res = await User.destroy({ where: wrapper });
 		return res > 0 ? true : false;
+	}
+
+	//关注用户
+	async followUser(id: number, user: User) {
+		const user1 = await User.findByPk(id);
+		const user2 = await User.findByPk(user.id);
+		// 更新粉丝量
+		const res1 = await User.update(
+			{ user_fans: user1?.dataValues.user_fans! + 1 },
+			{ where: { id } }
+		);
+		// 更新关注量
+		const res2 = await User.update(
+			{ user_focus: user2?.dataValues.user_focus! + 1 },
+			{ where: { id: user2?.dataValues.id } }
+		);
+		if (res1[0] > 0 && res2[0] > 0) {
+			await User_Focus.create({
+				focus_id: user1?.id,
+				fans_id: user2?.id
+			} as User_Focus);
+			await user1?.$add('userFans', user2?.id);
+			await user2?.$add('userFocus', user1?.id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 取消关注
+	async unfollowUser(id: number, user: User) {
+		const user1 = await User.findByPk(id);
+		const user2 = await User.findByPk(user.id);
+		// 更新粉丝量
+		const res1 = await User.update(
+			{ user_fans: user1?.dataValues.user_fans! - 1 },
+			{ where: { id } }
+		);
+		// 更新关注量
+		const res2 = await User.update(
+			{ user_focus: user2?.dataValues.user_focus! - 1 },
+			{ where: { id: user2?.dataValues.id } }
+		);
+		if (res1[0] > 0 && res2[0] > 0) {
+			await user_focusService.deleteUserFollow(user1?.id, user2?.id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 获取用户关注列表
+	async getUserFocusList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await User.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: User,
+					as: 'userFocus',
+					attributes: [
+						'id',
+						'is_admin',
+						'name',
+						'user_image',
+						'description',
+						'user_focus',
+						'user_fans'
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
+		});
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows: rows
+		};
+	}
+
+	// 获取用户粉丝列表
+	async getUserFansList(id: number, pageNum: number, pageSize: number) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await User.findAndCountAll({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: User,
+					as: 'userFans',
+					attributes: [
+						'id',
+						'is_admin',
+						'name',
+						'user_image',
+						'description',
+						'user_focus',
+						'user_fans'
+					]
+				}
+			],
+			offset: offset,
+			limit: pageSize
+		});
+		return {
+			pageNum,
+			pageSize,
+			total: count,
+			rows: rows[0].dataValues.userFans
+		};
 	}
 }
 

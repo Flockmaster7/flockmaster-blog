@@ -298,6 +298,30 @@ class BlogController {
 			);
 		}
 	}
+
+	// 是否点赞
+	async isLike(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const user = ctx.state.user;
+			const res = await blogService.getIsLikeStatus(id * 1, user.id);
+			ctx.body = new Result(200, '获取状态成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getStatusError, ctx, error);
+		}
+	}
+
+	// 是否收藏
+	async isCollect(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const user = ctx.state.user;
+			const res = await blogService.getIsCollectStatus(id * 1, user.id);
+			ctx.body = new Result(200, '获取状态成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getStatusError, ctx, error);
+		}
+	}
 }
 
 export default BlogController;

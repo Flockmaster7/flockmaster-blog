@@ -9,6 +9,8 @@ import Bolg_tagService from './blog_tagService';
 import User from '../model/User';
 import User_Blog_LikeService from './user_blog_likeService';
 import User_Blog_CollectService from './user_blog_collectService';
+import User_Blog_Like from '../model/User_Blog_Like';
+import User_Blog_Collect from '../model/User_Blog_Collect';
 
 const tagService = new TagService();
 const blogTagService = new Bolg_tagService();
@@ -428,6 +430,42 @@ class BlogService {
 			total: count,
 			rows
 		};
+	}
+
+	// 是否点赞
+	async getIsLikeStatus(blog_id: number, user_id: number) {
+		console.log(blog_id, user_id);
+		const res = await User_Blog_Like.findOne({
+			where: {
+				blog_id,
+				user_id
+			}
+		});
+		if (res) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// 是否收藏
+	async getIsCollectStatus(blog_id: number, user_id: number) {
+		console.log(blog_id, user_id);
+		const res = await User_Blog_Collect.findOne({
+			where: {
+				blog_id,
+				user_id
+			}
+		});
+		if (res) {
+			return {
+				status: true
+			};
+		} else {
+			return {
+				status: false
+			};
+		}
 	}
 }
 

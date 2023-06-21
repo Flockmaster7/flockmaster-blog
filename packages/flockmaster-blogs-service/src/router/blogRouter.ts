@@ -97,4 +97,10 @@ router.get(
 	blogController.getBlogCollectUserList
 );
 
+// 是否点赞
+router.get('/isLike/:id?', auth, validatorId, blogController.isLike);
+
+// 是否收藏
+router.get('/isCollect/:id?', auth, validatorId, blogController.isCollect);
+
 module.exports = router;

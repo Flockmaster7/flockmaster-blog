@@ -20,6 +20,10 @@ export default {
 	getUserInfoError: errorForm('10008', '获取用户信息失败', ''),
 	updateUserInfoError: errorForm('10009', '修改用户信息失败', ''),
 	hasNotAdminPermission: errorForm('10010', '没有管理员权限', ''),
+	focusUserError: errorForm('10011', '关注用户失败', ''),
+	unfocusUserError: errorForm('10012', '取消关注用户失败', ''),
+	getUserFollowListError: errorForm('10013', '获取关注列表失败', ''),
+	getUserFansListError: errorForm('10014', '获取粉丝列表失败', ''),
 	uploadError: errorForm('20001', '上传失败', ''),
 	markdownRenderError: errorForm('20002', 'md文件解析失败', ''),
 	FormValidatorError: errorForm('20003', '参数错误', ''),
@@ -54,5 +58,6 @@ export default {
 		'30019',
 		'获取某一文章收藏用户列表失败',
 		''
-	)
+	),
+	getStatusError: errorForm('30019', '获取状态失败', '')
 };
