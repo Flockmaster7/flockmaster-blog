@@ -4,7 +4,7 @@
 			class="img"
 			:style="{
 				backgroundImage: `url(${
-					getImgBaseUrl(imgEnvironment) + work.work_image
+					getImgBaseUrl(imgEnvironment.dev) + work.work_image
 				})`
 			}"></div>
 		<div class="title">{{ work.work_title }}</div>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgEnvironment } from '@/types/enum';
 	import { GetWorkListResType } from '@/types';
 	import { computed } from 'vue';
 
@@ -34,7 +34,7 @@
 		position: relative;
 		width: 850px;
 		height: 300px;
-		background-color: pink;
+		background-color: $themeColor;
 		border-radius: 20px;
 
 		.img {
@@ -50,11 +50,11 @@
 
 		.title {
 			position: absolute;
-			top: 0%;
+			top: 45%;
 			left: 50%;
 			transform: translateX(-50%);
 			font-size: 30px;
-			opacity: 0;
+			opacity: 0.8;
 			transition: all 1s linear;
 			font-weight: 700;
 			color: aliceblue;

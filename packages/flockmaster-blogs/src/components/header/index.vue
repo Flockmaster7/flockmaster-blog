@@ -5,12 +5,12 @@
 				<div class="logo--text">Flockmaster</div>
 				<div class="logo--logo">blogs</div>
 			</div>
-		</div>
-		<div class="mainBox">
-			<div class="navLink" v-for="(item, index) in navLinkList">
-				<router-link :to="item.src" @click="changeTag">{{
-					item.title
-				}}</router-link>
+			<div class="mainBox">
+				<div class="navLink" v-for="(item, index) in navLinkList">
+					<router-link :to="item.src" @click="changeTag">{{
+						item.title
+					}}</router-link>
+				</div>
 			</div>
 		</div>
 		<!-- <div class="search">
@@ -72,9 +72,9 @@
 <style lang="scss" scoped>
 	.header-container {
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
-		padding: 10px 60px;
+		padding: 10px 80px;
 		background-color: $themeColor;
 
 		.leftBox {

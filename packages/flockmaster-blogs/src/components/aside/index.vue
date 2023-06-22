@@ -3,7 +3,7 @@
 		<!-- 个人信息卡片 -->
 		<el-card>
 			<div class="info-card">
-				<img class="avatar" src="@/static/images/login_bg.png" />
+				<img class="avatar" :src="userInfo.user_image" />
 				<text class="name">{{ userInfo.name }}</text>
 				<text class="description">{{ userInfo.description }}</text>
 			</div>
@@ -70,8 +70,19 @@
 <script setup lang="ts">
 	import { useTagStore } from '@/store/tag';
 	import { useUserStore } from '@/store/user';
+	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
+	import usePagination from '@/hooks/usePagination';
+
+	const blogStore = useBlogStore();
+
+	usePagination(
+		{
+			author: 'flockmaster'
+		},
+		blogStore.getBlogList
+	);
 
 	// 用户信息、站点信息
 	const store = useUserStore();
@@ -113,16 +124,21 @@
 		console.log(val);
 	};
 
-	tgStore.getTgLIst(1, 10);
+	tgStore.getTgLIst(1, 20);
 	// 标签选中
+	const { getBlogListParams } = storeToRefs(blogStore);
 	const tagChecked = ref<number[]>([]);
-	const onChangeTag = (status: boolean, id: number) => {
+	const onChangeTag = async (status: boolean, id: number) => {
 		if (status) tagChecked.value.push(id);
 		else {
 			let index = tagChecked.value.indexOf(id);
 			if (index !== -1) tagChecked.value.splice(index, 1);
 		}
-		// TO DO 获取标签对应的文章列表
+		//获取标签对应的文章列表
+		getBlogListParams.value = {
+			tags: tagChecked.value
+		};
+		blogStore.getBlogList(1, 9, getBlogListParams.value);
 	};
 </script>
 
@@ -140,6 +156,7 @@
 		align-items: center;
 		margin-top: 15px;
 		gap: 15px;
+		// overflow-y: scroll;
 		// 个人信息卡片
 		.info-card {
 			display: flex;
@@ -195,7 +212,7 @@
 			gap: 6px;
 			.el-check-tag.is-checked {
 				background-color: $themeColor;
-				color: #fff;
+				color: $white;
 			}
 		}
 	}

@@ -28,6 +28,7 @@ export interface BlogFind {
 	classify?: string;
 	content_text?: string;
 	order?: string;
+	tags?: number[];
 }
 
 export interface Blog_tagType {

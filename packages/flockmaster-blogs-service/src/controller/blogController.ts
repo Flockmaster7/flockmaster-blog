@@ -86,14 +86,17 @@ class BlogController {
 	async getBlogList(ctx: Context) {
 		try {
 			const { pageSize, pageNum } = ctx.params;
-			const { content_text, author, title, order, classify } =
-				ctx.request.body;
 			const wrapper = {};
-			content_text && Object.assign(wrapper, { content_text });
-			author && Object.assign(wrapper, { author });
-			title && Object.assign(wrapper, { title });
-			order && Object.assign(wrapper, { order });
-			classify && Object.assign(wrapper, { classify });
+			if (ctx.request.body) {
+				const { content_text, author, title, order, classify, tags } =
+					ctx.request.body;
+				content_text && Object.assign(wrapper, { content_text });
+				author && Object.assign(wrapper, { author });
+				title && Object.assign(wrapper, { title });
+				order && Object.assign(wrapper, { order });
+				classify && Object.assign(wrapper, { classify });
+				tags && Object.assign(wrapper, { tags });
+			}
 			const data = await blogService.getBlogList(
 				pageNum,
 				pageSize,
@@ -141,9 +144,11 @@ class BlogController {
 	// 获取标签对应博客列表
 	async getBlogListByTagId(ctx: Context) {
 		try {
-			const { id, pageNum, pageSize } = ctx.params;
+			const { pageNum, pageSize } = ctx.params;
+			const { tags } = ctx.request.body;
+			console.log(ctx.request.body, tags);
 			const data = await blogService.getBlogListByTag(
-				id * 1,
+				tags,
 				pageNum * 1,
 				pageSize * 1
 			);

@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="imgBox">
 			<img
-				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
+				:src="getImgBaseUrl(imgEnvironment.dev) + blog.blog_image"
 				alt="" />
 		</div>
 		<div class="content">
@@ -11,21 +11,26 @@
 				<div class="description">{{ blog.author }}</div>
 				<div class="data">
 					<div class="data_item">
-						<p class="num">312</p>
+						<p class="num">{{ blog.blog_read }}</p>
 						<p class="text">阅读</p>
 					</div>
 					<div class="data_item">
-						<p class="num">123</p>
+						<p class="num">{{ blog.blog_like }}</p>
 						<p class="text">点赞</p>
 					</div>
 					<div class="data_item">
-						<p class="num">123</p>
+						<p class="num">{{ blog.blog_collect }}</p>
 						<p class="text">收藏</p>
 					</div>
 				</div>
-				<div class="actionBtn">
-					<button class="good">点赞</button>
-					<button class="collect">收藏</button>
+				<div class="tagList">
+					<el-tag
+						v-for="(item, index) in blog.tags"
+						:key="item.id"
+						type="default"
+						color="#a4c4b5"
+						>{{ item.tag_name }}</el-tag
+					>
 				</div>
 			</div>
 		</div>
@@ -35,7 +40,7 @@
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgEnvironment } from '@/types/enum';
 
 	export interface PropType {
 		blog: GetBlogDetailResType;
@@ -86,11 +91,11 @@
 			overflow: hidden;
 
 			.details {
-				padding: 15px 40px;
+				padding: 0px 40px;
 				text-align: center;
 				width: 100%;
 				transition: 1s;
-				transform: translateY(95px);
+				transform: translateY(65px);
 				.name {
 					font-weight: 900;
 					font-size: 18px;
@@ -124,7 +129,7 @@
 					}
 				}
 
-				.actionBtn {
+				.tagList {
 					display: flex;
 					justify-content: center;
 					gap: 8px;
@@ -168,14 +173,13 @@
 
 		.content {
 			.details {
-				transform: translateY(0);
+				transform: translateY(-30px);
 				.name,
 				.description {
 					transform: translateY(-20px);
 				}
 
-				.name {
-					margin-bottom: 8px;
+				.data {
 				}
 			}
 		}

@@ -1,14 +1,16 @@
 <template>
-	<el-card>
-		<div class="blog-info">
-			<div class="author">{{ blogDeatil.author }}</div>
-			<div class="createdAt">{{ blogDeatil.createdAt }}</div>
-		</div>
-	</el-card>
-	<el-card>
-		<div id="markdown"></div>
-		<v-md-preview :text="content"></v-md-preview>
-	</el-card>
+	<div class="container">
+		<el-card>
+			<div class="blog-info">
+				<div class="author">{{ blogDeatil.author }}</div>
+				<div class="createdAt">{{ blogDeatil.createdAt }}</div>
+			</div>
+		</el-card>
+		<el-card>
+			<div id="markdown"></div>
+			<v-md-preview :text="content"></v-md-preview>
+		</el-card>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +39,11 @@
 </script>
 
 <style lang="scss" scoped>
+	.container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 	.el-card:first-child {
 		margin-top: 15px;
 	}

@@ -69,11 +69,24 @@ class BlogService {
 			include: [
 				{
 					model: Tag,
+					as: 'tags',
 					attributes: ['id', 'tag_name', 'tag_classify']
 				}
 			],
+			// 去除重复
+			distinct: true,
 			through: { attributes: [] }
 		};
+
+		// 如果有标签id数组
+		if (wrapper.tags && wrapper.tags.length > 0) {
+			option.include[0].where = {
+				id: {
+					[Op.in]: wrapper.tags
+				}
+			};
+		}
+
 		// 升序降序，默认降序
 		if (wrapper.order) option.order[0][1] = wrapper.order;
 
@@ -167,39 +180,37 @@ class BlogService {
 
 	// 获取标签对应博客列表
 	async getBlogListByTag(
-		id: number,
+		tags: number[],
 		pageNum: number = 1,
 		pageSize: number = 10
 	) {
 		const offset = (pageNum - 1) * pageSize;
-		const { count, rows } = await Tag.findAndCountAll({
-			attributes: ['id', 'tag_name', 'tag_classify'],
-			where: {
-				id
-			},
+		const { count, rows } = await Blog.findAndCountAll({
+			attributes: [
+				'id',
+				'author',
+				'title',
+				'classify',
+				'blog_image',
+				'blog_read',
+				'blog_like',
+				'blog_collect',
+				'createdAt',
+				'updatedAt'
+			],
 			include: [
 				{
-					model: Blog,
-					attributes: [
-						'id',
-						'author',
-						'title',
-						'classify',
-						'blog_image',
-						'blog_read',
-						'blog_like',
-						'blog_collect',
-						'createdAt',
-						'updatedAt'
-					],
-					include: [
-						{
-							model: Tag,
-							attributes: ['id', 'tag_name', 'tag_classify']
+					model: Tag,
+					as: 'tags',
+					attributes: ['id', 'tag_name', 'tag_classify'],
+					where: {
+						id: {
+							[Op.in]: tags
 						}
-					]
+					}
 				}
 			],
+			order: [['createdAt', 'DESC']],
 			offset: offset,
 			limit: pageSize
 		});
@@ -207,7 +218,7 @@ class BlogService {
 			pageNum,
 			pageSize,
 			total: count,
-			rows: rows[0].dataValues.blog
+			rows: rows
 		};
 	}
 

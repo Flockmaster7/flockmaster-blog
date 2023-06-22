@@ -43,7 +43,10 @@ export interface GetUserInfoResType {
 	user_name: string;
 	is_admin: boolean;
 	name: string;
+	user_image: string;
 	description: string;
+	user_focus: number;
+	user_fans: number;
 }
 
 // 获取博客列表接口
@@ -55,6 +58,10 @@ export interface getBlogListResType {
 	classify: string;
 	content_html: string;
 	content_text: string;
+	blog_like: number;
+	blog_collect: number;
+	blog_read: number;
+	tags: GetTagListResType[];
 	createdAt: string;
 	updatedAt: string;
 }
@@ -66,6 +73,7 @@ export interface GetBlogListForm {
 	content_text?: string;
 	order?: string;
 	classify?: string;
+	tags?: number[];
 }
 
 // 获取博客详情接口
@@ -77,6 +85,10 @@ export interface GetBlogDetailResType {
 	classify: string;
 	content_text: string;
 	content_html: string;
+	blog_like: number;
+	blog_collect: number;
+	blog_read: number;
+	tags: GetTagListResType[];
 	createdAt: string;
 	updatedAt: string;
 }
@@ -97,8 +109,7 @@ export interface GetWorkListResType {
 export interface GetTagListResType {
 	id: number;
 	tag_name: string;
-	tag_color: string;
 	tag_classify: string;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string;
+	updatedAt?: string;
 }

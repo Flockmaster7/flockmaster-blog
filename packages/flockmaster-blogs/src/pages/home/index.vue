@@ -29,20 +29,18 @@
 
 	const store = useBlogStore();
 	const router = useRouter();
-	const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
-		usePagination(
-			{
-				author: 'flockmaster'
-			},
-			store.getBlogList
-		);
 
-	const { blogList, blogTotal } = storeToRefs(store);
+	const { blogList, blogTotal, getBlogListParams } = storeToRefs(store);
+
+	const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
+		usePagination(getBlogListParams.value, store.getBlogList);
 
 	onMounted(() => {
-		store.getBlogList(pageNum.value, pageSize.value, {
-			author: 'flockmaster'
-		});
+		store.getBlogList(
+			pageNum.value,
+			pageSize.value,
+			getBlogListParams.value
+		);
 	});
 
 	const gotoBlogDetail = (id: number) => {

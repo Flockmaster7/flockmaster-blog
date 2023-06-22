@@ -4,16 +4,16 @@ export const navLinkList = [
 		src: '/',
 		name: ''
 	},
-	{
-		title: '前端',
-		src: '/show',
-		name: ''
-	},
-	{
-		title: '后端',
-		src: '/service',
-		name: ''
-	},
+	// {
+	// 	title: '前端',
+	// 	src: '/show',
+	// 	name: ''
+	// },
+	// {
+	// 	title: '后端',
+	// 	src: '/service',
+	// 	name: ''
+	// },
 	{
 		title: '作品',
 		src: '/work',

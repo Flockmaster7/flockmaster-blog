@@ -35,3 +35,24 @@ export const getArticleDetail = (id: number) => {
 		method: 'GET'
 	});
 };
+
+/**
+ * 根据标签id获取标签文章列表
+ * @param id 文章id
+ * @param pageNum 页码
+ * @param pageSize 每一页数量
+ * @returns
+ */
+export const getBlogListByTagId = (
+	tags: number[],
+	pageNum: number,
+	pageSize: number
+) => {
+	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+		url: `/blog/getBlogListByTag/${pageNum}/${pageSize}`,
+		method: 'POST',
+		data: {
+			tags
+		}
+	});
+};

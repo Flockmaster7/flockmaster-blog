@@ -1,4 +1,8 @@
-import { getArticleDetail, getArticleList } from '@/http/blog';
+import {
+	getArticleDetail,
+	getArticleList,
+	getBlogListByTagId
+} from '@/http/blog';
 import {
 	GetBlogDetailResType,
 	GetBlogListForm,
@@ -8,6 +12,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useBlogStore = defineStore('blog', () => {
+	const getBlogListParams = ref<GetBlogListForm>({});
 	const blogTotal = ref(0);
 	const blogList = ref<getBlogListResType[]>([]);
 	const blogDeatil = ref<GetBlogDetailResType>({
@@ -18,6 +23,10 @@ export const useBlogStore = defineStore('blog', () => {
 		content_text: '',
 		content_html: '',
 		blog_image: '',
+		blog_like: 0,
+		blog_collect: 0,
+		blog_read: 0,
+		tags: [],
 		createdAt: '',
 		updatedAt: ''
 	});
@@ -39,11 +48,25 @@ export const useBlogStore = defineStore('blog', () => {
 		if (res.code === 200) blogDeatil.value = res.data;
 	};
 
+	const getBlogListByTag = async (
+		tags: number[],
+		pageNum: number,
+		pageSize: number
+	) => {
+		const { data: res } = await getBlogListByTagId(tags, pageNum, pageSize);
+		if (res.code === 200) {
+			blogList.value = res.data.rows;
+			blogTotal.value = res.data.total;
+		}
+	};
+
 	return {
 		blogList,
 		blogDeatil,
 		getBlogDetail,
 		getBlogList,
-		blogTotal
+		blogTotal,
+		getBlogListByTag,
+		getBlogListParams
 	};
 });

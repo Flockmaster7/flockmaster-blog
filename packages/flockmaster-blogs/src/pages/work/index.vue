@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-	import workItem from '@/pages/work/components/workItem.vue';
+	import workItem from '@/pages/work/components/zb-workItem.vue';
 	import { useWorkStore } from '@/store/work';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';

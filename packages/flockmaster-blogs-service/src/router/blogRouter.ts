@@ -38,9 +38,8 @@ router.post(
 );
 
 // 获取标签对应博客列表
-router.get(
-	'/getBlogListByTag/:pageNum?/:pageSize?/:id?',
-	validatorId,
+router.post(
+	'/getBlogListByTag/:pageNum?/:pageSize?',
 	validatorPage,
 	blogController.getBlogListByTagId
 );
