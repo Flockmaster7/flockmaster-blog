@@ -281,7 +281,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: 1rem;
-			background-color: #a4c4b5;
+			background-color: $themeColor;
 
 			img {
 				width: 100%;
@@ -291,19 +291,19 @@
 			h2 {
 				font-size: 1.75rem;
 				font-weight: 500;
-				color: #ffffff;
+				color: $white;
 			}
 
 			p {
 				max-width: 500px;
 				font-size: 1.2rem;
 				text-align: center;
-				color: #ffffff;
+				color: $white;
 			}
 		}
 
 		&--rightBox {
-			background-color: #fff;
+			background-color: $white;
 			flex-basis: 50%;
 			display: flex;
 			flex-direction: column;
@@ -321,7 +321,7 @@
 				margin-bottom: 1rem;
 				font-size: 1.2rem;
 				font-weight: 500;
-				color: #717775;
+				color: $gray;
 				text-align: center;
 			}
 

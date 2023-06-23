@@ -56,3 +56,87 @@ export const getBlogListByTagId = (
 		}
 	});
 };
+
+/**
+ * 增加文章阅读量
+ * @param id 文章id
+ * @returns
+ */
+export const blogRead = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/read/${id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 是否点赞
+ * @param id 文章id
+ * @returns
+ */
+export const isLike = (id: number) => {
+	return request<HttpResponse<{ status: boolean }>>({
+		url: `/blog/isLike/${id}`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 是否收藏
+ * @param id 文章id
+ * @returns
+ */
+export const isCollect = (id: number) => {
+	return request<HttpResponse<{ status: boolean }>>({
+		url: `/blog/isCollect/${id}`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 点赞
+ * @param id 文章id
+ * @returns
+ */
+export const like = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/like/${id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 取消点赞
+ * @param id 文章id
+ * @returns
+ */
+export const unlike = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/unlike/${id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 收藏
+ * @param id 文章id
+ * @returns
+ */
+export const collect = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/collect/${id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 取消收藏
+ * @param id 文章id
+ * @returns
+ */
+export const uncollect = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/uncollect/${id}`,
+		method: 'POST'
+	});
+};

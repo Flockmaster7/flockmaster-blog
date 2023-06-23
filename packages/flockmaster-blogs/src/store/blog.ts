@@ -1,7 +1,14 @@
 import {
+	blogRead,
+	collect,
 	getArticleDetail,
 	getArticleList,
-	getBlogListByTagId
+	getBlogListByTagId,
+	isCollect,
+	isLike,
+	like,
+	uncollect,
+	unlike
 } from '@/http/blog';
 import {
 	GetBlogDetailResType,
@@ -12,6 +19,11 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useBlogStore = defineStore('blog', () => {
+	const blogStatus = ref({
+		like: false,
+		collect: false,
+		read: false
+	});
 	const getBlogListParams = ref<GetBlogListForm>({});
 	const blogTotal = ref(0);
 	const blogList = ref<getBlogListResType[]>([]);
@@ -60,6 +72,44 @@ export const useBlogStore = defineStore('blog', () => {
 		}
 	};
 
+	const addBlogRead = async (id: number) => {
+		await blogRead(id);
+	};
+
+	const isBlogLike = async (id: number) => {
+		const { data: res } = await isLike(id);
+		if (res.code === 200) {
+			blogStatus.value.like = res.data.status;
+		}
+	};
+
+	const isBlogCOllect = async (id: number) => {
+		const { data: res } = await isCollect(id);
+		if (res.code === 200) {
+			blogStatus.value.collect = res.data.status;
+		}
+	};
+
+	const blogLike = async () => {
+		await like(blogDeatil.value.id);
+		blogStatus.value.like = !blogStatus.value.like;
+	};
+
+	const blogUnlike = async () => {
+		await unlike(blogDeatil.value.id);
+		blogStatus.value.like = !blogStatus.value.like;
+	};
+
+	const blogCollect = async () => {
+		await collect(blogDeatil.value.id);
+		blogStatus.value.collect = !blogStatus.value.collect;
+	};
+
+	const blogUncollect = async () => {
+		await uncollect(blogDeatil.value.id);
+		blogStatus.value.collect = !blogStatus.value.collect;
+	};
+
 	return {
 		blogList,
 		blogDeatil,
@@ -67,6 +117,14 @@ export const useBlogStore = defineStore('blog', () => {
 		getBlogList,
 		blogTotal,
 		getBlogListByTag,
-		getBlogListParams
+		getBlogListParams,
+		addBlogRead,
+		isBlogLike,
+		isBlogCOllect,
+		blogStatus,
+		blogLike,
+		blogUnlike,
+		blogCollect,
+		blogUncollect
 	};
 });

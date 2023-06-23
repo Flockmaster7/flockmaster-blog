@@ -30,7 +30,7 @@
 		position: sticky;
 		top: 0px;
 		z-index: 999;
-		background-color: #a4c4b5;
+		background-color: $themeColor;
 		.header {
 			width: 1350px;
 			margin: 0 auto;

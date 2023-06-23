@@ -88,9 +88,16 @@ router.beforeEach(
 		if (to.path === '/login') {
 			next();
 		} else {
-			// to do
+			// 还没登录
+			if (!isLogin()) {
+				ElMessage({
+					message: '请先登录',
+					type: 'error'
+				});
+			} else {
+				next();
+			}
 		}
-		next();
 	}
 );
 

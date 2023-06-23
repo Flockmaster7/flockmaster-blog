@@ -453,9 +453,13 @@ class BlogService {
 			}
 		});
 		if (res) {
-			return true;
+			return {
+				status: true
+			};
 		} else {
-			return false;
+			return {
+				status: false
+			};
 		}
 	}
 
