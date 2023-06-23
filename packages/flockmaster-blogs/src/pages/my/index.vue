@@ -27,8 +27,12 @@
 				<div class="item">文章</div>
 			</div>
 			<div class="main">
-				<div class="blog-list">
-					<div class="blog-item"></div>
+				<div
+					class="blog-item"
+					v-for="(item, index) in blogList"
+					:key="item.id"
+					@click="gotoBlogDetail(item.id)">
+					<blogItem :blog="item"></blogItem>
 				</div>
 			</div>
 		</div>
@@ -36,19 +40,39 @@
 </template>
 
 <script setup lang="ts">
-	import zbInfoItem from '@/components/item/zb-infoItem.vue';
-	import blogList from './blogList.vue';
-	import updateUserForm from './updateUserForm.vue';
-	import { getUserInfo } from '@/http/user';
+	import { useRouter } from 'vue-router';
+	import blogItem from './blogItem.vue';
+	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
-	import { ref } from 'vue';
-	const user = useUserStore();
-	const { userInfo } = storeToRefs(user);
-	const type = ref('read');
-	const handlerUpdate = () => {
-		type.value = 'edit';
+	import { onMounted, ref } from 'vue';
+
+	const router = useRouter();
+
+	const userStore = useUserStore();
+	const { userInfo } = storeToRefs(userStore);
+	const getUserInfo = async () => {
+		await userStore.getUserProfile();
 	};
+
+	onMounted(async () => {
+		await getUserInfo();
+		await getBlogListByUser();
+	});
+
+	const blogStore = useBlogStore();
+	const { blogList, blogTotal } = storeToRefs(blogStore);
+	const getBlogListByUser = async () => {
+		await blogStore.getBlogList(1, 9, { author: userInfo.value.name });
+	};
+	// 跳转到文章详情
+	const gotoBlogDetail = (id: number) => {
+		router.push('/blog/detail?id=' + id);
+	};
+	// getBlogListParams.value.author = userInfo.value.name;
+	// console.log(getBlogListParams.value);
+	// const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
+	// 	usePagination(getBlogListParams.value, blogStore.getBlogList);
 </script>
 
 <style lang="scss" scoped>
@@ -133,55 +157,16 @@
 					padding-left: 20px;
 				}
 			}
-		}
-	}
 
-	.main {
-		height: 600px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		.left {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			align-items: center;
-			gap: 10px;
-			.left-info {
+			.main {
+				margin-top: 10px;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				margin-bottom: 15px;
 				gap: 10px;
-				.left-avatar {
-					width: 300px;
-					height: 300px;
-					border-radius: 50%;
-					border: 8px solid #fff;
-					&-img {
-						width: 300px;
-						height: 300px;
-						border-radius: 50%;
-						box-shadow: 0px 5px 5px #fcfcfc;
-					}
+				.blog-item {
 				}
-
-				.left-name {
-					font-size: 40px;
-					font-weight: 600;
-					margin-top: 20px;
-				}
-				.left-description {
-					color: #ccc;
-					font-size: 20px;
-					// margin-top: 5px;
-				}
-			}
-
-			.left-updateButton {
-				// padding-top: 40px;
 			}
 		}
 	}

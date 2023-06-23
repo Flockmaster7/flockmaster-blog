@@ -102,4 +102,12 @@ router.get('/isLike/:id?', auth, validatorId, blogController.isLike);
 // 是否收藏
 router.get('/isCollect/:id?', auth, validatorId, blogController.isCollect);
 
+// 获取某一用户博客列表
+router.get(
+	'/blog/userBlogList/:id?',
+	auth,
+	validatorId,
+	blogController.getUserBlogList
+);
+
 module.exports = router;

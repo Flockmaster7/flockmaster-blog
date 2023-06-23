@@ -10,7 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Aside: typeof import('./src/components/aside/index.vue')['default']
-    BlogItem: typeof import('./src/components/blogItem/index.vue')['default']
+    BlogItem: typeof import('./src/components/item/blogItem.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -38,6 +38,9 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ZbBlogItem: typeof import('./src/components/item/zb-blogItem.vue')['default']
+    'ZbBlogItem-': typeof import('./src/components/item/zb-blogItem-.vue')['default']
+    ZbBlogItemFlexible: typeof import('./src/components/item/zb-blogItem-flexible.vue')['default']
+    ZbBlogItemRectangle: typeof import('./src/components/item/zb-blogItem-rectangle.vue')['default']
     ZbBookItem: typeof import('./src/components/zb-bookItem.vue')['default']
     ZbInfoItem: typeof import('./src/components/item/zb-infoItem.vue')['default']
     ZbItemInBook: typeof import('./src/components/magic/zb-itemInBook.vue')['default']

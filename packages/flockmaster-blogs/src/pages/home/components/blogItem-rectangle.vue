@@ -43,8 +43,8 @@
 		padding: 8px;
 		border-radius: 15px;
 		background-color: $whiteCard;
-		width: 640px;
-		height: 150px;
+		width: 800px;
+		height: 170px;
 		display: flex;
 		justify-content: space-around;
 		transition: 0.6s;
@@ -57,7 +57,7 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
-				height: 140px;
+				height: 170px;
 
 				.top {
 					display: flex;
@@ -105,7 +105,7 @@
 
 			img {
 				width: 100%;
-				height: 140px;
+				height: 170px;
 				border-radius: 8px;
 			}
 		}
@@ -113,8 +113,8 @@
 
 	.card:hover {
 		cursor: pointer;
-		width: 650px;
-		height: 160px;
+		width: 820px;
+		height: 180px;
 		// transform: translate(-3px, -3px);
 	}
 </style>

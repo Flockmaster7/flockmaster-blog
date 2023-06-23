@@ -2,7 +2,12 @@
 	<div class="container">
 		<div v-for="(item, index) in blogList" :key="item.id">
 			<div @click="gotoBlogDetail(item.id)" class="item">
-				<zbBlogItem :blog="item"></zbBlogItem>
+				<zbBlogItemFlexible
+					:blog="item"
+					v-if="false"></zbBlogItemFlexible>
+				<zbBlogItemRectangle
+					:blog="item"
+					v-if="true"></zbBlogItemRectangle>
 			</div>
 		</div>
 	</div>
@@ -23,7 +28,8 @@
 	import { onMounted, ref } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import zbBlogItem from '@/components/item/zb-blogItem.vue';
+	import zbBlogItemFlexible from '@/pages/home/components/blogItem-flexible.vue';
+	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
 	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
 
@@ -57,7 +63,7 @@
 		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 30px;
+		gap: 10px;
 
 		.item {
 			display: flex;

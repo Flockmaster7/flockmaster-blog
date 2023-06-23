@@ -327,6 +327,17 @@ class BlogController {
 			ctx.app.emit('error', ERROR.getStatusError, ctx, error);
 		}
 	}
+
+	// 获取某一用户博客列表
+	async getUserBlogList(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const res = await blogService.getBlogListByUserId(id * 1);
+			ctx.body = new Result(200, '获取', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getBlogListError, ctx, error);
+		}
+	}
 }
 
 export default BlogController;

@@ -465,7 +465,6 @@ class BlogService {
 
 	// 是否收藏
 	async getIsCollectStatus(blog_id: number, user_id: number) {
-		console.log(blog_id, user_id);
 		const res = await User_Blog_Collect.findOne({
 			where: {
 				blog_id,
@@ -481,6 +480,12 @@ class BlogService {
 				status: false
 			};
 		}
+	}
+
+	// 获取某一用户博客列表
+	async getBlogListByUserId(id: number) {
+		// TO DO
+		const wrapper = {};
 	}
 }
 
