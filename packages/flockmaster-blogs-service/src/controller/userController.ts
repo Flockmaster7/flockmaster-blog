@@ -128,6 +128,9 @@ class UserController {
 		try {
 			const { id } = ctx.params;
 			const user = ctx.state.user;
+			if (id == user.id) {
+				throw 'error';
+			}
 			const res = await userService.followUser(id * 1, user);
 			if (res) {
 				ctx.body = new Result(200, '关注用户成功', 'success');

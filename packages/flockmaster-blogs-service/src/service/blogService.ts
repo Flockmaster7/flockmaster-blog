@@ -18,8 +18,18 @@ const user_blog_likeService = new User_Blog_LikeService();
 const user_blog_collectService = new User_Blog_CollectService();
 class BlogService {
 	// 添加博客
-	async createBlog(blogObject: BlogObject, tagIdList: number[]) {
+	async createBlog(
+		blogObject: BlogObject,
+		tagIdList: number[],
+		userId: number
+	) {
+		let user = await User.findOne({ where: { id: userId } });
 		let blog = await Blog.create(blogObject as Blog);
+		if (user) {
+			user.$add('blogs', blog);
+		} else {
+			return false;
+		}
 		// 添加博客对应的标签
 		await blog.$add('tags', tagIdList);
 		return true;
@@ -91,6 +101,10 @@ class BlogService {
 		if (wrapper.order) option.order[0][1] = wrapper.order;
 
 		const filter: any = [];
+		if (wrapper.user_id)
+			filter.push({
+				user_id: wrapper.user_id
+			});
 		if (wrapper.author)
 			filter.push({
 				author: {

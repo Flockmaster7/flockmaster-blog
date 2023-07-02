@@ -1,4 +1,4 @@
-import { getUserInfo } from '@/http/user';
+import { getFansList, getFollowList, getUserInfo } from '@/http/user';
 import { GetUserInfoResType } from '@/types';
 import { imgEnvironment } from '@/types/enum';
 import { getImgBaseUrl } from '@/utils/imgUrl';
@@ -16,8 +16,13 @@ export const useUserStore = defineStore('user', () => {
 		user_focus: 0,
 		user_fans: 0
 	});
+	// 关注列表
+	const followingList = ref<GetUserInfoResType[]>([]);
+	// 粉丝列表
+	const followerList = ref<GetUserInfoResType[]>([]);
 	const type = ref<string>('read');
 
+	// 获取用户信息
 	const getUserProfile = async () => {
 		const { data: res } = await getUserInfo();
 		if (res.code === 200) {
@@ -27,5 +32,27 @@ export const useUserStore = defineStore('user', () => {
 				getImgBaseUrl(imgEnvironment.dev) + userInfo.value.user_image;
 		}
 	};
-	return { userInfo, type, getUserProfile };
+	// 获取用户关注列表
+	const getUserFollowingList = async (pageNum: number, pageSize: number) => {
+		const { data: res } = await getFollowList(pageNum, pageSize);
+		if (res.code == 200) {
+			followingList.value = res.data.rows;
+		}
+	};
+	// 获取用户粉丝列表
+	const getUserFollowerList = async (pageNum: number, pageSize: number) => {
+		const { data: res } = await getFansList(pageNum, pageSize);
+		if (res.code == 200) {
+			followerList.value = res.data.rows;
+		}
+	};
+	return {
+		userInfo,
+		followerList,
+		followingList,
+		type,
+		getUserProfile,
+		getUserFollowingList,
+		getUserFollowerList
+	};
 });

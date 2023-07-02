@@ -10,29 +10,52 @@
 			<div class="data">
 				<div class="data-item">
 					<div class="text">文章</div>
-					<div class="number">2</div>
+					<div class="number" @click="() => changeList('blog')">
+						{{ blogTotal }}
+					</div>
 				</div>
 				<div class="data-item">
 					<div class="text">关注</div>
-					<div class="number">{{ userInfo.user_focus }}</div>
+					<div class="number" @click="() => changeList('following')">
+						{{ userInfo.user_focus }}
+					</div>
 				</div>
 				<div class="data-item">
 					<div class="text">粉丝</div>
-					<div class="number">{{ userInfo.user_fans }}</div>
+					<div class="number" @click="() => changeList('follower')">
+						{{ userInfo.user_fans }}
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="right">
 			<div class="top">
-				<div class="item">文章</div>
+				<div class="item">{{ title }}</div>
 			</div>
 			<div class="main">
 				<div
+					v-show="showBlogs"
 					class="blog-item"
 					v-for="(item, index) in blogList"
 					:key="item.id"
 					@click="gotoBlogDetail(item.id)">
 					<blogItem :blog="item"></blogItem>
+				</div>
+				<div
+					v-show="showFollow"
+					class="blog-item"
+					v-for="(item, index) in followingList"
+					:key="item.id"
+					@click="gotoBlogDetail(item.id)">
+					<userItem :user="item"></userItem>
+				</div>
+				<div
+					v-show="showFans"
+					class="blog-item"
+					v-for="(item, index) in followerList"
+					:key="item.id"
+					@click="gotoBlogDetail(item.id)">
+					<userItem :user="item"></userItem>
 				</div>
 			</div>
 		</div>
@@ -45,12 +68,13 @@
 	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
-	import { onMounted, ref } from 'vue';
+	import { computed, onMounted, ref } from 'vue';
+	import userItem from './userItem.vue';
 
 	const router = useRouter();
 
 	const userStore = useUserStore();
-	const { userInfo } = storeToRefs(userStore);
+	const { userInfo, followerList, followingList } = storeToRefs(userStore);
 	const getUserInfo = async () => {
 		await userStore.getUserProfile();
 	};
@@ -58,21 +82,56 @@
 	onMounted(async () => {
 		await getUserInfo();
 		await getBlogListByUser();
+		await getFollowList();
 	});
 
 	const blogStore = useBlogStore();
 	const { blogList, blogTotal } = storeToRefs(blogStore);
+	// 获取用户列表
 	const getBlogListByUser = async () => {
-		await blogStore.getBlogList(1, 9, { author: userInfo.value.name });
+		await blogStore.getBlogList(1, 9, { user_id: userInfo.value.id });
+	};
+	// 获取用户关注列表和粉丝列表
+	const getFollowList = async () => {
+		await userStore.getUserFollowingList(1, 9);
+		await userStore.getUserFollowerList(1, 9);
 	};
 	// 跳转到文章详情
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);
 	};
-	// getBlogListParams.value.author = userInfo.value.name;
-	// console.log(getBlogListParams.value);
-	// const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
-	// 	usePagination(getBlogListParams.value, blogStore.getBlogList);
+
+	// 显示粉丝列表
+	const showFans = ref(false);
+	// 显示关注列表
+	const showFollow = ref(false);
+	// 显示文章列表
+	const showBlogs = ref(true);
+	// 切换列表
+	const changeList = (type: string) => {
+		switch (type) {
+			case 'blog':
+				showBlogs.value = true;
+				showFans.value = false;
+				showFollow.value = false;
+				break;
+			case 'following':
+				showFollow.value = true;
+				showBlogs.value = false;
+				showFans.value = false;
+				break;
+			case 'follower':
+				showFans.value = true;
+				showBlogs.value = false;
+				showFollow.value = false;
+				break;
+		}
+	};
+	const title = computed(() => {
+		if (showBlogs.value) return '文章';
+		if (showFollow.value) return '关注';
+		if (showFans.value) return '粉丝';
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -137,6 +196,12 @@
 					.number {
 						font-weight: 600;
 					}
+
+					.number:hover {
+						color: $themeColor;
+						cursor: pointer;
+						font-weight: 600;
+					}
 				}
 			}
 		}
@@ -165,6 +230,7 @@
 				justify-content: center;
 				align-items: center;
 				gap: 10px;
+				padding: 0 10px;
 				.blog-item {
 				}
 			}

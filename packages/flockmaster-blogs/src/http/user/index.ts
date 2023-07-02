@@ -8,7 +8,7 @@ import type {
 	UpdateUserInfoFrom,
 	GetUserInfoResType
 } from '@/types/index.d.ts';
-import type { HttpResponse } from '@/types/http.d.ts';
+import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
 /**
  * 登录
@@ -70,5 +70,31 @@ export const updateUserInfo = (data: UpdateUserInfoFrom) => {
 		url: '/users/updateUserInfo',
 		method: 'POST',
 		data
+	});
+};
+
+/**
+ * 获取用户关注列表
+ * @param pageNum
+ * @param pageSize
+ * @returns
+ */
+export const getFollowList = (pageNum: number, pageSize: number) => {
+	return request<HttpResponse<PageRequest<GetUserInfoResType>>>({
+		url: `/users/getUserFollow/${pageNum}/${pageSize}`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 获取用户粉丝列表
+ * @param pageNum
+ * @param pageSize
+ * @returns
+ */
+export const getFansList = (pageNum: number, pageSize: number) => {
+	return request<HttpResponse<PageRequest<GetUserInfoResType>>>({
+		url: `/users/getUserFollow/${pageNum}/${pageSize}`,
+		method: 'GET'
 	});
 };

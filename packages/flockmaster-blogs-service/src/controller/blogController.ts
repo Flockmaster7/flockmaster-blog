@@ -51,15 +51,17 @@ class BlogController {
 				content_text,
 				tags
 			} = ctx.request.body;
+			const user = ctx.state.user;
 			const params = {
 				author,
+				user_id: user.id,
 				title,
 				classify,
 				blog_image,
 				content_html,
 				content_text
 			};
-			const res = await blogService.createBlog(params, tags);
+			const res = await blogService.createBlog(params, tags, user.id);
 			if (res) ctx.body = new Result(200, '发布博客成功', 'success');
 			else ctx.body = new Result(20004, '发布博客失败', 'fail');
 		} catch (error) {
@@ -88,14 +90,23 @@ class BlogController {
 			const { pageSize, pageNum } = ctx.params;
 			const wrapper = {};
 			if (ctx.request.body) {
-				const { content_text, author, title, order, classify, tags } =
-					ctx.request.body;
+				const {
+					content_text,
+					author,
+					title,
+					order,
+					classify,
+					tags,
+					user_id
+				} = ctx.request.body;
+
 				content_text && Object.assign(wrapper, { content_text });
 				author && Object.assign(wrapper, { author });
 				title && Object.assign(wrapper, { title });
 				order && Object.assign(wrapper, { order });
 				classify && Object.assign(wrapper, { classify });
 				tags && Object.assign(wrapper, { tags });
+				user_id && Object.assign(wrapper, { user_id });
 			}
 			const data = await blogService.getBlogList(
 				pageNum,

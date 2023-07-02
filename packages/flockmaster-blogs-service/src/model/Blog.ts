@@ -1,8 +1,10 @@
 import {
+	BelongsTo,
 	BelongsToMany,
 	Column,
 	DataType,
 	DeletedAt,
+	ForeignKey,
 	Model,
 	Table
 } from 'sequelize-typescript';
@@ -15,6 +17,14 @@ import User_Blog_Collect from './User_Blog_Collect';
 
 @Table({ tableName: 'blog' })
 export default class Blog extends Model<Blog> {
+	@ForeignKey(() => User)
+	@Column({
+		type: DataType.INTEGER,
+		allowNull: false,
+		comment: '用户id'
+	})
+	user_id: number;
+
 	@Column({
 		type: DataType.CHAR(64),
 		allowNull: true,
@@ -87,6 +97,9 @@ export default class Blog extends Model<Blog> {
 		comment: '删除时间'
 	})
 	isDeleted: Date | null;
+
+	@BelongsTo(() => User)
+	user: User;
 
 	@BelongsToMany(() => Tag, () => Blog_Tag)
 	tags: Tag[];

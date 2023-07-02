@@ -68,6 +68,7 @@ export interface getBlogListResType {
 
 // 获取博客列表表单
 export interface GetBlogListForm {
+	user_id?: number;
 	author?: string;
 	title?: string;
 	content_text?: string;

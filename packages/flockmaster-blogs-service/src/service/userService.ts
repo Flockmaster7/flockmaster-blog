@@ -1,5 +1,6 @@
+import { Op } from 'sequelize';
 import User from '../model/User';
-import User_Focus from '../model/User_Focus';
+import User_Follow from '../model/User_Follow';
 import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
 import User_FocusService from './user_focusService';
 
@@ -81,12 +82,12 @@ class UserService {
 			{ where: { id: user2?.dataValues.id } }
 		);
 		if (res1[0] > 0 && res2[0] > 0) {
-			await User_Focus.create({
-				focus_id: user1?.id,
-				fans_id: user2?.id
-			} as User_Focus);
+			// await User_Focus.create({
+			// 	focus_id: user1?.id,
+			// 	fans_id: user2?.id
+			// } as User_Focus);
 			await user1?.$add('userFans', user2?.id);
-			await user2?.$add('userFocus', user1?.id);
+			// await user2?.$add('userFocus', user1?.id);
 			return true;
 		} else {
 			return false;
@@ -118,66 +119,84 @@ class UserService {
 	// 获取用户关注列表
 	async getUserFocusList(id: number, pageNum: number, pageSize: number) {
 		const offset = (pageNum - 1) * pageSize;
-		const { count, rows } = await User.findAndCountAll({
+		// 先在中间表查出对应的focus_id
+		const { count, rows } = await User_Follow.findAndCountAll({
 			where: {
-				id
+				fans_id: id
 			},
-			include: [
-				{
-					model: User,
-					as: 'userFocus',
-					attributes: [
-						'id',
-						'is_admin',
-						'name',
-						'user_image',
-						'description',
-						'user_focus',
-						'user_fans'
-					]
-				}
-			],
+			order: [['createdAt', 'DESC']],
 			offset: offset,
 			limit: pageSize
+		});
+		// 找出对应user的id
+		let idList: number[] = [];
+		rows.forEach((item) => {
+			idList.push(item.dataValues.focus_id);
+		});
+
+		const { rows: rows1 } = await User.findAndCountAll({
+			where: {
+				id: {
+					[Op.in]: idList
+				}
+			},
+			attributes: [
+				'id',
+				'user_name',
+				'is_admin',
+				'name',
+				'user_image',
+				'description',
+				'user_focus',
+				'user_fans'
+			]
 		});
 		return {
 			pageNum,
 			pageSize,
 			total: count,
-			rows: rows
+			rows: rows1
 		};
 	}
 
 	// 获取用户粉丝列表
 	async getUserFansList(id: number, pageNum: number, pageSize: number) {
 		const offset = (pageNum - 1) * pageSize;
-		const { count, rows } = await User.findAndCountAll({
+		const { count, rows } = await User_Follow.findAndCountAll({
 			where: {
-				id
+				focus_id: id
 			},
-			include: [
-				{
-					model: User,
-					as: 'userFans',
-					attributes: [
-						'id',
-						'is_admin',
-						'name',
-						'user_image',
-						'description',
-						'user_focus',
-						'user_fans'
-					]
-				}
-			],
+			order: [['createdAt', 'DESC']],
 			offset: offset,
 			limit: pageSize
+		});
+		// 找出对应user的id
+		let idList: number[] = [];
+		rows.forEach((item) => {
+			idList.push(item.dataValues.focus_id);
+		});
+		const { rows: rows1 } = await User.findAndCountAll({
+			where: {
+				id: {
+					[Op.in]: idList
+				}
+			},
+			attributes: [
+				'id',
+				'user_name',
+				'is_admin',
+				'name',
+				'user_image',
+				'description',
+				'user_focus',
+				'user_fans'
+			]
 		});
 		return {
 			pageNum,
 			pageSize,
 			total: count,
-			rows: rows[0].dataValues.userFans
+			rows: rows1
 		};
 	}
 }

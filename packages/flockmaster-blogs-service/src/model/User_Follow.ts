@@ -9,8 +9,8 @@ import {
 import User from './User';
 import Blog from './Blog';
 
-@Table({ tableName: 'user_focus' })
-export default class User_Focus extends Model<User_Focus> {
+@Table({ tableName: 'user_follow' })
+export default class User_Follow extends Model<User_Follow> {
 	@Column({
 		type: DataType.INTEGER,
 		allowNull: false,
@@ -23,6 +23,7 @@ export default class User_Focus extends Model<User_Focus> {
 	@ForeignKey(() => User)
 	@Column({
 		type: DataType.INTEGER,
+		unique: false,
 		allowNull: true,
 		comment: '被关注用户id'
 	})
@@ -31,15 +32,9 @@ export default class User_Focus extends Model<User_Focus> {
 	@ForeignKey(() => User)
 	@Column({
 		type: DataType.INTEGER,
+		unique: false,
 		allowNull: true,
 		comment: '关注用户id'
 	})
 	fans_id: number;
-
-	// @DeletedAt
-	// @Column({
-	// 	type: DataType.DATE,
-	// 	comment: '删除时间'
-	// })
-	// isDeleted: Date | null;
 }

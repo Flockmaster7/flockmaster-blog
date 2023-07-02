@@ -4,12 +4,13 @@ import {
 	Table,
 	DataType,
 	DeletedAt,
-	BelongsToMany
+	BelongsToMany,
+	HasMany
 } from 'sequelize-typescript';
 import User_Blog_Like from './User_Blog_Like';
 import Blog from './Blog';
 import User_Blog_Collect from './User_Blog_Collect';
-import User_Focus from './User_Focus';
+import User_Follow from './User_Follow';
 
 @Table({ tableName: 'user' })
 export default class User extends Model<User> {
@@ -80,15 +81,18 @@ export default class User extends Model<User> {
 	})
 	isDeleted: Date | null;
 
+	@HasMany(() => Blog)
+	blogs: Blog[];
+
 	@BelongsToMany(() => Blog, () => User_Blog_Like)
 	likedBlogs: Blog[];
 
 	@BelongsToMany(() => Blog, () => User_Blog_Collect)
 	collectedBlogs: Blog[];
 
-	@BelongsToMany(() => User, () => User_Focus)
+	@BelongsToMany(() => User, () => User_Follow, 'fans_id', 'focus_id')
 	userFocus: User[];
 
-	@BelongsToMany(() => User, () => User_Focus)
+	@BelongsToMany(() => User, () => User_Follow, 'focus_id', 'fans_id')
 	userFans: User[];
 }

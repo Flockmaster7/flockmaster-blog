@@ -1,4 +1,4 @@
-import User_Focus from '../model/User_Focus';
+import User_Focus from '../model/User_Follow';
 
 class User_FocusService {
 	// 删除

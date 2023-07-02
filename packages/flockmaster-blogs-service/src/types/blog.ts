@@ -22,6 +22,7 @@ export interface BlogObject {
 }
 
 export interface BlogFind {
+	user_id?: number;
 	id?: number;
 	author?: string;
 	title?: string;
