@@ -34,7 +34,7 @@
 			</div>
 			<div class="main">
 				<div
-					v-show="showBlogs"
+					v-show="showBlogs && blogList.length > 0"
 					class="blog-item"
 					v-for="(item, index) in blogList"
 					:key="item.id"
@@ -42,7 +42,7 @@
 					<blogItem :blog="item"></blogItem>
 				</div>
 				<div
-					v-show="showFollow"
+					v-show="showFollow && followingList.length > 0"
 					class="blog-item"
 					v-for="(item, index) in followingList"
 					:key="item.id"
@@ -50,12 +50,15 @@
 					<userItem :user="item"></userItem>
 				</div>
 				<div
-					v-show="showFans"
+					v-show="showFans && followerList.length > 0"
 					class="blog-item"
 					v-for="(item, index) in followerList"
 					:key="item.id"
 					@click="gotoBlogDetail(item.id)">
 					<userItem :user="item"></userItem>
+				</div>
+				<div v-show="isShowEmpty">
+					<zb-empty></zb-empty>
 				</div>
 			</div>
 		</div>
@@ -70,6 +73,7 @@
 	import { storeToRefs } from 'pinia';
 	import { computed, onMounted, ref } from 'vue';
 	import userItem from './userItem.vue';
+	import zbEmpty from '@/components/common/zb-empty.vue';
 
 	const router = useRouter();
 
@@ -131,6 +135,18 @@
 		if (showBlogs.value) return '文章';
 		if (showFollow.value) return '关注';
 		if (showFans.value) return '粉丝';
+	});
+	const isShowEmpty = computed(() => {
+		if (showBlogs) {
+			if (!blogList.value.length) return true;
+		}
+		if (showFans) {
+			if (!followerList.value.length) return true;
+		}
+		if (showFollow) {
+			if (!followingList.value.length) return true;
+		}
+		return false;
 	});
 </script>
 

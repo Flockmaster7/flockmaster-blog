@@ -128,7 +128,7 @@
 		console.log(val);
 	};
 
-	tgStore.getTgLIst(1, 20);
+	tgStore.getTgLIst(1, 9);
 	// 标签选中
 	const { getBlogListParams } = storeToRefs(blogStore);
 	const tagChecked = ref<number[]>([]);

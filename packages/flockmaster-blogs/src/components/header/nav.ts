@@ -4,6 +4,16 @@ export const navLinkList = [
 		src: '/',
 		name: ''
 	},
+	{
+		title: '归档',
+		src: '/pigeonhole',
+		name: ''
+	},
+	{
+		title: '标签',
+		src: '/tag',
+		name: ''
+	},
 	// {
 	// 	title: '前端',
 	// 	src: '/show',

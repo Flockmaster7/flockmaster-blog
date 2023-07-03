@@ -32,7 +32,7 @@
 <style lang="scss" scoped>
 	.work-item {
 		position: relative;
-		width: 850px;
+		width: 720px;
 		height: 300px;
 		background-color: $themeColor;
 		border-radius: 20px;

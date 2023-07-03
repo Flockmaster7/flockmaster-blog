@@ -43,6 +43,7 @@ export const useUserStore = defineStore('user', () => {
 	const getUserFollowerList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getFansList(pageNum, pageSize);
 		if (res.code == 200) {
+			console.log(res.data.rows);
 			followerList.value = res.data.rows;
 		}
 	};

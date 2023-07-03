@@ -1,5 +1,9 @@
 <template>
 	<div class="container">
+		<div class="header">作品集</div>
+		<el-divider>
+			<el-icon><star-filled /></el-icon>
+		</el-divider>
 		<div class="work-list">
 			<div v-for="(item, index) in workList" :key="item.id">
 				<div @click="gotoWorkDetail(item.work_url)">
@@ -11,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+	import { StarFilled } from '@element-plus/icons-vue';
 	import workItem from '@/pages/work/components/zb-workItem.vue';
 	import { useWorkStore } from '@/store/work';
 	import { storeToRefs } from 'pinia';
@@ -31,6 +36,21 @@
 <style lang="scss" scoped>
 	.container {
 		margin: 15px;
+		background-color: $white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 50px 10px 25px;
+
+		.header {
+			// margin-top: 45px;
+			height: 60px;
+			line-height: 60px;
+			font-size: 40px;
+			font-weight: 600;
+		}
+
 		.work-list {
 			display: flex;
 			flex-direction: column;

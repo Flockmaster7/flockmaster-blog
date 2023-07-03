@@ -48,6 +48,16 @@ const routes: Array<RouteRecordRaw> = [
 						path: '/about',
 						name: 'About',
 						component: () => import('@/pages/about/index.vue')
+					},
+					{
+						path: '/pigeonhole',
+						name: 'Pigeonhole',
+						component: () => import('@/pages/pigeonhole/index.vue')
+					},
+					{
+						path: '/tag',
+						name: 'Tag',
+						component: () => import('@/pages/tag/index.vue')
 					}
 				]
 			},

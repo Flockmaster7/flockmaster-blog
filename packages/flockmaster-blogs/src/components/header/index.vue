@@ -124,6 +124,7 @@
 				a:hover {
 					font-weight: 700;
 					color: rgb(51, 49, 49);
+					border-bottom: 1px solid $white;
 				}
 			}
 		}

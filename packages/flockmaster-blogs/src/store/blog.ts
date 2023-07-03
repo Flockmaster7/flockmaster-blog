@@ -46,7 +46,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const getBlogList = async (
 		pageNum: number,
 		pageSize: number,
-		data: GetBlogListForm
+		data?: GetBlogListForm
 	) => {
 		const { data: res } = await getArticleList(pageNum, pageSize, data);
 		if (res.code === 200) {

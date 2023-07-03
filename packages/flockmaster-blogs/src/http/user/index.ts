@@ -94,7 +94,7 @@ export const getFollowList = (pageNum: number, pageSize: number) => {
  */
 export const getFansList = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<GetUserInfoResType>>>({
-		url: `/users/getUserFollow/${pageNum}/${pageSize}`,
+		url: `/users/getUserFans/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
 };
