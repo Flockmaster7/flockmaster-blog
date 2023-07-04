@@ -57,7 +57,7 @@
 					</template>
 					<div class="tag-List">
 						<el-check-tag
-							v-for="(item, index) in tagList"
+							v-for="(item, index) in tagAsideList"
 							:key="item.id"
 							:checked="tagChecked.includes(item.id)"
 							color="skyblue"
@@ -122,13 +122,13 @@
 
 	//标签云
 	const tgStore = useTagStore();
-	const { tagList } = storeToRefs(tgStore);
+	const { tagAsideList } = storeToRefs(tgStore);
 	const activeTag = ref(['1']);
 	const handleTagCollapseChange = (val: string[]) => {
 		console.log(val);
 	};
 
-	tgStore.getTgLIst(1, 9);
+	tgStore.getAsideTgLIst(1, 9);
 	// 标签选中
 	const { getBlogListParams } = storeToRefs(blogStore);
 	const tagChecked = ref<number[]>([]);
@@ -156,9 +156,9 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
-		margin-top: 15px;
+		// margin-top: 15px;
 		gap: 15px;
 		// overflow-y: scroll;
 		// 个人信息卡片

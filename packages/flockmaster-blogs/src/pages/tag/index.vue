@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="tag-container">
 		<div class="tag">
 			<el-collapse v-model="activeTag" @change="handleTagCollapseChange">
 				<el-collapse-item name="1">
@@ -20,10 +20,28 @@
 				</el-collapse-item>
 			</el-collapse>
 		</div>
-		<div v-for="(item, index) in blogList" :key="item.id">
-			<div @click="gotoBlogDetail(item.id)" class="item">
-				<zbBlogItemRectangle :blog="item"></zbBlogItemRectangle>
+		<div class="blog">
+			<div v-for="(item, index) in blogList" :key="item.id">
+				<div @click="gotoBlogDetail(item.id)" class="item">
+					<zbBlogItemRectangleMobile
+						:blog="item"
+						v-if="isMobile"></zbBlogItemRectangleMobile>
+					<zbBlogItemRectangle
+						:blog="item"
+						v-if="!isMobile"></zbBlogItemRectangle>
+				</div>
 			</div>
+		</div>
+		<div class="pagination">
+			<el-pagination
+				v-model:current-page="pageNum"
+				v-model:page-size="pageSize"
+				:page-sizes="[9, 12, 15, 18, 36]"
+				:background="true"
+				layout="sizes, prev, pager, next"
+				:total="blogTotal"
+				@size-change="handleSizeChange"
+				@current-change="handleCurrentChange" />
 		</div>
 	</div>
 </template>
@@ -34,12 +52,21 @@
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
 	import { useRouter } from 'vue-router';
-	import zbBlogItemRectangle from '@/components/item/zb-blogItem-rectangle.vue';
+	// import zbBlogItemRectangle from '@/components/item/zb-blogItem-rectangle.vue';
+	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
+	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
+	import useIsMobile from '@/hooks/useIsMobile';
+	import { useCommonStore } from '@/store/common';
 
 	const router = useRouter();
 
 	const blogStore = useBlogStore();
-	const { blogList } = storeToRefs(blogStore);
+	const { blogList, blogTotal } = storeToRefs(blogStore);
+
+	// 获取设备
+	useIsMobile();
+	const commonStore = useCommonStore();
+	const { isMobile } = storeToRefs(commonStore);
 
 	// 标签
 	const tgStore = useTagStore();
@@ -68,33 +95,56 @@
 
 	// 文章
 	onMounted(async () => {
-		await getBlog();
+		await getBlog(pageNum.value, pageSize.value);
 	});
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);
 	};
-	const getBlog = async () => {
-		await blogStore.getBlogList(1, 9);
+	const getBlog = async (pageNum: number, pageSize: number) => {
+		await blogStore.getBlogList(pageNum, pageSize);
+	};
+
+	// 分页器
+	const pageNum = ref(1);
+	const pageSize = ref(9);
+
+	const handleSizeChange = (val: number) => {
+		pageSize.value = val;
+		getBlog(pageNum.value, pageSize.value);
+	};
+	const handleCurrentChange = (val: number) => {
+		pageNum.value = val;
+		getBlog(pageNum.value, pageSize.value);
 	};
 </script>
 
 <style lang="scss" scoped>
-	.container {
-		margin: 15px;
+	@media screen and (max-width: 540px) {
+		.tag-container {
+			padding: 20px 0 !important;
+		}
+		.tag {
+			padding: 0 10px 0 !important;
+		}
+	}
+	.tag-container {
 		background-color: $white;
 		padding: 20px;
 		display: flex;
 		// justify-content: space-between;
 		flex-direction: column;
 		align-items: center;
-		width: 828px;
+		// width: 100%;
 		min-height: 500px;
-		gap: 20px;
 
 		.tag {
+			padding: 0 10px 10px;
+			// border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 20px;
 			width: 90%;
-			height: 200px;
-			// overflow: hidden;
+			max-height: 200px;
+			overflow: hidden;
+			margin-bottom: 20px;
 			.head-icon {
 				font-size: 25px;
 				margin-right: 5px;
@@ -107,7 +157,7 @@
 			.tag-List {
 				overflow-y: scroll;
 				width: 100%;
-				height: 200px;
+				max-height: 200px;
 				display: flex;
 				flex-wrap: wrap;
 				padding: 0 20px;
@@ -117,6 +167,28 @@
 					color: $white;
 				}
 			}
+		}
+		.blog {
+			// margin-top: 70px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			gap: 10px;
+			.item {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+		.pagination {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 30px;
 		}
 	}
 </style>

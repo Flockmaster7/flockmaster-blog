@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="my-container">
 		<div class="left">
 			<p class="title">个人信息</p>
 			<!-- <zbInfoItem :info="userInfo" /> -->
@@ -39,14 +39,17 @@
 					v-for="(item, index) in blogList"
 					:key="item.id"
 					@click="gotoBlogDetail(item.id)">
-					<blogItem :blog="item"></blogItem>
+					<zbBlogItemRectangleMobile
+						:blog="item"
+						v-if="isMobile"></zbBlogItemRectangleMobile>
+					<blogItem :blog="item" v-if="!isMobile"></blogItem>
 				</div>
 				<div
 					v-show="showFollow && followingList.length > 0"
 					class="blog-item"
 					v-for="(item, index) in followingList"
 					:key="item.id"
-					@click="gotoBlogDetail(item.id)">
+					@click="gotoUserDetail(item.id)">
 					<userItem :user="item"></userItem>
 				</div>
 				<div
@@ -54,7 +57,7 @@
 					class="blog-item"
 					v-for="(item, index) in followerList"
 					:key="item.id"
-					@click="gotoBlogDetail(item.id)">
+					@click="gotoUserDetail(item.id)">
 					<userItem :user="item"></userItem>
 				</div>
 				<div v-show="isShowEmpty">
@@ -74,8 +77,16 @@
 	import { computed, onMounted, ref } from 'vue';
 	import userItem from './userItem.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
+	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
+	import { useCommonStore } from '@/store/common';
+	import useIsMobile from '@/hooks/useIsMobile';
 
 	const router = useRouter();
+
+	// 获取设备
+	useIsMobile();
+	const commonStore = useCommonStore();
+	const { isMobile } = storeToRefs(commonStore);
 
 	const userStore = useUserStore();
 	const { userInfo, followerList, followingList } = storeToRefs(userStore);
@@ -93,12 +104,12 @@
 	const { blogList, blogTotal } = storeToRefs(blogStore);
 	// 获取用户列表
 	const getBlogListByUser = async () => {
-		await blogStore.getBlogList(1, 9, { user_id: userInfo.value.id });
+		await blogStore.getBlogList(1, 999, { user_id: userInfo.value.id });
 	};
 	// 获取用户关注列表和粉丝列表
 	const getFollowList = async () => {
-		await userStore.getUserFollowingList(1, 9);
-		await userStore.getUserFollowerList(1, 9);
+		await userStore.getUserFollowingList(1, 999);
+		await userStore.getUserFollowerList(1, 999);
 	};
 	// 跳转到文章详情
 	const gotoBlogDetail = (id: number) => {
@@ -111,23 +122,29 @@
 	const showFollow = ref(false);
 	// 显示文章列表
 	const showBlogs = ref(true);
+	// 是否显示空状态
+	const isShowEmpty = ref(false);
 	// 切换列表
 	const changeList = (type: string) => {
+		isShowEmpty.value = false;
 		switch (type) {
 			case 'blog':
 				showBlogs.value = true;
 				showFans.value = false;
 				showFollow.value = false;
+				if (!blogList.value.length) isShowEmpty.value = true;
 				break;
 			case 'following':
 				showFollow.value = true;
 				showBlogs.value = false;
 				showFans.value = false;
+				if (!followingList.value.length) isShowEmpty.value = true;
 				break;
 			case 'follower':
 				showFans.value = true;
 				showBlogs.value = false;
 				showFollow.value = false;
+				if (!followerList.value.length) isShowEmpty.value = true;
 				break;
 		}
 	};
@@ -136,22 +153,24 @@
 		if (showFollow.value) return '关注';
 		if (showFans.value) return '粉丝';
 	});
-	const isShowEmpty = computed(() => {
-		if (showBlogs) {
-			if (!blogList.value.length) return true;
-		}
-		if (showFans) {
-			if (!followerList.value.length) return true;
-		}
-		if (showFollow) {
-			if (!followingList.value.length) return true;
-		}
-		return false;
-	});
+	//跳转到用户
+	const gotoUserDetail = (id: number) => {
+		console.log(id);
+	};
 </script>
 
 <style lang="scss" scoped>
-	.container {
+	@media screen and (max-width: 540px) {
+		.my-container {
+			flex-direction: column;
+		}
+		.left {
+			gap: 15px !important;
+			height: 250px;
+			padding: 30px 0 !important;
+		}
+	}
+	.my-container {
 		display: flex;
 		justify-content: space-between;
 		gap: 20px;
@@ -248,6 +267,7 @@
 				gap: 10px;
 				padding: 0 10px;
 				.blog-item {
+					width: 100%;
 				}
 			}
 		}

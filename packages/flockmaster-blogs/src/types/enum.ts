@@ -1,4 +1,4 @@
-export const enum imgEnvironment {
-	dev = 'dev',
-	pro = 'pro'
-}
+// export const enum imgEnvironment {
+// 	dev = 'dev',
+// 	pro = 'pro'
+// }

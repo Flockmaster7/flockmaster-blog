@@ -1,14 +1,16 @@
 <template>
-	<div class="container">
+	<div class="work-container">
 		<div class="header">作品集</div>
 		<el-divider>
 			<el-icon><star-filled /></el-icon>
 		</el-divider>
 		<div class="work-list">
-			<div v-for="(item, index) in workList" :key="item.id">
-				<div @click="gotoWorkDetail(item.work_url)">
-					<work-item :work="item"></work-item>
-				</div>
+			<div
+				v-for="(item, index) in workList"
+				:key="item.id"
+				@click="gotoWorkDetail(item.work_url)"
+				:style="{ width: 100 + '%' }">
+				<work-item :work="item"></work-item>
 			</div>
 		</div>
 	</div>
@@ -34,8 +36,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.container {
-		margin: 15px;
+	.work-container {
 		background-color: $white;
 		display: flex;
 		flex-direction: column;
@@ -52,6 +53,7 @@
 		}
 
 		.work-list {
+			width: 100%;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;

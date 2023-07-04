@@ -165,7 +165,7 @@
 			});
 			getUserProfile();
 			cache.setCache(import.meta.env.VITE_ACCESS_TOKEN, res.data.token);
-			router.push('/');
+			router.push('/home');
 		});
 	};
 
@@ -268,6 +268,16 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.login-container {
+			&--leftBox {
+				display: none !important;
+			}
+			&--rightBox {
+				flex-basis: 100% !important;
+			}
+		}
+	}
 	.login-container {
 		display: flex;
 		min-height: 90vh;

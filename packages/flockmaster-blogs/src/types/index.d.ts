@@ -114,3 +114,9 @@ export interface GetTagListResType {
 	createdAt?: string;
 	updatedAt?: string;
 }
+
+export interface HeaderNavType {
+	title: string;
+	src: string;
+	name: string;
+}

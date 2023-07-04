@@ -1,6 +1,6 @@
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
 import { GetUserInfoResType } from '@/types';
-import { imgEnvironment } from '@/types/enum';
+import { imgEnvironment } from '@/constant/index';
 import { getImgBaseUrl } from '@/utils/imgUrl';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', () => {
 			userInfo.value = res.data;
 			// 处理用户头像
 			userInfo.value.user_image =
-				getImgBaseUrl(imgEnvironment.dev) + userInfo.value.user_image;
+				getImgBaseUrl(imgEnvironment) + userInfo.value.user_image;
 		}
 	};
 	// 获取用户关注列表

@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="pigeonhole-container">
 		<div class="card">
 			<div class="title">归档</div>
 			<div class="main">
@@ -51,7 +51,6 @@
 
 	const getBlog = async (pageNum: number, pageSize: number) => {
 		blogStore.getBlogList(pageNum, pageSize, {
-			user_id: userInfo.value.id,
 			classify: '2'
 		});
 	};
@@ -76,12 +75,16 @@
 </script>
 
 <style lang="scss" scoped>
-	.container {
-		margin: 15px;
+	@media screen and (max-width: 540px) {
+		.main {
+			padding: 0 10px !important;
+		}
+	}
+	.pigeonhole-container {
 		background-color: $white;
 		padding: 20px;
 		.card {
-			width: 825px;
+			width: 100%;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -111,10 +114,11 @@
 				}
 
 				.pagination {
+					width: 100%;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					padding: 30px;
+					padding: 30px 0;
 				}
 			}
 		}

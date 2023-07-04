@@ -4,6 +4,7 @@ import App from './App.vue';
 import router from './router/index';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import '@/static/css/default.scss';
+import '@/static/css/media.scss';
 
 // 预览组件以及样式
 import VMdPreview from '@kangc/v-md-editor/lib/preview';

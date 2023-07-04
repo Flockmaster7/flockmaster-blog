@@ -1,7 +1,9 @@
-export const navLinkList = [
+import { HeaderNavType } from '@/types';
+
+export const navLinkList: HeaderNavType[] = [
 	{
 		title: '首页',
-		src: '/',
+		src: '/home',
 		name: ''
 	},
 	{
@@ -14,16 +16,6 @@ export const navLinkList = [
 		src: '/tag',
 		name: ''
 	},
-	// {
-	// 	title: '前端',
-	// 	src: '/show',
-	// 	name: ''
-	// },
-	// {
-	// 	title: '后端',
-	// 	src: '/service',
-	// 	name: ''
-	// },
 	{
 		title: '作品',
 		src: '/work',

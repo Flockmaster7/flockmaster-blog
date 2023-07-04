@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="imgBox">
 			<img
-				:src="getImgBaseUrl(imgEnvironment.dev) + blog.blog_image"
+				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
 				alt="" />
 		</div>
 		<div class="content">
@@ -40,7 +40,7 @@
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/types/enum';
+	import { imgEnvironment } from '@/constant/index';
 
 	export interface PropType {
 		blog: GetBlogDetailResType;

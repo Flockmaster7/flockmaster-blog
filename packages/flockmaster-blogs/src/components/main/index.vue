@@ -1,13 +1,13 @@
 <template>
-	<div class="container">
+	<div class="layout-container">
 		<!-- 主体区域 -->
-		<div class="mian">
+		<div class="main-area">
 			<!-- <Transition> -->
 			<router-view></router-view>
 			<!-- </Transition> -->
 		</div>
 		<!-- 右侧边栏 -->
-		<div class="aside">
+		<div class="aside-area">
 			<Aside></Aside>
 		</div>
 	</div>
@@ -16,12 +16,23 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-	.container {
+	@media screen and (max-width: 540px) {
+		.main-area {
+			flex-basis: 100% !important;
+			width: 100% !important;
+		}
+		.aside-area {
+			display: none !important;
+		}
+	}
+	.layout-container {
 		display: flex;
-		.mian {
+		gap: 10px;
+		margin: 15px 8px 0;
+		.main-area {
 			flex-basis: 75%;
 		}
-		.aside {
+		.aside-area {
 			flex-basis: 25%;
 		}
 	}

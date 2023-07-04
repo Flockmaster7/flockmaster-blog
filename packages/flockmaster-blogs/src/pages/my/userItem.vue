@@ -2,7 +2,9 @@
 	<div class="card">
 		<div class="info">
 			<div class="avatar">
-				<img :src="getImgBaseUrl('dev') + user.user_image" alt="" />
+				<img
+					:src="getImgBaseUrl(imgEnvironment) + user.user_image"
+					alt="" />
 			</div>
 			<div class="user">
 				<div class="name">{{ user.name }}</div>
@@ -16,6 +18,7 @@
 <script setup lang="ts">
 	import { GetUserInfoResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgEnvironment } from '@/constant/index';
 
 	interface propsType {
 		user: GetUserInfoResType;
@@ -31,8 +34,6 @@
 		align-items: center;
 		background-color: $whiteCard;
 		border-radius: 10px;
-		padding: 0 20px;
-		width: 640px;
 		height: 100px;
 		transition: 0.6s;
 		.info {

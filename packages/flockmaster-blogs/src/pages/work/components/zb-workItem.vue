@@ -4,7 +4,7 @@
 			class="img"
 			:style="{
 				backgroundImage: `url(${
-					getImgBaseUrl(imgEnvironment.dev) + work.work_image
+					getImgBaseUrl(imgEnvironment) + work.work_image
 				})`
 			}"></div>
 		<div class="title">{{ work.work_title }}</div>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/types/enum';
+	import { imgEnvironment } from '@/constant/index';
 	import { GetWorkListResType } from '@/types';
 	import { computed } from 'vue';
 
@@ -30,9 +30,14 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.work-item {
+			height: 180px !important;
+		}
+	}
 	.work-item {
 		position: relative;
-		width: 720px;
+		width: 100%;
 		height: 300px;
 		background-color: $themeColor;
 		border-radius: 20px;

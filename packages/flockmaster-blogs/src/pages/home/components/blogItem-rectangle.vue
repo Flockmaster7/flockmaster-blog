@@ -20,7 +20,7 @@
 		</div>
 		<div class="blogImg">
 			<img
-				:src="getImgBaseUrl(imgEnvironment.dev) + blog.blog_image"
+				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
 				alt="" />
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/types/enum';
+	import { imgEnvironment } from '@/constant/index';
 
 	interface PropType {
 		blog: GetBlogDetailResType;
@@ -39,11 +39,28 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.title {
+			font-size: 20px !important;
+		}
+		.author,
+		.data-item {
+			font-size: 15px !important;
+		}
+
+		.date {
+			font-size: 14px !important;
+		}
+
+		.bottom {
+			flex-direction: column;
+		}
+	}
 	.card {
 		padding: 8px;
 		border-radius: 15px;
 		background-color: $whiteCard;
-		width: 800px;
+		width: 100%;
 		height: 170px;
 		display: flex;
 		justify-content: space-around;
@@ -97,7 +114,7 @@
 
 		.blogImg {
 			flex-basis: 40%;
-			width: 200px;
+			width: 20%;
 			height: 100%;
 			display: flex;
 			justify-content: center;
@@ -113,7 +130,7 @@
 
 	.card:hover {
 		cursor: pointer;
-		width: 820px;
+		width: 95%;
 		height: 180px;
 		// transform: translate(-3px, -3px);
 	}

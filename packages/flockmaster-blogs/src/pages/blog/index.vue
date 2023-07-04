@@ -45,10 +45,7 @@
 			</div>
 			<div class="mainImg">
 				<img
-					:src="
-						getImgBaseUrl(imgEnvironment.dev) +
-						blogDeatil.blog_image
-					"
+					:src="getImgBaseUrl(imgEnvironment) + blogDeatil.blog_image"
 					alt="" />
 			</div>
 			<div id="markdown"></div>
@@ -64,7 +61,7 @@
 	import { useRoute } from 'vue-router';
 	import { useUserStore } from '@/store/user';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/types/enum';
+	import { imgEnvironment } from '@/constant/index';
 
 	const blogStore = useBlogStore();
 	const userStore = useUserStore();
@@ -116,6 +113,23 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		:deep(.el-card__body) {
+			padding: 0 !important;
+		}
+
+		.bottom {
+			gap: 10px !important;
+		}
+
+		.title {
+			font-size: 28px !important;
+		}
+
+		.author {
+			font-size: 14px;
+		}
+	}
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -218,8 +232,8 @@
 		margin-bottom: 30px;
 
 		img {
-			width: 1060px;
-			border-radius: 15px;
+			width: 100%;
+			border-radius: 5px;
 		}
 	}
 </style>

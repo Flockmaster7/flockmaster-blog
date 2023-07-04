@@ -1,9 +1,9 @@
 <template>
-	<div class="container">
+	<div class="empty-container">
 		<div class="center">
-			<div class="img">
+			<!-- <div class="img">
 				<img src="../../static/images/logo/empty.png" alt="" />
-			</div>
+			</div> -->
 			<div class="text">
 				{{ text }}
 			</div>
@@ -17,16 +17,16 @@
 	}
 
 	const props = withDefaults(defineProps<propsType>(), {
-		text: '空空如也'
+		text: '空空如也~'
 	});
 </script>
 
 <style lang="scss" scoped>
-	.container {
+	.empty-container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 400px;
+		min-height: 250px;
 		.center {
 			display: flex;
 			justify-content: center;
@@ -34,7 +34,7 @@
 			flex-direction: column;
 			gap: 15px;
 			.text {
-				font-size: 15px;
+				font-size: 20px;
 				color: $themeColor;
 			}
 		}

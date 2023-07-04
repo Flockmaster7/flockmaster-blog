@@ -12,10 +12,10 @@ import { isLogin } from '@/utils/login';
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/home'
+		redirect: '/login'
 	},
 	{
-		path: '/',
+		path: '/home',
 		name: 'Layout',
 		component: () => import('@/components/layout/index.vue'),
 		children: [

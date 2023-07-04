@@ -1,7 +1,12 @@
 <template>
 	<div class="card">
-		<div class="blogInfo">
-			<div class="container">
+		<div class="blog">
+			<div class="blogImg">
+				<img
+					:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
+					alt="" />
+			</div>
+			<div class="blogInfo">
 				<div class="top">
 					<div class="title">{{ blog.title }}</div>
 				</div>
@@ -9,19 +14,14 @@
 					<div class="author">作者：{{ blog.author }}</div>
 				</div>
 				<div class="bottom">
+					<div class="date">发布于：{{ blog.createdAt }}</div>
 					<div class="data">
 						<div class="data-item">读:{{ blog.blog_read }}</div>
 						<div class="data-item">赞:{{ blog.blog_like }}</div>
 						<div class="data-item">藏:{{ blog.blog_collect }}</div>
 					</div>
-					<div class="date">发布于：{{ blog.createdAt }}</div>
 				</div>
 			</div>
-		</div>
-		<div class="blogImg">
-			<img
-				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
-				alt="" />
 		</div>
 	</div>
 </template>
@@ -43,21 +43,32 @@
 		padding: 8px;
 		border-radius: 15px;
 		background-color: $whiteCard;
-		width: 640px;
-		height: 150px;
+		width: 90%;
+		// height: 300px;
 		display: flex;
+		flex-direction: column;
 		justify-content: space-around;
 		transition: 0.6s;
 
-		.blogInfo {
-			flex-basis: 60%;
-			padding: 8px;
-			height: 100%;
-			.container {
+		.blog {
+			.blogImg {
+				width: 100%;
+				height: 170px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 8px;
+				}
+			}
+			.blogInfo {
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
-				height: 140px;
+				height: 120px;
 
 				.top {
 					display: flex;
@@ -65,13 +76,13 @@
 
 					.title {
 						font-weight: 700;
-						font-size: 25px;
+						font-size: 20px;
 					}
 				}
 
 				.main {
 					.author {
-						font-size: 17px;
+						font-size: 16px;
 						color: $gray;
 					}
 				}
@@ -83,6 +94,7 @@
 						display: flex;
 						gap: 0.4rem;
 						.data-item {
+							font-size: 15px;
 							color: $gray;
 						}
 					}
@@ -90,31 +102,17 @@
 						display: flex;
 						align-items: center;
 						color: $gray;
+						font-size: 14px;
 					}
 				}
-			}
-		}
-
-		.blogImg {
-			flex-basis: 40%;
-			width: 200px;
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
-			img {
-				width: 100%;
-				height: 140px;
-				border-radius: 8px;
 			}
 		}
 	}
 
 	.card:hover {
 		cursor: pointer;
-		width: 650px;
-		height: 160px;
+		width: 95%;
+		height: 180px;
 		// transform: translate(-3px, -3px);
 	}
 </style>

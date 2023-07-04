@@ -2,36 +2,40 @@
 	<div class="container">
 		<div v-for="(item, index) in blogList" :key="item.id">
 			<div @click="gotoBlogDetail(item.id)" class="item">
-				<zbBlogItemFlexible
+				<zbBlogItemRectangleMobile
 					:blog="item"
-					v-if="false"></zbBlogItemFlexible>
+					v-if="isMobile"></zbBlogItemRectangleMobile>
 				<zbBlogItemRectangle
 					:blog="item"
-					v-if="true"></zbBlogItemRectangle>
+					v-if="!isMobile"></zbBlogItemRectangle>
 			</div>
 		</div>
-	</div>
-	<div class="pagination">
-		<el-pagination
-			v-model:current-page="pageNum"
-			v-model:page-size="pageSize"
-			:page-sizes="[9, 12, 15, 18, 36]"
-			:background="true"
-			layout="sizes, prev, pager, next"
-			:total="blogTotal"
-			@size-change="handleSizeChange"
-			@current-change="handleCurrentChange" />
+		<div class="pagination">
+			<el-pagination
+				v-model:current-page="pageNum"
+				v-model:page-size="pageSize"
+				:page-sizes="[9, 12, 15, 18, 36]"
+				:background="true"
+				layout="sizes, prev, pager, next"
+				:total="blogTotal"
+				@size-change="handleSizeChange"
+				@current-change="handleCurrentChange" />
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { onMounted, ref } from 'vue';
+	import { onMounted, ref, watch } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import zbBlogItemFlexible from '@/pages/home/components/blogItem-flexible.vue';
 	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
+	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
+	import useIsMobile from '@/hooks/useIsMobile';
+	import { useCommonStore } from '@/store/common';
+	import { useUserStore } from '@/store/user';
 
 	const store = useBlogStore();
 	const router = useRouter();
@@ -41,7 +45,15 @@
 	const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
 		usePagination(getBlogListParams.value, store.getBlogList);
 
+	// 获取设备
+	useIsMobile();
+	const commonStore = useCommonStore();
+	const { isMobile } = storeToRefs(commonStore);
+
+	const userStore = useUserStore();
+
 	onMounted(() => {
+		userStore.getUserProfile();
 		store.getBlogList(
 			pageNum.value,
 			pageSize.value,
@@ -55,10 +67,12 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+	}
 	.container {
 		padding: 20px 0;
 		background-color: $white;
-		margin: 15px;
+		// margin: 15px;
 		display: flex;
 		justify-content: center;
 		align-items: center;

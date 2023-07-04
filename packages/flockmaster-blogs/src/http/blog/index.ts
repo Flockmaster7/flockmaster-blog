@@ -15,7 +15,7 @@ import request from '../index.ts';
 export const getArticleList = (
 	pageNum: number,
 	pageSize: number,
-	data: GetBlogListForm
+	data?: GetBlogListForm
 ) => {
 	return request<HttpResponse<PageRequest<getBlogListResType>>>({
 		url: `/blog/getList/${pageNum}/${pageSize}`,
