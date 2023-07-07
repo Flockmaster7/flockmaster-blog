@@ -2,7 +2,7 @@
 	<div class="container">
 		<div v-for="(item, index) in blogList" :key="item.id">
 			<div @click="gotoBlogDetail(item.id)" class="item">
-				<zbBlogItem :blog="item"></zbBlogItem>
+				<!-- <zbBlogItem :blog="item"></zbBlogItem> -->
 			</div>
 		</div>
 	</div>
@@ -12,7 +12,7 @@
 	import { onMounted } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import zbBlogItem from '@/components/item/zb-blogItem.vue';
+	// import zbBlogItem from '@/components/item/zb-blogItem.vue';
 	import { useRouter } from 'vue-router';
 
 	const store = useBlogStore();

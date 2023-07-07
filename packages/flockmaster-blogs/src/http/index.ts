@@ -12,6 +12,7 @@ import { ElLoading, ElMessage } from 'element-plus';
 let loadingInstance: any = null;
 
 const baseUrl = '/api';
+// const baseUrl = '/';
 
 const instance = axios.create({
 	baseURL: baseUrl,

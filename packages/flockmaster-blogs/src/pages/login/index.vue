@@ -148,8 +148,8 @@
 	const type = ref('login');
 
 	const loginForm = reactive({
-		user_name: 'admin',
-		password: '123456'
+		user_name: '',
+		password: ''
 	});
 	const loginFormRef = ref<FormInstance>();
 	const submitLoginForm = async (formEl: FormInstance | undefined) => {

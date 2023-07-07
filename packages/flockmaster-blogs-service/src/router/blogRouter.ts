@@ -8,7 +8,7 @@ import {
 	verifyUploadImg
 } from '../middleware/blogMiddleware';
 import { validatorId, validatorPage } from '../middleware/validator';
-const router = new Router({ prefix: '/blog' });
+const router = new Router({ prefix: '/api/blog' });
 
 const blogController = new BlogController();
 

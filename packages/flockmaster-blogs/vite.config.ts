@@ -28,6 +28,7 @@ import ElementPlus from 'unplugin-element-plus/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: './',
 	plugins: [
 		vue(),
 		AutoImport({
@@ -62,14 +63,14 @@ export default defineConfig({
 	server: {
 		host: true,
 		open: true, //启动项目自动弹出浏览器
-		port: 4000, //启动端口
-		proxy: {
-			'/api': {
-				// target: 'http://159.75.177.56:7070', //实际请求地址
-				target: 'http://localhost:7070',
-				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, '')
-			}
-		}
+		port: 4000 //启动端口
+		// proxy: {
+		// 	'/api': {
+		// 		target: 'http://159.75.177.56:7070', //实际请求地址
+		// 		// target: 'http://localhost:7070',
+		// 		changeOrigin: true,
+		// 		rewrite: (path) => path.replace(/^\/api/, '')
+		// 	}
+		// }
 	}
 });

@@ -4,7 +4,7 @@ import { auth } from '../middleware/auth';
 import { validatorId, validatorPage } from '../middleware/workMiddleware';
 import { verifyUploadImg } from '../middleware/validator';
 
-const router = new Router({ prefix: '/work' });
+const router = new Router({ prefix: '/api/work' });
 
 const workController = new WorkController();
 

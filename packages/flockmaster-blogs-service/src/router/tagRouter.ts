@@ -3,7 +3,7 @@ import TagController from '../controller/tagController';
 import { auth } from '../middleware/auth';
 import { validatorId, validatorPage } from '../middleware/validator';
 
-const router = new Router({ prefix: '/blog' });
+const router = new Router({ prefix: '/api/blog' });
 
 const tagController = new TagController();
 

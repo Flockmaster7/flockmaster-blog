@@ -4,7 +4,8 @@ import {
 	RouterOptions,
 	RouteRecordRaw,
 	RouteLocationNormalized,
-	NavigationGuardNext
+	NavigationGuardNext,
+	createWebHashHistory
 } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { isLogin } from '@/utils/login';
@@ -81,7 +82,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes
 	// scrollBehavior(to, from, savedPosition) {
 	// 	return { top: 0 };
@@ -92,7 +93,7 @@ const router = createRouter({
 router.beforeEach(
 	(
 		to: RouteLocationNormalized,
-		from: RouteLocationNormalized,
+		_: RouteLocationNormalized,
 		next: NavigationGuardNext
 	) => {
 		if (to.path === '/login') {

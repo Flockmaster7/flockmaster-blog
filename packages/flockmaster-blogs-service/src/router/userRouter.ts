@@ -15,7 +15,7 @@ import {
 	verifyUploadImg
 } from '../middleware/validator';
 
-const router = new Router({ prefix: '/users' });
+const router = new Router({ prefix: '/api/users' });
 
 const userController = new UserController();
 
