@@ -50,9 +50,7 @@
 	});
 
 	const getBlog = async (pageNum: number, pageSize: number) => {
-		blogStore.getBlogList(pageNum, pageSize, {
-			classify: '2'
-		});
+		blogStore.getBlogList(pageNum, pageSize);
 	};
 
 	// 跳转到文章详情

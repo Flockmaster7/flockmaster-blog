@@ -1,2 +1,2 @@
-export const imgEnvironment = 'dev';
-// export const imgEnvironment = 'pro';
+// export const imgEnvironment = 'dev';
+export const imgEnvironment = 'pro';
