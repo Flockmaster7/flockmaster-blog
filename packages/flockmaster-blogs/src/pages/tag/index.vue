@@ -21,15 +21,17 @@
 			</el-collapse>
 		</div>
 		<div class="blog">
-			<div v-for="(item, index) in blogList" :key="item.id">
-				<div @click="gotoBlogDetail(item.id)" class="item">
-					<zbBlogItemRectangleMobile
-						:blog="item"
-						v-if="isMobile"></zbBlogItemRectangleMobile>
-					<zbBlogItemRectangle
-						:blog="item"
-						v-if="!isMobile"></zbBlogItemRectangle>
-				</div>
+			<div
+				v-for="(item, index) in blogList"
+				:key="item.id"
+				@click="gotoBlogDetail(item.id)"
+				class="item">
+				<zbBlogItemRectangleMobile
+					:blog="item"
+					v-if="isMobile"></zbBlogItemRectangleMobile>
+				<zbBlogItemRectangle
+					:blog="item"
+					v-if="!isMobile"></zbBlogItemRectangle>
 			</div>
 		</div>
 		<div class="pagination">
@@ -177,6 +179,7 @@
 			width: 100%;
 			gap: 10px;
 			.item {
+				width: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: center;

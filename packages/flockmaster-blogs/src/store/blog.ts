@@ -18,8 +18,15 @@ import {
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+interface BlogStatusType {
+	like: boolean;
+	collect: boolean;
+	read: boolean;
+	[key: string]: any;
+}
+
 export const useBlogStore = defineStore('blog', () => {
-	const blogStatus = ref({
+	const blogStatus = ref<BlogStatusType>({
 		like: false,
 		collect: false,
 		read: false

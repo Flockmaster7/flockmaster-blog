@@ -1,17 +1,7 @@
 <template>
-	<div class="container">
+	<div class="blog-container">
 		<div class="tool-card">
-			<div
-				:class="{ 'tool-item': true, active: blogStatus.like }"
-				@click="likeBlog">
-				点赞
-			</div>
-			<div
-				:class="{ 'tool-item': true, active: blogStatus.collect }"
-				@click="collectBlog">
-				收藏
-			</div>
-			<!-- <div class="tool-item">评论</div> -->
+			<tool :id="id"></tool>
 		</div>
 		<el-card>
 			<div class="blog-info">
@@ -50,6 +40,40 @@
 			</div>
 			<div id="markdown"></div>
 			<v-md-preview :text="content"></v-md-preview>
+			<el-divider></el-divider>
+			<div class="tag">
+				标签：
+				<div class="tag-list">
+					<el-tag
+						v-for="(item, index) in blogDeatil.tags"
+						:key="item.id"
+						>{{ item.tag_name }}</el-tag
+					>
+				</div>
+			</div>
+		</el-card>
+		<el-card>
+			<div class="top">
+				<span class="title">评论</span>
+				<div class="text-input">
+					<div class="avatar">
+						<img :src="userInfo.user_image" alt="" />
+					</div>
+					<div class="input">
+						<el-input
+							:rows="4"
+							v-model="textarea"
+							maxlength="255"
+							placeholder="请输入~"
+							@change="onChange"
+							show-word-limit
+							type="textarea" />
+					</div>
+				</div>
+				<div class="comfirm">
+					<el-button>发布</el-button>
+				</div>
+			</div>
 		</el-card>
 	</div>
 </template>
@@ -62,6 +86,7 @@
 	import { useUserStore } from '@/store/user';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { imgEnvironment } from '@/constant/index';
+	import tool from '@/pages/blog/tool.vue';
 
 	const blogStore = useBlogStore();
 	const userStore = useUserStore();
@@ -70,7 +95,7 @@
 	const route = useRoute();
 
 	const content = ref('');
-	const id = route.query.id!;
+	const id = route.query.id! as string;
 
 	onMounted(() => {
 		// 获取状态
@@ -91,31 +116,38 @@
 		blogStatus.value.read = false;
 	});
 
-	// 点赞
-	const likeBlog = async () => {
-		if (!blogStatus.value.like) {
-			await blogStore.blogLike();
-		} else {
-			await blogStore.blogUnlike();
-		}
-		blogStore.getBlogDetail(Number(id));
+	// 评论
+	const textarea = ref('');
+	const onChange = (e: Event) => {
+		console.log(e);
 	};
 
-	// 收藏
-	const collectBlog = async () => {
-		if (!blogStatus.value.collect) {
-			await blogStore.blogCollect();
-		} else {
-			await blogStore.blogUncollect();
-		}
-		await blogStore.getBlogDetail(Number(id));
-	};
+	// // 点赞
+	// const likeBlog = async () => {
+	// 	if (!blogStatus.value.like) {
+	// 		await blogStore.blogLike();
+	// 	} else {
+	// 		await blogStore.blogUnlike();
+	// 	}
+	// 	blogStore.getBlogDetail(Number(id));
+	// };
+
+	// // 收藏
+	// const collectBlog = async () => {
+	// 	if (!blogStatus.value.collect) {
+	// 		await blogStore.blogCollect();
+	// 	} else {
+	// 		await blogStore.blogUncollect();
+	// 	}
+	// 	await blogStore.getBlogDetail(Number(id));
+	// };
 </script>
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		:deep(.el-card__body) {
-			padding: 0 !important;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
 		}
 
 		.bottom {
@@ -129,8 +161,30 @@
 		.author {
 			font-size: 14px;
 		}
+
+		.tag {
+			padding-left: 15px;
+		}
+
+		.top {
+			.title {
+				font-size: 18px !important;
+			}
+			.text-input {
+				gap: 12px !important;
+				.avatar {
+					width: 50px !important;
+					height: 50px !important;
+				}
+			}
+			.comfirm {
+				:deep(.el-button) {
+					width: 80px !important;
+				}
+			}
+		}
 	}
-	.container {
+	.blog-container {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -144,29 +198,7 @@
 
 	.tool-card {
 		position: absolute;
-		top: 20px;
-		left: -75px;
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-
-		.tool-item {
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			background-color: $white;
-			line-height: 60px;
-			text-align: center;
-			font-size: 15px;
-			transition: 0.6s;
-		}
-
-		.tool-item:hover {
-			width: 60px;
-			height: 60px;
-			background-color: $themeColor;
-			cursor: pointer;
-		}
+		left: -100px;
 	}
 
 	.blog-info {
@@ -234,6 +266,76 @@
 		img {
 			width: 100%;
 			border-radius: 5px;
+		}
+	}
+
+	.tag {
+		display: flex;
+		align-items: center;
+
+		.tag-list {
+			display: flex;
+			gap: 8px;
+			margin-left: 10px;
+		}
+	}
+
+	.top {
+		display: flex;
+		flex-direction: column;
+		padding: 0 20px;
+		// width: 100%;
+
+		.title {
+			font-size: 20px;
+			font-weight: 600;
+			margin: 20px;
+		}
+
+		.text-input {
+			width: 100%;
+			display: flex;
+			gap: 20px;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+			.avatar {
+				width: 60px;
+				border-radius: 50%;
+				height: 60px;
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+				}
+			}
+
+			.input {
+				width: 100%;
+				flex: 1;
+				margin-right: 14px;
+				// flex-basis: 70%;
+			}
+		}
+
+		.comfirm {
+			margin-top: 6px !important;
+			display: flex;
+			justify-content: flex-end;
+
+			margin-top: 20px;
+			:deep(.el-button) {
+				width: 100px;
+				background-color: #a4c4b5;
+				border-radius: 6px;
+				transition: 1s;
+			}
+			:deep(.el-button:hover) {
+				color: #fff;
+				width: 120px;
+				background-color: #84c5a7;
+				border-radius: 6px;
+			}
 		}
 	}
 </style>

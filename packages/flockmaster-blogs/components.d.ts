@@ -25,6 +25,7 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     Header: typeof import('./src/components/header/index.vue')['default']

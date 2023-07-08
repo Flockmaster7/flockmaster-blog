@@ -5,6 +5,7 @@ import {
 	DataType,
 	DeletedAt,
 	ForeignKey,
+	HasMany,
 	Model,
 	Table
 } from 'sequelize-typescript';
@@ -14,6 +15,7 @@ import { BelongsToManyRemoveAssociationMixin } from 'sequelize/types';
 import User from './User';
 import User_Blog_Like from './User_Blog_Like';
 import User_Blog_Collect from './User_Blog_Collect';
+import Comment from './Comment';
 
 @Table({ tableName: 'blog' })
 export default class Blog extends Model<Blog> {
@@ -97,6 +99,9 @@ export default class Blog extends Model<Blog> {
 		comment: '删除时间'
 	})
 	isDeleted: Date | null;
+
+	@HasMany(() => Comment)
+	comments: Comment[];
 
 	@BelongsTo(() => User)
 	user: User;

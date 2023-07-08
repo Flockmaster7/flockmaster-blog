@@ -8,9 +8,11 @@ import {
 	verifyUploadImg
 } from '../middleware/blogMiddleware';
 import { validatorId, validatorPage } from '../middleware/validator';
+import CommentController from '../controller/commentController';
 const router = new Router({ prefix: '/api/blog' });
 
 const blogController = new BlogController();
+const commentController = new CommentController();
 
 //上传md文件
 router.post(
@@ -108,6 +110,32 @@ router.get(
 	auth,
 	validatorId,
 	blogController.getUserBlogList
+);
+
+// 文章评论
+router.post('/comment', auth, commentController.blogComment);
+
+// 修改评论
+router.post(
+	'/comment/update/:id',
+	auth,
+	validatorId,
+	commentController.updateComment
+);
+
+// 删除评论
+router.delete(
+	'/comment/:id',
+	auth,
+	validatorId,
+	commentController.removeComment
+);
+
+// 查询评论列表
+router.get(
+	'/getCommentList/:id/:pageNum/:pageSize',
+	validatorId,
+	commentController.getCommentList
 );
 
 module.exports = router;

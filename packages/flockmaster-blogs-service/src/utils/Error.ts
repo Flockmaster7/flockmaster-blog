@@ -59,5 +59,13 @@ export default {
 		'获取某一文章收藏用户列表失败',
 		''
 	),
-	getStatusError: errorForm('30019', '获取状态失败', '')
+	getStatusError: errorForm('30019', '获取状态失败', ''),
+	addCommentError: errorForm('40001', '发布评论失败', ''),
+	getCommentListError: errorForm('40002', '获取评论列表失败', ''),
+	removeCommentError: errorForm('40003', '删除评论失败', ''),
+	updateCommentError: errorForm('40004', '修改评论失败', ''),
+	addLeaveWordsError: errorForm('50001', '发布留言失败', ''),
+	getLeaveWordsListError: errorForm('50002', '获取留言列表失败', ''),
+	removeLeaveWordsError: errorForm('50003', '删除留言失败', ''),
+	updateLeaveWordsError: errorForm('50004', '修改留言失败', '')
 };

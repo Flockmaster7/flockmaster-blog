@@ -1,14 +1,16 @@
 <template>
-	<div class="container">
-		<div v-for="(item, index) in blogList" :key="item.id">
-			<div @click="gotoBlogDetail(item.id)" class="item">
-				<zbBlogItemRectangleMobile
-					:blog="item"
-					v-if="isMobile"></zbBlogItemRectangleMobile>
-				<zbBlogItemRectangle
-					:blog="item"
-					v-if="!isMobile"></zbBlogItemRectangle>
-			</div>
+	<div class="blog-container">
+		<div
+			v-for="(item, index) in blogList"
+			:key="item.id"
+			@click="gotoBlogDetail(item.id)"
+			class="item">
+			<zbBlogItemRectangleMobile
+				:blog="item"
+				v-if="isMobile"></zbBlogItemRectangleMobile>
+			<zbBlogItemRectangle
+				:blog="item"
+				v-if="!isMobile"></zbBlogItemRectangle>
 		</div>
 		<div class="pagination">
 			<el-pagination
@@ -68,9 +70,12 @@
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
+		.blog-container {
+			padding: 20px 0 !important;
+		}
 	}
-	.container {
-		padding: 20px 0;
+	.blog-container {
+		padding: 20px 15px;
 		background-color: $white;
 		// margin: 15px;
 		display: flex;
@@ -80,6 +85,7 @@
 		gap: 10px;
 
 		.item {
+			width: 100%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
