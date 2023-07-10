@@ -42,7 +42,9 @@
 		</div> -->
 		<div class="rightBox">
 			<div class="avater" @click="toUserDetail">
-				<img :src="userInfo.user_image" alt="" />
+				<img
+					:src="getImgBaseUrl(imgEnvironment) + userInfo.user_image"
+					alt="" />
 			</div>
 			<el-popconfirm
 				width="220"
@@ -70,6 +72,9 @@
 	import { HeaderNavType } from '@/types';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
+	import { imgEnvironment } from '@/constant/index';
+	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { ElMessageBox } from 'element-plus';
 
 	const userStore = useUserStore();
 	const { userInfo } = storeToRefs(userStore);
@@ -77,7 +82,24 @@
 	const router = useRouter();
 
 	const toUserDetail = () => {
-		if (!isLogin()) return;
+		if (!isLogin()) {
+			ElMessageBox.confirm(
+				'此内容需要登录才可操作，是否登录',
+				'Warning',
+				{
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}
+			).then(() => {
+				// 跳转到登录页
+				router.push({
+					path: '/login',
+					query: { from: router.currentRoute.value.fullPath }
+				});
+			});
+			return;
+		}
 		router.push('/my');
 	};
 

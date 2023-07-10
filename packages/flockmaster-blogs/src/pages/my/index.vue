@@ -4,7 +4,9 @@
 			<p class="title">个人信息</p>
 			<!-- <zbInfoItem :info="userInfo" /> -->
 			<div class="avatar">
-				<img :src="userInfo.user_image" alt="" />
+				<img
+					:src="getImgBaseUrl(imgEnvironment) + userInfo.user_image"
+					alt="" />
 			</div>
 			<div class="name">{{ userInfo.name }}</div>
 			<div class="data">
@@ -80,6 +82,8 @@
 	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import { useCommonStore } from '@/store/common';
 	import useIsMobile from '@/hooks/useIsMobile';
+	import { imgEnvironment } from '@/constant/index';
+	import { getImgBaseUrl } from '@/utils/imgUrl';
 
 	const router = useRouter();
 

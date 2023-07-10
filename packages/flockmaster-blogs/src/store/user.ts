@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
 		is_admin: false,
 		name: '游客',
 		description: '这个人很懒，什么都没有留下',
-		user_image: '@/static/images/test_blog_img.png',
+		user_image: '/70819f913636cc5b697a88c00.jpg',
 		user_focus: 0,
 		user_fans: 0
 	});
@@ -28,8 +28,8 @@ export const useUserStore = defineStore('user', () => {
 		if (res.code === 200) {
 			userInfo.value = res.data;
 			// 处理用户头像
-			userInfo.value.user_image =
-				getImgBaseUrl(imgEnvironment) + userInfo.value.user_image;
+			// userInfo.value.user_image =
+			// 	getImgBaseUrl(imgEnvironment) + userInfo.value.user_image;
 		}
 	};
 	// 获取用户关注列表

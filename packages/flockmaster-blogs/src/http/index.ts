@@ -7,7 +7,8 @@ import cache from '@/utils/cache';
 import { useRouter } from 'vue-router';
 import type { HttpResponse } from '@/types/http.d.ts';
 import { isLogin, redirectToLogin } from '@/utils/login';
-import { ElLoading, ElMessage } from 'element-plus';
+import { ElLoading, ElMessage, ElMessageBox } from 'element-plus';
+import router from '@/router';
 
 let loadingInstance: any = null;
 
@@ -40,15 +41,34 @@ instance.interceptors.response.use(
 		return res;
 	},
 	(err) => {
+		const code = err.response.data.code;
 		if (!err.response) {
 			return Promise.reject('网络错误');
 		}
-		if (err.response.data.code === '401') {
+		// 登录权限控制
+		if (code === '10102') {
+			ElMessageBox.confirm(
+				'此内容需要登录才可操作，是否登录',
+				'Warning',
+				{
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}
+			).then(() => {
+				// 跳转到登录页
+				router.push({
+					path: '/login',
+					query: { from: router.currentRoute.value.fullPath }
+				});
+			});
+		}
+		// token过期判断
+		if (code === '401') {
 			ElMessage.error('登录状态已过期，请重新登录');
 			redirectToLogin('/login');
 			return Promise.reject('token已过期');
 		}
-		redirectToLogin('/login');
 		console.log(err);
 		return Promise.reject(err);
 	}

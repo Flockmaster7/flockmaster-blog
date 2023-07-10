@@ -55,7 +55,7 @@
 	const userStore = useUserStore();
 
 	onMounted(() => {
-		userStore.getUserProfile();
+		// userStore.getUserProfile();
 		store.getBlogList(
 			pageNum.value,
 			pageSize.value,

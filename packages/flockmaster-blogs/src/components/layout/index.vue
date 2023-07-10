@@ -13,7 +13,10 @@
 
 <script setup lang="ts">
 	import Header from '@/components/header/index.vue';
+	import { imgEnvironment } from '@/constant';
 	import { useUserStore } from '@/store/user';
+	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
 	import { onMounted } from 'vue';
 
@@ -21,7 +24,19 @@
 	const { userInfo } = storeToRefs(store);
 
 	onMounted(() => {
-		store.getUserProfile();
+		if (isLogin()) store.getUserProfile();
+		else {
+			userInfo.value = {
+				id: 0,
+				user_name: '游客',
+				is_admin: false,
+				name: '游客',
+				description: '这个人很懒，什么都没有留下',
+				user_image: '/70819f913636cc5b697a88c00.jpg',
+				user_focus: 0,
+				user_fans: 0
+			};
+		}
 	});
 </script>
 

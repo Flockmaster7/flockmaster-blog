@@ -24,6 +24,7 @@
 	import { ref } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
+	import { isLogin } from '@/utils/login';
 
 	interface propsType {
 		id: string;

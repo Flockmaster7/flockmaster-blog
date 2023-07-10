@@ -152,6 +152,7 @@
 		password: ''
 	});
 	const loginFormRef = ref<FormInstance>();
+	// 登录
 	const submitLoginForm = async (formEl: FormInstance | undefined) => {
 		if (!formEl) return;
 		await formEl.validate(async (valid) => {
@@ -165,7 +166,10 @@
 			});
 			getUserProfile();
 			cache.setCache(import.meta.env.VITE_ACCESS_TOKEN, res.data.token);
-			router.push('/home');
+			// 跳转
+			if (router.currentRoute.value.query.from)
+				router.push(String(router.currentRoute.value.query.from));
+			else router.push('/home');
 		});
 	};
 

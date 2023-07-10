@@ -3,7 +3,11 @@
 		<!-- 个人信息卡片 -->
 		<el-card>
 			<div class="info-card">
-				<img class="avatar" :src="userInfo.user_image" />
+				<img
+					class="avatar"
+					:src="
+						getImgBaseUrl(imgEnvironment) + userInfo.user_image
+					" />
 				<text class="name">{{ userInfo.name }}</text>
 				<text class="description">{{ userInfo.description }}</text>
 			</div>
@@ -78,6 +82,8 @@
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
 	import usePagination from '@/hooks/usePagination';
+	import { imgEnvironment } from '@/constant/index';
+	import { getImgBaseUrl } from '@/utils/imgUrl';
 
 	const blogStore = useBlogStore();
 

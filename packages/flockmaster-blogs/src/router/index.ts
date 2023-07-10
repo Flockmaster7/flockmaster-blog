@@ -101,19 +101,20 @@ router.beforeEach(
 		_: RouteLocationNormalized,
 		next: NavigationGuardNext
 	) => {
-		if (to.path === '/login') {
-			next();
-		} else {
-			// 还没登录
-			if (!isLogin()) {
-				ElMessage({
-					message: '请先登录',
-					type: 'error'
-				});
-			} else {
-				next();
-			}
-		}
+		next();
+		// if (to.path === '/login') {
+		// 	next();
+		// } else {
+		// 	// 还没登录
+		// 	if (!isLogin()) {
+		// 		ElMessage({
+		// 			message: '请先登录',
+		// 			type: 'error'
+		// 		});
+		// 	} else {
+		// 		next();
+		// 	}
+		// }
 	}
 );
 

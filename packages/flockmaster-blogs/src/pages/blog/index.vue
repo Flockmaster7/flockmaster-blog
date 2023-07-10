@@ -66,7 +66,12 @@
 				<span class="title">评论</span>
 				<div class="text-input">
 					<div class="avatar">
-						<img :src="userInfo.user_image" alt="" />
+						<img
+							:src="
+								getImgBaseUrl(imgEnvironment) +
+								userInfo.user_image
+							"
+							alt="" />
 					</div>
 					<div class="input">
 						<el-input
@@ -267,6 +272,7 @@
 	import useGetPageScroll from '@/hooks/useGetPageScroll';
 	import { ArrowUpBold } from '@element-plus/icons-vue';
 	import { getTimeFormNow } from '@/utils/dayFormat';
+	import { isLogin } from '@/utils/login';
 
 	const blogStore = useBlogStore();
 	const userStore = useUserStore();
@@ -280,17 +286,23 @@
 
 	onMounted(async () => {
 		// 获取状态
-		blogStore.isBlogLike(Number(id));
-		blogStore.isBlogCOllect(Number(id));
+		if (isLogin()) {
+			blogStore.isBlogLike(Number(id));
+			blogStore.isBlogCOllect(Number(id));
+		}
+		//增加阅读
 		if (!blogStatus.value.read) {
 			blogStore.addBlogRead(Number(id));
 			blogStatus.value.read = true;
 		}
 		// 获取信息
 		await blogStore.getBlogDetail(Number(id));
-		setTimeout(() => {
+		nextTick(() => {
 			content.value = blogDeatil.value.content_html;
-		}, 150);
+		});
+		// setTimeout(() => {
+		// 	content.value = blogDeatil.value.content_html;
+		// }, 150);
 		// 获取评论
 		getCommentList();
 	});
@@ -314,6 +326,8 @@
 		await blogStore.addComment(params);
 		ElMessage.success('发布评论成功');
 		textarea.value = '';
+		// 重新获取评论
+		getCommentList();
 	};
 	const activeReply = ref<number | null>(null);
 	const openReply = (index: number) => {
@@ -322,8 +336,6 @@
 			return;
 		}
 		activeReply.value = index;
-		// 重新获取评论
-		getCommentList();
 	};
 	// 回复
 	const replyContent = ref('');
@@ -473,6 +485,16 @@
 				}
 			}
 		}
+
+		.scrollToTop {
+			right: 30px !important;
+			.icon {
+				bottom: 70px !important;
+				width: 40px !important;
+				height: 40px !important;
+				line-height: 40px !important;
+			}
+		}
 	}
 	.blog-container {
 		display: flex;
@@ -492,6 +514,7 @@
 	}
 
 	.scrollToTop {
+		opacity: 0.6;
 		position: absolute;
 		right: -50px;
 		.icon {
