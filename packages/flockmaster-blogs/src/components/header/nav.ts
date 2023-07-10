@@ -20,6 +20,11 @@ export const navLinkList: HeaderNavType[] = [
 		title: '作品',
 		src: '/work',
 		name: ''
+	},
+	{
+		title: '留言',
+		src: '/leaveWord',
+		name: ''
 	}
 	// {
 	// 	title: '关于',

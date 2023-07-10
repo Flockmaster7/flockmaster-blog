@@ -87,7 +87,7 @@ video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 article,
@@ -110,17 +110,11 @@ ul {
 }
 
 html {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
 	background-color: $themeBgColor;
 }
 
 body {
 	line-height: 1;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
 }
 
 blockquote,

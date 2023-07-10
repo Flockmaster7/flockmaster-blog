@@ -1,4 +1,6 @@
 import {
+	CommentParamsType,
+	CommentType,
 	GetBlogDetailResType,
 	GetBlogListForm,
 	getBlogListResType
@@ -138,5 +140,36 @@ export const uncollect = (id: number) => {
 	return request<HttpResponse<string>>({
 		url: `/blog/uncollect/${id}`,
 		method: 'POST'
+	});
+};
+
+/**
+ * 文章评论
+ * @param data
+ * @returns
+ */
+export const comment = (data: CommentParamsType) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/comment`,
+		method: 'POST',
+		data
+	});
+};
+
+/**
+ * 获取评论列表
+ * @param id 文章id
+ * @param pageNum 页码
+ * @param pageSize 每一页的数量
+ * @returns
+ */
+export const getCommentList = (
+	id: number,
+	pageNum: number,
+	pageSize: number
+) => {
+	return request<HttpResponse<PageRequest<CommentType>>>({
+		url: `/blog/getCommentList/${id}/${pageNum}/${pageSize}`,
+		method: 'GET'
 	});
 };

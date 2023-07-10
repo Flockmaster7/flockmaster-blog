@@ -1,9 +1,11 @@
 import {
 	blogRead,
 	collect,
+	comment,
 	getArticleDetail,
 	getArticleList,
 	getBlogListByTagId,
+	getCommentList,
 	isCollect,
 	isLike,
 	like,
@@ -11,6 +13,8 @@ import {
 	unlike
 } from '@/http/blog';
 import {
+	CommentParamsType,
+	CommentType,
 	GetBlogDetailResType,
 	GetBlogListForm,
 	getBlogListResType
@@ -49,6 +53,28 @@ export const useBlogStore = defineStore('blog', () => {
 		createdAt: '',
 		updatedAt: ''
 	});
+	// 评论列表
+	const commentList = ref<CommentType[]>([]);
+	const commentTotal = ref<number>(0);
+
+	// 评论
+	const addComment = async (data: CommentParamsType) => {
+		const res = await comment(data);
+	};
+
+	// 获取评论列表
+	const getComment = async (
+		id: number,
+		pageNum: number,
+		pageSize: number
+	) => {
+		const { data: res } = await getCommentList(id, pageNum, pageSize);
+		if (res.code === 200) {
+			commentList.value = res.data.rows;
+			commentTotal.value = res.data.total;
+			console.log(commentTotal.value);
+		}
+	};
 
 	const getBlogList = async (
 		pageNum: number,
@@ -132,6 +158,10 @@ export const useBlogStore = defineStore('blog', () => {
 		blogLike,
 		blogUnlike,
 		blogCollect,
-		blogUncollect
+		blogUncollect,
+		commentList,
+		getComment,
+		addComment,
+		commentTotal
 	};
 });

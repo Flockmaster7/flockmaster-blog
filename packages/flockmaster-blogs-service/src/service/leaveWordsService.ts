@@ -59,7 +59,7 @@ class LeaveWordsService {
 		return {
 			pageNum,
 			pageSize,
-			count,
+			total: count,
 			rows: rows
 		};
 	}

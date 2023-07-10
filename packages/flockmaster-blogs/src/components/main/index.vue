@@ -31,6 +31,7 @@
 		margin: 15px 8px 0;
 		.main-area {
 			flex-basis: 75%;
+			background-color: $white;
 		}
 		.aside-area {
 			flex-basis: 25%;

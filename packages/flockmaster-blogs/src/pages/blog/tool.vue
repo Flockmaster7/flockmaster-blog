@@ -29,7 +29,12 @@
 		id: string;
 	}
 
+	interface emitType {
+		(e: 'toComment'): void;
+	}
+
 	const props = defineProps<propsType>();
+	const emit = defineEmits<emitType>();
 
 	const config = ref([
 		{
@@ -58,6 +63,7 @@
 				collectBlog();
 				break;
 			case 'remark':
+				emit('toComment');
 				break;
 		}
 	};

@@ -120,3 +120,26 @@ export interface HeaderNavType {
 	src: string;
 	name: string;
 }
+
+// 文章评论接口
+export interface CommentParamsType {
+	blog_id: number;
+	content: string;
+	parent_id?: number;
+	reply_to?: number;
+}
+
+export interface CommentType {
+	id: number;
+	content: string;
+	parent_id: number | null;
+	reply_to: number | null;
+	user_id: number;
+	blog_id: number;
+	isDeleted: string;
+	createdAt: string;
+	updatedAt: string;
+	user: GetUserInfoResType;
+	children: CommentType[];
+	targetComment?: CommentType;
+}

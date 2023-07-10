@@ -59,6 +59,11 @@ const routes: Array<RouteRecordRaw> = [
 						path: '/tag',
 						name: 'Tag',
 						component: () => import('@/pages/tag/index.vue')
+					},
+					{
+						path: '/leaveWord',
+						name: 'LeaveWord',
+						component: () => import('@/pages/leaveWord/index.vue')
 					}
 				]
 			},

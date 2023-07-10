@@ -61,7 +61,7 @@ class CommentService {
 		return {
 			pageNum,
 			pageSize,
-			count,
+			total: count,
 			rows: rows
 		};
 	}

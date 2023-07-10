@@ -15,8 +15,7 @@ class CommentController {
 			const wrapper: AddCommentWrapper = {
 				blog_id: 0,
 				user_id: 0,
-				content: '',
-				reply_to: 0
+				content: ''
 			};
 			const { blog_id, content, parent_id, reply_to } = ctx.request.body;
 			wrapper.blog_id = blog_id;
