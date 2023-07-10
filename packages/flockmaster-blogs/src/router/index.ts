@@ -13,7 +13,7 @@ import { isLogin } from '@/utils/login';
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/login'
+		redirect: '/home'
 	},
 	{
 		path: '/home',

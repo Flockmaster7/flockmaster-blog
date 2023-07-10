@@ -93,7 +93,11 @@
 					class="comment"
 					v-for="(item, index) in commentList"
 					:key="item.id">
-					<div class="avatar">
+					<zb-comment-area
+						type="blog"
+						:item="item"
+						@getCommentList="getCommentList"></zb-comment-area>
+					<!-- <div class="avatar">
 						<img
 							:src="
 								getImgBaseUrl(imgEnvironment) +
@@ -148,7 +152,6 @@
 									class="comment"
 									v-for="(item1, index1) in item.children"
 									:key="item1.id">
-									<!-- <div class="comment"> -->
 									<div class="avatar">
 										<img
 											:src="
@@ -242,9 +245,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
-				<!-- </div> -->
 			</div>
 		</el-card>
 	</div>
@@ -273,6 +275,7 @@
 	import { ArrowUpBold } from '@element-plus/icons-vue';
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { isLogin } from '@/utils/login';
+	import zbCommentArea from '@/components/common/zb-comment-area.vue';
 
 	const blogStore = useBlogStore();
 	const userStore = useUserStore();
@@ -687,10 +690,6 @@
 			margin-bottom: 25px;
 			justify-content: space-between;
 
-			// .left {
-			// 	display: flex;
-			// 	gap: 20px;
-			// 	padding-top: 5px;
 			.avatar {
 				width: 45px;
 				height: 45px;
@@ -702,7 +701,7 @@
 					border-radius: 50%;
 				}
 			}
-			// }
+
 			.box {
 				flex-basis: 95%;
 				.info {
