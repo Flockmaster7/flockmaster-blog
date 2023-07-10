@@ -14,7 +14,9 @@
 					<div class="author">作者：{{ blog.author }}</div>
 				</div>
 				<div class="bottom">
-					<div class="date">发布于：{{ blog.createdAt }}</div>
+					<div class="date">
+						发布于：{{ getTimeFormNow(blog.createdAt) }}
+					</div>
 					<div class="data">
 						<div class="data-item">读:{{ blog.blog_read }}</div>
 						<div class="data-item">赞:{{ blog.blog_like }}</div>
@@ -30,6 +32,7 @@
 	import { GetBlogDetailResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { imgEnvironment } from '@/constant/index';
+	import { getTimeFormNow } from '@/utils/dayFormat';
 
 	interface PropType {
 		blog: GetBlogDetailResType;

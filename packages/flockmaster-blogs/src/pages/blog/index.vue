@@ -103,7 +103,7 @@
 									{{ item.user.name }}
 								</div>
 								<div class="time">
-									{{ item.createdAt }}
+									{{ getTimeFormNow(item.createdAt) }}
 								</div>
 							</div>
 							<div class="content">
@@ -178,7 +178,11 @@
 													</div>
 												</div>
 												<div class="time">
-													{{ item1.createdAt }}
+													{{
+														getTimeFormNow(
+															item1.createdAt
+														)
+													}}
 												</div>
 											</div>
 											<div class="content">
@@ -262,6 +266,7 @@
 	import { CommentParamsType } from '@/types/index';
 	import useGetPageScroll from '@/hooks/useGetPageScroll';
 	import { ArrowUpBold } from '@element-plus/icons-vue';
+	import { getTimeFormNow } from '@/utils/dayFormat';
 
 	const blogStore = useBlogStore();
 	const userStore = useUserStore();

@@ -14,7 +14,9 @@
 						<div class="data-item">赞:{{ blog.blog_like }}</div>
 						<div class="data-item">藏:{{ blog.blog_collect }}</div>
 					</div>
-					<div class="date">发布于：{{ blog.createdAt }}</div>
+					<div class="date">
+						发布于：{{ getTimeFormNow(blog.createdAt) }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -30,6 +32,7 @@
 	import { GetBlogDetailResType } from '@/types';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { imgEnvironment } from '@/constant/index';
+	import { getTimeFormNow } from '@/utils/dayFormat';
 
 	interface PropType {
 		blog: GetBlogDetailResType;
