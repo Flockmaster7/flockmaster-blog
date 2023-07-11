@@ -2,11 +2,13 @@
 	"name": "@bin",
 	"scripts": {
 		"dev:blogs": "pnpm -F @bin/flockmaster-blogs dev",
+		"pro:blogs": "pnpm -F @bin/flockmaster-blogs pro",
 		"dev:service": "pnpm -F @bin/flockmaster-blogs-service dev",
 		"build:blogs": "pnpm -F @bin/flockmaster-blogs build",
 		"build:service": "pnpm -F @bin/flockmaster-blogs-service build",
 		"start:blogs": "pnpm -F @bin/flockmaster-blogs start",
-		"start:service": "pnpm -F @bin/flockmaster-blogs-service start"
+		"start:service": "pnpm -F @bin/flockmaster-blogs-service start",
+		"preview:blogs": "pnpm -F @bin/flockmaster-blogs preview"
 	},
 	"devDependencies": {
 		"@rollup/plugin-json": "^6.0.0",

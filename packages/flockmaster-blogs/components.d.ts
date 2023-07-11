@@ -39,5 +39,6 @@ declare module '@vue/runtime-core' {
     ZbEmpty: typeof import('./src/components/common/zb-empty.vue')['default']
     ZbInfoItem: typeof import('./src/components/item/zb-infoItem.vue')['default']
     ZbItemInBook: typeof import('./src/components/magic/zb-itemInBook.vue')['default']
+    ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
   }
 }

@@ -43,7 +43,7 @@ const sequelize = new Sequelize(
 // 	{
 // 		host: MYSQL_SERVICE_HOST,
 // 		dialect: 'mysql',
-//      timezone: '+8:00', //设置为东八区
+// 		timezone: '+8:00', //设置为东八区
 // 		models: [
 // 			`${path.resolve(__dirname, '../model')}/*.ts`,
 // 			`${path.resolve(__dirname, '../model')}/*.js`

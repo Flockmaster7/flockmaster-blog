@@ -1,76 +1,122 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import ElementPlus from 'unplugin-element-plus/vite';
-// import pxtovw from 'postcss-px-to-viewport';
-
-// // 配置postcss
-// const loder_pxtovw = pxtovw({
-// 	unitToConvert: 'px', // 需要转换的单位，默认为"px"
-// 	viewportWidth: 1920, // 设计稿的视口宽度
-// 	unitPrecision: 5, // 单位转换后保留的精度
-// 	propList: ['*'], // 能转化为vw的属性列表
-// 	viewportUnit: 'vw', // 希望使用的视口单位
-// 	fontViewportUnit: 'vw', // 字体使用的视口单位
-// 	selectorBlackList: [], // 需要忽略的CSS选择器，不会转为视口单位，使用原有的px等单位。
-// 	minPixelValue: 1, // 设置最小的转换数值，如果为1的话，只有大于1的值会被转换
-// 	mediaQuery: false, // 媒体查询里的单位是否需要转换单位
-// 	replace: true, //  是否直接更换属性值，而不添加备用属性
-// 	exclude: undefined, // 忽略某些文件夹下的文件或特定文件，例如 'node_modules' 下的文件
-// 	include: undefined, // 如果设置了include，那将只有匹配到的文件才会被转换
-// 	landscape: false, // 是否添加根据 landscapeWidth 生成的媒体查询条件 @media (orientation: landscape)
-// 	landscapeUnit: 'vw', // 横屏时使用的单位
-// 	landscapeWidth: 1920 // 横屏时使用的视口宽度
-// });
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-	base: './',
-	plugins: [
-		vue(),
-		AutoImport({
-			resolvers: [ElementPlusResolver()]
-		}),
-		Components({
-			resolvers: [ElementPlusResolver()]
-		}),
-		ElementPlus({
-			// options
-		})
-	],
-	// 引入全局scss变量
-	css: {
-		preprocessorOptions: {
-			// 全局样式引入
-			scss: {
-				additionalData: '@import "./src/static//css/_variable.scss";',
-				javascriptEnabled: true
+export default defineConfig(({ command, mode }) => {
+	// 根据当前工作目录中的 `mode` 加载 .env 文件
+	// 设置第三个参数为 '' 来加载所有环境变量，而不管是否有 `VITE_` 前缀。
+	const env = loadEnv(mode, process.cwd(), '');
+	// 开发环境配置
+	if (command === 'serve') {
+		return {
+			base: './',
+			plugins: [
+				vue(),
+				AutoImport({
+					resolvers: [ElementPlusResolver()]
+				}),
+				Components({
+					resolvers: [ElementPlusResolver()]
+				}),
+				ElementPlus({
+					// options
+				})
+			],
+			// 引入全局scss变量
+			css: {
+				devSourcemap: true, //开发模式时启用
+				preprocessorOptions: {
+					// 全局样式引入
+					scss: {
+						additionalData:
+							'@import "./src/static/css/_variable.scss";',
+						javascriptEnabled: true
+					}
+				}
+			},
+			resolve: {
+				alias: {
+					'~': path.resolve(__dirname, './'),
+					'@': path.resolve(__dirname, 'src')
+				},
+				// 导入时想要省略的扩展名列表
+				extensions: ['.ts', '.js', '.json', '.vue']
+			},
+			build: {
+				sourcemap: false
+			},
+			server: {
+				host: true,
+				open: true, //启动项目自动弹出浏览器
+				port: 4000, //启动端口
+				proxy: {
+					'/api': {
+						target: env.VITE_BASEURL,
+						changeOrigin: true,
+						rewrite: (path) => path.replace(/^\/api/, '')
+					}
+				}
 			}
-		}
-		// postcss: {
-		// 	plugins: [loder_pxtovw]
-		// }
-	},
-	resolve: {
-		alias: {
-			'@': path.resolve(__dirname, 'src')
-		},
-		extensions: ['.ts', '.js', '.json']
-	},
-	server: {
-		host: true,
-		open: true, //启动项目自动弹出浏览器
-		port: 4000, //启动端口
-		proxy: {
-			'/api': {
-				// target: 'http://159.75.177.56:7070', //实际请求地址
-				target: 'http://localhost:7070/api',
-				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, '')
+		};
+	} else {
+		// 生产环境配置
+		return {
+			base: './',
+			plugins: [
+				vue(),
+				AutoImport({
+					resolvers: [ElementPlusResolver()]
+				}),
+				Components({
+					resolvers: [ElementPlusResolver()]
+				}),
+				ElementPlus({
+					// options
+				}),
+				visualizer({ open: true })
+			],
+			// 引入全局scss变量
+			css: {
+				devSourcemap: true, //开发模式时启用
+				preprocessorOptions: {
+					// 全局样式引入
+					scss: {
+						additionalData:
+							'@import "./src/static/css/_variable.scss";',
+						javascriptEnabled: true
+					}
+				}
+			},
+			resolve: {
+				alias: {
+					'~': path.resolve(__dirname, './'),
+					'@': path.resolve(__dirname, 'src')
+				},
+				// 导入时想要省略的扩展名列表
+				extensions: ['.ts', '.js', '.json', '.vue']
+			},
+			build: {
+				sourcemap: false,
+				rollupOptions: {
+					output: {
+						chunkFileNames: 'js/[name]-[hash].js', // 引入文件名的名称
+						entryFileNames: 'js/[name]-[hash].js', // 包的入口文件名称
+						assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件像 字体，图片等
+						manualChunks(id) {
+							// 将 node_modules 中的代码单独打包成一个 JS 文件
+							if (id.includes('node_modules')) {
+								return 'vendor';
+							}
+						}
+					}
+				}
 			}
-		}
+		};
 	}
 });

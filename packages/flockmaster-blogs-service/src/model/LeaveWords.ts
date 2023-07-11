@@ -10,7 +10,7 @@ import {
 } from 'sequelize-typescript';
 import User from './User';
 
-@Table({ tableName: 'leaveWords' })
+@Table({ tableName: 'leavewords' })
 export default class LeaveWords extends Model<LeaveWords> {
 	@Column({
 		type: DataType.STRING,
