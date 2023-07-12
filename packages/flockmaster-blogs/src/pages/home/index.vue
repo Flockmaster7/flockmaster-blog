@@ -1,16 +1,18 @@
 <template>
 	<div class="blog-container">
-		<div
-			v-for="(item, index) in blogList"
-			:key="item.id"
-			@click="gotoBlogDetail(item.id)"
-			class="item">
-			<zbBlogItemRectangleMobile
-				:blog="item"
-				v-if="isMobile"></zbBlogItemRectangleMobile>
-			<zbBlogItemRectangle
-				:blog="item"
-				v-if="!isMobile"></zbBlogItemRectangle>
+		<div class="blog-list">
+			<div
+				v-for="(item, index) in blogList"
+				:key="item.id"
+				@click="gotoBlogDetail(item.id)"
+				class="item">
+				<zbBlogItemRectangleMobile
+					:blog="item"
+					v-if="isMobile"></zbBlogItemRectangleMobile>
+				<zbBlogItemRectangle
+					:blog="item"
+					v-if="!isMobile"></zbBlogItemRectangle>
+			</div>
 		</div>
 		<zb-empty v-if="blogList.length === 0" :height="500"></zb-empty>
 		<div class="pagination" v-if="blogList.length > 0">
@@ -87,11 +89,17 @@
 		flex-wrap: wrap;
 		gap: 10px;
 
-		.item {
+		.blog-list {
 			width: 100%;
 			display: flex;
-			justify-content: center;
-			align-items: center;
+			flex-direction: column;
+			gap: 10px;
+			.item {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 		}
 	}
 
