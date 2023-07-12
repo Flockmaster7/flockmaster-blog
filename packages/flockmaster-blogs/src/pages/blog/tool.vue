@@ -5,7 +5,6 @@
 				:class="{ 'tool-item': true, active: blogStatus[item.type] }"
 				v-for="(item, index) in config"
 				@click="handleClick(item.type)">
-				<!-- <span class="subscript"><p></p></span> -->
 				{{ item.text }}
 			</div>
 		</div>
@@ -132,6 +131,9 @@
 
 			.tool-item:hover {
 				transform: translate(-5px, -5px);
+				-webkit-box-shadow: 10px 10px 99px 6px rgb(129, 227, 198);
+				-moz-box-shadow: 10px 10px 99px 6px rgb(134, 235, 192);
+				box-shadow: 10px 10px 99px 6px rgb(98, 243, 187);
 				cursor: pointer;
 			}
 		}

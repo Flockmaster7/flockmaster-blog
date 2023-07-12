@@ -7,7 +7,7 @@
 	<div class="box">
 		<div class="info">
 			<div class="topInfo">
-				<div class="name">
+				<div class="user-name" @click="gotoUser(item.user)">
 					{{ item.user.name }}
 				</div>
 				<div class="time">
@@ -54,7 +54,9 @@
 						<div class="info">
 							<div class="topInfo">
 								<div class="name">
-									<div class="name-name">
+									<div
+										class="name-name"
+										@click="gotoUser(item1.user)">
 										{{ item1.user.name }}
 									</div>
 									<span
@@ -62,7 +64,9 @@
 										v-if="item1[target]">
 										回复
 									</span>
-									<div class="name-replyName">
+									<div
+										class="name-replyName"
+										@click="gotoUser(item1[target]?.user!)">
 										{{
 											item1[target]
 												? item1[target]?.user.name
@@ -117,7 +121,7 @@
 
 <script setup lang="ts">
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { CommentType } from '@/types';
+	import { CommentType, GetUserInfoResType } from '@/types';
 	// import { useUserStore } from '@/store/user';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { imgEnvironment } from '@/constant/index';
@@ -127,6 +131,8 @@
 	import { storeToRefs } from 'pinia';
 	import { ElMessage } from 'element-plus';
 	import { useLeaveWordStore } from '@/store/leaveWord';
+	import { validatorNotEmpty } from '@/utils/common';
+	import router from '@/router';
 
 	interface propsType {
 		item: CommentType;
@@ -161,6 +167,9 @@
 	// 回复
 	const replyContent = ref('');
 	const reply = async (parent_id: number, reply_to?: number) => {
+		if (validatorNotEmpty(replyContent.value)) {
+			return ElMessage.warning('不能为空');
+		}
 		const params: CommentParamsType = {
 			// blog_id: blogDeatil.value.id,
 			content: replyContent.value,
@@ -179,6 +188,10 @@
 		activeReply.value = null;
 		// 重新获取评论
 		emit('getCommentList');
+	};
+	// 跳转到用户详情页
+	const gotoUser = (userInfo: GetUserInfoResType) => {
+		router.push('/my?id=' + userInfo.id);
 	};
 </script>
 
@@ -293,7 +306,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				.name {
+				.user-name {
 					font-size: 18px;
 				}
 				.time {
@@ -353,5 +366,12 @@
 				color: $gray;
 			}
 		}
+	}
+
+	.name-name:hover,
+	.user-name:hover,
+	.name-replyName:hover {
+		cursor: pointer;
+		color: $themeColor;
 	}
 </style>

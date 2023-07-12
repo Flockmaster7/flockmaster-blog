@@ -1,8 +1,8 @@
 <template>
 	<div class="pigeonhole-container">
 		<div class="card">
-			<div class="title">归档</div>
 			<div class="main">
+				<div class="title">归档</div>
 				<el-timeline>
 					<el-timeline-item
 						v-for="(item, index) in blogList"
@@ -15,17 +15,17 @@
 						</p>
 					</el-timeline-item>
 				</el-timeline>
-				<div class="pagination">
-					<el-pagination
-						v-model:current-page="pageNum"
-						v-model:page-size="pageSize"
-						:page-sizes="[9, 12, 15, 18, 36]"
-						:background="true"
-						layout="sizes, prev, pager, next"
-						:total="blogTotal"
-						@size-change="handleSizeChange"
-						@current-change="handleCurrentChange" />
-				</div>
+			</div>
+			<div class="pagination">
+				<el-pagination
+					v-model:current-page="pageNum"
+					v-model:page-size="pageSize"
+					:page-sizes="[9, 12, 15, 18, 36]"
+					:background="true"
+					layout="sizes, prev, pager, next"
+					:total="blogTotal"
+					@size-change="handleSizeChange"
+					@current-change="handleCurrentChange" />
 			</div>
 		</div>
 	</div>
@@ -79,28 +79,33 @@
 		}
 	}
 	.pigeonhole-container {
+		min-height: 580px;
 		background-color: $white;
 		padding: 20px;
 		.card {
+			min-height: 580px;
 			width: 100%;
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
-			.title {
-				text-align: center;
-				font-size: 30px;
-				font-weight: 700;
-				margin: 30px;
-			}
+			justify-content: space-between;
+
 			.main {
-				padding: 30px 60px 0;
+				padding: 0 60px;
+				.title {
+					text-align: center;
+					font-size: 30px;
+					font-weight: 700;
+					margin: 30px;
+				}
 				.nodeTitle {
 					font-weight: 500;
 					font-size: 18px;
 					padding: 0 0 5px;
+					transition: 0.5s;
 				}
 				.nodeTitle:hover {
 					cursor: pointer;
+					transform: translate(-3px, -3px);
 					color: $themeColor;
 				}
 				.el-timeline-item {
@@ -110,14 +115,13 @@
 				.el-timeline-item:last-child {
 					padding-bottom: 0;
 				}
-
-				.pagination {
-					width: 100%;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					padding: 30px 0;
-				}
+			}
+			.pagination {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 30px 0;
 			}
 		}
 	}

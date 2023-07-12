@@ -6,7 +6,7 @@ import axios, {
 import cache from '@/utils/cache';
 import { useRouter } from 'vue-router';
 import type { HttpResponse } from '@/types/http.d.ts';
-import { isLogin, redirectToLogin } from '@/utils/login';
+import { clearInfo, isLogin, redirectToLogin } from '@/utils/login';
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus';
 import router from '@/router';
 
@@ -65,11 +65,23 @@ instance.interceptors.response.use(
 		}
 		// token过期判断
 		if (code === '401') {
-			ElMessage.error('登录状态已过期，请重新登录');
-			redirectToLogin('/login');
-			return Promise.reject('token已过期');
+			ElMessageBox.confirm('登录状态已过期，是否重新登录', 'Warning', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			})
+				.then(() => {
+					// 跳转到登录页
+					router.push({
+						path: '/login',
+						query: { from: router.currentRoute.value.fullPath }
+					});
+					return Promise.reject('token已过期');
+				})
+				.finally(() => {
+					clearInfo();
+				});
 		}
-		console.log(err);
 		return Promise.reject(err);
 	}
 );

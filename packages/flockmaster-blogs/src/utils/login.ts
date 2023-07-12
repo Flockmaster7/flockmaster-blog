@@ -23,8 +23,8 @@ export const redirectToLogin = (path: string) => {
 	});
 };
 
-// 退出登录
-export const logout = () => {
+// 清除信息
+export const clearInfo = () => {
 	cache.removeCache(import.meta.env.VITE_ACCESS_TOKEN);
 	// 清除用户信息
 	userInfo.value = {
@@ -37,12 +37,17 @@ export const logout = () => {
 		user_focus: 0,
 		user_fans: 0
 	};
+	// 清除用户信息
+	cache.removeCache(import.meta.env.VITE_USERINFO);
+};
+
+// 退出登录
+export const logout = () => {
+	clearInfo();
 	ElMessage({
 		type: 'success',
 		message: '退出登录成功'
 	});
-	// 清除用户信息
-	cache.removeCache(import.meta.env.VITE_USERINFO);
 	// 跳转
 	router.replace({
 		path: '/login'

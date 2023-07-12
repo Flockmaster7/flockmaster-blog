@@ -19,6 +19,7 @@
     "dayjs": "^1.11.9",
     "element-plus": "^2.3.6",
     "markdown-it": "^13.0.1",
+    "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.36",
     "postcss-pxtorem": "^6.0.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
+    "@types/nprogress": "^0.2.0",
     "@types/path-browserify": "^1.0.0",
     "@types/prismjs": "^1.26.0",
     "@vitejs/plugin-vue": "^4.1.0",

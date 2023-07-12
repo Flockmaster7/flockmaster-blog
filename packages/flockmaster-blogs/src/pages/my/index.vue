@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-	import { useRouter } from 'vue-router';
+	import { useRoute, useRouter } from 'vue-router';
 	import blogItem from './blogItem.vue';
 	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
@@ -86,6 +86,7 @@
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 
 	const router = useRouter();
+	const route = useRoute();
 
 	// 获取设备
 	useIsMobile();
@@ -106,15 +107,18 @@
 
 	const blogStore = useBlogStore();
 	const { blogList, blogTotal } = storeToRefs(blogStore);
+
 	// 获取用户列表
 	const getBlogListByUser = async () => {
 		await blogStore.getBlogList(1, 999, { user_id: userInfo.value.id });
 	};
+
 	// 获取用户关注列表和粉丝列表
 	const getFollowList = async () => {
 		await userStore.getUserFollowingList(1, 999);
 		await userStore.getUserFollowerList(1, 999);
 	};
+
 	// 跳转到文章详情
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);

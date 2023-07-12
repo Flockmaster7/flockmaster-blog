@@ -2,9 +2,11 @@
 	<div class="layout-container">
 		<!-- 主体区域 -->
 		<div class="main-area">
-			<!-- <Transition> -->
-			<router-view></router-view>
-			<!-- </Transition> -->
+			<router-view v-slot="{ Component }">
+				<transition>
+					<component :is="Component"></component>
+				</transition>
+			</router-view>
 		</div>
 		<!-- 右侧边栏 -->
 		<div class="aside-area">
@@ -28,23 +30,23 @@
 	.layout-container {
 		display: flex;
 		gap: 10px;
-		margin: 15px 8px 0;
+		margin: 15px 8px 15px;
 		.main-area {
 			flex-basis: 75%;
-			background-color: $white;
+			// background-color: $white;
 		}
 		.aside-area {
 			flex-basis: 25%;
 		}
 	}
 
-	// .v-enter-active,
-	// .v-leave-active {
-	// 	transition: opacity 1.5s ease;
-	// }
+	.v-enter-active,
+	.v-leave-active {
+		transition: opacity 0.4s ease;
+	}
 
-	// .v-enter-from,
-	// .v-leave-to {
-	// 	opacity: 0;
-	// }
+	.v-enter-from,
+	.v-leave-to {
+		opacity: 0;
+	}
 </style>

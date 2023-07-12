@@ -9,9 +9,12 @@
 				<div
 					:class="{ navLink: true, active: activeNav === item.src }"
 					v-for="(item, index) in navLinkList">
-					<router-link :to="item.src" @click="changeTag(item)">{{
+					<div class="navLink-item" @click="changeTab(item)">
+						{{ item.title }}
+					</div>
+					<!-- <router-link :to="item.src" @click="changeTag(item)">{{
 						item.title
-					}}</router-link>
+					}}</router-link> -->
 				</div>
 			</div>
 			<div class="header-nav-mobile">
@@ -105,7 +108,8 @@
 
 	// 选中nav
 	const activeNav = ref('/');
-	const changeTag = (nav: HeaderNavType) => {
+	const changeTab = (nav: HeaderNavType) => {
+		router.push(nav.src);
 		window.scrollTo({
 			top: 0
 		});
@@ -190,6 +194,7 @@
 
 		.header-nav-pc {
 			display: flex;
+			gap: 10px;
 			justify-content: center;
 			align-items: center;
 			.navLink {
@@ -197,15 +202,61 @@
 				height: 100%;
 				text-align: center;
 
-				a {
-					color: black;
+				.navLink-item {
+					// color: $navColor;
+					font-weight: bold;
+					padding: 10px 10px;
+					box-sizing: border-box;
+					border-radius: 10px;
 				}
 
-				a:hover {
-					font-weight: 700;
-					color: rgb(51, 49, 49);
-					border-bottom: 1px solid $white;
+				.navLink-item:hover {
+					cursor: pointer;
+					background-color: $navBorderColor;
+					-webkit-box-shadow: 10px 10px 99px 6px rgb(129, 227, 198);
+					-moz-box-shadow: 10px 10px 99px 6px rgb(134, 235, 192);
+					box-shadow: 10px 10px 99px 6px rgb(98, 243, 187);
 				}
+
+				// .navLink-item::before,
+				// .navLink-item::after {
+				// 	box-sizing: inherit;
+				// 	position: absolute;
+				// 	content: '';
+				// 	border: 2px solid transparent;
+				// 	border-radius: 5px;
+				// 	width: 0;
+				// 	height: 0;
+				// }
+
+				// .navLink-item::after {
+				// 	bottom: 0;
+				// 	right: 0;
+				// }
+
+				// .navLink-item::before {
+				// 	top: 0;
+				// 	left: 0;
+				// }
+
+				// .navLink-item:hover::before,
+				// .navLink-item:hover::after {
+				// 	width: 100%;
+				// 	height: 100%;
+				// }
+
+				// .navLink-item:hover::before {
+				// 	border-top-color: $navBorderColor;
+				// 	border-right-color: $navBorderColor;
+				// 	transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
+				// }
+
+				// .navLink-item:hover::after {
+				// 	border-bottom-color: $navBorderColor;
+				// 	border-left-color: $navBorderColor;
+				// 	transition: border-color 0s ease-out 0.6s,
+				// 		width 0.3s ease-out 0.6s, height 0.3s ease-out 1s;
+				// }
 			}
 		}
 
@@ -235,11 +286,13 @@
 		}
 
 		.active {
-			a {
-				font-weight: 700 !important;
-				color: rgb(51, 49, 49) !important;
-				border-bottom: 1px solid $white;
-			}
+			font-size: 18px;
+			border-radius: 10px;
+			color: $navActiveColor !important;
+			// background-color: $navBorderColor;
+			// -webkit-box-shadow: 10px 10px 99px 6px rgb(129, 227, 198);
+			// -moz-box-shadow: 10px 10px 99px 6px rgb(134, 235, 192);
+			// box-shadow: 10px 10px 99px 6px rgb(98, 243, 187);
 		}
 
 		.rightBox {

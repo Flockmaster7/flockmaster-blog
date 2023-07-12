@@ -36,6 +36,7 @@ export default {
 	getWorkListError: errorForm('30004', '获取作品列表失败', ''),
 	validatorIdError: errorForm('30005', '必须携带id', ''),
 	validatorPageError: errorForm('30006', '必须携带pageNum和pageSize', ''),
+	validatorNullError: errorForm('30020', '不能为null', ''),
 	removeWorkError: errorForm('30007', '删除作品失败', ''),
 	createTagError: errorForm('30008', '添加标签失败', ''),
 	updateTagError: errorForm('30009', '修改标签失败', ''),

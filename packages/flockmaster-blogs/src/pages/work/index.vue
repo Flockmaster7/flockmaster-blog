@@ -13,12 +13,14 @@
 				<work-item :work="item"></work-item>
 			</div>
 		</div>
+		<zb-empty v-if="workList.length === 0" :height="300"></zb-empty>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { StarFilled } from '@element-plus/icons-vue';
 	import workItem from '@/pages/work/components/zb-workItem.vue';
+	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { useWorkStore } from '@/store/work';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';

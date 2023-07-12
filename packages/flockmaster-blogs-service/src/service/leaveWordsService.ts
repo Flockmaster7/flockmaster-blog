@@ -56,10 +56,14 @@ class LeaveWordsService {
 			limit: pageSize * 1,
 			offset: offset
 		});
+		let total = count;
+		rows.forEach((item) => {
+			total += item.dataValues.children.length > 0 ? 1 : 0;
+		});
 		return {
 			pageNum,
 			pageSize,
-			total: count,
+			total,
 			rows: rows
 		};
 	}

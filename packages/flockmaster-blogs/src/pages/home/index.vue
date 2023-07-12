@@ -12,7 +12,8 @@
 				:blog="item"
 				v-if="!isMobile"></zbBlogItemRectangle>
 		</div>
-		<div class="pagination">
+		<zb-empty v-if="blogList.length === 0" :height="500"></zb-empty>
+		<div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"
 				v-model:page-size="pageSize"
@@ -30,7 +31,7 @@
 	import { onMounted, ref, watch } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import zbBlogItemFlexible from '@/pages/home/components/blogItem-flexible.vue';
+	import zbEmpty from '@/components/common/zb-empty.vue';
 	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
 	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import { useRouter } from 'vue-router';
@@ -75,11 +76,13 @@
 		}
 	}
 	.blog-container {
-		padding: 20px 15px;
+		min-height: 580px;
+		padding: 20px 15px 0;
 		background-color: $white;
 		// margin: 15px;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 10px;

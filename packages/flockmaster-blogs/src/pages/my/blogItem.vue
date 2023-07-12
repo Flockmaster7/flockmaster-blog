@@ -113,8 +113,6 @@
 
 	.card:hover {
 		cursor: pointer;
-		width: 650px;
-		height: 160px;
-		// transform: translate(-3px, -3px);
+		transform: translate(-4px, -4px);
 	}
 </style>

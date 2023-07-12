@@ -1,6 +1,14 @@
-import { Ref, onBeforeMount, onMounted, reactive, toRefs } from 'vue';
+import {
+	Ref,
+	nextTick,
+	onBeforeMount,
+	onMounted,
+	reactive,
+	ref,
+	toRefs
+} from 'vue';
 
-export default function () {
+export default function (el?: HTMLDivElement) {
 	const scrollObj = reactive({
 		x: 0,
 		y: 0

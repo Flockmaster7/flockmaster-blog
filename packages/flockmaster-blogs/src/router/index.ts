@@ -9,6 +9,7 @@ import {
 } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { isLogin } from '@/utils/login';
+import { closeProgress, startProgress } from '@/utils/progress';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -64,6 +65,11 @@ const routes: Array<RouteRecordRaw> = [
 						path: '/leaveWord',
 						name: 'LeaveWord',
 						component: () => import('@/pages/leaveWord/index.vue')
+					},
+					{
+						path: '/blog/detail',
+						name: 'Detail',
+						component: () => import('@/pages/blog/index.vue')
 					}
 				]
 			},
@@ -76,12 +82,12 @@ const routes: Array<RouteRecordRaw> = [
 				path: '/my',
 				name: 'My',
 				component: () => import('@/pages/my/index.vue')
-			},
-			{
-				path: '/blog/detail',
-				name: 'Detail',
-				component: () => import('@/pages/blog/index.vue')
 			}
+			// {
+			// 	path: '/blog/detail',
+			// 	name: 'Detail',
+			// 	component: () => import('@/pages/blog/index.vue')
+			// }
 		]
 	}
 ];
@@ -101,6 +107,7 @@ router.beforeEach(
 		_: RouteLocationNormalized,
 		next: NavigationGuardNext
 	) => {
+		startProgress();
 		next();
 		// if (to.path === '/login') {
 		// 	next();
@@ -117,5 +124,9 @@ router.beforeEach(
 		// }
 	}
 );
+
+router.afterEach(() => {
+	closeProgress();
+});
 
 export default router;

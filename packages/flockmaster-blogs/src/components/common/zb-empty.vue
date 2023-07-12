@@ -1,5 +1,5 @@
 <template>
-	<div class="empty-container">
+	<div class="empty-container" :style="{ height: height + 'px' }">
 		<div class="center">
 			<!-- <div class="img">
 				<img src="../../static/images/logo/empty.png" alt="" />
@@ -14,10 +14,12 @@
 <script setup lang="ts">
 	interface propsType {
 		text: string;
+		height: number;
 	}
 
 	const props = withDefaults(defineProps<propsType>(), {
-		text: '空空如也~'
+		text: '空空如也~',
+		height: 250
 	});
 </script>
 

@@ -26,7 +26,9 @@
 			</div>
 		</div>
 		<div class="list">
-			<div class="title">全部留言 {{ leaveWordTotal }}</div>
+			<div class="title">
+				全部留言 {{ leaveWordTotal === 0 ? '' : leaveWordTotal }}
+			</div>
 			<div
 				class="comment"
 				v-for="(item, index) in leaveWordList"
@@ -36,6 +38,9 @@
 					:item="item"
 					@getCommentList="getLeaveWordList"></zb-comment-area>
 			</div>
+			<zb-empty
+				v-if="leaveWordList.length === 0"
+				:height="400"></zb-empty>
 		</div>
 	</div>
 </template>
@@ -49,6 +54,7 @@
 	import { imgEnvironment } from '@/constant/index';
 	import { useUserStore } from '@/store/user';
 	import { ElMessage } from 'element-plus';
+	import { validatorNotEmpty } from '@/utils/common';
 
 	const leaveWordStore = useLeaveWordStore();
 	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWordStore);
@@ -67,6 +73,9 @@
 	// 留言
 	const leaveWordInput = ref('');
 	const leaveWord = async () => {
+		if (validatorNotEmpty(leaveWordInput.value)) {
+			return ElMessage.warning('不能为空');
+		}
 		const params = {
 			content: leaveWordInput.value
 		};

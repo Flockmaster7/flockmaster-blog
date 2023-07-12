@@ -5,9 +5,11 @@
 		</div>
 	</div>
 	<div class="layout-container--main">
-		<!-- <Transition> -->
-		<router-view></router-view>
-		<!-- </Transition> -->
+		<router-view v-slot="{ Component }">
+			<transition>
+				<component :is="Component"></component>
+			</transition>
+		</router-view>
 	</div>
 </template>
 
@@ -47,23 +49,23 @@
 		z-index: 999;
 		background-color: $themeColor;
 		.header {
-			width: 1350px;
+			width: 1250px;
 			margin: 0 auto;
 		}
 	}
 	.layout-container--main {
-		width: 1200px;
+		width: 1100px;
 		margin: 0 auto;
 	}
 
-	// // 切换路由动画
-	// .v-enter-active,
-	// .v-leave-active {
-	// 	transition: opacity 1.5s ease;
-	// }
+	// 切换路由动画
+	.v-enter-active,
+	.v-leave-active {
+		transition: opacity 0.4s ease;
+	}
 
-	// .v-enter-from,
-	// .v-leave-to {
-	// 	opacity: 0;
-	// }
+	.v-enter-from,
+	.v-leave-to {
+		opacity: 0;
+	}
 </style>

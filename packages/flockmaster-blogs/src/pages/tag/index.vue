@@ -92,7 +92,12 @@
 		getBlogListParams.value = {
 			tags: tagChecked.value
 		};
-		blogStore.getBlogList(1, 9, getBlogListParams.value);
+		pageNum.value = 1;
+		blogStore.getBlogList(
+			pageNum.value,
+			pageSize.value,
+			getBlogListParams.value
+		);
 	};
 
 	// 文章

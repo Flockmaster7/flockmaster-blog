@@ -31,6 +31,7 @@ class BlogService {
 			return false;
 		}
 		// 添加博客对应的标签
+		console.log(tagIdList);
 		await blog.$add('tags', tagIdList);
 		return true;
 	}

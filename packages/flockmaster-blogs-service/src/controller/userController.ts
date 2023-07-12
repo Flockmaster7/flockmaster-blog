@@ -64,7 +64,10 @@ class UserController {
 	async getUserInfo(ctx: Context) {
 		try {
 			let data = {};
-			const id = ctx.state.user.id;
+			let id = ctx.request.body.id
+				? ctx.request.body.id
+				: ctx.state.user.id;
+			// const id = ctx.state.user.id;
 			const res = await userService.getUserInfo({ id });
 			if (res) {
 				const { password, ...response } = res;
