@@ -81,7 +81,8 @@
 	.pigeonhole-container {
 		min-height: 580px;
 		background-color: $white;
-		padding: 20px;
+		padding: 20px 20px 0;
+
 		.card {
 			min-height: 580px;
 			width: 100%;

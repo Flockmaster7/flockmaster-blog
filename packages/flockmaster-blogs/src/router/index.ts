@@ -70,6 +70,12 @@ const routes: Array<RouteRecordRaw> = [
 						path: '/blog/detail',
 						name: 'Detail',
 						component: () => import('@/pages/blog/index.vue')
+					},
+					{
+						path: '/searchResult',
+						name: 'SearchResult',
+						component: () =>
+							import('@/pages/searchResult/index.vue')
 					}
 				]
 			},
@@ -82,6 +88,11 @@ const routes: Array<RouteRecordRaw> = [
 				path: '/my',
 				name: 'My',
 				component: () => import('@/pages/my/index.vue')
+			},
+			{
+				path: '/search',
+				name: 'Search',
+				component: () => import('@/pages/search/index.vue')
 			}
 			// {
 			// 	path: '/blog/detail',

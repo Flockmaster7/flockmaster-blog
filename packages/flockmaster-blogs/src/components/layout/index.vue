@@ -15,12 +15,12 @@
 
 <script setup lang="ts">
 	import Header from '@/components/header/index.vue';
-	import { imgEnvironment } from '@/constant';
+	import zbStickyBar from '../common/zb-sticky-bar.vue';
 	import { useUserStore } from '@/store/user';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
 	import { onMounted } from 'vue';
+	import { useCommonStore } from '@/store/common';
 
 	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
@@ -40,12 +40,16 @@
 			};
 		}
 	});
+
+	// //sticky-bar显示隐藏
+	// const commonStore = useCommonStore();
+	// const { isShowStickyBar } = storeToRefs(commonStore);
 </script>
 
 <style lang="scss" scoped>
 	.layout-container--header {
 		position: sticky;
-		top: 0px;
+		top: -1px;
 		z-index: 999;
 		background-color: $themeColor;
 		.header {

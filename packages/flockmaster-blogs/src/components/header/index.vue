@@ -44,12 +44,17 @@
 				:suffix-icon="Search" />
 		</div> -->
 		<div class="rightBox">
+			<div class="search" @click="gotoSearch">
+				<el-icon :size="22"><Search /></el-icon>
+				<span class="text">搜索</span>
+			</div>
 			<div class="avater" @click="toUserDetail">
 				<img
 					:src="getImgBaseUrl(imgEnvironment) + userInfo.user_image"
 					alt="" />
 			</div>
 			<el-popconfirm
+				v-if="isLogin()"
 				width="220"
 				confirm-button-text="确定"
 				cancel-button-text="取消"
@@ -121,6 +126,11 @@
 		router.push('/home');
 	};
 
+	// 跳转到搜索页
+	const gotoSearch = () => {
+		router.push('/search');
+	};
+
 	// 退出登录
 	const confirm = () => {
 		console.log(11);
@@ -148,6 +158,14 @@
 			}
 			&--logo {
 				font-size: 8px !important;
+			}
+		}
+
+		.search {
+			border: none !important;
+			padding: 0 !important;
+			.text {
+				display: none;
 			}
 		}
 	}
@@ -300,6 +318,18 @@
 			justify-content: center;
 			align-items: center;
 			cursor: pointer;
+			.search {
+				margin-right: 15px;
+				color: $white;
+				font-size: 15px;
+				font-weight: 700;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				border: 1px solid $white;
+				border-radius: 18px;
+				padding: 3px 10px;
+			}
 			.avater {
 				margin-right: 10px;
 				img {

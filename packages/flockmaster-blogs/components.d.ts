@@ -23,8 +23,10 @@ declare module '@vue/runtime-core' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
@@ -39,7 +41,9 @@ declare module '@vue/runtime-core' {
     ZbEmpty: typeof import('./src/components/common/zb-empty.vue')['default']
     ZbInfoItem: typeof import('./src/components/item/zb-infoItem.vue')['default']
     ZbItemInBook: typeof import('./src/components/magic/zb-itemInBook.vue')['default']
+    ZbLoading: typeof import('./src/components/common/zb-loading.vue')['default']
     ZbProgress: typeof import('./src/components/common/zb-progress.vue')['default']
+    ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
   }
 }

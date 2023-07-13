@@ -1,40 +1,45 @@
 <template>
 	<div class="tag-container">
-		<div class="tag">
-			<el-collapse v-model="activeTag" @change="handleTagCollapseChange">
-				<el-collapse-item name="1">
-					<template #title>
-						<el-icon class="head-icon"><Guide /></el-icon>
-						<text class="head-text"> 标签 </text>
-					</template>
-					<div class="tag-List">
-						<el-check-tag
-							v-for="(item, index) in tagList"
-							:key="item.id"
-							:checked="tagChecked.includes(item.id)"
-							color="skyblue"
-							@change="(status: boolean) => onChangeTag(status, item.id)"
-							>{{ item.tag_name }}</el-check-tag
-						>
-					</div>
-				</el-collapse-item>
-			</el-collapse>
-		</div>
-		<div class="blog">
-			<div
-				v-for="(item, index) in blogList"
-				:key="item.id"
-				@click="gotoBlogDetail(item.id)"
-				class="item">
-				<zbBlogItemRectangleMobile
-					:blog="item"
-					v-if="isMobile"></zbBlogItemRectangleMobile>
-				<zbBlogItemRectangle
-					:blog="item"
-					v-if="!isMobile"></zbBlogItemRectangle>
+		<div class="top">
+			<div class="tag">
+				<el-collapse
+					v-model="activeTag"
+					@change="handleTagCollapseChange">
+					<el-collapse-item name="1">
+						<template #title>
+							<el-icon class="head-icon"><Guide /></el-icon>
+							<text class="head-text"> 标签 </text>
+						</template>
+						<div class="tag-List">
+							<el-check-tag
+								v-for="(item, index) in tagList"
+								:key="item.id"
+								:checked="tagChecked.includes(item.id)"
+								color="skyblue"
+								@change="(status: boolean) => onChangeTag(status, item.id)"
+								>{{ item.tag_name }}</el-check-tag
+							>
+						</div>
+					</el-collapse-item>
+				</el-collapse>
 			</div>
+			<div class="blog">
+				<div
+					v-for="(item, index) in blogList"
+					:key="item.id"
+					@click="gotoBlogDetail(item.id)"
+					class="item">
+					<zbBlogItemRectangleMobile
+						:blog="item"
+						v-if="isMobile"></zbBlogItemRectangleMobile>
+					<zbBlogItemRectangle
+						:blog="item"
+						v-if="!isMobile"></zbBlogItemRectangle>
+				</div>
+			</div>
+			<zb-empty :height="310" v-show="blogList.length === 0"></zb-empty>
 		</div>
-		<div class="pagination">
+		<div class="pagination" v-show="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"
 				v-model:page-size="pageSize"
@@ -59,6 +64,7 @@
 	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { useCommonStore } from '@/store/common';
+	import zbEmpty from '@/components/common/zb-empty.vue';
 
 	const router = useRouter();
 
@@ -135,59 +141,65 @@
 		}
 	}
 	.tag-container {
+		box-sizing: border-box;
 		background-color: $white;
-		padding: 20px;
+		padding: 20px 20px 0;
 		display: flex;
-		// justify-content: space-between;
+		justify-content: space-between;
 		flex-direction: column;
 		align-items: center;
 		// width: 100%;
-		min-height: 500px;
+		min-height: 100%;
 
-		.tag {
-			padding: 0 10px 10px;
-			// border: 1px solid rgba(0, 0, 0, 0.1);
-			border-radius: 20px;
-			width: 90%;
-			max-height: 200px;
-			overflow: hidden;
-			margin-bottom: 20px;
-			.head-icon {
-				font-size: 25px;
-				margin-right: 5px;
-			}
-			// 右侧卡片标题文字
-			.head-text {
-				font-size: 20px;
-				font-weight: 700;
-			}
-			.tag-List {
-				overflow-y: scroll;
-				width: 100%;
+		.top {
+			width: 100%;
+
+			.tag {
+				margin: 0 auto;
+				padding: 0 0 10px;
+				// border: 1px solid rgba(0, 0, 0, 0.1);
+				border-radius: 20px;
+				width: 95%;
 				max-height: 200px;
-				display: flex;
-				flex-wrap: wrap;
-				padding: 0 20px;
-				gap: 20px;
-				.el-check-tag.is-checked {
-					background-color: $themeColor;
-					color: $white;
+				overflow: hidden;
+				margin-bottom: 10px;
+				.head-icon {
+					font-size: 25px;
+					margin-right: 5px;
+				}
+				// 右侧卡片标题文字
+				.head-text {
+					font-size: 20px;
+					font-weight: 700;
+				}
+				.tag-List {
+					overflow-y: scroll;
+					width: 100%;
+					max-height: 200px;
+					display: flex;
+					flex-wrap: wrap;
+					padding: 0 20px;
+					gap: 20px;
+					.el-check-tag.is-checked {
+						background-color: $themeColor;
+						color: $white;
+					}
 				}
 			}
-		}
-		.blog {
-			// margin-top: 70px;
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			align-items: center;
-			width: 100%;
-			gap: 10px;
-			.item {
-				width: 100%;
+			.blog {
+				// margin-top: 70px;
 				display: flex;
 				justify-content: center;
+				flex-direction: column;
 				align-items: center;
+				width: 100%;
+				gap: 10px;
+				.item {
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
 			}
 		}
 

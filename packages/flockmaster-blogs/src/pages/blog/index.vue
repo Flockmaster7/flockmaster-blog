@@ -1,116 +1,112 @@
 <template>
-	<transition>
-		<div class="blog-container">
-			<div class="tool-card">
-				<tool :id="id" @toComment="toComment"></tool>
+	<!-- <transition> -->
+
+	<div class="blog-container">
+		<div class="tool-card">
+			<tool :id="id" @toComment="toComment"></tool>
+		</div>
+		<div class="progress-card">
+			<zb-progress
+				:progressDepth="progressDepth"
+				text="泰裤辣"></zb-progress>
+		</div>
+		<div
+			ref="scrollToTopRef"
+			class="scrollToTop"
+			@click="gotoTop"
+			v-show="isShowScrollToTop">
+			<div class="icon">
+				<el-icon color="#ffffff"><ArrowUpBold /></el-icon>
 			</div>
-			<div class="progress-card">
-				<zb-progress
-					:progressDepth="progressDepth"
-					text="泰裤辣"></zb-progress>
+		</div>
+		<el-card>
+			<div class="blog-info">
+				<div class="top">
+					<div class="title">{{ blogDeatil.title }}</div>
+					<div class="createdAt">{{ blogDeatil.createdAt }} 发布</div>
+				</div>
+				<div class="bottom">
+					<div class="author">作者：{{ blogDeatil.author }}</div>
+					<div class="data">
+						<div class="data-item">
+							<!-- <el-icon><View /></el-icon> -->
+							<span class="text"
+								>阅读：{{ blogDeatil.blog_read }}</span
+							>
+						</div>
+						<div class="data-item">
+							<!-- <el-icon><View /></el-icon> -->
+							<span class="text"
+								>点赞：{{ blogDeatil.blog_like }}</span
+							>
+						</div>
+						<div class="data-item">
+							<!-- <el-icon><Star /></el-icon> -->
+							<span class="text">
+								收藏：{{ blogDeatil.blog_collect }}
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div
-				ref="scrollToTopRef"
-				class="scrollToTop"
-				@click="gotoTop"
-				v-show="isShowScrollToTop">
-				<div class="icon">
-					<el-icon color="#ffffff"><ArrowUpBold /></el-icon>
+			<div class="mainImg">
+				<img
+					:src="getImgBaseUrl(imgEnvironment) + blogDeatil.blog_image"
+					alt="" />
+			</div>
+			<div id="markdown"></div>
+			<v-md-preview :text="content"></v-md-preview>
+			<el-divider></el-divider>
+			<div class="tag">
+				标签：
+				<div class="tag-list">
+					<el-tag
+						v-for="(item, index) in blogDeatil.tags"
+						:key="item.id"
+						>{{ item.tag_name }}</el-tag
+					>
 				</div>
 			</div>
-			<el-card>
-				<div class="blog-info">
-					<div class="top">
-						<div class="title">{{ blogDeatil.title }}</div>
-						<div class="createdAt">
-							{{ blogDeatil.createdAt }} 发布
-						</div>
+		</el-card>
+		<el-card>
+			<div class="top" ref="commentRef">
+				<span class="title">评论</span>
+				<div class="text-input">
+					<div class="avatar">
+						<img
+							:src="
+								getImgBaseUrl(imgEnvironment) +
+								userInfo.user_image
+							"
+							alt="" />
 					</div>
-					<div class="bottom">
-						<div class="author">作者：{{ blogDeatil.author }}</div>
-						<div class="data">
-							<div class="data-item">
-								<!-- <el-icon><View /></el-icon> -->
-								<span class="text"
-									>阅读：{{ blogDeatil.blog_read }}</span
-								>
-							</div>
-							<div class="data-item">
-								<!-- <el-icon><View /></el-icon> -->
-								<span class="text"
-									>点赞：{{ blogDeatil.blog_like }}</span
-								>
-							</div>
-							<div class="data-item">
-								<!-- <el-icon><Star /></el-icon> -->
-								<span class="text">
-									收藏：{{ blogDeatil.blog_collect }}
-								</span>
-							</div>
-						</div>
+					<div class="input">
+						<el-input
+							:rows="4"
+							v-model="textarea"
+							maxlength="255"
+							placeholder="请输入~"
+							show-word-limit
+							type="textarea" />
 					</div>
 				</div>
-				<div class="mainImg">
-					<img
-						:src="
-							getImgBaseUrl(imgEnvironment) +
-							blogDeatil.blog_image
-						"
-						alt="" />
+				<div class="comfirm">
+					<el-button @click="comment">发布</el-button>
 				</div>
-				<div id="markdown"></div>
-				<v-md-preview :text="content"></v-md-preview>
-				<el-divider></el-divider>
-				<div class="tag">
-					标签：
-					<div class="tag-list">
-						<el-tag
-							v-for="(item, index) in blogDeatil.tags"
-							:key="item.id"
-							>{{ item.tag_name }}</el-tag
-						>
-					</div>
+			</div>
+			<div class="list">
+				<div class="title">
+					全部评论 {{ commentTotal === 0 ? '' : commentTotal }}
 				</div>
-			</el-card>
-			<el-card>
-				<div class="top" ref="commentRef">
-					<span class="title">评论</span>
-					<div class="text-input">
-						<div class="avatar">
-							<img
-								:src="
-									getImgBaseUrl(imgEnvironment) +
-									userInfo.user_image
-								"
-								alt="" />
-						</div>
-						<div class="input">
-							<el-input
-								:rows="4"
-								v-model="textarea"
-								maxlength="255"
-								placeholder="请输入~"
-								show-word-limit
-								type="textarea" />
-						</div>
-					</div>
-					<div class="comfirm">
-						<el-button @click="comment">发布</el-button>
-					</div>
-				</div>
-				<div class="list">
-					<div class="title">
-						全部评论 {{ commentTotal === 0 ? '' : commentTotal }}
-					</div>
-					<div
-						class="comment"
-						v-for="(item, index) in commentList"
-						:key="item.id">
-						<zb-comment-area
-							type="blog"
-							:item="item"
-							@getCommentList="getCommentList"></zb-comment-area>
-						<!-- <div class="avatar">
+				<div
+					class="comment"
+					v-for="(item, index) in commentList"
+					:key="item.id">
+					<zb-comment-area
+						type="blog"
+						:item="item"
+						@getCommentList="getCommentList"></zb-comment-area>
+					<!-- <div class="avatar">
 							<img
 								:src="
 									getImgBaseUrl(imgEnvironment) +
@@ -259,14 +255,14 @@
 								</div>
 							</div>
 						</div> -->
-					</div>
-					<zb-empty
-						v-if="commentList.length === 0"
-						:height="400"></zb-empty>
 				</div>
-			</el-card>
-		</div>
-	</transition>
+				<zb-empty
+					v-if="commentList.length === 0"
+					:height="400"></zb-empty>
+			</div>
+		</el-card>
+	</div>
+	<!-- </transition> -->
 </template>
 
 <script setup lang="ts">

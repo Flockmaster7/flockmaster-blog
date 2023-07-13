@@ -73,6 +73,7 @@ class BlogService {
 				'blog_image',
 				'blog_read',
 				'blog_like',
+				'content_text',
 				'blog_collect',
 				'createdAt',
 				'updatedAt'
