@@ -39,7 +39,7 @@
 		position: relative;
 		width: 100%;
 		height: 300px;
-		background-color: $themeColor;
+		background-color: var(--theme-color);
 		border-radius: 20px;
 
 		.img {

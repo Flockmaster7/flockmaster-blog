@@ -543,7 +543,7 @@
 	}
 
 	.active {
-		background-color: $themeColor !important;
+		background-color: var(--theme-color) !important;
 	}
 
 	.tool-card {
@@ -572,7 +572,7 @@
 			bottom: 100px;
 			width: 50px;
 			height: 50px;
-			background-color: $themeColor;
+			background-color: var(--theme-color);
 			text-align: center;
 			line-height: 50px;
 			transition: 0.7s;

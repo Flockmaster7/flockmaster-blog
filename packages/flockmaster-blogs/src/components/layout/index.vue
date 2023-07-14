@@ -51,7 +51,8 @@
 		position: sticky;
 		top: -1px;
 		z-index: 999;
-		background-color: $themeColor;
+		background-color: var(--theme-color);
+		transition: 0.4s;
 		.header {
 			width: 1250px;
 			margin: 0 auto;

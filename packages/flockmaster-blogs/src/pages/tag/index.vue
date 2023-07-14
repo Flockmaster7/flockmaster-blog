@@ -142,7 +142,7 @@
 	}
 	.tag-container {
 		box-sizing: border-box;
-		background-color: $white;
+		background-color: var(--theme-card-color);
 		padding: 20px 20px 0;
 		display: flex;
 		justify-content: space-between;

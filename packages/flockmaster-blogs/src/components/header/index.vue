@@ -37,17 +37,12 @@
 				</el-dropdown>
 			</div>
 		</div>
-		<!-- <div class="search">
-			<el-input
-				v-model="searchText"
-				placeholder="你想要的这里都有"
-				:suffix-icon="Search" />
-		</div> -->
 		<div class="rightBox">
 			<div class="search" @click="gotoSearch">
 				<el-icon :size="22"><Search /></el-icon>
 				<span class="text">搜索</span>
 			</div>
+			<zb-theme></zb-theme>
 			<div class="avater" @click="toUserDetail">
 				<img
 					:src="getImgBaseUrl(imgEnvironment) + userInfo.user_image"
@@ -83,6 +78,7 @@
 	import { imgEnvironment } from '@/constant/index';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import { ElMessageBox } from 'element-plus';
+	import zbTheme from '@/components/common/zb-theme.vue';
 
 	const userStore = useUserStore();
 	const { userInfo } = storeToRefs(userStore);
@@ -174,7 +170,8 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 10px 80px;
-		background-color: $themeColor;
+		background-color: var(--theme-color);
+		transition: 0.4s;
 
 		.leftBox {
 			display: flex;
@@ -230,7 +227,7 @@
 
 				.navLink-item:hover {
 					cursor: pointer;
-					background-color: $navBorderColor;
+					background-color: var(--theme-nav-color);
 					-webkit-box-shadow: 10px 10px 99px 6px rgb(129, 227, 198);
 					-moz-box-shadow: 10px 10px 99px 6px rgb(134, 235, 192);
 					box-shadow: 10px 10px 99px 6px rgb(98, 243, 187);
@@ -306,7 +303,7 @@
 		.active {
 			font-size: 18px;
 			border-radius: 10px;
-			color: $navActiveColor !important;
+			color: var(--theme-nav-active-color) !important;
 			// background-color: $navBorderColor;
 			// -webkit-box-shadow: 10px 10px 99px 6px rgb(129, 227, 198);
 			// -moz-box-shadow: 10px 10px 99px 6px rgb(134, 235, 192);
@@ -318,8 +315,8 @@
 			justify-content: center;
 			align-items: center;
 			cursor: pointer;
+			gap: 15px;
 			.search {
-				margin-right: 15px;
 				color: $white;
 				font-size: 15px;
 				font-weight: 700;
@@ -331,7 +328,6 @@
 				padding: 3px 10px;
 			}
 			.avater {
-				margin-right: 10px;
 				img {
 					width: 35px;
 					height: 35px;

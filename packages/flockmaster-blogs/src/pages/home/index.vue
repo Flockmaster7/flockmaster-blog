@@ -77,10 +77,11 @@
 			padding: 20px 0 !important;
 		}
 	}
+
 	.blog-container {
 		min-height: 580px;
 		padding: 20px 15px 0;
-		background-color: $white;
+		background-color: var(--theme-card-color);
 		// margin: 15px;
 		display: flex;
 		flex-direction: column;
@@ -108,9 +109,5 @@
 		justify-content: center;
 		align-items: center;
 		padding: 30px;
-
-		:deep(.el-pagination.is-background .el-pager li.is-active) {
-			background-color: $themeColor;
-		}
 	}
 </style>

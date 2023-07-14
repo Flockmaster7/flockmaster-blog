@@ -123,7 +123,7 @@
 	}
 	.leaveWord-container {
 		padding: 40px 40px;
-		background-color: $white;
+		background-color: var(--theme-card-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;

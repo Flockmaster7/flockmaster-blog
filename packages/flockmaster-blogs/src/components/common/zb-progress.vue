@@ -37,7 +37,7 @@
 		progressHeight: 150,
 		progressDepth: 0,
 		bgColor: '#ffffff',
-		proColor: '#a4c4b5',
+		proColor: 'var(--theme-tool-active-color)',
 		text: ''
 	});
 </script>
@@ -57,7 +57,7 @@
 			border-radius: 10px 10px;
 			bottom: 0;
 			height: 0%;
-			background-color: $themeColor;
+			background-color: var(--theme-tool-active-color);
 		}
 	}
 </style>

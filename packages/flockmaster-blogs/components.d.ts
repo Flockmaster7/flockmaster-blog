@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
@@ -45,5 +46,6 @@ declare module '@vue/runtime-core' {
     ZbProgress: typeof import('./src/components/common/zb-progress.vue')['default']
     ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
+    ZbTheme: typeof import('./src/components/common/zb-theme.vue')['default']
   }
 }

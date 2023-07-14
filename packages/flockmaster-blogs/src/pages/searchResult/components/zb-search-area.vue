@@ -94,7 +94,7 @@
 
 		.search-button {
 			border: none;
-			background-color: $themeColor;
+			background-color: var(--theme-color);
 			color: $white;
 			padding: 10px 25px;
 			border-radius: 3px;
@@ -123,11 +123,11 @@
 
 			.filter:hover {
 				cursor: pointer;
-				color: $themeColor;
+				color: var(--theme-active-color);
 			}
 
 			.active {
-				color: $themeColor !important;
+				color: var(--theme-active-color) !important;
 			}
 		}
 	}

@@ -49,9 +49,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: $whiteCard;
+		background-color: var(--theme-card-item-color);
 		padding: 20px 15px;
 		gap: 10px;
+		transition: 0.6s;
 
 		.left {
 			flex-basis: 60%;
@@ -90,5 +91,6 @@
 
 	.item-container:hover {
 		cursor: pointer;
+		transform: translate(-3px, -3px);
 	}
 </style>

@@ -35,7 +35,6 @@
     "@types/prismjs": "^1.26.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "lodash-es": "^4.17.21",
-    "node-sass": "^9.0.0",
     "postcss-px-to-viewport": "^1.1.1",
     "rollup-plugin-visualizer": "^5.9.2",
     "sass": "^1.62.1",

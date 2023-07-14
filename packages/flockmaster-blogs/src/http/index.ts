@@ -21,23 +21,14 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
-	// loadingInstance = ElLoading.service({
-	// 	lock: true,
-	// 	text: '努力加载中',
-	// 	background: 'rgba(0, 0, 0, 0.3)'
-	// });
 	if (isLogin()) {
 		config.headers.Authorization = cache.getCache('TOKEN');
 	}
-	//  else {
-	// 	redirectToLogin('/login');
-	// }
 	return config;
 });
 
 instance.interceptors.response.use(
 	(res: AxiosResponse<HttpResponse, any>): any => {
-		// loadingInstance.close();
 		return res;
 	},
 	(err) => {

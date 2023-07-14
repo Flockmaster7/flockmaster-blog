@@ -13,9 +13,31 @@
 			</div>
 		</el-card>
 		<!-- 设置 -->
-		<!-- <el-card>
-
-		</el-card> -->
+		<el-card>
+			<el-collapse v-model="activeSettings">
+				<el-collapse-item name="1">
+					<template #title>
+						<el-icon class="head-icon"><Setting /></el-icon>
+						<text class="head-text"> 设置 </text>
+					</template>
+					<div class="change-dark">
+						黑夜:
+						<zb-theme></zb-theme>
+					</div>
+					<div class="change-dark">
+						主题:
+						<span
+							v-for="(item, index) in allTheme"
+							class="theme-item"
+							:class="{ active: theme === item.theme }"
+							:key="index"
+							@click="changeActiveTheme(item.theme)"
+							>{{ item.text }}</span
+						>
+					</div>
+				</el-collapse-item>
+			</el-collapse>
+		</el-card>
 		<!-- 站点信息卡片 -->
 		<el-card>
 			<el-collapse v-model="activeNames" @change="handleChange">
@@ -49,7 +71,7 @@
 		</el-card>
 		<!-- 标签云卡片 -->
 		<el-card>
-			<el-collapse v-model="activeTag" @change="handleTagCollapseChange">
+			<el-collapse v-model="activeTag">
 				<el-collapse-item name="1">
 					<template #title>
 						<el-icon class="head-icon"><Guide /></el-icon>
@@ -84,6 +106,8 @@
 	import usePagination from '@/hooks/usePagination';
 	import { imgEnvironment } from '@/constant/index';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import zbTheme from '@/components/common/zb-theme.vue';
+	import useTheme from '@/hooks/useTheme';
 
 	const blogStore = useBlogStore();
 
@@ -101,6 +125,9 @@
 	const handleChange = (val: string[]) => {
 		console.log(val);
 	};
+	// 设置
+	const activeSettings = ref(['1']);
+	const { theme, changeActiveTheme, allTheme } = useTheme();
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {
@@ -130,9 +157,6 @@
 	const tgStore = useTagStore();
 	const { tagAsideList } = storeToRefs(tgStore);
 	const activeTag = ref(['1']);
-	const handleTagCollapseChange = (val: string[]) => {
-		console.log(val);
-	};
 
 	tgStore.getAsideTgLIst(1, 9);
 	// 标签选中
@@ -188,6 +212,28 @@
 				color: #a8a4a4;
 			}
 		}
+
+		// 设置卡片
+		.change-dark {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 15px;
+			padding: 0 15px;
+
+			.theme-item {
+			}
+
+			.active {
+				color: var(--theme-color);
+			}
+
+			.theme-item:hover {
+				cursor: pointer;
+				color: var(--theme-color);
+			}
+		}
+
 		// 站点信息卡片
 		.site-info {
 			display: flex;
@@ -220,10 +266,6 @@
 			display: flex;
 			flex-wrap: wrap;
 			gap: 6px;
-			.el-check-tag.is-checked {
-				background-color: $themeColor;
-				color: $white;
-			}
 		}
 	}
 

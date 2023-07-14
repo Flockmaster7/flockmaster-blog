@@ -1,3 +1,5 @@
+import { useDark, useToggle } from '@vueuse/core';
+
 // 延迟交互
 export const sleep = (delay: number) => {
 	return new Promise((resolve, reject) => {

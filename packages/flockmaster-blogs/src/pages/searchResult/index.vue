@@ -33,8 +33,8 @@
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
-	import zbSearchArea from '@/pages/searchResult/zb-search-area.vue';
-	import zbSearchResultBlogItem from './zb-searchResult-blogItem.vue';
+	import zbSearchArea from '@/pages/searchResult/components/zb-search-area.vue';
+	import zbSearchResultBlogItem from './components/zb-searchResult-blogItem.vue';
 	import zbLoading from '@/components/common/zb-loading.vue';
 	import { useCommonStore } from '@/store/common';
 	import zbEmpty from '@/components/common/zb-empty.vue';
@@ -82,7 +82,7 @@
 	.searchResult-container {
 		width: 100%;
 		height: 100%;
-		background-color: $white;
+		background-color: var(--theme-card-color);
 
 		.blog-area {
 			box-sizing: border-box;

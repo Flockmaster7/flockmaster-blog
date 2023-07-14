@@ -90,9 +90,6 @@
 							v-model="forgetForm.second_password"
 							type="password" />
 					</el-form-item>
-					<!-- <el-form-item label="验证码">
-						<el-input v-model="formLabelAlign.type" />
-					</el-form-item> -->
 					<el-form-item>
 						<div class="bottom-box">
 							<el-button
@@ -295,7 +292,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: 1rem;
-			background-color: $themeColor;
+			background-color: var(--theme-color);
 
 			img {
 				width: 100%;
@@ -317,7 +314,7 @@
 		}
 
 		&--rightBox {
-			background-color: $white;
+			background-color: var(--theme-tool-color);
 			flex-basis: 50%;
 			display: flex;
 			flex-direction: column;

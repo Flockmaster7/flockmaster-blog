@@ -96,7 +96,7 @@
 	.tool-container {
 		border-radius: 10px;
 		padding: 15px 10px;
-		background-color: $toolColor;
+		background-color: var(--theme-tool-color);
 		position: fixed;
 		top: 200px;
 		.tool-list {
@@ -110,7 +110,7 @@
 				width: 50px;
 				height: 50px;
 				border-radius: 50%;
-				background-color: $white;
+				background-color: var(--theme-tool-item-color);
 				line-height: 50px;
 				text-align: center;
 				font-size: 12px;
@@ -140,6 +140,6 @@
 	}
 
 	.active {
-		background-color: $activeColor !important;
+		background-color: var(--theme-tool-active-color) !important;
 	}
 </style>

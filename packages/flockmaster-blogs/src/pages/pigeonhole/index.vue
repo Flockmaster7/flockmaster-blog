@@ -80,7 +80,7 @@
 	}
 	.pigeonhole-container {
 		min-height: 580px;
-		background-color: $white;
+		background-color: var(--theme-card-color);
 		padding: 20px 20px 0;
 
 		.card {
@@ -107,7 +107,7 @@
 				.nodeTitle:hover {
 					cursor: pointer;
 					transform: translate(-3px, -3px);
-					color: $themeColor;
+					color: var(--theme-color);
 				}
 				.el-timeline-item {
 					padding-bottom: 40px;

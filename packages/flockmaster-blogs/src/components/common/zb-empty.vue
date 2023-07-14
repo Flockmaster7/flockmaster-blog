@@ -37,7 +37,7 @@
 			gap: 15px;
 			.text {
 				font-size: 20px;
-				color: $themeColor;
+				color: var(--theme-active-color);
 			}
 		}
 	}

@@ -346,7 +346,7 @@
 
 		.secondList {
 			padding: 15px 15px 0;
-			background-color: $whiteCard;
+			background-color: var(--theme-card-item-color);
 
 			.name {
 				display: flex;
@@ -362,7 +362,7 @@
 
 			.replied-content {
 				padding: 10px;
-				background-color: #f2f5f4;
+				background-color: var(--theme-reply-content-color);
 				color: $gray;
 			}
 		}

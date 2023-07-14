@@ -45,7 +45,7 @@
 	.card {
 		padding: 8px;
 		border-radius: 15px;
-		background-color: $whiteCard;
+		background-color: var(--theme-card-item-color);
 		width: 90%;
 		// height: 300px;
 		display: flex;

@@ -5,7 +5,9 @@ export const useCommonStore = defineStore('common', () => {
 	const isMobile = ref(false);
 	const isLoading = ref(false);
 	const isShowStickyBar = ref(false);
+	const isDark = ref(false);
 	return {
+		isDark,
 		isMobile,
 		isLoading,
 		isShowStickyBar

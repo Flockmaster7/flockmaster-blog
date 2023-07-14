@@ -39,7 +39,7 @@
 
 <style lang="scss" scoped>
 	.work-container {
-		background-color: $white;
+		background-color: var(--theme-card-color);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

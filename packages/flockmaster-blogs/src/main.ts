@@ -5,6 +5,11 @@ import router from './router/index';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import '@/static/css/default.scss';
 import '@/static/css/media.scss';
+// 引入主题
+import '@/static/theme/theme.css';
+import '@/static/theme/element.css';
+// 引入element暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css';
 
 // 预览组件以及样式
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
