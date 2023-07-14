@@ -1,6 +1,6 @@
 <template>
 	<div class="searchResult-container">
-		<zb-search-area></zb-search-area>
+		<zb-search-area @getSearchBlog="getBlogList"></zb-search-area>
 		<div class="blog-area" v-show="!isLoading && blogList.length > 0">
 			<div
 				class="item"
@@ -10,7 +10,9 @@
 				<zbSearchResultBlogItem :blog="item"></zbSearchResultBlogItem>
 			</div>
 		</div>
-		<zb-empty :height="500" v-show="blogList.length === 0"></zb-empty>
+		<zb-empty
+			:height="500"
+			v-show="!isLoading && blogList.length === 0"></zb-empty>
 		<div class="loading" v-show="isLoading">
 			<zb-loading></zb-loading>
 		</div>
@@ -50,13 +52,15 @@
 
 	const query = route.query.query as string;
 
-	onMounted(() => {
-		getBlogList(pageNum.value, pageSize.value);
-	});
+	onMounted(() => {});
 
 	// 获取博客列表
-	const getBlogList = async (pageNum: number, pageSize: number) => {
-		await blogStore.getBlogList(pageNum, pageSize);
+	const getBlogList = async (data?: any) => {
+		if (data) {
+			await blogStore.getBlogList(pageNum.value, pageSize.value, data);
+		} else {
+			await blogStore.getBlogList(pageNum.value, pageSize.value);
+		}
 	};
 
 	// 跳转到详情页
@@ -70,11 +74,11 @@
 
 	const handleSizeChange = (val: number) => {
 		pageSize.value = val;
-		getBlogList(pageNum.value, pageSize.value);
+		getBlogList();
 	};
 	const handleCurrentChange = (val: number) => {
 		pageNum.value = val;
-		getBlogList(pageNum.value, pageSize.value);
+		getBlogList();
 	};
 </script>
 

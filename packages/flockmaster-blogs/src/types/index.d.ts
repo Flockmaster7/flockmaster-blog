@@ -75,6 +75,7 @@ export interface GetBlogListForm {
 	order?: string;
 	classify?: string;
 	tags?: number[];
+	querySearch?: string;
 }
 
 // 获取博客详情接口

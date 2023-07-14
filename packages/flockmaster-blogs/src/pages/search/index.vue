@@ -56,16 +56,23 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		border-radius: 20px;
 		width: 100%;
 		gap: 20px;
 		background-image: linear-gradient(
-			25deg,
-			#f84b00,
-			#dd8754,
-			#adb296,
-			#00d9db
+			186deg,
+			#434950,
+			#626663,
+			#838577,
+			#a4a58b
 		);
-
+		// background-image: linear-gradient(
+		// 	25deg,
+		// 	#f84b00,
+		// 	#dd8754,
+		// 	#adb296,
+		// 	#00d9db
+		// );
 		.title {
 			font-size: 40px;
 			font-weight: 700;

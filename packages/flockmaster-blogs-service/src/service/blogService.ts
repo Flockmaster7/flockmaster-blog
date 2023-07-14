@@ -101,6 +101,8 @@ class BlogService {
 
 		// 升序降序，默认降序
 		if (wrapper.order) option.order[0][1] = wrapper.order;
+		// 按热度排序
+		if (wrapper.orderByRead) option.order[0] = ['blog_read', 'DESC'];
 
 		const filter: any = [];
 		if (wrapper.user_id)
@@ -142,9 +144,6 @@ class BlogService {
 					},
 					content_text: {
 						[Op.like]: `%${wrapper?.querySearch}%`
-					},
-					classify: {
-						[Op.like]: `%${wrapper?.querySearch}%`
 					}
 				}
 			});
@@ -153,6 +152,7 @@ class BlogService {
 		if (filter.length !== 0) {
 			option.where = filter;
 		}
+		console.log(option);
 		const { count, rows } = await Blog.findAndCountAll(option);
 
 		return {

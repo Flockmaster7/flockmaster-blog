@@ -277,6 +277,18 @@
 		}
 	}
 
+	:deep(.el-button) {
+		width: 100px;
+		// background-color: #a4c4b5;
+		border-radius: 6px;
+		transition: 1s;
+	}
+	:deep(.el-button:hover) {
+		color: #fff;
+		width: 110px;
+		background-color: var(--theme-color);
+	}
+
 	.comment {
 		display: flex;
 		gap: 20px;
@@ -330,7 +342,7 @@
 
 			.reply:hover {
 				cursor: pointer;
-				color: $themeColor;
+				color: var(--theme-active-color);
 			}
 		}
 
@@ -372,6 +384,6 @@
 	.user-name:hover,
 	.name-replyName:hover {
 		cursor: pointer;
-		color: $themeColor;
+		color: var(--theme-active-color);
 	}
 </style>

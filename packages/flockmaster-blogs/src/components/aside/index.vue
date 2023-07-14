@@ -225,12 +225,12 @@
 			}
 
 			.active {
-				color: var(--theme-color);
+				color: var(--theme-tool-active-color);
 			}
 
 			.theme-item:hover {
 				cursor: pointer;
-				color: var(--theme-color);
+				color: var(--theme-tool-active-color);
 			}
 		}
 

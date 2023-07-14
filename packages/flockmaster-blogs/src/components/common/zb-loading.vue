@@ -2,7 +2,9 @@
 	<div class="loading-container" :style="{ height: height + 'px' }">
 		<!-- 加载中... -->
 		<div class="loading-icon">
-			<el-icon size="40" color="var(--theme-color)"><Loading /></el-icon>
+			<el-icon size="40" color="var(--theme-active-color)"
+				><Loading
+			/></el-icon>
 		</div>
 	</div>
 </template>

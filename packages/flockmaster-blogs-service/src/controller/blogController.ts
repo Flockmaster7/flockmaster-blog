@@ -97,8 +97,10 @@ class BlogController {
 					classify,
 					tags,
 					user_id,
-					querySearch
+					querySearch,
+					orderByRead
 				} = ctx.request.body;
+				orderByRead && Object.assign(wrapper, { orderByRead });
 				querySearch && Object.assign(wrapper, { querySearch });
 				content_text && Object.assign(wrapper, { content_text });
 				author && Object.assign(wrapper, { author });

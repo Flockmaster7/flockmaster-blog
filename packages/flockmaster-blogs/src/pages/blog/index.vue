@@ -709,14 +709,14 @@
 			margin-top: 20px;
 			:deep(.el-button) {
 				width: 100px;
-				background-color: #a4c4b5;
+				// background-color: #a4c4b5;
 				border-radius: 6px;
 				transition: 1s;
 			}
 			:deep(.el-button:hover) {
 				color: #fff;
 				width: 120px;
-				background-color: #84c5a7;
+				background-color: var(--theme-color);
 				border-radius: 6px;
 			}
 		}

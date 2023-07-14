@@ -31,6 +31,7 @@ export interface BlogFind {
 	order?: string;
 	tags?: number[];
 	querySearch?: string;
+	orderByRead?: boolean;
 }
 
 export interface Blog_tagType {

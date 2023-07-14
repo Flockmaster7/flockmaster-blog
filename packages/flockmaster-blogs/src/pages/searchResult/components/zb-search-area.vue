@@ -1,7 +1,7 @@
 <template>
 	<div class="searchArea-container">
 		<div class="search-input">
-			<el-input v-model="searchText" clearable>
+			<el-input v-model="params.querySearch" clearable>
 				<template #append>
 					<button class="search-button" @click="search">搜索</button>
 				</template>
@@ -27,34 +27,56 @@
 	import { Search } from '@element-plus/icons-vue';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
-	import { ref } from 'vue';
+	import { onMounted, ref } from 'vue';
+	import { useRoute } from 'vue-router';
+
+	interface ParamsType {
+		querySearch: string;
+		orderByRead: boolean;
+	}
+
+	const emit = defineEmits<{
+		(event: 'getSearchBlog', data?: ParamsType): void;
+	}>();
 
 	const blogStore = useBlogStore();
 
 	const commonStore = useCommonStore();
 	const { isLoading } = storeToRefs(commonStore);
 
-	const searchText = ref('');
+	const route = useRoute();
+	const query = route.query.query as string;
 	const activeFilter = ref(1);
 
+	const params = ref<ParamsType>({
+		querySearch: query,
+		orderByRead: false
+	});
+
+	onMounted(() => {
+		search();
+	});
+
 	// 获取文章
-	const getBlog = async (data?: any) => {
+	const getBlog = async (data?: ParamsType) => {
 		isLoading.value = true;
 		if (data) {
-			await blogStore.getBlogList(1, 9, data);
+			emit('getSearchBlog', data);
+			// await blogStore.getBlogList(1, 9, data);
 		} else {
-			await blogStore.getBlogList(1, 9);
+			emit('getSearchBlog');
+			// await blogStore.getBlogList(1, 9);
 		}
 		return Promise.resolve(true);
 	};
 
 	// 搜索
 	const search = async () => {
-		if (validatorNotEmpty(searchText.value)) {
+		if (validatorNotEmpty(params.value.querySearch)) {
 			ElMessage.warning('不能为空');
 			return;
 		}
-		await minDelay<boolean>(getBlog(), 500);
+		await minDelay<boolean>(getBlog(params.value), 500);
 		isLoading.value = false;
 	};
 
@@ -72,7 +94,8 @@
 	// 切换filter
 	const changeFilter = async (id: number) => {
 		activeFilter.value = id;
-		await minDelay<boolean>(getBlog(), 500);
+		params.value.orderByRead = activeFilter.value === 2 ? true : false;
+		await search();
 		isLoading.value = false;
 	};
 </script>
