@@ -85,7 +85,7 @@
 			:deep(.el-button:hover) {
 				color: #fff;
 				width: 120px;
-				background-color: #84c5a7;
+				background-color: var(--theme-color);
 				border-radius: 15px;
 			}
 		}

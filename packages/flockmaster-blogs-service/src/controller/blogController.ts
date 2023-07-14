@@ -43,7 +43,6 @@ class BlogController {
 	async createBlog(ctx: Context) {
 		try {
 			const {
-				author,
 				title,
 				classify,
 				blog_image,
@@ -53,7 +52,7 @@ class BlogController {
 			} = ctx.request.body;
 			const user = ctx.state.user;
 			const params = {
-				author,
+				author: user.name,
 				user_id: user.id,
 				title,
 				classify,
@@ -97,9 +96,10 @@ class BlogController {
 					order,
 					classify,
 					tags,
-					user_id
+					user_id,
+					querySearch
 				} = ctx.request.body;
-
+				querySearch && Object.assign(wrapper, { querySearch });
 				content_text && Object.assign(wrapper, { content_text });
 				author && Object.assign(wrapper, { author });
 				title && Object.assign(wrapper, { title });

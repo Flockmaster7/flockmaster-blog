@@ -131,6 +131,24 @@ class BlogService {
 					[Op.like]: `%${wrapper?.classify}%`
 				}
 			});
+		if (wrapper.querySearch) {
+			filter.push({
+				[Op.or]: {
+					title: {
+						[Op.like]: `%${wrapper?.querySearch}%`
+					},
+					author: {
+						[Op.like]: `%${wrapper?.querySearch}%`
+					},
+					content_text: {
+						[Op.like]: `%${wrapper?.querySearch}%`
+					},
+					classify: {
+						[Op.like]: `%${wrapper?.querySearch}%`
+					}
+				}
+			});
+		}
 		// 传了限制条件
 		if (filter.length !== 0) {
 			option.where = filter;

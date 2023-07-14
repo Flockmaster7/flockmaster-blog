@@ -30,6 +30,7 @@ export interface BlogFind {
 	content_text?: string;
 	order?: string;
 	tags?: number[];
+	querySearch?: string;
 }
 
 export interface Blog_tagType {
