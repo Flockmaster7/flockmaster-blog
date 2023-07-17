@@ -15,7 +15,9 @@
 	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import Aside from './aside.vue';
+</script>
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {

@@ -7,12 +7,12 @@
 
 <script lang="ts" setup>
 	import useTheme from '@/hooks/useTheme';
-	import { useCommonStore } from '@/store/common';
+	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 
 	const { changeDark } = useTheme();
-	const commonStore = useCommonStore();
-	const { isDark } = storeToRefs(commonStore);
+	const { common } = useStore();
+	const { isDark } = storeToRefs(common);
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 import { GetWorkListResType } from '@/types';
-import request from '../index';
+import request from './index';
 import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
 /**

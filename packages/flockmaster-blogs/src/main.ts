@@ -18,13 +18,18 @@ import '@kangc/v-md-editor/lib/style/preview.css';
 import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
 import '@kangc/v-md-editor/lib/theme/style/github.css';
 
-// Prism
-import Prism from 'prismjs';
-// 代码高亮
-import 'prismjs/components/prism-javascript';
+// 代码复制
+import createCopyCodePreview from '@kangc/v-md-editor/lib/plugins/copy-code/preview';
+import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
+
+VMdPreview.use(createCopyCodePreview());
+
+// highlightjs
+import hljs from 'highlight.js';
+
 // 选择使用主题
 VMdPreview.use(githubTheme, {
-	Prism
+	Hljs: hljs
 });
 
 const app = createApp(App);

@@ -1,11 +1,12 @@
 import axios, {
+	AxiosError,
 	AxiosRequestConfig,
 	AxiosResponse,
 	InternalAxiosRequestConfig
 } from 'axios';
 import cache from '@/utils/cache';
 import { useRouter } from 'vue-router';
-import type { HttpResponse } from '@/types/http.d.ts';
+import type { HttpError, HttpResponse } from '@/types/http.d.ts';
 import { clearInfo, isLogin, redirectToLogin } from '@/utils/login';
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus';
 import router from '@/router';
@@ -31,8 +32,8 @@ instance.interceptors.response.use(
 	(res: AxiosResponse<HttpResponse, any>): any => {
 		return res;
 	},
-	(err) => {
-		const code = err.response.data.code;
+	(err: AxiosError<HttpError>) => {
+		const code = err.response?.data.code;
 		if (!err.response) {
 			return Promise.reject('网络错误');
 		}
@@ -73,7 +74,7 @@ instance.interceptors.response.use(
 					clearInfo();
 				});
 		}
-		return Promise.reject(err);
+		return Promise.reject(err.response.data);
 	}
 );
 

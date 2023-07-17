@@ -6,7 +6,7 @@ import {
 	getBlogListResType
 } from '@/types';
 import { HttpResponse, PageRequest } from '@/types/http';
-import request from '../index.ts';
+import request from './index.ts';
 
 /**
  * 获取博客列表接口

@@ -71,6 +71,9 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(vue@3.3.1)
     devDependencies:
+      '@types/highlightjs':
+        specifier: ^9.12.2
+        version: 9.12.2
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.7
@@ -773,6 +776,10 @@ packages:
       '@types/minimatch': 5.1.2
       '@types/node': 20.2.5
     dev: false
+
+  /@types/highlightjs@9.12.2:
+    resolution: {integrity: sha512-oW2pEKwshxwBW1nVUizWQg/tnhboRtKrUKnF2hd6l4BZ0shr5ZjQ4ra/82+NEH6uWeM8JjrMGCux5enQXOQbTA==}
+    dev: true
 
   /@types/http-assert@1.5.3:
     resolution: {integrity: sha512-FyAOrDuQmBi8/or3ns4rwPno7/9tJTijVW6aQQjK02+kOQ8zmoNg2XJtAuQhvQcy1ASJq38wirX5//9J1EqoUA==}

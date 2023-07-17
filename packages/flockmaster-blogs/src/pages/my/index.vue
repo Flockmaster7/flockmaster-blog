@@ -72,12 +72,12 @@
 
 <script setup lang="ts">
 	import { useRoute, useRouter } from 'vue-router';
-	import blogItem from './blogItem.vue';
+	import blogItem from './components/blogItem.vue';
 	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { computed, onMounted, ref } from 'vue';
-	import userItem from './userItem.vue';
+	import userItem from './components/userItem.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import { useCommonStore } from '@/store/common';

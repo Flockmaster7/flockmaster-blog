@@ -34,8 +34,8 @@
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';
-	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
-	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
+	import zbBlogItemRectangle from '@/components/common/zb-blogItem-rectangle.vue';
+	import zbBlogItemRectangleMobile from '@/components/mobile/zb-blogItem-rectangle-mobile.vue';
 	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';

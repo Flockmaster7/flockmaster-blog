@@ -19,12 +19,12 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/home',
 		name: 'Layout',
-		component: () => import('@/components/layout/index.vue'),
+		component: () => import('@/components/layout/layout.vue'),
 		children: [
 			{
 				path: '/main',
 				name: 'Main',
-				component: () => import('@/components/main/index.vue'),
+				component: () => import('@/components/layout/main.vue'),
 				children: [
 					{
 						path: '/home',

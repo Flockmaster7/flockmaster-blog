@@ -1,6 +1,12 @@
 // http请求返回data类型
 export interface HttpResponse<T = any> {
-	code: number;
+	code: number | string;
+	data: T;
+	message: string;
+}
+
+export interface HttpError<T = any> {
+	code: number | string;
 	data: T;
 	message: string;
 }

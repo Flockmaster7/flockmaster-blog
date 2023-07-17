@@ -1,12 +1,12 @@
-import { useCommonStore } from '@/store/common';
+import useStore from '@/store';
 import { minDelay } from '@/utils/common';
 import { ElLoading } from 'element-plus';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 export default function () {
-	const commonStore = useCommonStore();
-	const { isDark } = storeToRefs(commonStore);
+	const { common } = useStore();
+	const { isDark } = storeToRefs(common);
 	const allTheme = [
 		{
 			text: '默认',
@@ -63,6 +63,19 @@ export default function () {
 		await minDelay(changeActiveTheme(theme), 500);
 		loadingInstance.close();
 	};
+
+	// 是否为晚上
+	const nowIsDark = () => {
+		let date = new Date();
+		let hour = date.getHours();
+		if (hour >= 18 || hour <= 6) {
+			changeDark();
+		}
+	};
+
+	onMounted(() => {
+		nowIsDark();
+	});
 
 	return {
 		theme,

@@ -131,7 +131,7 @@
 		login,
 		register,
 		updatePassword
-	} from '@/http/user/index';
+	} from '@/http/user.ts';
 	import cache from '@/utils/cache';
 	import { useRouter } from 'vue-router';
 	import { useUserStore } from '@/store/user';
@@ -156,17 +156,24 @@
 			if (!valid) {
 				console.log('登录校验不通过');
 			}
-			const { data: res } = await login(loginForm);
-			ElMessage({
-				message: '登录成功',
-				type: 'success'
-			});
-			getUserProfile();
-			cache.setCache(import.meta.env.VITE_ACCESS_TOKEN, res.data.token);
-			// 跳转
-			if (router.currentRoute.value.query.from)
-				router.push(String(router.currentRoute.value.query.from));
-			else router.push('/home');
+			try {
+				const { data: res } = await login(loginForm);
+				ElMessage({
+					message: '登录成功',
+					type: 'success'
+				});
+				getUserProfile();
+				cache.setCache(
+					import.meta.env.VITE_ACCESS_TOKEN,
+					res.data.token
+				);
+				// 跳转
+				if (router.currentRoute.value.query.from)
+					router.push(String(router.currentRoute.value.query.from));
+				else router.push('/home');
+			} catch (error: any) {
+				ElMessage.error(error.message);
+			}
 		});
 	};
 
@@ -412,3 +419,4 @@
 		margin-left: 36px;
 	}
 </style>
+@/http/user/user

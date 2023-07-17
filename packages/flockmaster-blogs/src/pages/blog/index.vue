@@ -317,7 +317,7 @@
 		// 获取信息
 		await blogStore.getBlogDetail(Number(id));
 		nextTick(() => {
-			content.value = blogDeatil.value.content_html;
+			content.value = blogDeatil.value.content_text;
 		});
 		// setTimeout(() => {
 		// 	content.value = blogDeatil.value.content_html;
