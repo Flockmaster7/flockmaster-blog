@@ -42,7 +42,7 @@
 	.card {
 		padding: 8px;
 		border-radius: 15px;
-		background-color: $whiteCard;
+		background-color: var(--theme-card-item-color);
 		width: 640px;
 		height: 150px;
 		display: flex;

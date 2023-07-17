@@ -217,7 +217,7 @@
 			const { user_name, password } = forgetForm;
 			const { data: res } = await updatePassword({ user_name, password });
 			console.log(res);
-			alert('修改成功');
+			ElMessage.success('修改成功');
 			type.value = 'login';
 		});
 	};

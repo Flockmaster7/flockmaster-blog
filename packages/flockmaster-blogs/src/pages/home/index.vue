@@ -2,10 +2,11 @@
 	<div class="blog-container">
 		<div class="blog-list">
 			<div
-				v-for="(item, index) in blogList"
+				v-for="item in blogList"
 				:key="item.id"
 				@click="gotoBlogDetail(item.id)"
-				class="item">
+				class="item"
+				v-show="!isLoading && blogList.length > 0">
 				<zbBlogItemRectangleMobile
 					:blog="item"
 					v-if="isMobile"></zbBlogItemRectangleMobile>
@@ -14,6 +15,7 @@
 					v-if="!isMobile"></zbBlogItemRectangle>
 			</div>
 		</div>
+		<zb-loading v-show="isLoading"></zb-loading>
 		<zb-empty v-if="blogList.length === 0" :height="500"></zb-empty>
 		<div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
@@ -30,8 +32,7 @@
 </template>
 
 <script setup lang="ts">
-	import { onMounted } from 'vue';
-	import { useBlogStore } from '@/store/blog';
+	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import zbBlogItemRectangle from '@/components/common/zb-blogItem-rectangle.vue';
@@ -39,32 +40,25 @@
 	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';
-	import { useCommonStore } from '@/store/common';
-	import { useUserStore } from '@/store/user';
+	import zbLoading from '@/components/common/zb-loading.vue';
 
-	const store = useBlogStore();
+	const { blog, common } = useStore();
 	const router = useRouter();
 
-	const { blogList, blogTotal, getBlogListParams } = storeToRefs(store);
+	const { blogList, blogTotal } = storeToRefs(blog);
 
-	const { pageNum, pageSize, handleSizeChange, handleCurrentChange } =
-		usePagination(getBlogListParams.value, store.getBlogList);
+	const {
+		pageNum,
+		pageSize,
+		handleSizeChange,
+		handleCurrentChange,
+		isLoading,
+		getBlogListParams
+	} = usePagination(blog.getBlogList);
 
 	// 获取设备
 	useIsMobile();
-	const commonStore = useCommonStore();
-	const { isMobile } = storeToRefs(commonStore);
-
-	const userStore = useUserStore();
-
-	onMounted(() => {
-		// userStore.getUserProfile();
-		store.getBlogList(
-			pageNum.value,
-			pageSize.value,
-			getBlogListParams.value
-		);
-	});
+	const { isMobile } = storeToRefs(common);
 
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);

@@ -100,23 +100,15 @@
 <script setup lang="ts">
 	import { useTagStore } from '@/store/tag';
 	import { useUserStore } from '@/store/user';
-	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
-	import usePagination from '@/hooks/usePagination';
 	import { imgEnvironment } from '@/constant/index';
 	import { getImgBaseUrl } from '@/utils/imgUrl';
 	import zbTheme from '@/components/common/zb-theme.vue';
 	import useTheme from '@/hooks/useTheme';
+	import useStore from '@/store';
 
-	const blogStore = useBlogStore();
-
-	usePagination(
-		{
-			author: 'flockmaster'
-		},
-		blogStore.getBlogList
-	);
+	const { blog } = useStore();
 
 	// 用户信息、站点信息
 	const store = useUserStore();
@@ -160,7 +152,7 @@
 
 	tgStore.getAsideTgLIst(1, 9);
 	// 标签选中
-	const { getBlogListParams } = storeToRefs(blogStore);
+	const { getBlogListParams } = storeToRefs(blog);
 	const tagChecked = ref<number[]>([]);
 	const onChangeTag = async (status: boolean, id: number) => {
 		if (status) tagChecked.value.push(id);
@@ -172,7 +164,7 @@
 		getBlogListParams.value = {
 			tags: tagChecked.value
 		};
-		blogStore.getBlogList(1, 9, getBlogListParams.value);
+		blog.getBlogList(1, 9, getBlogListParams.value);
 	};
 </script>
 

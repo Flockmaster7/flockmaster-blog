@@ -160,6 +160,7 @@
 		if (showBlogs.value) return '文章';
 		if (showFollow.value) return '关注';
 		if (showFans.value) return '粉丝';
+		return '';
 	});
 	//跳转到用户
 	const gotoUserDetail = (id: number) => {
@@ -186,7 +187,7 @@
 		margin: 15px;
 
 		.left {
-			background-color: $white;
+			background-color: var(--theme-card-color);
 			border-radius: 20px;
 			flex-basis: 40%;
 			height: 600px;
@@ -251,7 +252,7 @@
 
 		.right {
 			flex-basis: 60%;
-			background-color: $white;
+			background-color: var(--theme-card-color);
 			border-radius: 20px;
 
 			.top {

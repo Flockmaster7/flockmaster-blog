@@ -4,6 +4,7 @@
 			<div
 				:class="{ 'tool-item': true, active: blogStatus[item.type] }"
 				v-for="(item, index) in config"
+				:key="index"
 				@click="handleClick(item.type)">
 				{{ item.text }}
 			</div>

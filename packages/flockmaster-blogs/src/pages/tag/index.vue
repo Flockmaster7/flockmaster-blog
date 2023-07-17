@@ -23,7 +23,7 @@
 					</el-collapse-item>
 				</el-collapse>
 			</div>
-			<div class="blog">
+			<div class="blog" v-show="!isLoading && blogList.length > 0">
 				<div
 					v-for="(item, index) in blogList"
 					:key="item.id"
@@ -37,6 +37,7 @@
 						v-if="!isMobile"></zbBlogItemRectangle>
 				</div>
 			</div>
+			<zb-loading v-show="isLoading"></zb-loading>
 			<zb-empty :height="310" v-show="blogList.length === 0"></zb-empty>
 		</div>
 		<div class="pagination" v-show="blogList.length > 0">
@@ -55,21 +56,30 @@
 
 <script setup lang="ts">
 	import { useTagStore } from '@/store/tag';
-	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import { onMounted, ref } from 'vue';
+	import { ref } from 'vue';
 	import { useRouter } from 'vue-router';
-	// import zbBlogItemRectangle from '@/components/item/zb-blogItem-rectangle.vue';
+	import zbLoading from '@/components/common/zb-loading.vue';
 	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
 	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { useCommonStore } from '@/store/common';
 	import zbEmpty from '@/components/common/zb-empty.vue';
+	import usePagination from '@/hooks/usePagination';
+	import useStore from '@/store';
 
 	const router = useRouter();
+	const { blog } = useStore();
+	const { blogList, blogTotal } = storeToRefs(blog);
 
-	const blogStore = useBlogStore();
-	const { blogList, blogTotal } = storeToRefs(blogStore);
+	const {
+		pageNum,
+		pageSize,
+		handleSizeChange,
+		handleCurrentChange,
+		isLoading,
+		getBlogListParams
+	} = usePagination(blog.getBlogList);
 
 	// 获取设备
 	useIsMobile();
@@ -86,7 +96,6 @@
 
 	tgStore.getTgLIst(1, 999);
 	// 标签选中
-	const { getBlogListParams } = storeToRefs(blogStore);
 	const tagChecked = ref<number[]>([]);
 	const onChangeTag = async (status: boolean, id: number) => {
 		if (status) tagChecked.value.push(id);
@@ -98,36 +107,11 @@
 		getBlogListParams.value = {
 			tags: tagChecked.value
 		};
-		pageNum.value = 1;
-		blogStore.getBlogList(
-			pageNum.value,
-			pageSize.value,
-			getBlogListParams.value
-		);
+		handleCurrentChange(1);
 	};
 
-	// 文章
-	onMounted(async () => {
-		await getBlog(pageNum.value, pageSize.value);
-	});
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);
-	};
-	const getBlog = async (pageNum: number, pageSize: number) => {
-		await blogStore.getBlogList(pageNum, pageSize);
-	};
-
-	// 分页器
-	const pageNum = ref(1);
-	const pageSize = ref(9);
-
-	const handleSizeChange = (val: number) => {
-		pageSize.value = val;
-		getBlog(pageNum.value, pageSize.value);
-	};
-	const handleCurrentChange = (val: number) => {
-		pageNum.value = val;
-		getBlog(pageNum.value, pageSize.value);
 	};
 </script>
 

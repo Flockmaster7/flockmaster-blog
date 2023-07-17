@@ -32,7 +32,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background-color: $whiteCard;
+		background-color: var(--theme-card-item-color);
 		border-radius: 10px;
 		height: 100px;
 		transition: 0.6s;

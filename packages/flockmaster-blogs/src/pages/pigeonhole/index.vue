@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="main">
 				<div class="title">归档</div>
-				<el-timeline>
+				<el-timeline v-show="!isLoading && blogList.length > 0">
 					<el-timeline-item
 						v-for="(item, index) in blogList"
 						:key="index"
@@ -16,6 +16,7 @@
 					</el-timeline-item>
 				</el-timeline>
 			</div>
+			<zb-loading v-show="isLoading"></zb-loading>
 			<div class="pagination">
 				<el-pagination
 					v-model:current-page="pageNum"
@@ -33,42 +34,27 @@
 
 <script setup lang="ts">
 	import { MoreFilled } from '@element-plus/icons-vue';
-	import { useBlogStore } from '@/store/blog';
-	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
-	import { onMounted, ref } from 'vue';
 	import { useRouter } from 'vue-router';
+	import zbLoading from '@/components/common/zb-loading.vue';
+	import usePagination from '@/hooks/usePagination';
+	import useStore from '@/store';
 
 	const router = useRouter();
-	const blogStore = useBlogStore();
-	const userStore = useUserStore();
-	const { blogList, blogTotal } = storeToRefs(blogStore);
-	const { userInfo } = storeToRefs(userStore);
+	const { blog } = useStore();
+	const { blogList, blogTotal } = storeToRefs(blog);
 
-	onMounted(async () => {
-		await getBlog(pageNum.value, pageSize.value);
-	});
-
-	const getBlog = async (pageNum: number, pageSize: number) => {
-		blogStore.getBlogList(pageNum, pageSize);
-	};
+	const {
+		pageNum,
+		pageSize,
+		handleSizeChange,
+		handleCurrentChange,
+		isLoading
+	} = usePagination(blog.getBlogList);
 
 	// 跳转到文章详情
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail/?id=' + id);
-	};
-
-	// 分页器
-	const pageNum = ref(1);
-	const pageSize = ref(9);
-
-	const handleSizeChange = (val: number) => {
-		pageSize.value = val;
-		getBlog(pageNum.value, pageSize.value);
-	};
-	const handleCurrentChange = (val: number) => {
-		pageNum.value = val;
-		getBlog(pageNum.value, pageSize.value);
 	};
 </script>
 
