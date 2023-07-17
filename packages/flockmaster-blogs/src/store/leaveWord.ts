@@ -9,7 +9,7 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 
 	// 留言
 	const addLeaveWord = async (data: CommentParamsType) => {
-		const res = await leaveWord(data);
+		await leaveWord(data);
 	};
 
 	// 获取留言列表

@@ -1,17 +1,13 @@
 import axios, {
 	AxiosError,
-	AxiosRequestConfig,
 	AxiosResponse,
 	InternalAxiosRequestConfig
 } from 'axios';
 import cache from '@/utils/cache';
-import { useRouter } from 'vue-router';
 import type { HttpError, HttpResponse } from '@/types/http.d.ts';
-import { clearInfo, isLogin, redirectToLogin } from '@/utils/login';
-import { ElLoading, ElMessage, ElMessageBox } from 'element-plus';
+import { clearInfo, isLogin } from '@/utils/login';
+import { ElMessageBox } from 'element-plus';
 import router from '@/router';
-
-let loadingInstance: any = null;
 
 const baseUrl = '/api';
 // const baseUrl = '/';

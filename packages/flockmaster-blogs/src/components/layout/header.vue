@@ -8,7 +8,8 @@
 			<div class="header-nav-pc">
 				<div
 					:class="{ navLink: true, active: activeNav === item.src }"
-					v-for="(item, index) in navLinkList">
+					v-for="(item, index) in navLinkList"
+					:key="index">
 					<div class="navLink-item" @click="changeTab(item)">
 						{{ item.title }}
 					</div>
@@ -30,6 +31,7 @@
 							<el-dropdown-item
 								:command="item"
 								v-for="(item, index) in navLinkList"
+								:key="index"
 								>{{ item.title }}</el-dropdown-item
 							>
 						</el-dropdown-menu>

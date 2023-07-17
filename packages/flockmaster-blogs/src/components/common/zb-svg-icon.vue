@@ -11,7 +11,7 @@
 		size: number;
 	}
 	// 提供 name 属性即可
-	const props = withDefaults(defineProps<PropsType>(), {
+	withDefaults(defineProps<PropsType>(), {
 		size: 20
 	});
 </script>

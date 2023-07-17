@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-	import { onMounted, ref, watch } from 'vue';
+	import { onMounted } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';

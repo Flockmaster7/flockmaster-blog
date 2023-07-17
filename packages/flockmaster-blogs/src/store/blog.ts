@@ -59,7 +59,7 @@ export const useBlogStore = defineStore('blog', () => {
 
 	// 评论
 	const addComment = async (data: CommentParamsType) => {
-		const res = await comment(data);
+		await comment(data);
 	};
 
 	// 获取评论列表

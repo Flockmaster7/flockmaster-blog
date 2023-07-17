@@ -7,6 +7,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import ElementPlus from 'unplugin-element-plus/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import eslintPlugin from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -28,8 +29,18 @@ export default defineConfig(({ command, mode }) => {
 				ElementPlus({
 					// options
 				}),
+				//svg图标
 				createSvgIconsPlugin({
 					iconDirs: [path.resolve(process.cwd(), 'src/icons')]
+				}),
+				// eslint
+				eslintPlugin({
+					include: [
+						'src/**/*.ts',
+						'src/**/*.vue',
+						'src/*.ts',
+						'src/*.vue'
+					]
 				})
 			],
 			// 引入全局scss变量

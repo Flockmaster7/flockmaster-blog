@@ -1,14 +1,11 @@
 import {
 	createRouter,
-	createWebHistory,
 	RouterOptions,
 	RouteRecordRaw,
 	RouteLocationNormalized,
 	NavigationGuardNext,
 	createWebHashHistory
 } from 'vue-router';
-import { ElMessage } from 'element-plus';
-import { isLogin } from '@/utils/login';
 import { closeProgress, startProgress } from '@/utils/progress';
 
 const routes: Array<RouteRecordRaw> = [

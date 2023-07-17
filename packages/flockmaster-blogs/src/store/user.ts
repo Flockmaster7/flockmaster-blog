@@ -1,7 +1,5 @@
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
 import { GetUserInfoResType } from '@/types';
-import { imgEnvironment } from '@/constant/index';
-import { getImgBaseUrl } from '@/utils/imgUrl';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -35,14 +33,14 @@ export const useUserStore = defineStore('user', () => {
 	// 获取用户关注列表
 	const getUserFollowingList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getFollowList(pageNum, pageSize);
-		if (res.code == 200) {
+		if (res.code === 200) {
 			followingList.value = res.data.rows;
 		}
 	};
 	// 获取用户粉丝列表
 	const getUserFollowerList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getFansList(pageNum, pageSize);
-		if (res.code == 200) {
+		if (res.code === 200) {
 			console.log(res.data.rows);
 			followerList.value = res.data.rows;
 		}
