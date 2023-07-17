@@ -22,6 +22,10 @@ import '@kangc/v-md-editor/lib/theme/style/github.css';
 import createCopyCodePreview from '@kangc/v-md-editor/lib/plugins/copy-code/preview';
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
 
+//svg图标
+import 'virtual:svg-icons-register';
+import zbSvgIconVue from './components/common/zb-svg-icon.vue';
+
 VMdPreview.use(createCopyCodePreview());
 
 // highlightjs
@@ -41,6 +45,9 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 // 引入v-md-editor预览组件
 app.use(VMdPreview);
+
+//全局注册组件
+app.component(zbSvgIconVue.name, zbSvgIconVue);
 
 app.use(router);
 app.use(pinia);

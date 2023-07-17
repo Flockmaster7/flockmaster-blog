@@ -25,7 +25,7 @@ declare module '@vue/runtime-core' {
     Main: typeof import('./src/components/layout/main.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ZbBlogItemFlexible: typeof import('./src/components/item/zb-blogItem-flexible.vue')['default']
+    ZbBlogItemFlexible: typeof import('./src/components/common/zb-blogItem-flexible.vue')['default']
     ZbBlogItemRectangle: typeof import('./src/components/common/zb-blogItem-rectangle.vue')['default']
     ZbBlogItemRectangleMobile: typeof import('./src/components/mobile/zb-blogItem-rectangle-mobile.vue')['default']
     ZbCommentArea: typeof import('./src/components/common/zb-comment-area.vue')['default']
