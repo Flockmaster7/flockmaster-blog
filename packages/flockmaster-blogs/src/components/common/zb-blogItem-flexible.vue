@@ -1,9 +1,7 @@
 <template>
 	<div class="card">
 		<div class="imgBox">
-			<img
-				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
-				alt="" />
+			<img :src="imgUrl(blog.blog_image)" alt="" />
 		</div>
 		<div class="content">
 			<div class="details">
@@ -25,7 +23,7 @@
 				</div>
 				<div class="tagList">
 					<el-tag
-						v-for="(item, index) in blog.tags"
+						v-for="item in blog.tags"
 						:key="item.id"
 						type="default"
 						color="#a4c4b5"
@@ -39,14 +37,12 @@
 
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgUrl } from '@/utils/common';
 
 	export interface PropType {
 		blog: GetBlogDetailResType;
 	}
-
-	const props = defineProps<PropType>();
+	defineProps<PropType>();
 </script>
 
 <style lang="scss" scoped>

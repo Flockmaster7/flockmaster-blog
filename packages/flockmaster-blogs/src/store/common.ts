@@ -6,11 +6,13 @@ export const useCommonStore = defineStore('common', () => {
 	const isLoading = ref(false);
 	const isShowStickyBar = ref(false);
 	const isDark = ref(false);
+	const currentTheme = ref('default');
 
 	return {
 		isDark,
 		isMobile,
 		isLoading,
-		isShowStickyBar
+		isShowStickyBar,
+		currentTheme
 	};
 });

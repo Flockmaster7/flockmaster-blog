@@ -3,11 +3,7 @@
 		<!-- 个人信息卡片 -->
 		<el-card>
 			<div class="info-card">
-				<img
-					class="avatar"
-					:src="
-						getImgBaseUrl(imgEnvironment) + userInfo.user_image
-					" />
+				<img class="avatar" :src="imgUrl(userInfo.user_image)" />
 				<text class="name">{{ userInfo.name }}</text>
 				<text class="description">{{ userInfo.description }}</text>
 			</div>
@@ -83,7 +79,7 @@
 					</template>
 					<div class="tag-List">
 						<el-check-tag
-							v-for="(item, index) in tagAsideList"
+							v-for="item in tagAsideList"
 							:key="item.id"
 							:checked="tagChecked.includes(item.id)"
 							color="skyblue"
@@ -102,11 +98,11 @@
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
-	import { imgEnvironment } from '@/constant/index';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgUrl } from '@/utils/common';
 	import zbTheme from '@/components/common/zb-theme.vue';
 	import useTheme from '@/hooks/useTheme';
 	import useStore from '@/store';
+	import { allTheme } from '@/config/theme';
 
 	const { blog } = useStore();
 
@@ -119,7 +115,7 @@
 	};
 	// 设置
 	const activeSettings = ref(['1']);
-	const { theme, changeActiveTheme, allTheme } = useTheme();
+	const { theme, changeActiveTheme } = useTheme();
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {

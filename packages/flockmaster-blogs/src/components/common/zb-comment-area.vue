@@ -1,8 +1,6 @@
 <template>
 	<div class="avatar">
-		<img
-			:src="getImgBaseUrl(imgEnvironment) + item.user.user_image"
-			alt="" />
+		<img :src="imgUrl(item.user.user_image)" alt="" />
 	</div>
 	<div class="box">
 		<div class="info">
@@ -39,16 +37,11 @@
 			<div class="secondList" v-if="item.children.length > 0">
 				<div
 					class="comment"
-					v-for="(item1, index1) in item.children"
+					v-for="item1 in item.children"
 					:key="item1.id">
 					<!-- <div class="comment"> -->
 					<div class="avatar">
-						<img
-							:src="
-								getImgBaseUrl(imgEnvironment) +
-								item1.user.user_image
-							"
-							alt="" />
+						<img :src="imgUrl(item1.user.user_image)" alt="" />
 					</div>
 					<div class="box">
 						<div class="info">
@@ -123,16 +116,13 @@
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { CommentType, GetUserInfoResType } from '@/types';
 	// import { useUserStore } from '@/store/user';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
 	import { CommentParamsType } from '@/types/index';
-	import { useBlogStore } from '@/store/blog';
 	import { computed, ref } from 'vue';
 	import { storeToRefs } from 'pinia';
 	import { ElMessage } from 'element-plus';
-	import { useLeaveWordStore } from '@/store/leaveWord';
-	import { validatorNotEmpty } from '@/utils/common';
+	import { validatorNotEmpty, imgUrl } from '@/utils/common';
 	import router from '@/router';
+	import useStore from '@/store';
 
 	interface propsType {
 		item: CommentType;
@@ -146,11 +136,9 @@
 	const props = defineProps<propsType>();
 	const emit = defineEmits<emitsType>();
 
-	const blogStore = useBlogStore();
-	const leaveWordStore = useLeaveWordStore();
+	const { blog, leaveWord } = useStore();
 
-	const { blogDeatil, blogStatus, commentList, commentTotal } =
-		storeToRefs(blogStore);
+	const { blogDeatil } = storeToRefs(blog);
 
 	const target = computed(() => {
 		return props.type === 'blog' ? 'targetComment' : 'targetLeaveWords';
@@ -178,10 +166,10 @@
 		reply_to && (params.reply_to = reply_to);
 		if (props.type === 'blog') {
 			params.blog_id = blogDeatil.value.id;
-			await blogStore.addComment(params);
+			await blog.addComment(params);
 			ElMessage.success('发布评论成功');
 		} else if (props.type === 'leaveWord') {
-			leaveWordStore.addLeaveWord(params);
+			leaveWord.addLeaveWord(params);
 			ElMessage.success('发布留言成功');
 		}
 		replyContent.value = '';

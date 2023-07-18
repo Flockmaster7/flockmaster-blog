@@ -18,8 +18,7 @@ module.exports = {
 	parser: 'vue-eslint-parser',
 	parserOptions: {
 		parser: '@typescript-eslint/parser',
-		ecmaVersion: 6,
-		sourceType: 'module'
+		ecmaVersion: 6
 	},
 	plugins: ['vue', '@typescript-eslint'],
 	rules: {
@@ -40,6 +39,7 @@ module.exports = {
 		'no-dupe-args': 2, //函数参数不能重复
 		'no-dupe-keys': 2, //在创建对象字面量时不允许键重复
 		'no-duplicate-case': 2, //switch中的case标签不能重复
-		'no-alert': 2 //禁止使用alert confirm prompt
+		'no-alert': 2, //禁止使用alert confirm prompt
+		'no-mixed-spaces-and-tabs': 0
 	}
 };

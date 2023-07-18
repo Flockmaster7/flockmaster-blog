@@ -6,20 +6,10 @@ import { onMounted, ref } from 'vue';
 
 export default function () {
 	const { common } = useStore();
-	const { isDark } = storeToRefs(common);
-	const allTheme = [
-		{
-			text: '默认',
-			theme: ''
-		},
-		{
-			text: '蓝',
-			theme: 'skyblue'
-		}
-	];
+	const { isDark, currentTheme } = storeToRefs(common);
 
 	// 现在主题
-	const theme = ref('');
+	const theme = ref('default');
 
 	// 切换黑夜白天
 	const changeDark = () => {
@@ -43,7 +33,8 @@ export default function () {
 		// 添加 class
 		htmlElement.classList.add(activeTheme);
 		theme.value = activeTheme;
-		return Promise.reject(true);
+		currentTheme.value = activeTheme;
+		return Promise.resolve(true);
 	};
 
 	// 移除所有主题
@@ -66,20 +57,23 @@ export default function () {
 
 	// 是否为晚上
 	const nowIsDark = () => {
-		let date = new Date();
-		let hour = date.getHours();
+		const date = new Date();
+		const hour = date.getHours();
 		if (hour >= 18 || hour <= 6) {
 			changeDark();
 		}
 	};
 
 	onMounted(() => {
-		nowIsDark();
+		if (currentTheme.value !== 'default') {
+			changeActiveTheme(currentTheme.value);
+		} else {
+			nowIsDark();
+		}
 	});
 
 	return {
 		theme,
-		allTheme,
 		changeActiveTheme,
 		removeAllTheme,
 		changeDark,

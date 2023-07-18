@@ -19,17 +19,14 @@
 			</div>
 		</div>
 		<div class="blogImg">
-			<img
-				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
-				alt="" />
+			<img :src="imgUrl(blog.blog_image)" alt="" />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { GetBlogDetailResType } from '@/types';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgUrl } from '@/utils/common';
 
 	interface PropType {
 		blog: GetBlogDetailResType;

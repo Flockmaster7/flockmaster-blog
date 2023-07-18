@@ -50,9 +50,7 @@
 				</div>
 			</div>
 			<div class="mainImg">
-				<img
-					:src="getImgBaseUrl(imgEnvironment) + blogDeatil.blog_image"
-					alt="" />
+				<img :src="imgUrl(blogDeatil.blog_image)" alt="" />
 			</div>
 			<div id="markdown"></div>
 			<v-md-preview :text="content"></v-md-preview>
@@ -73,12 +71,7 @@
 				<span class="title">评论</span>
 				<div class="text-input">
 					<div class="avatar">
-						<img
-							:src="
-								getImgBaseUrl(imgEnvironment) +
-								userInfo.user_image
-							"
-							alt="" />
+						<img :src="imgUrl(userInfo.user_image)" alt="" />
 					</div>
 					<div class="input">
 						<el-input
@@ -98,10 +91,7 @@
 				<div class="title">
 					全部评论 {{ commentTotal === 0 ? '' : commentTotal }}
 				</div>
-				<div
-					class="comment"
-					v-for="(item, index) in commentList"
-					:key="item.id">
+				<div class="comment" v-for="item in commentList" :key="item.id">
 					<zb-comment-area
 						type="blog"
 						:item="item"
@@ -109,7 +99,7 @@
 					<!-- <div class="avatar">
 							<img
 								:src="
-									getImgBaseUrl(imgEnvironment) +
+									imgUrl(imgEnvironment) +
 									item.user.user_image
 								"
 								alt="" />
@@ -164,7 +154,7 @@
 										<div class="avatar">
 											<img
 												:src="
-													getImgBaseUrl(imgEnvironment) +
+													imgUrl(imgEnvironment) +
 													item1.user.user_image
 												"
 												alt="" />
@@ -266,27 +256,17 @@
 </template>
 
 <script setup lang="ts">
-	import {
-		nextTick,
-		onBeforeUnmount,
-		onMounted,
-		onUnmounted,
-		ref,
-		toRaw,
-		watch
-	} from 'vue';
+	import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import { useRoute } from 'vue-router';
 	import { useUserStore } from '@/store/user';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgUrl } from '@/utils/common';
 	import tool from '@/pages/blog/tool.vue';
 	import { ElMessage } from 'element-plus';
 	import { CommentParamsType } from '@/types/index';
 	import useGetPageScroll from '@/hooks/useGetPageScroll';
 	import { ArrowUpBold } from '@element-plus/icons-vue';
-	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { isLogin } from '@/utils/login';
 	import zbCommentArea from '@/components/common/zb-comment-area.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';

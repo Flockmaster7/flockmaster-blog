@@ -15,11 +15,10 @@
 
 <script setup lang="ts">
 	import Header from '@/components/layout/header.vue';
-	import zbStickyBar from '../common/zb-sticky-bar.vue';
 	import { useUserStore } from '@/store/user';
 	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
-	import { nextTick, onMounted } from 'vue';
+	import { onMounted } from 'vue';
 
 	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);

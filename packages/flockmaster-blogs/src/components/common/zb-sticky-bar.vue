@@ -7,7 +7,7 @@
 		<div class="user-info">
 			<div class="avatar">
 				<img
-					:src="getImgBaseUrl(imgEnvironment) + blogDeatil.blog_image"
+					:src="imgUrl(blogDeatil.blog_image)"
 					alt="" />
 			</div>
 			<div class="user-name">
@@ -18,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-	import { imgEnvironment } from '@/constant';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgUrl } from '@/utils/common';
 </script>
 
 <style lang="scss" scoped>

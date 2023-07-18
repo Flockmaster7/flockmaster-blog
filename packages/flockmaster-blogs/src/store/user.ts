@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', () => {
 			userInfo.value = res.data;
 			// 处理用户头像
 			// userInfo.value.user_image =
-			// 	getImgBaseUrl(imgEnvironment) + userInfo.value.user_image;
+			// 	imgUrl(imgEnvironment) + userInfo.value.user_image;
 		}
 	};
 	// 获取用户关注列表

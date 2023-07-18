@@ -3,9 +3,7 @@
 		<div
 			class="img"
 			:style="{
-				backgroundImage: `url(${
-					getImgBaseUrl(imgEnvironment) + work.work_image
-				})`
+				backgroundImage: `url(${imgUrl(work.work_image)})`
 			}"></div>
 		<div class="title">{{ work.work_title }}</div>
 		<div class="des">{{ work.work_des }}</div>
@@ -13,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgUrl } from '@/utils/common';
 	import { GetWorkListResType } from '@/types';
 	import { computed } from 'vue';
 

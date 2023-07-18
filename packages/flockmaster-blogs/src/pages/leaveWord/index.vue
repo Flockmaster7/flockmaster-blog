@@ -5,11 +5,7 @@
 		<div class="top">
 			<div class="text-input">
 				<div class="avatar">
-					<img
-						:src="
-							getImgBaseUrl(imgEnvironment) + userInfo.user_image
-						"
-						alt="" />
+					<img :src="imgUrl(userInfo.user_image)" alt="" />
 				</div>
 				<div class="input">
 					<el-input
@@ -50,8 +46,7 @@
 	import { useLeaveWordStore } from '@/store/leaveWord';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { imgEnvironment } from '@/constant/index';
+	import { imgUrl } from '@/utils/common';
 	import { useUserStore } from '@/store/user';
 	import { ElMessage } from 'element-plus';
 	import { validatorNotEmpty } from '@/utils/common';

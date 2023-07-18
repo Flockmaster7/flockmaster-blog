@@ -51,4 +51,5 @@ app.component(zbSvgIconVue.name, zbSvgIconVue);
 
 app.use(router);
 app.use(pinia);
+
 app.mount('#app');

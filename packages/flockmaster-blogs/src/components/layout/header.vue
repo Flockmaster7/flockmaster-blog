@@ -46,9 +46,7 @@
 			</div>
 			<zb-theme></zb-theme>
 			<div class="avater" @click="toUserDetail">
-				<img
-					:src="getImgBaseUrl(imgEnvironment) + userInfo.user_image"
-					alt="" />
+				<img :src="imgUrl(userInfo.user_image)" alt="" />
 			</div>
 			<el-popconfirm
 				v-if="isLogin()"
@@ -69,7 +67,7 @@
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
-	import { navLinkList } from './nav';
+	import { navLinkList } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
 	import { Search } from '@element-plus/icons-vue';
 	import { InfoFilled, ArrowDown } from '@element-plus/icons-vue';
@@ -77,8 +75,7 @@
 	import { HeaderNavType } from '@/types';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
-	import { imgEnvironment } from '@/constant/index';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
+	import { imgUrl } from '@/utils/common';
 	import { ElMessageBox } from 'element-plus';
 	import zbTheme from '@/components/common/zb-theme.vue';
 

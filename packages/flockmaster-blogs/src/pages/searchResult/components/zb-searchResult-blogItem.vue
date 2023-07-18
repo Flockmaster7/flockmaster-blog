@@ -13,9 +13,7 @@
 			<div class="tool"></div>
 		</div>
 		<div class="right">
-			<img
-				:src="getImgBaseUrl(imgEnvironment) + blog.blog_image"
-				alt="" />
+			<img :src="imgUrl(blog.blog_image)" alt="" />
 		</div>
 	</div>
 </template>
@@ -23,11 +21,8 @@
 <script setup lang="ts">
 	import { useBlogStore } from '@/store/blog';
 	import { GetBlogDetailResType } from '@/types';
-	import { imgEnvironment } from '@/constant/index';
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { getImgBaseUrl } from '@/utils/imgUrl';
-	import { storeToRefs } from 'pinia';
-	import { ref } from 'vue';
+	import { imgUrl } from '@/utils/common';
 
 	interface PropsType {
 		blog: GetBlogDetailResType;

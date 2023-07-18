@@ -4,4 +4,6 @@ interface ImportMetaEnv {
 	VITE_ACCESS_TOKEN: string;
 	VITE_BASEURL: string;
 	VITE_USERINFO: string;
+	VITE_THEME: string;
+	VITE_IMGURL: string;
 }

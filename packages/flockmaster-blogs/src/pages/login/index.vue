@@ -144,10 +144,17 @@
 
 	const type = ref('login');
 
-	const loginForm = reactive({
-		user_name: '',
-		password: ''
-	});
+	const loginForm = reactive(
+		import.meta.env.VITE_MODE_NAME === 'production'
+			? {
+					user_name: '',
+					password: ''
+			  }
+			: {
+					user_name: 'admin',
+					password: '123456'
+			  }
+	);
 	const loginFormRef = ref<FormInstance>();
 	// 登录
 	const submitLoginForm = async (formEl: FormInstance | undefined) => {
