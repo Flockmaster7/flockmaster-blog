@@ -1,5 +1,8 @@
 <template>
 	<div class="blog-container">
+		<div class="tool-card">
+			<tool @getBlogList="changeClassify"></tool>
+		</div>
 		<div class="blog-list">
 			<div
 				v-for="item in blogList"
@@ -41,6 +44,7 @@
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import zbLoading from '@/components/common/zb-loading.vue';
+	import tool from '@/components/common/zb-classify-tool.vue';
 
 	const { blog, common } = useStore();
 	const router = useRouter();
@@ -63,6 +67,18 @@
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);
 	};
+
+	// 切换分类
+	const changeClassify = (id: string) => {
+		if (id !== '0') {
+			getBlogListParams.value = {
+				classify: id
+			};
+		} else {
+			getBlogListParams.value = {};
+		}
+		handleCurrentChange(1);
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -83,6 +99,12 @@
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 10px;
+		position: relative;
+
+		.tool-card {
+			position: absolute;
+			left: -110px;
+		}
 
 		.blog-list {
 			width: 100%;

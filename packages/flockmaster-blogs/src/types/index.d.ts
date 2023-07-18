@@ -160,3 +160,9 @@ export interface LeaveWordType {
 	children: LeaveWord[];
 	targetComment?: LeaveWordType;
 }
+
+// 分类类型
+export interface ClassifyType {
+	id: string;
+	text: string;
+}

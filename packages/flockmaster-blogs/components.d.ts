@@ -36,6 +36,7 @@ declare module '@vue/runtime-core' {
     ZbBlogItemFlexible: typeof import('./src/components/common/zb-blogItem-flexible.vue')['default']
     ZbBlogItemRectangle: typeof import('./src/components/common/zb-blogItem-rectangle.vue')['default']
     ZbBlogItemRectangleMobile: typeof import('./src/components/mobile/zb-blogItem-rectangle-mobile.vue')['default']
+    ZbClassifyTool: typeof import('./src/components/common/zb-classify-tool.vue')['default']
     ZbCommentArea: typeof import('./src/components/common/zb-comment-area.vue')['default']
     ZbEmpty: typeof import('./src/components/common/zb-empty.vue')['default']
     ZbImageLazy: typeof import('./src/components/common/zb-image-lazy.vue')['default']

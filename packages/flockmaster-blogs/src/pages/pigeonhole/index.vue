@@ -1,8 +1,12 @@
 <template>
 	<div class="pigeonhole-container">
+		<div class="tool-card">
+			<zbClassifyTool @getBlogList="changeClassify"></zbClassifyTool>
+		</div>
 		<div class="card">
 			<div class="main">
 				<div class="title">归档</div>
+				<div class="des">{{ des }}</div>
 				<el-timeline v-show="!isLoading && blogList.length > 0">
 					<el-timeline-item
 						v-for="(item, index) in blogList"
@@ -17,6 +21,7 @@
 				</el-timeline>
 			</div>
 			<zb-loading v-show="isLoading"></zb-loading>
+			<zb-empty v-if="blogList.length === 0" :height="500"></zb-empty>
 			<div class="pagination">
 				<el-pagination
 					v-model:current-page="pageNum"
@@ -39,6 +44,9 @@
 	import zbLoading from '@/components/common/zb-loading.vue';
 	import usePagination from '@/hooks/usePagination';
 	import useStore from '@/store';
+	import zbClassifyTool from '@/components/common/zb-classify-tool.vue';
+	import zbEmpty from '@/components/common/zb-empty.vue';
+	import { computed, ref } from 'vue';
 
 	const router = useRouter();
 	const { blog } = useStore();
@@ -49,12 +57,32 @@
 		pageSize,
 		handleSizeChange,
 		handleCurrentChange,
-		isLoading
+		isLoading,
+		getBlogListParams
 	} = usePagination(blog.getBlogList);
 
 	// 跳转到文章详情
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail/?id=' + id);
+	};
+
+	const des = computed(() => {
+		return desName.value + '下文章有' + blogTotal.value + '篇';
+	});
+
+	const desName = ref('综合');
+
+	// 切换分类
+	const changeClassify = (id: string, text?: string) => {
+		if (text) desName.value = text;
+		if (id !== '0') {
+			getBlogListParams.value = {
+				classify: id
+			};
+		} else {
+			getBlogListParams.value = {};
+		}
+		handleCurrentChange(1);
 	};
 </script>
 
@@ -65,9 +93,15 @@
 		}
 	}
 	.pigeonhole-container {
+		position: relative;
 		min-height: 580px;
 		background-color: var(--theme-card-color);
 		padding: 20px 20px 0;
+
+		.tool-card {
+			position: absolute;
+			left: -110px;
+		}
 
 		.card {
 			min-height: 580px;
@@ -82,7 +116,13 @@
 					text-align: center;
 					font-size: 30px;
 					font-weight: 700;
-					margin: 30px;
+					margin: 20px;
+				}
+				.des {
+					color: $gray;
+					font-size: 18px;
+					text-align: center;
+					margin: 20px 0 40px;
 				}
 				.nodeTitle {
 					font-weight: 500;

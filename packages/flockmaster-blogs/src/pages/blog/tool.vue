@@ -24,7 +24,7 @@
 	import { ref } from 'vue';
 	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
-	import { isLogin } from '@/utils/login';
+	import { toolConfig } from '@/config/blogTool.ts';
 
 	interface propsType {
 		id: string;
@@ -37,23 +37,7 @@
 	const props = defineProps<propsType>();
 	const emit = defineEmits<emitType>();
 
-	const config = ref([
-		{
-			type: 'like',
-			text: '点赞',
-			icon: ''
-		},
-		{
-			type: 'collect',
-			text: '收藏',
-			icon: ''
-		},
-		{
-			type: 'remark',
-			text: '评论',
-			icon: ''
-		}
-	]);
+	const config = ref(toolConfig);
 
 	const handleClick = (type: string) => {
 		switch (type) {
