@@ -1,7 +1,7 @@
 <template>
 	<div class="searchArea-container">
 		<div class="search-input">
-			<el-input v-model="params.querySearch" clearable>
+			<el-input v-model="params.querySearch" clearable @change="search">
 				<template #append>
 					<button class="search-button" @click="search">搜索</button>
 				</template>
@@ -10,7 +10,7 @@
 		<div class="search-filter">
 			<div
 				class="filter"
-				v-for="(item, index) in filters"
+				v-for="item in filters"
 				:key="item.id"
 				:class="{ active: item.id === activeFilter }"
 				@click="changeFilter(item.id)">
@@ -21,16 +21,12 @@
 </template>
 
 <script setup lang="ts">
-	import { useBlogStore } from '@/store/blog';
-	import { useCommonStore } from '@/store/common';
-	import { minDelay, validatorNotEmpty } from '@/utils/common';
-	import { Search } from '@element-plus/icons-vue';
+	import { validatorNotEmpty } from '@/utils/common';
 	import { ElMessage } from 'element-plus';
-	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
 	import { useRoute } from 'vue-router';
 
-	interface ParamsType {
+	export interface ParamsType {
 		querySearch: string;
 		orderByRead: boolean;
 	}
@@ -38,11 +34,6 @@
 	const emit = defineEmits<{
 		(event: 'getSearchBlog', data?: ParamsType): void;
 	}>();
-
-	const blogStore = useBlogStore();
-
-	const commonStore = useCommonStore();
-	const { isLoading } = storeToRefs(commonStore);
 
 	const route = useRoute();
 	const query = route.query.query as string;
@@ -57,27 +48,13 @@
 		search();
 	});
 
-	// 获取文章
-	const getBlog = async (data?: ParamsType) => {
-		isLoading.value = true;
-		if (data) {
-			emit('getSearchBlog', data);
-			// await blogStore.getBlogList(1, 9, data);
-		} else {
-			emit('getSearchBlog');
-			// await blogStore.getBlogList(1, 9);
-		}
-		return Promise.resolve(true);
-	};
-
 	// 搜索
 	const search = async () => {
 		if (validatorNotEmpty(params.value.querySearch)) {
 			ElMessage.warning('不能为空');
 			return;
 		}
-		await minDelay<boolean>(getBlog(params.value), 500);
-		isLoading.value = false;
+		emit('getSearchBlog', params.value);
 	};
 
 	const filters = [
@@ -96,7 +73,6 @@
 		activeFilter.value = id;
 		params.value.orderByRead = activeFilter.value === 2 ? true : false;
 		await search();
-		isLoading.value = false;
 	};
 </script>
 

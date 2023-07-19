@@ -62,7 +62,12 @@ export const routers = [
 						path: '/searchResult',
 						name: 'SearchResult',
 						component: () =>
-							import('@/pages/searchResult/index.vue')
+							import('@/pages/searchResult/searchResult.vue')
+					},
+					{
+						path: '/search',
+						name: 'Search',
+						component: () => import('@/pages/search/index.vue')
 					}
 				]
 			},
@@ -75,11 +80,6 @@ export const routers = [
 				path: '/my',
 				name: 'My',
 				component: () => import('@/pages/my/index.vue')
-			},
-			{
-				path: '/search',
-				name: 'Search',
-				component: () => import('@/pages/search/index.vue')
 			}
 			// {
 			// 	path: '/blog/detail',

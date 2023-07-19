@@ -4,7 +4,7 @@
 		<div class="blog-area" v-show="!isLoading && blogList.length > 0">
 			<div
 				class="item"
-				v-for="(item, index) in blogList"
+				v-for="item in blogList"
 				:key="item.id"
 				@click="gotoBlogDetail(item.id)">
 				<zbSearchResultBlogItem :blog="item"></zbSearchResultBlogItem>
@@ -31,54 +31,45 @@
 </template>
 
 <script setup lang="ts">
-	import { useRoute, useRouter } from 'vue-router';
-	import { useBlogStore } from '@/store/blog';
+	import { useRouter } from 'vue-router';
 	import { storeToRefs } from 'pinia';
-	import { onMounted, ref } from 'vue';
-	import zbSearchArea from '@/pages/searchResult/components/zb-search-area.vue';
+	import { onMounted } from 'vue';
+	import zbSearchArea, {
+		ParamsType
+	} from '@/pages/searchResult/components/zb-search-area.vue';
 	import zbSearchResultBlogItem from './components/zb-searchResult-blogItem.vue';
 	import zbLoading from '@/components/common/zb-loading.vue';
-	import { useCommonStore } from '@/store/common';
 	import zbEmpty from '@/components/common/zb-empty.vue';
+	import usePagination from '@/hooks/usePagination';
+	import useStore from '@/store';
 
-	const blogStore = useBlogStore();
-	const { blogList, blogTotal } = storeToRefs(blogStore);
+	const { blog } = useStore();
+	const { blogList, blogTotal } = storeToRefs(blog);
 
-	const route = useRoute();
+	const {
+		pageNum,
+		pageSize,
+		handleSizeChange,
+		handleCurrentChange,
+		isLoading,
+		getBlogListParams
+	} = usePagination(blog.getBlogList);
+
 	const router = useRouter();
-
-	const commonStore = useCommonStore();
-	const { isLoading } = storeToRefs(commonStore);
-
-	const query = route.query.query as string;
 
 	onMounted(() => {});
 
 	// 获取博客列表
-	const getBlogList = async (data?: any) => {
+	const getBlogList = async (data?: ParamsType) => {
 		if (data) {
-			await blogStore.getBlogList(pageNum.value, pageSize.value, data);
-		} else {
-			await blogStore.getBlogList(pageNum.value, pageSize.value);
+			getBlogListParams.value = data;
 		}
+		handleCurrentChange(1);
 	};
 
 	// 跳转到详情页
 	const gotoBlogDetail = (id: number) => {
 		router.push('/blog/detail?id=' + id);
-	};
-
-	// 分页器
-	const pageNum = ref(1);
-	const pageSize = ref(9);
-
-	const handleSizeChange = (val: number) => {
-		pageSize.value = val;
-		getBlogList();
-	};
-	const handleCurrentChange = (val: number) => {
-		pageNum.value = val;
-		getBlogList();
 	};
 </script>
 

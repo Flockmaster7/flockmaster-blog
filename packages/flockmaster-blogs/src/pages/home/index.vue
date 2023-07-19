@@ -19,7 +19,9 @@
 			</div>
 		</div>
 		<zb-loading v-show="isLoading"></zb-loading>
-		<zb-empty v-if="blogList.length === 0" :height="500"></zb-empty>
+		<zb-empty
+			v-if="!isLoading && blogList.length === 0"
+			:height="500"></zb-empty>
 		<div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"

@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-	import { useBlogStore } from '@/store/blog';
 	import { GetBlogDetailResType } from '@/types';
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { imgUrl } from '@/utils/common';
@@ -28,9 +27,7 @@
 		blog: GetBlogDetailResType;
 	}
 
-	const props = defineProps<PropsType>();
-
-	const blogStore = useBlogStore();
+	defineProps<PropsType>();
 
 	const replaceContent = (text: string) => {
 		return text.replace(/#/g, '');

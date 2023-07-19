@@ -4,7 +4,9 @@
 		<div class="main-area">
 			<router-view v-slot="{ Component }">
 				<transition>
-					<component :is="Component"></component>
+					<keep-alive include="searchResult">
+						<component :is="Component"></component>
+					</keep-alive>
 				</transition>
 			</router-view>
 		</div>
