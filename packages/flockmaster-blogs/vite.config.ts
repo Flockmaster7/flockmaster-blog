@@ -94,6 +94,10 @@ export default defineConfig(({ command, mode }) => {
 				ElementPlus({
 					// options
 				}),
+				//svg图标
+				createSvgIconsPlugin({
+					iconDirs: [path.resolve(process.cwd(), 'src/icons')]
+				}),
 				visualizer({ open: true })
 			],
 			// 引入全局scss变量
