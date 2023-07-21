@@ -6,7 +6,7 @@
 				v-for="(item, index) in config"
 				:key="index"
 				@click="handleClick(item.type)">
-				{{ item.text }}
+				<zb-svg-icon :name="item.icon" size="25"></zb-svg-icon>
 			</div>
 		</div>
 		<!-- <div
@@ -91,6 +91,9 @@
 			justify-content: space-around;
 			gap: 20px;
 			.tool-item {
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				position: relative;
 				width: 50px;
 				height: 50px;

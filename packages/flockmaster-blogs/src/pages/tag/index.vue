@@ -60,8 +60,8 @@
 	import { ref } from 'vue';
 	import { useRouter } from 'vue-router';
 	import zbLoading from '@/components/common/zb-loading.vue';
-	import zbBlogItemRectangle from '@/pages/home/components/blogItem-rectangle.vue';
-	import zbBlogItemRectangleMobile from '@/pages/home/components/blogItem-rectangle-mobile.vue';
+	import zbBlogItemRectangle from '@/components/common/zb-blogItem-rectangle.vue';
+	import zbBlogItemRectangleMobile from '@/components/mobile/zb-blogItem-rectangle-mobile.vue';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { useCommonStore } from '@/store/common';
 	import zbEmpty from '@/components/common/zb-empty.vue';

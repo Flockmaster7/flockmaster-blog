@@ -10,9 +10,24 @@
 				</div>
 				<div class="bottom">
 					<div class="data">
-						<div class="data-item">读:{{ blog.blog_read }}</div>
-						<div class="data-item">赞:{{ blog.blog_like }}</div>
-						<div class="data-item">藏:{{ blog.blog_collect }}</div>
+						<div class="data-item">
+							<zb-svg-icon
+								name="yanjing"
+								color="#717775"></zb-svg-icon
+							>{{ blog.blog_read }}
+						</div>
+						<div class="data-item">
+							<zb-svg-icon
+								name="dianzan"
+								color="#717775"></zb-svg-icon
+							>{{ blog.blog_like }}
+						</div>
+						<div class="data-item">
+							<zb-svg-icon
+								name="shoucang"
+								color="#717775"></zb-svg-icon
+							>{{ blog.blog_collect }}
+						</div>
 					</div>
 					<div class="date">
 						发布于：{{ getTimeFormNow(blog.createdAt) }}
@@ -101,6 +116,8 @@
 						gap: 0.4rem;
 						.data-item {
 							color: $gray;
+							display: flex;
+							align-items: center;
 						}
 					}
 					.date {
