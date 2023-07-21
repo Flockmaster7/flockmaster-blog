@@ -17,6 +17,5 @@ export const validatorNotEmpty = (target: string) => {
 
 // 处理图片路径
 export const imgUrl = (path: string) => {
-	console.log(import.meta.env.VITE_IMGURL);
 	return import.meta.env.VITE_IMGURL + path;
 };
