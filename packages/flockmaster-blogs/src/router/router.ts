@@ -87,7 +87,10 @@ export const routers = [
 			{
 				path: '/blog/detail',
 				name: 'Detail',
-				component: () => import('@/pages/blog/index.vue')
+				component: () => import('@/pages/blog/index.vue'),
+				meta: {
+					isShowRight: true
+				}
 			}
 		]
 	}

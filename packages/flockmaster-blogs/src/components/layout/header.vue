@@ -2,7 +2,11 @@
 	<div class="header-container">
 		<div class="leftBox">
 			<div class="operator-mobile" @click="openOperator">
-				<el-icon color="#fff" :size="20"><Operation /></el-icon>
+				<!-- <el-icon color="#fff" :size="20"><Operation /></el-icon> -->
+				<zb-svg-icon
+					name="leftzhankai"
+					size="18"
+					:autoDark="true"></zb-svg-icon>
 			</div>
 			<div class="logo" @click="gotoHome">
 				<div class="logo--text">Flockmaster</div>
@@ -44,14 +48,22 @@
 		</div>
 		<div class="rightBox">
 			<div class="search" @click="gotoSearch">
-				<el-icon :size="22"><Search /></el-icon>
+				<!-- <el-icon :size="22"><Search /></el-icon> -->
+				<zb-svg-icon name="search" :autoDark="true"></zb-svg-icon>
 				<span class="text">搜索</span>
 			</div>
 			<zb-theme></zb-theme>
 			<div class="avater" @click="toUserDetail">
 				<img :src="imgUrl(userInfo.user_image)" alt="" />
 			</div>
-			<el-popconfirm
+			<div
+				class="right-open"
+				@click="openRight"
+				v-if="route.meta.isShowRight">
+				<!-- <el-icon color="#fff" :size="20"><Operation /></el-icon> -->
+				<zb-svg-icon name="rightzhankai" :autoDark="true"></zb-svg-icon>
+			</div>
+			<!-- <el-popconfirm
 				v-if="isLogin()"
 				width="220"
 				confirm-button-text="确定"
@@ -63,7 +75,7 @@
 				<template #reference>
 					<el-icon color="#fff" :size="20"><Operation /></el-icon>
 				</template>
-			</el-popconfirm>
+			</el-popconfirm> -->
 		</div>
 	</div>
 	<el-drawer v-model="showOperator" size="30%" title="导航" direction="ltr">
@@ -79,9 +91,7 @@
 					:key="index">
 					<zb-svg-icon
 						:name="item.icon"
-						:color="
-							isDark ? 'var(--theme-active-color)' : ''
-						"></zb-svg-icon>
+						:autoDark="true"></zb-svg-icon>
 					<span>{{ item.title }}</span>
 				</div>
 			</div>
@@ -90,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-	import { useRouter } from 'vue-router';
+	import { useRoute, useRouter } from 'vue-router';
 	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
 	import { Search } from '@element-plus/icons-vue';
@@ -105,8 +115,9 @@
 
 	const { user, common } = useStore();
 	const { userInfo } = storeToRefs(user);
-	const { isDark } = storeToRefs(common);
+	const { isDark, rightOpen } = storeToRefs(common);
 	const router = useRouter();
+	const route = useRoute();
 
 	const toUserDetail = () => {
 		if (!isLogin()) {
@@ -176,9 +187,14 @@
 			showOperator.value = false;
 		}
 	};
+	// 左侧导航菜单
 	const showOperator = ref(false);
 	const openOperator = () => {
 		showOperator.value = true;
+	};
+	// 打开右侧
+	const openRight = () => {
+		rightOpen.value = true;
 	};
 </script>
 
@@ -258,7 +274,7 @@
 			align-items: center;
 			.operator-mobile {
 				display: none;
-				padding: 0 7px 0 5px;
+				padding: 2px 7px 0 5px;
 			}
 			.logo {
 				display: flex;
@@ -400,13 +416,13 @@
 			cursor: pointer;
 			gap: 15px;
 			.search {
-				color: $white;
+				// color: $white;
 				font-size: 15px;
 				font-weight: 700;
 				display: flex;
 				align-items: center;
 				gap: 10px;
-				border: 1px solid $white;
+				border: 1px solid;
 				border-radius: 18px;
 				padding: 3px 10px;
 			}
@@ -416,6 +432,9 @@
 					height: 35px;
 					border-radius: 50%;
 				}
+			}
+			.right-open {
+				padding-top: 2px;
 			}
 		}
 	}

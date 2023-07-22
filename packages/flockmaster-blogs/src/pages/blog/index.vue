@@ -302,7 +302,17 @@
 			</el-card>
 		</div>
 	</div>
-	<!-- </transition> -->
+	<!-- 右侧抽屉 -->
+	<el-drawer v-model="rightOpen" size="60%" title="目录" direction="rtl">
+		<!-- 目录卡片 -->
+		<div class="catalog-card">
+			<div class="catalog-box">
+				<MdCatalog
+					:editorId="previewId"
+					:scrollElement="scrollElement" />
+			</div>
+		</div>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">
@@ -326,7 +336,7 @@
 	import router from '@/router';
 
 	const { common, blog, user } = useStore();
-	const { isDark, previewId } = storeToRefs(common);
+	const { isDark, previewId, rightOpen } = storeToRefs(common);
 
 	// const blogStore = useBlogStore();
 	const { blogDeatil, blogStatus, commentList, commentTotal, recommendList } =
@@ -484,6 +494,10 @@
 	// 分割线
 	.el-divider--horizontal {
 		margin: 9px 0 !important;
+	}
+	// 抽屉
+	:deep(.el-drawer__header) {
+		margin-bottom: 0px !important;
 	}
 
 	@media screen and (max-width: 540px) {

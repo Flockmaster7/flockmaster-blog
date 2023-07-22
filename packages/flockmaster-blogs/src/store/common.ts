@@ -8,6 +8,7 @@ export const useCommonStore = defineStore('common', () => {
 	const isDark = ref(false);
 	const currentTheme = ref('default');
 	const previewId = ref('myPreview');
+	const rightOpen = ref(false);
 
 	return {
 		isDark,
@@ -15,6 +16,7 @@ export const useCommonStore = defineStore('common', () => {
 		isLoading,
 		isShowStickyBar,
 		currentTheme,
-		previewId
+		previewId,
+		rightOpen
 	};
 });
