@@ -138,4 +138,11 @@ router.get(
 	commentController.getCommentList
 );
 
+// 获取推荐文章
+router.get(
+	'/getRecommendBlog/:id',
+	validatorId,
+	blogController.getRecommendBlogList
+);
+
 module.exports = router;

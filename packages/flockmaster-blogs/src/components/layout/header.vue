@@ -1,6 +1,9 @@
 <template>
 	<div class="header-container">
 		<div class="leftBox">
+			<div class="operator-mobile" @click="openOperator">
+				<el-icon color="#fff" :size="20"><Operation /></el-icon>
+			</div>
 			<div class="logo" @click="gotoHome">
 				<div class="logo--text">Flockmaster</div>
 				<div class="logo--logo">blogs</div>
@@ -18,7 +21,7 @@
 					}}</router-link> -->
 				</div>
 			</div>
-			<div class="header-nav-mobile">
+			<!-- <div class="header-nav-mobile">
 				<el-dropdown trigger="click" @command="handleCommand">
 					<span class="el-dropdown-link">
 						{{ currentNav }}
@@ -37,7 +40,7 @@
 						</el-dropdown-menu>
 					</template>
 				</el-dropdown>
-			</div>
+			</div> -->
 		</div>
 		<div class="rightBox">
 			<div class="search" @click="gotoSearch">
@@ -63,25 +66,46 @@
 			</el-popconfirm>
 		</div>
 	</div>
+	<el-drawer v-model="showOperator" size="30%" title="导航" direction="ltr">
+		<div class="operatorMain">
+			<div class="operator-avatar">
+				<img :src="imgUrl(userInfo.user_image)" alt="" />
+			</div>
+			<div class="operator-list">
+				<div
+					class="operator-item"
+					@click="handleOperator(item)"
+					v-for="(item, index) in mobileNav"
+					:key="index">
+					<zb-svg-icon
+						:name="item.icon"
+						:color="
+							isDark ? 'var(--theme-active-color)' : ''
+						"></zb-svg-icon>
+					<span>{{ item.title }}</span>
+				</div>
+			</div>
+		</div>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
-	import { navLinkList } from '@/config/headerNav';
+	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
 	import { Search } from '@element-plus/icons-vue';
 	import { InfoFilled, ArrowDown } from '@element-plus/icons-vue';
 	import { ref } from 'vue';
 	import { HeaderNavType } from '@/types';
-	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { imgUrl } from '@/utils/common';
 	import { ElMessageBox } from 'element-plus';
 	import zbTheme from '@/components/common/zb-theme.vue';
+	import useStore from '@/store';
 
-	const userStore = useUserStore();
-	const { userInfo } = storeToRefs(userStore);
-
+	const { user, common } = useStore();
+	const { userInfo } = storeToRefs(user);
+	const { isDark } = storeToRefs(common);
 	const router = useRouter();
 
 	const toUserDetail = () => {
@@ -136,9 +160,25 @@
 	// 选中nav
 	const currentNav = ref('首页');
 	// 点击下来菜单
-	const handleCommand = (command: HeaderNavType) => {
-		currentNav.value = command.title;
-		router.push(command.src);
+	const handleOperator = (operator: HeaderNavType) => {
+		if (operator.type === 'logout') {
+			ElMessageBox.confirm('是否退出登录', 'Warning', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				logout();
+				showOperator.value = false;
+			});
+		} else {
+			currentNav.value = operator.title;
+			router.push(operator.src);
+			showOperator.value = false;
+		}
+	};
+	const showOperator = ref(false);
+	const openOperator = () => {
+		showOperator.value = true;
 	};
 </script>
 
@@ -146,6 +186,9 @@
 	@media screen and (max-width: 540px) {
 		.header-container {
 			padding: 10px 6px !important;
+		}
+		.operator-mobile {
+			display: block !important;
 		}
 		.logo {
 			&--text {
@@ -163,7 +206,44 @@
 				display: none;
 			}
 		}
+
+		.rightBox {
+			.avater {
+				display: none !important;
+			}
+		}
 	}
+
+	// 导航
+	.operatorMain {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 35px;
+		.operator-avatar {
+			width: 70px;
+			height: 70px;
+			overflow: hidden;
+			img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+		}
+		.operator-list {
+			display: flex;
+			flex-direction: column;
+			gap: 30px;
+			.operator-item {
+				display: flex;
+				gap: 7px;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+
 	.header-container {
 		display: flex;
 		justify-content: space-between;
@@ -176,6 +256,10 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			.operator-mobile {
+				display: none;
+				padding: 0 7px 0 5px;
+			}
 			.logo {
 				display: flex;
 				justify-content: center;

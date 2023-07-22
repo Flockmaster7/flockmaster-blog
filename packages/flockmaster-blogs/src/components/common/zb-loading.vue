@@ -2,20 +2,20 @@
 	<div class="loading-container" :style="{ height: height + 'px' }">
 		<!-- 加载中... -->
 		<div class="loading-icon">
-			<el-icon size="40" color="var(--theme-active-color)"
-				><Loading
-			/></el-icon>
+			<zb-svg-icon
+				name="loading"
+				size="40"
+				color="var(--theme-active-color)"></zb-svg-icon>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { Loading } from '@element-plus/icons-vue';
 	interface PropsType {
 		height: number;
 	}
 
-	const props = withDefaults(defineProps<PropsType>(), {
+	withDefaults(defineProps<PropsType>(), {
 		height: 500
 	});
 </script>

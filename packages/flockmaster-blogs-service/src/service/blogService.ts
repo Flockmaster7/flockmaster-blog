@@ -11,9 +11,11 @@ import User_Blog_LikeService from './user_blog_likeService';
 import User_Blog_CollectService from './user_blog_collectService';
 import User_Blog_Like from '../model/User_Blog_Like';
 import User_Blog_Collect from '../model/User_Blog_Collect';
+import CommentService from './commentService';
 
 const tagService = new TagService();
 const blogTagService = new Bolg_tagService();
+const commentService = new CommentService();
 const user_blog_likeService = new User_Blog_LikeService();
 const user_blog_collectService = new User_Blog_CollectService();
 class BlogService {
@@ -520,6 +522,42 @@ class BlogService {
 	async getBlogListByUserId(id: number) {
 		// TO DO
 		const wrapper = {};
+	}
+
+	// 获取推荐文章
+	async getRecommendBlog(id: number) {
+		const blog = await Blog.findOne({
+			where: {
+				id
+			},
+			include: [
+				{
+					model: Tag,
+					as: 'tags',
+					attributes: ['id', 'tag_name', 'tag_classify']
+				}
+			]
+		});
+		if (blog) {
+			const tagIdList: number[] = [];
+			blog.dataValues.tags.forEach((item) => {
+				tagIdList.push(item.id);
+			});
+			const res = await this.getBlogListByTag(tagIdList, 1, 6);
+			// 剔除自己
+			const newRows = res.rows.filter((item) => {
+				if (item.dataValues.id === id) {
+					return false;
+				}
+				return true;
+			});
+			return {
+				...res,
+				rows: newRows
+			};
+		} else {
+			return false;
+		}
 	}
 }
 

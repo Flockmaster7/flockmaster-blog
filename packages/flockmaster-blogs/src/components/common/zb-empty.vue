@@ -4,7 +4,7 @@
 			<!-- <div class="img">
 				<img src="../../static/images/logo/empty.png" alt="" />
 			</div> -->
-			<div class="text">
+			<div class="text" :style="{ fontSize: textSize + 'px' }">
 				{{ text }}
 			</div>
 		</div>
@@ -15,11 +15,13 @@
 	interface propsType {
 		text: string;
 		height: number;
+		textSize: number;
 	}
 
-	const props = withDefaults(defineProps<propsType>(), {
+	withDefaults(defineProps<propsType>(), {
 		text: '空空如也~',
-		height: 250
+		height: 250,
+		textSize: 20
 	});
 </script>
 
@@ -28,7 +30,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 250px;
+		height: 250px;
 		.center {
 			display: flex;
 			justify-content: center;

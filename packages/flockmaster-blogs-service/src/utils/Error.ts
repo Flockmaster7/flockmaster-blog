@@ -61,6 +61,7 @@ export default {
 		''
 	),
 	getStatusError: errorForm('30019', '获取状态失败', ''),
+	getRecommendBlogListError: errorForm('30020', '获取推荐文章失败', ''),
 	addCommentError: errorForm('40001', '发布评论失败', ''),
 	getCommentListError: errorForm('40002', '获取评论列表失败', ''),
 	removeCommentError: errorForm('40003', '删除评论失败', ''),

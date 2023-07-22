@@ -7,12 +7,14 @@ export const useCommonStore = defineStore('common', () => {
 	const isShowStickyBar = ref(false);
 	const isDark = ref(false);
 	const currentTheme = ref('default');
+	const previewId = ref('myPreview');
 
 	return {
 		isDark,
 		isMobile,
 		isLoading,
 		isShowStickyBar,
-		currentTheme
+		currentTheme,
+		previewId
 	};
 });

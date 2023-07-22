@@ -6,6 +6,7 @@ import {
 	getArticleList,
 	getBlogListByTagId,
 	getCommentList,
+	getRecommendBlog,
 	isCollect,
 	isLike,
 	like,
@@ -56,6 +57,16 @@ export const useBlogStore = defineStore('blog', () => {
 	// 评论列表
 	const commentList = ref<CommentType[]>([]);
 	const commentTotal = ref<number>(0);
+	// 文章推荐列表
+	const recommendList = ref<getBlogListResType[]>([]);
+
+	// 获取文章推荐列表
+	const getRecommendBlogList = async (id: number) => {
+		const { data: res } = await getRecommendBlog(id);
+		if (res.code === 200) {
+			recommendList.value = res.data.rows;
+		}
+	};
 
 	// 评论
 	const addComment = async (data: CommentParamsType) => {
@@ -76,6 +87,7 @@ export const useBlogStore = defineStore('blog', () => {
 		}
 	};
 
+	// 获取文章列表
 	const getBlogList = async (
 		pageNum: number,
 		pageSize: number,
@@ -88,6 +100,7 @@ export const useBlogStore = defineStore('blog', () => {
 		}
 	};
 
+	// 获取文章详情
 	const getBlogDetail = async (id: number) => {
 		const { data: res } = await getArticleDetail(id);
 		if (res.code === 200) blogDeatil.value = res.data;
@@ -162,6 +175,8 @@ export const useBlogStore = defineStore('blog', () => {
 		commentList,
 		getComment,
 		addComment,
-		commentTotal
+		commentTotal,
+		getRecommendBlogList,
+		recommendList
 	};
 });

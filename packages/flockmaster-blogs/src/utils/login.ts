@@ -3,8 +3,9 @@ import cache from './cache';
 import router from '@/router/index';
 import { useUserStore } from '@/store/user';
 import { storeToRefs } from 'pinia';
+import pinia from '@/store/store';
 
-const userStore = useUserStore();
+const userStore = useUserStore(pinia);
 const { userInfo } = storeToRefs(userStore);
 
 // 判断是否登录

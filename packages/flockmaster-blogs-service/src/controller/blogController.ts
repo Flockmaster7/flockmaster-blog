@@ -346,9 +346,24 @@ class BlogController {
 		try {
 			const id = ctx.params.id;
 			const res = await blogService.getBlogListByUserId(id * 1);
-			ctx.body = new Result(200, '获取', res);
+			ctx.body = new Result(200, '获取博客列表成功', res);
 		} catch (error) {
 			ctx.app.emit('error', ERROR.getBlogListError, ctx, error);
+		}
+	}
+
+	// 获取推荐文章
+	async getRecommendBlogList(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const res = await blogService.getRecommendBlog(id * 1);
+			if (res) {
+				ctx.body = new Result(200, '获取推荐文章成功', res);
+			} else {
+				ctx.body = new Result(30020, '没有找到该id对应的文章', '');
+			}
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getRecommendBlogListError, ctx, error);
 		}
 	}
 }

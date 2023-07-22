@@ -120,6 +120,8 @@ export interface HeaderNavType {
 	title: string;
 	src: string;
 	name: string;
+	icon: string;
+	type?: string;
 }
 
 // 文章评论接口

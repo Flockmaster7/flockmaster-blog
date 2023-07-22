@@ -173,3 +173,15 @@ export const getCommentList = (
 		method: 'GET'
 	});
 };
+
+/**
+ * 获取推荐文章
+ * @param id 文章id
+ * @returns
+ */
+export const getRecommendBlog = (id: number) => {
+	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+		url: `/blog/getRecommendBlog/${id}`,
+		method: 'GET'
+	});
+};

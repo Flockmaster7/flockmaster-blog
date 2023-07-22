@@ -19,9 +19,9 @@ export const routers = [
 						component: () => import('@/pages/home/index.vue')
 					},
 					{
-						path: '/show',
-						name: 'Show',
-						component: () => import('@/pages/show/index.vue')
+						path: '/settings',
+						name: 'Settings',
+						component: () => import('@/pages/settings/index.vue')
 					},
 					{
 						path: '/work',
@@ -53,11 +53,11 @@ export const routers = [
 						name: 'LeaveWord',
 						component: () => import('@/pages/leaveWord/index.vue')
 					},
-					{
-						path: '/blog/detail',
-						name: 'Detail',
-						component: () => import('@/pages/blog/index.vue')
-					},
+					// {
+					// 	path: '/blog/detail',
+					// 	name: 'Detail',
+					// 	component: () => import('@/pages/blog/index.vue')
+					// },
 					{
 						path: '/searchResult',
 						name: 'SearchResult',
@@ -79,13 +79,16 @@ export const routers = [
 			{
 				path: '/my',
 				name: 'My',
-				component: () => import('@/pages/my/index.vue')
+				component: () => import('@/pages/my/index.vue'),
+				meta: {
+					loginRequest: true
+				}
+			},
+			{
+				path: '/blog/detail',
+				name: 'Detail',
+				component: () => import('@/pages/blog/index.vue')
 			}
-			// {
-			// 	path: '/blog/detail',
-			// 	name: 'Detail',
-			// 	component: () => import('@/pages/blog/index.vue')
-			// }
 		]
 	}
 ];

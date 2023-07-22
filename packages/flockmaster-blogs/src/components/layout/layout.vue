@@ -46,6 +46,7 @@
 
 <style lang="scss" scoped>
 	.layout-container--header {
+		// transform: translate3d(0, -100%, 0);
 		position: sticky;
 		top: -1px;
 		z-index: 999;

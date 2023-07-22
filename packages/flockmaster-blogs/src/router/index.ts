@@ -8,6 +8,8 @@ import {
 } from 'vue-router';
 import { closeProgress, startProgress } from '@/utils/progress';
 import { routers } from './router';
+import { ElMessageBox } from 'element-plus';
+import { isLogin } from '@/utils/login';
 
 const routes: Array<RouteRecordRaw> = routers;
 
@@ -26,21 +28,27 @@ router.beforeEach(
 		_: RouteLocationNormalized,
 		next: NavigationGuardNext
 	) => {
-		startProgress();
-		next();
-		// if (to.path === '/login') {
-		// 	next();
-		// } else {
-		// 	// 还没登录
-		// 	if (!isLogin()) {
-		// 		ElMessage({
-		// 			message: '请先登录',
-		// 			type: 'error'
-		// 		});
-		// 	} else {
-		// 		next();
-		// 	}
-		// }
+		if (to.meta.loginRequest && !isLogin()) {
+			ElMessageBox.confirm(
+				'此内容需要登录才可操作，是否登录',
+				'Warning',
+				{
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}
+			).then(() => {
+				// 跳转到登录页
+				router.push({
+					path: '/login',
+					query: { from: router.currentRoute.value.fullPath }
+				});
+				next();
+			});
+		} else {
+			startProgress();
+			next();
+		}
 	}
 );
 

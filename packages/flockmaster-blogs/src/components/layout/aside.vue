@@ -95,7 +95,6 @@
 
 <script setup lang="ts">
 	import { useTagStore } from '@/store/tag';
-	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
 	import { imgUrl } from '@/utils/common';
@@ -104,11 +103,9 @@
 	import useStore from '@/store';
 	import { allTheme } from '@/config/theme';
 
-	const { blog } = useStore();
+	const { blog, user } = useStore();
 
-	// 用户信息、站点信息
-	const store = useUserStore();
-	const { userInfo } = storeToRefs(store);
+	const { userInfo } = storeToRefs(user);
 	const activeNames = ref(['1']);
 	const handleChange = (val: string[]) => {
 		console.log(val);

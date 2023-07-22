@@ -1,266 +1,314 @@
 <template>
 	<!-- <transition> -->
-
 	<div class="blog-container">
-		<div class="tool-card">
-			<tool :id="id" @toComment="toComment"></tool>
-		</div>
-		<div class="progress-card">
-			<zb-progress
-				:progressDepth="progressDepth"
-				text="泰裤辣"></zb-progress>
-		</div>
-		<div
-			ref="scrollToTopRef"
-			class="scrollToTop"
-			@click="gotoTop"
-			v-show="isShowScrollToTop">
-			<div class="icon">
-				<el-icon color="#ffffff"><ArrowUpBold /></el-icon>
+		<!-- 左侧 -->
+		<div class="blog-card">
+			<div class="tool-card">
+				<tool :id="id" @toComment="toComment"></tool>
 			</div>
-		</div>
-		<el-card>
-			<div class="blog-info">
-				<div class="top">
-					<div class="title">{{ blogDeatil.title }}</div>
-					<div class="createdAt">{{ blogDeatil.createdAt }} 发布</div>
+			<div class="progress-card">
+				<zb-progress
+					:progressDepth="progressDepth"
+					text="泰裤辣"></zb-progress>
+			</div>
+			<div
+				ref="scrollToTopRef"
+				class="scrollToTop"
+				@click="gotoTop"
+				v-show="isShowScrollToTop">
+				<div class="icon">
+					<el-icon color="#ffffff"><ArrowUpBold /></el-icon>
 				</div>
-				<div class="bottom">
-					<div class="author">作者：{{ blogDeatil.author }}</div>
-					<div class="data">
-						<div class="data-item">
-							<!-- <el-icon><View /></el-icon> -->
-							<span class="text"
-								>阅读：{{ blogDeatil.blog_read }}</span
-							>
+			</div>
+			<el-card>
+				<div class="blog-info">
+					<div class="top">
+						<div class="title">{{ blogDeatil.title }}</div>
+						<div class="createdAt">
+							{{ blogDeatil.createdAt }} 发布
 						</div>
-						<div class="data-item">
-							<!-- <el-icon><View /></el-icon> -->
-							<span class="text"
-								>点赞：{{ blogDeatil.blog_like }}</span
-							>
-						</div>
-						<div class="data-item">
-							<!-- <el-icon><Star /></el-icon> -->
-							<span class="text">
-								收藏：{{ blogDeatil.blog_collect }}
-							</span>
+					</div>
+					<div class="bottom">
+						<div class="author">作者：{{ blogDeatil.author }}</div>
+						<div class="data">
+							<div class="data-item">
+								<span class="text"
+									>阅读：{{ blogDeatil.blog_read }}</span
+								>
+							</div>
+							<div class="data-item">
+								<span class="text"
+									>点赞：{{ blogDeatil.blog_like }}</span
+								>
+							</div>
+							<div class="data-item">
+								<span class="text">
+									收藏：{{ blogDeatil.blog_collect }}
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="mainImg">
-				<img :src="imgUrl(blogDeatil.blog_image)" alt="" />
-			</div>
-			<div id="markdown"></div>
-			<v-md-preview :text="content"></v-md-preview>
-			<el-divider></el-divider>
-			<div class="tag">
-				标签：
-				<div class="tag-list">
-					<el-tag
-						v-for="(item, index) in blogDeatil.tags"
-						:key="item.id"
-						>{{ item.tag_name }}</el-tag
-					>
+				<div class="mainImg">
+					<img :src="imgUrl(blogDeatil.blog_image)" alt="" />
 				</div>
-			</div>
-		</el-card>
-		<el-card>
-			<div class="top" ref="commentRef">
-				<span class="title">评论</span>
-				<div class="text-input">
-					<div class="avatar">
-						<img :src="imgUrl(userInfo.user_image)" alt="" />
-					</div>
-					<div class="input">
-						<el-input
-							:rows="4"
-							v-model="textarea"
-							maxlength="255"
-							placeholder="请输入~"
-							show-word-limit
-							type="textarea" />
+				<!-- 文章预览 -->
+				<MdPreview
+					:editorId="previewId"
+					v-model="content"
+					:theme="isDark ? 'dark' : 'light'"
+					:showCodeRowNumber="true" />
+				<el-divider></el-divider>
+				<div class="tag">
+					标签：
+					<div class="tag-list">
+						<el-tag
+							v-for="(item, index) in blogDeatil.tags"
+							:key="item.id"
+							>{{ item.tag_name }}</el-tag
+						>
 					</div>
 				</div>
-				<div class="comfirm">
-					<el-button @click="comment">发布</el-button>
-				</div>
-			</div>
-			<div class="list">
-				<div class="title">
-					全部评论 {{ commentTotal === 0 ? '' : commentTotal }}
-				</div>
-				<div class="comment" v-for="item in commentList" :key="item.id">
-					<zb-comment-area
-						type="blog"
-						:item="item"
-						@getCommentList="getCommentList"></zb-comment-area>
-					<!-- <div class="avatar">
-							<img
-								:src="
-									imgUrl(imgEnvironment) +
-									item.user.user_image
-								"
-								alt="" />
+			</el-card>
+			<el-card>
+				<div class="top" ref="commentRef">
+					<span class="title">评论</span>
+					<div class="text-input">
+						<div class="avatar">
+							<img :src="imgUrl(userInfo.user_image)" alt="" />
 						</div>
-						<div class="box">
-							<div class="info">
-								<div class="topInfo">
-									<div class="name">
-										{{ item.user.name }}
-									</div>
-									<div class="time">
-										{{ getTimeFormNow(item.createdAt) }}
-									</div>
-								</div>
-								<div class="content">
-									{{ item.content }}
-								</div>
-								<div class="operator">
-									<div class="reply" @click="openReply(item.id)">
-										{{
-											activeReply === item.id
-												? '取消回复'
-												: '回复'
-										}}
-									</div>
-								</div>
-								<div
-									class="replyArea"
-									v-if="activeReply === item.id">
-									<div class="input">
-										<el-input
-											:rows="3"
-											v-model="replyContent"
-											maxlength="255"
-											placeholder="请输入~"
-											show-word-limit
-											type="textarea" />
-									</div>
-									<div class="reply">
-										<el-button @click="reply(item.id)"
-											>发布</el-button
-										>
-									</div>
-								</div>
-								<div
-									class="secondList"
-									v-if="item.children.length > 0">
-									<div
-										class="comment"
-										v-for="(item1, index1) in item.children"
-										:key="item1.id">
-										<div class="avatar">
-											<img
-												:src="
-													imgUrl(imgEnvironment) +
-													item1.user.user_image
-												"
-												alt="" />
+						<div class="input">
+							<el-input
+								:rows="4"
+								v-model="textarea"
+								maxlength="255"
+								placeholder="请输入~"
+								show-word-limit
+								type="textarea" />
+						</div>
+					</div>
+					<div class="comfirm">
+						<el-button @click="comment">发布</el-button>
+					</div>
+				</div>
+				<div class="list">
+					<div class="title">
+						全部评论 {{ commentTotal === 0 ? '' : commentTotal }}
+					</div>
+					<div
+						class="comment"
+						v-for="item in commentList"
+						:key="item.id">
+						<zb-comment-area
+							type="blog"
+							:item="item"
+							@getCommentList="getCommentList"></zb-comment-area>
+						<!-- <div class="avatar">
+								<img
+									:src="
+										imgUrl(imgEnvironment) +
+										item.user.user_image
+									"
+									alt="" />
+							</div>
+							<div class="box">
+								<div class="info">
+									<div class="topInfo">
+										<div class="name">
+											{{ item.user.name }}
 										</div>
-										<div class="box">
-											<div class="info">
-												<div class="topInfo">
-													<div class="name">
-														<div class="name-name">
-															{{ item1.user.name }}
+										<div class="time">
+											{{ getTimeFormNow(item.createdAt) }}
+										</div>
+									</div>
+									<div class="content">
+										{{ item.content }}
+									</div>
+									<div class="operator">
+										<div class="reply" @click="openReply(item.id)">
+											{{
+												activeReply === item.id
+													? '取消回复'
+													: '回复'
+											}}
+										</div>
+									</div>
+									<div
+										class="replyArea"
+										v-if="activeReply === item.id">
+										<div class="input">
+											<el-input
+												:rows="3"
+												v-model="replyContent"
+												maxlength="255"
+												placeholder="请输入~"
+												show-word-limit
+												type="textarea" />
+										</div>
+										<div class="reply">
+											<el-button @click="reply(item.id)"
+												>发布</el-button
+											>
+										</div>
+									</div>
+									<div
+										class="secondList"
+										v-if="item.children.length > 0">
+										<div
+											class="comment"
+											v-for="(item1, index1) in item.children"
+											:key="item1.id">
+											<div class="avatar">
+												<img
+													:src="
+														imgUrl(imgEnvironment) +
+														item1.user.user_image
+													"
+													alt="" />
+											</div>
+											<div class="box">
+												<div class="info">
+													<div class="topInfo">
+														<div class="name">
+															<div class="name-name">
+																{{ item1.user.name }}
+															</div>
+															<span
+																class="name-reply"
+																v-if="
+																	item1.targetComment
+																">
+																回复
+															</span>
+															<div class="name-replyName">
+																{{
+																	item1.targetComment
+																		? item1
+																				.targetComment
+																				.user
+																				.name
+																		: ''
+																}}
+															</div>
 														</div>
-														<span
-															class="name-reply"
-															v-if="
-																item1.targetComment
-															">
-															回复
-														</span>
-														<div class="name-replyName">
+														<div class="time">
 															{{
-																item1.targetComment
-																	? item1
-																			.targetComment
-																			.user
-																			.name
-																	: ''
+																getTimeFormNow(
+																	item1.createdAt
+																)
 															}}
 														</div>
 													</div>
-													<div class="time">
-														{{
-															getTimeFormNow(
-																item1.createdAt
-															)
-														}}
+													<div class="content">
+														{{ item1.content }}
 													</div>
-												</div>
-												<div class="content">
-													{{ item1.content }}
-												</div>
-												<div
-													class="replied-content"
-													v-if="item1.targetComment">
-													{{
-														item1.targetComment.content
-													}}
-												</div>
-												<div class="operator">
 													<div
-														class="reply"
-														@click="
-															openReply(item1.id)
-														">
+														class="replied-content"
+														v-if="item1.targetComment">
 														{{
-															activeReply === item1.id
-																? '取消回复'
-																: '回复'
+															item1.targetComment.content
 														}}
 													</div>
-												</div>
-												<div
-													class="replyArea"
-													v-if="activeReply === item1.id">
-													<div class="input">
-														<el-input
-															:rows="3"
-															v-model="replyContent"
-															maxlength="255"
-															placeholder="请输入~"
-															show-word-limit
-															type="textarea" />
-													</div>
-													<div class="reply">
-														<el-button
+													<div class="operator">
+														<div
+															class="reply"
 															@click="
-																reply(
-																	item.id,
-																	item1.id
-																)
-															"
-															>发布</el-button
-														>
+																openReply(item1.id)
+															">
+															{{
+																activeReply === item1.id
+																	? '取消回复'
+																	: '回复'
+															}}
+														</div>
+													</div>
+													<div
+														class="replyArea"
+														v-if="activeReply === item1.id">
+														<div class="input">
+															<el-input
+																:rows="3"
+																v-model="replyContent"
+																maxlength="255"
+																placeholder="请输入~"
+																show-word-limit
+																type="textarea" />
+														</div>
+														<div class="reply">
+															<el-button
+																@click="
+																	reply(
+																		item.id,
+																		item1.id
+																	)
+																"
+																>发布</el-button
+															>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div> -->
+							</div> -->
+					</div>
+					<zb-empty
+						v-if="commentList.length === 0"
+						:height="400"></zb-empty>
 				</div>
+			</el-card>
+		</div>
+		<!-- 右侧 -->
+		<div class="right-card">
+			<el-card class="recommend-card">
+				<div class="recommend-title">相关文章</div>
+				<el-divider border-style="dashed" />
+				<div class="recommend-box">
+					<div
+						class="recommend-blog-item"
+						v-for="item in recommendList"
+						:key="item.id">
+						<div
+							class="item-title"
+							@click="gotoBlogDetail(item.id)">
+							{{ item.title }}
+						</div>
+						<div class="item-data">
+							<div class="item-data-item">
+								{{ item.blog_like }}点赞
+							</div>
+							<div class="item-data-item">
+								{{ item.blog_collect }}收藏
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <zb-loading></zb-loading> -->
 				<zb-empty
-					v-if="commentList.length === 0"
-					:height="400"></zb-empty>
-			</div>
-		</el-card>
+					v-if="recommendList.length === 0"
+					:text-size="15"
+					:height="100"></zb-empty>
+			</el-card>
+			<!-- 目录卡片 -->
+			<el-card class="catalog-card">
+				<div class="catalog-title">目录</div>
+				<el-divider border-style="dashed" />
+				<div class="catalog-box">
+					<MdCatalog
+						:editorId="previewId"
+						:scrollElement="scrollElement" />
+				</div>
+			</el-card>
+		</div>
 	</div>
 	<!-- </transition> -->
 </template>
 
 <script setup lang="ts">
 	import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-	import { useBlogStore } from '@/store/blog';
 	import { storeToRefs } from 'pinia';
 	import { useRoute } from 'vue-router';
-	import { useUserStore } from '@/store/user';
 	import { imgUrl } from '@/utils/common';
 	import tool from '@/pages/blog/tool.vue';
 	import { ElMessage } from 'element-plus';
@@ -272,30 +320,38 @@
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { validatorNotEmpty } from '@/utils/common';
 	import zbProgress from '@/components/common/zb-progress.vue';
+	import { MdPreview, MdCatalog } from 'md-editor-v3';
+	import 'md-editor-v3/lib/style.css';
+	import useStore from '@/store';
+	import router from '@/router';
 
-	const blogStore = useBlogStore();
-	const userStore = useUserStore();
-	const { blogDeatil, blogStatus, commentList, commentTotal } =
-		storeToRefs(blogStore);
-	const { userInfo } = storeToRefs(userStore);
+	const { common, blog, user } = useStore();
+	const { isDark, previewId } = storeToRefs(common);
+
+	// const blogStore = useBlogStore();
+	const { blogDeatil, blogStatus, commentList, commentTotal, recommendList } =
+		storeToRefs(blog);
+	const { userInfo } = storeToRefs(user);
 	const route = useRoute();
 
 	const content = ref('');
 	const id = route.query.id! as string;
 
+	const scrollElement = document.documentElement;
+
 	onMounted(async () => {
 		// 获取状态
 		if (isLogin()) {
-			blogStore.isBlogLike(Number(id));
-			blogStore.isBlogCOllect(Number(id));
+			blog.isBlogLike(Number(id));
+			blog.isBlogCOllect(Number(id));
 		}
 		//增加阅读
 		if (!blogStatus.value.read) {
-			blogStore.addBlogRead(Number(id));
+			blog.addBlogRead(Number(id));
 			blogStatus.value.read = true;
 		}
 		// 获取信息
-		await blogStore.getBlogDetail(Number(id));
+		await blog.getBlogDetail(Number(id));
 		nextTick(() => {
 			content.value = blogDeatil.value.content_text;
 		});
@@ -304,6 +360,8 @@
 		// }, 150);
 		// 获取评论
 		getCommentList();
+		// 获取推荐文章
+		blog.getRecommendBlogList(Number(id));
 	});
 
 	onBeforeUnmount(() => {
@@ -314,7 +372,7 @@
 	const textarea = ref('');
 	// 获取评论
 	const getCommentList = async () => {
-		await blogStore.getComment(blogDeatil.value.id, 1, 999);
+		await blog.getComment(blogDeatil.value.id, 1, 999);
 	};
 	// 评论
 	const comment = async () => {
@@ -325,7 +383,7 @@
 			blog_id: blogDeatil.value.id,
 			content: textarea.value
 		};
-		await blogStore.addComment(params);
+		await blog.addComment(params);
 		ElMessage.success('发布评论成功');
 		textarea.value = '';
 		// 重新获取评论
@@ -348,7 +406,7 @@
 			parent_id: parent_id
 		};
 		reply_to && (params.reply_to = reply_to);
-		await blogStore.addComment(params);
+		await blog.addComment(params);
 		ElMessage.success('发布评论成功');
 		replyContent.value = '';
 		activeReply.value = null;
@@ -399,9 +457,35 @@
 			isShowScrollToTop.value = false;
 		}
 	});
+
+	// 跳转到文章详情
+	const gotoBlogDetail = async (id: number) => {
+		// 获取状态
+		if (isLogin()) {
+			blog.isBlogLike(Number(id));
+			blog.isBlogCOllect(Number(id));
+		}
+		//增加阅读
+		if (!blogStatus.value.read) {
+			blog.addBlogRead(Number(id));
+			blogStatus.value.read = true;
+		}
+		// 获取信息
+		await blog.getBlogDetail(Number(id));
+		// 获取评论
+		getCommentList();
+		// 获取推荐文章
+		blog.getRecommendBlogList(Number(id));
+		router.push('/blog/detail?id=' + id);
+	};
 </script>
 
 <style lang="scss" scoped>
+	// 分割线
+	.el-divider--horizontal {
+		margin: 9px 0 !important;
+	}
+
 	@media screen and (max-width: 540px) {
 		:deep(.el-card__body) {
 			padding-left: 0 !important;
@@ -412,21 +496,17 @@
 			gap: 10px !important;
 		}
 
-		.title {
-			font-size: 28px !important;
-		}
-
 		.author {
-			font-size: 14px;
+			font-size: 15px !important;
 		}
 
 		.tag {
-			padding-left: 15px;
+			padding-left: 15px !important;
 		}
 
 		.top {
 			.title {
-				font-size: 18px !important;
+				font-size: 25px !important;
 			}
 			.text-input {
 				gap: 12px !important;
@@ -512,14 +592,94 @@
 				line-height: 40px !important;
 			}
 		}
+
+		.right-card {
+			display: none !important;
+		}
 	}
 
 	.blog-container {
 		display: flex;
+		gap: 10px;
+		margin: 15px;
+	}
+
+	.blog-card {
+		width: 100%;
+		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		// margin: 15px;
 		position: relative;
+		flex-basis: 75%;
+	}
+
+	.right-card {
+		// flex-basis: 25%;
+		width: 300px;
+		gap: 10px;
+		display: flex;
+		flex-direction: column;
+
+		//推荐文章
+		.recommend-card {
+			.recommend-title {
+				font-size: 20px;
+				text-align: center;
+				height: 30px;
+				line-height: 30px;
+			}
+
+			.recommend-box {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				padding: 0 20px;
+				.recommend-blog-item {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+					padding: 5px 0;
+					.item-title {
+						font-size: 16px;
+					}
+					.item-data {
+						display: flex;
+						gap: 8px;
+						.item-data-item {
+							font-size: 14px;
+						}
+					}
+				}
+
+				.recommend-blog-item:hover {
+					.item-title:hover {
+						cursor: pointer;
+						color: var(--theme-active-color);
+					}
+				}
+			}
+		}
+		// 目录导航
+		.catalog-card {
+			position: sticky;
+			top: 75px;
+			max-height: 450px;
+			cursor: pointer;
+			overflow: hidden;
+
+			.catalog-title {
+				font-size: 20px;
+				text-align: center;
+				height: 30px;
+				line-height: 30px;
+			}
+
+			.catalog-box {
+				max-height: 350px;
+				padding: 0 20px;
+				overflow-y: auto;
+			}
+		}
 	}
 
 	.active {
@@ -543,13 +703,14 @@
 	}
 
 	.scrollToTop {
+		z-index: 10;
 		opacity: 0.6;
 		position: absolute;
 		right: -50px;
 		.icon {
 			border-radius: 40%;
 			position: fixed;
-			bottom: 100px;
+			bottom: 50px;
 			width: 50px;
 			height: 50px;
 			background-color: var(--theme-color);
@@ -624,7 +785,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 30px;
 
 		img {
 			width: 100%;
