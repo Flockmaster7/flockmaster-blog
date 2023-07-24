@@ -32,4 +32,11 @@ router.get(
 	leaveWordsController.getLeaveWordList
 );
 
+// 查询子留言列表
+router.get(
+	'/getChildrenLeaveWordList/:id/:pageNum/:pageSize',
+	validatorId,
+	leaveWordsController.getChildrenLeaveWordList
+);
+
 module.exports = router;

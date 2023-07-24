@@ -25,7 +25,7 @@
 	// 提供 name 属性即可
 	const props = withDefaults(defineProps<PropsType>(), {
 		size: 20,
-		autoDark: false
+		autoDark: true
 	});
 
 	const fillColor = computed(() => {

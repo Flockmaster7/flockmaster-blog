@@ -107,6 +107,11 @@
 						</div>
 					</div>
 				</div>
+				<div @click="getChildrenList(item.id)">
+					<zb-loadMore
+						v-if="isLoadMore"
+						:isLoading="isLoading"></zb-loadMore>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -117,7 +122,7 @@
 	import { CommentType, GetUserInfoResType } from '@/types';
 	// import { useUserStore } from '@/store/user';
 	import { CommentParamsType } from '@/types/index';
-	import { computed, ref } from 'vue';
+	import { computed, nextTick, onMounted, ref } from 'vue';
 	import { storeToRefs } from 'pinia';
 	import { ElMessage } from 'element-plus';
 	import { validatorNotEmpty, imgUrl } from '@/utils/common';
@@ -130,7 +135,7 @@
 	}
 
 	interface emitsType {
-		(e: 'getCommentList'): void;
+		(e: 'getCommentList', newStart?: boolean): void;
 	}
 
 	const props = defineProps<propsType>();
@@ -174,12 +179,41 @@
 		}
 		replyContent.value = '';
 		activeReply.value = null;
+		currentPage.value = 1;
 		// 重新获取评论
-		emit('getCommentList');
+		emit('getCommentList', true);
 	};
+
 	// 跳转到用户详情页
 	const gotoUser = (userInfo: GetUserInfoResType) => {
 		router.push('/my?id=' + userInfo.id);
+	};
+
+	//获取子评论
+	onMounted(() => {
+		if (props.item.children.length < 3) isLoadMore.value = false;
+	});
+	const currentPage = ref(1);
+	const isLoadMore = ref(true);
+	const isLoading = ref(false);
+	//获取子评论
+	const getChildrenList = async (id: number) => {
+		isLoading.value = true;
+		currentPage.value += 1;
+		let res: boolean | undefined = true;
+		if (props.type === 'blog') {
+			res = await blog.getChildrenComment(id, currentPage.value, 3);
+		} else {
+			res = await leaveWord.getChildrenLeaveWord(
+				id,
+				currentPage.value,
+				3
+			);
+		}
+		isLoading.value = false;
+		if (!res) {
+			isLoadMore.value = false;
+		}
 	};
 </script>
 

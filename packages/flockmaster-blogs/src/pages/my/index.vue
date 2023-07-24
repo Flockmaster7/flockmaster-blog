@@ -61,7 +61,7 @@
 					<userItem :user="item"></userItem>
 				</div>
 				<div v-show="isShowEmpty">
-					<zb-empty></zb-empty>
+					<zb-empty :height="500"></zb-empty>
 				</div>
 			</div>
 		</div>
@@ -100,6 +100,7 @@
 		await getUserInfo();
 		await getBlogListByUser();
 		await getFollowList();
+		isShowEmpty.value = !blogList.value.length;
 	});
 
 	const blogStore = useBlogStore();

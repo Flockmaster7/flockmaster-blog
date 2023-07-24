@@ -15,5 +15,6 @@ export interface PageRequest<T> {
 	pageNum: string;
 	pageSize: string;
 	total: number;
+	count?: number;
 	rows: T[];
 }

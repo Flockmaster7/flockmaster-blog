@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="blog">
 			<div class="blogImg">
-				<img :src="imgUrl(blog.blog_image)" alt="" />
+				<img v-lazy="imgUrl(blog.blog_image)" alt="" />
 			</div>
 			<div class="blogInfo">
 				<div class="top">
@@ -43,7 +43,6 @@
 		padding: 8px;
 		border-radius: 15px;
 		background-color: var(--theme-card-item-color);
-		width: 90%;
 		// height: 300px;
 		display: flex;
 		flex-direction: column;

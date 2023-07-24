@@ -37,7 +37,8 @@
     "mysql2": "^3.3.3",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.31.1",
-    "sequelize-typescript": "^2.1.5"
+    "sequelize-typescript": "^2.1.5",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

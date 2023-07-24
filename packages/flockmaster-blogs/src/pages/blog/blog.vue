@@ -256,6 +256,12 @@
 					<zb-empty
 						v-if="commentList.length === 0"
 						:height="400"></zb-empty>
+					<div @click="() => getCommentList()">
+						<zb-loadMore
+							v-if="isLoadMore"
+							direction="center"
+							:isLoading="isLoading"></zb-loadMore>
+					</div>
 				</div>
 			</el-card>
 		</div>
@@ -338,7 +344,6 @@
 	const { common, blog, user } = useStore();
 	const { isDark, previewId, rightOpen } = storeToRefs(common);
 
-	// const blogStore = useBlogStore();
 	const { blogDeatil, blogStatus, commentList, commentTotal, recommendList } =
 		storeToRefs(blog);
 	const { userInfo } = storeToRefs(user);
@@ -365,9 +370,6 @@
 		nextTick(() => {
 			content.value = blogDeatil.value.content_text;
 		});
-		// setTimeout(() => {
-		// 	content.value = blogDeatil.value.content_html;
-		// }, 150);
 		// 获取评论
 		getCommentList();
 		// 获取推荐文章
@@ -378,11 +380,28 @@
 		blogStatus.value.read = false;
 	});
 
+	const currentPage = ref(0);
+	const isLoadMore = ref(true);
+	const isLoading = ref(false);
+
 	// 评论
 	const textarea = ref('');
 	// 获取评论
-	const getCommentList = async () => {
-		await blog.getComment(blogDeatil.value.id, 1, 999);
+	const getCommentList = async (newStart?: boolean) => {
+		if (newStart) {
+			currentPage.value = 0;
+		}
+		isLoading.value = true;
+		currentPage.value += 1;
+		const res = await blog.getComment(
+			blogDeatil.value.id,
+			currentPage.value,
+			9
+		);
+		isLoading.value = false;
+		if (!res) {
+			isLoadMore.value = false;
+		}
 	};
 	// 评论
 	const comment = async () => {
@@ -397,7 +416,7 @@
 		ElMessage.success('发布评论成功');
 		textarea.value = '';
 		// 重新获取评论
-		getCommentList();
+		getCommentList(true);
 	};
 	const activeReply = ref<number | null>(null);
 	const openReply = (index: number) => {

@@ -74,7 +74,7 @@ export const routers = [
 			{
 				path: '/login',
 				name: 'Login',
-				component: () => import('@/pages/login/index.vue')
+				component: () => import('@/pages/login/login.vue')
 			},
 			{
 				path: '/my',
@@ -87,7 +87,7 @@ export const routers = [
 			{
 				path: '/blog/detail',
 				name: 'Detail',
-				component: () => import('@/pages/blog/index.vue'),
+				component: () => import('@/pages/blog/blog.vue'),
 				meta: {
 					isShowRight: true
 				}

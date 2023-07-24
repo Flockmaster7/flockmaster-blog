@@ -138,6 +138,13 @@ router.get(
 	commentController.getCommentList
 );
 
+// 查询子评论列表
+router.get(
+	'/getChildrenCommentList/:id/:pageNum/:pageSize',
+	validatorId,
+	commentController.getChildrenCommentList
+);
+
 // 获取推荐文章
 router.get(
 	'/getRecommendBlog/:id',

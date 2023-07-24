@@ -43,6 +43,23 @@ class CommentController {
 		}
 	}
 
+	//查询子评论
+	async getChildrenCommentList(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const pageNum = ctx.params.pageNum;
+			const pageSize = ctx.params.pageSize;
+			const res = await commentService.getChildComment(
+				id,
+				pageNum,
+				pageSize
+			);
+			ctx.body = new Result(200, '获取评论列表成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getCommentListError, ctx, error);
+		}
+	}
+
 	// 删除评论
 	async removeComment(ctx: Context) {
 		try {

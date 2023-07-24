@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="info">
 			<div class="avatar">
-				<img :src="imgUrl(user.user_image)" alt="" />
+				<img v-lazy="imgUrl(user.user_image)" alt="" />
 			</div>
 			<div class="user">
 				<div class="name">{{ user.name }}</div>
@@ -20,7 +20,7 @@
 	interface propsType {
 		user: GetUserInfoResType;
 	}
-	const props = defineProps<propsType>();
+	defineProps<propsType>();
 </script>
 
 <style lang="scss" scoped>

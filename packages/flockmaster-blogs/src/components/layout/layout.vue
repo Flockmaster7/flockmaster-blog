@@ -7,7 +7,9 @@
 	<div class="layout-container--main">
 		<router-view v-slot="{ Component }">
 			<transition>
-				<component :is="Component"></component>
+				<keep-alive include="main">
+					<component :is="Component"></component>
+				</keep-alive>
 			</transition>
 		</router-view>
 	</div>

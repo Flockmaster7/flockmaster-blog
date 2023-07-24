@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="blogImg">
-			<img :src="imgUrl(blog.blog_image)" alt="" />
+			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
 		</div>
 	</div>
 </template>

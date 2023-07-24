@@ -52,20 +52,67 @@ class CommentService {
 								}
 							]
 						}
-					]
+					],
+					limit: 3,
+					order: [['createdAt', 'DESC']]
 				}
 			],
 			limit: pageSize * 1,
-			offset: offset
+			offset: offset,
+			order: [['createdAt', 'DESC']]
 		});
-		let total = count;
-		rows.forEach((item) => {
-			total += item.dataValues.children.length > 0 ? 1 : 0;
+		// 查询评论总数
+		const total = await Comment.count({
+			where: {
+				blog_id: id
+			}
 		});
 		return {
 			pageNum,
 			pageSize,
 			total,
+			count,
+			rows: rows
+		};
+	}
+
+	// 获取子评论
+	async getChildComment(
+		parent_id: number,
+		pageNum: number,
+		pageSize: number
+	) {
+		const offset = (pageNum - 1) * pageSize;
+		const { count, rows } = await Comment.findAndCountAll({
+			where: {
+				parent_id: parent_id
+			},
+			include: [
+				{
+					model: User,
+					as: 'user',
+					attributes: ['id', 'name', 'user_image']
+				},
+				{
+					model: Comment,
+					as: 'targetComment',
+					include: [
+						{
+							model: User,
+							as: 'user',
+							attributes: ['id', 'name', 'user_image']
+						}
+					]
+				}
+			],
+			limit: pageSize * 1,
+			offset: offset,
+			order: [['createdAt', 'DESC']]
+		});
+		return {
+			pageNum,
+			pageSize,
+			total: count,
 			rows: rows
 		};
 	}

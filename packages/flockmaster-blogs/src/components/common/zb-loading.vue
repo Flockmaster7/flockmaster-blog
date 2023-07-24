@@ -4,7 +4,7 @@
 		<div class="loading-icon">
 			<zb-svg-icon
 				name="loading"
-				size="40"
+				:size="size"
 				color="var(--theme-active-color)"></zb-svg-icon>
 		</div>
 	</div>
@@ -13,10 +13,12 @@
 <script setup lang="ts">
 	interface PropsType {
 		height: number;
+		size: number;
 	}
 
 	withDefaults(defineProps<PropsType>(), {
-		height: 500
+		height: 500,
+		size: 40
 	});
 </script>
 

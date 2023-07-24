@@ -1,3 +1,4 @@
+import { minDelay } from './../utils/common';
 import {
 	blogRead,
 	collect,
@@ -5,6 +6,7 @@ import {
 	getArticleDetail,
 	getArticleList,
 	getBlogListByTagId,
+	getChildCommentList,
 	getCommentList,
 	getRecommendBlog,
 	isCollect,
@@ -79,11 +81,46 @@ export const useBlogStore = defineStore('blog', () => {
 		pageNum: number,
 		pageSize: number
 	) => {
-		const { data: res } = await getCommentList(id, pageNum, pageSize);
+		const { data: res } = await minDelay(
+			getCommentList(id, pageNum, pageSize),
+			500
+		);
 		if (res.code === 200) {
-			commentList.value = res.data.rows;
+			commentList.value =
+				pageNum === 1
+					? res.data.rows
+					: [...commentList.value, ...res.data.rows];
 			commentTotal.value = res.data.total;
-			console.log(commentTotal.value);
+			if (res.data.count! <= pageSize * pageNum) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	};
+
+	// 获取子评论列表
+	const getChildrenComment = async (
+		parent_id: number,
+		pageNum: number,
+		pageSize: number
+	) => {
+		const { data: res } = await minDelay(
+			getChildCommentList(parent_id, pageNum, pageSize),
+			500
+		);
+		if (res.code === 200) {
+			commentList.value.forEach((item) => {
+				if (item.id === parent_id) {
+					item.children = [...item.children, ...res.data.rows];
+				}
+			});
+			commentTotal.value += res.data.total;
+			if (res.data.total <= pageSize * pageNum) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	};
 
@@ -177,6 +214,7 @@ export const useBlogStore = defineStore('blog', () => {
 		addComment,
 		commentTotal,
 		getRecommendBlogList,
-		recommendList
+		recommendList,
+		getChildrenComment
 	};
 });

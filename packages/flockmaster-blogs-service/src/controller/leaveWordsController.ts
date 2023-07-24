@@ -43,6 +43,23 @@ class LeaveWordsController {
 		}
 	}
 
+	//查询子留言
+	async getChildrenLeaveWordList(ctx: Context) {
+		try {
+			const id = ctx.params.id;
+			const pageNum = ctx.params.pageNum;
+			const pageSize = ctx.params.pageSize;
+			const res = await leaveWordsService.getChildLeaveWords(
+				id,
+				pageNum,
+				pageSize
+			);
+			ctx.body = new Result(200, '获取留言列表成功', res);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getCommentListError, ctx, error);
+		}
+	}
+
 	// 删除留言
 	async removeLeaveWord(ctx: Context) {
 		try {

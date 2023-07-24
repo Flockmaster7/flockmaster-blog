@@ -7,7 +7,14 @@
 				v-for="item in blogList"
 				:key="item.id"
 				@click="gotoBlogDetail(item.id)">
-				<zbSearchResultBlogItem :blog="item"></zbSearchResultBlogItem>
+				<div class="result-item-pc">
+					<zbSearchResultBlogItem
+						:blog="item"></zbSearchResultBlogItem>
+				</div>
+				<div class="result-item-mobile">
+					<zbSearchResultBlogItemMobile
+						:blog="item"></zbSearchResultBlogItemMobile>
+				</div>
 			</div>
 		</div>
 		<zb-empty
@@ -38,6 +45,7 @@
 		ParamsType
 	} from '@/pages/searchResult/components/zb-search-area.vue';
 	import zbSearchResultBlogItem from './components/zb-searchResult-blogItem.vue';
+	import zbSearchResultBlogItemMobile from './components/zb-searchResult-blogItem-mobile.vue';
 	import zbLoading from '@/components/common/zb-loading.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import usePagination from '@/hooks/usePagination';
@@ -74,6 +82,19 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.result-item-mobile {
+			display: block !important;
+		}
+		.result-item-pc {
+			display: none !important;
+		}
+	}
+
+	.result-item-mobile {
+		display: none;
+	}
+
 	.searchResult-container {
 		width: 100%;
 		height: 100%;

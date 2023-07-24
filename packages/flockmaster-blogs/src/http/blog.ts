@@ -175,6 +175,24 @@ export const getCommentList = (
 };
 
 /**
+ * 获取子评论列表
+ * @param id parent_id
+ * @param pageNum 页码
+ * @param pageSize 每一页的数量
+ * @returns
+ */
+export const getChildCommentList = (
+	parent_id: number,
+	pageNum: number,
+	pageSize: number
+) => {
+	return request<HttpResponse<PageRequest<CommentType>>>({
+		url: `/blog/getChildrenCommentList/${parent_id}/${pageNum}/${pageSize}`,
+		method: 'GET'
+	});
+};
+
+/**
  * 获取推荐文章
  * @param id 文章id
  * @returns

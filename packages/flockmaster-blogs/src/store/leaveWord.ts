@@ -1,5 +1,10 @@
-import { getLeaveWordList, leaveWord } from '@/http/leaveWord';
+import {
+	getChildLeaveWordList,
+	getLeaveWordList,
+	leaveWord
+} from '@/http/leaveWord';
 import { CommentParamsType, LeaveWordType } from '@/types';
+import { minDelay } from '@/utils/common';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -14,10 +19,46 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 
 	// 获取留言列表
 	const getLeaveWord = async (pageNum: number, pageSize: number) => {
-		const { data: res } = await getLeaveWordList(pageNum, pageSize);
+		const { data: res } = await minDelay(
+			getLeaveWordList(pageNum, pageSize),
+			500
+		);
 		if (res.code === 200) {
-			leaveWordList.value = res.data.rows;
+			leaveWordList.value =
+				Number(pageNum) === 1
+					? res.data.rows
+					: [...leaveWordList.value, ...res.data.rows];
 			leaveWordTotal.value = res.data.total;
+			if (res.data.count! <= pageSize * pageNum) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	};
+
+	// 获取子留言列表
+	const getChildrenLeaveWord = async (
+		parent_id: number,
+		pageNum: number,
+		pageSize: number
+	) => {
+		const { data: res } = await minDelay(
+			getChildLeaveWordList(parent_id, pageNum, pageSize),
+			500
+		);
+		if (res.code === 200) {
+			leaveWordList.value.forEach((item) => {
+				if (item.id === parent_id) {
+					item.children = [...item.children, ...res.data.rows];
+				}
+			});
+			leaveWordTotal.value += res.data.total;
+			if (res.data.total <= pageSize * pageNum) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	};
 
@@ -25,6 +66,7 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 		leaveWordList,
 		leaveWordTotal,
 		addLeaveWord,
-		getLeaveWord
+		getLeaveWord,
+		getChildrenLeaveWord
 	};
 });

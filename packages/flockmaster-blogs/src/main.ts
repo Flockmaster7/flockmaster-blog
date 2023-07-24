@@ -14,8 +14,14 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 //svg图标
 import 'virtual:svg-icons-register';
 import zbSvgIconVue from './components/common/zb-svg-icon.vue';
+// 图片懒加载
+import lazyPlugin from 'vue3-lazy';
 
 const app = createApp(App);
+lazyPlugin.install(app, {
+	loading: new URL('@/static/images/error.png', import.meta.url).href,
+	error: new URL('@/static/images/error.png', import.meta.url).href
+});
 app.use(pinia);
 app.use(router);
 

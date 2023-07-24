@@ -3,18 +3,32 @@ import User from '../model/User';
 import User_Follow from '../model/User_Follow';
 import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
 import User_FocusService from './user_focusService';
+import { uid } from 'uid';
 
 const user_focusService = new User_FocusService();
 class UserService {
 	// 添加用户
 	async createUser(user_name: string, password: string): Promise<User> {
+		const id = uid();
+		const name = '用户' + id;
+		const description = '用户有点懒，什么都没留下';
+		const user_image = '/70819f913636cc5b697a88c00.jpg';
 		const res = await User.create(
 			{
 				user_name,
-				password
+				password,
+				name,
+				description,
+				user_image
 			} as User,
 			{
-				fields: ['user_name', 'password']
+				fields: [
+					'user_name',
+					'password',
+					'name',
+					'description',
+					'user_image'
+				]
 			}
 		);
 		return res.dataValues;

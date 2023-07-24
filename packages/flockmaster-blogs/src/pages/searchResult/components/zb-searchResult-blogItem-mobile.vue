@@ -1,6 +1,9 @@
 <template>
 	<div class="item-container">
-		<div class="left">
+		<div class="top">
+			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
+		</div>
+		<div class="bottom">
 			<div class="top-info">
 				{{ blog.author + ' & ' + getTimeFormNow(blog.createdAt) }}
 			</div>
@@ -11,9 +14,6 @@
 				{{ replaceContent(blog.content_text) }}
 			</div>
 			<div class="tool"></div>
-		</div>
-		<div class="right">
-			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
 		</div>
 	</div>
 </template>
@@ -41,44 +41,43 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
 		background-color: var(--theme-card-item-color);
-		padding: 10px 15px;
+		padding: 5px;
 		gap: 10px;
 		transition: 0.6s;
+		.top {
+			border-radius: 10px;
+			overflow: hidden;
+			width: 100%;
+			height: 170px;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
 
-		.left {
-			flex-basis: 60%;
+		.bottom {
 			display: flex;
 			flex-direction: column;
 			gap: 8px;
 			.top-info {
-				font-size: 16px;
+				font-size: 15px;
 
 				color: $grayWhite;
 			}
 			.title {
-				font-size: 24px;
+				font-size: 18px;
 				font-weight: 700;
 			}
 			.description {
 				color: $gray;
-				width: 500px;
+				max-width: 320px;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;
-				margin-top: 10px;
-			}
-		}
-
-		.right {
-			flex-basis: 40%;
-			border-radius: 10px;
-			overflow: hidden;
-			width: 120px;
-			height: 120px;
-			img {
-				width: 100%;
-				height: 100%;
+				margin-top: 8px;
+				font-size: 16px;
 			}
 		}
 	}

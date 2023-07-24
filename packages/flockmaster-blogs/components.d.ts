@@ -45,6 +45,7 @@ declare module '@vue/runtime-core' {
     ZbInfoItem: typeof import('./src/components/common/zb-infoItem.vue')['default']
     ZbItemInBook: typeof import('./src/components/common/zb-itemInBook.vue')['default']
     ZbLoading: typeof import('./src/components/common/zb-loading.vue')['default']
+    ZbLoadMore: typeof import('./src/components/common/zb-loadMore.vue')['default']
     ZbProgress: typeof import('./src/components/common/zb-progress.vue')['default']
     ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']

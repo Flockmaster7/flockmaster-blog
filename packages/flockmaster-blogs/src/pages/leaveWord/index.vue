@@ -37,6 +37,12 @@
 			<zb-empty
 				v-if="leaveWordList.length === 0"
 				:height="400"></zb-empty>
+			<div @click="() => getLeaveWordList()">
+				<zb-loadMore
+					v-if="isLoadMore"
+					direction="center"
+					:isLoading="isLoading"></zb-loadMore>
+			</div>
 		</div>
 	</div>
 </template>
@@ -61,8 +67,18 @@
 	});
 
 	// 获取留言列表
-	const getLeaveWordList = async () => {
-		await leaveWordStore.getLeaveWord(1, 999);
+	const currentPage = ref(0);
+	const isLoadMore = ref(true);
+	const isLoading = ref(false);
+	const getLeaveWordList = async (newStart?: boolean) => {
+		if (newStart) currentPage.value = 0;
+		isLoading.value = true;
+		currentPage.value += 1;
+		const res = await leaveWordStore.getLeaveWord(currentPage.value, 9);
+		isLoading.value = false;
+		if (!res) {
+			isLoadMore.value = false;
+		}
 	};
 
 	// 留言
@@ -79,7 +95,7 @@
 		ElMessage.success('发布留言成功');
 		leaveWordInput.value = '';
 		// 重新获取留言
-		getLeaveWordList();
+		getLeaveWordList(true);
 	};
 </script>
 
