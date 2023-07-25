@@ -66,7 +66,6 @@ export const markdownRender = async (ctx: Context, next: Next) => {
 export const validatorBlogForm = async (ctx: Context, next: Next) => {
 	try {
 		ctx.verifyParams({
-			author: 'string',
 			title: 'string',
 			classify: 'string',
 			blog_image: 'string',
