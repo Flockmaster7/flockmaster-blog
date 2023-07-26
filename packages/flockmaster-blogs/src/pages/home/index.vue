@@ -93,7 +93,7 @@
 	.blog-container {
 		min-height: 580px;
 		padding: 20px 15px 0;
-		background-color: var(--theme-card-color);
+		background: var(--card-reset-bg);
 		// margin: 15px;
 		display: flex;
 		flex-direction: column;

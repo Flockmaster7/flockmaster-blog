@@ -95,7 +95,7 @@
 	.pigeonhole-container {
 		position: relative;
 		min-height: 580px;
-		background-color: var(--theme-card-color);
+		background: var(--card-reset-bg);
 		padding: 20px 20px 0;
 
 		.tool-card {

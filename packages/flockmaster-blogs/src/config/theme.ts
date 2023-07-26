@@ -14,5 +14,9 @@ export const allTheme = [
 	{
 		text: '紫',
 		theme: 'purple'
+	},
+	{
+		text: '白',
+		theme: 'white'
 	}
 ];

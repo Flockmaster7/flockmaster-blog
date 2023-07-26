@@ -126,7 +126,8 @@
 	}
 	.tag-container {
 		box-sizing: border-box;
-		background-color: var(--theme-card-color);
+		// background-color: var(--theme-card-color);
+		background: var(--card-reset-bg);
 		padding: 20px 20px 0;
 		display: flex;
 		justify-content: space-between;

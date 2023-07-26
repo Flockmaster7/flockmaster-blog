@@ -36,7 +36,6 @@
 	const props = withDefaults(defineProps<PropsType>(), {
 		progressHeight: 150,
 		progressDepth: 0,
-		bgColor: '#ffffff',
 		proColor: 'var(--theme-tool-active-color)',
 		text: ''
 	});
@@ -46,13 +45,14 @@
 	.progress-container {
 		width: 40px;
 		height: 150px;
-		background-color: $white;
+		background: var(--card-reset-bg);
 		border-radius: 10px;
 		position: relative;
 
 		.progress-inline {
 			transition: 0.3s ease-in-out;
 			position: absolute;
+			opacity: 0.7;
 			width: 100%;
 			border-radius: 10px 10px;
 			bottom: 0;

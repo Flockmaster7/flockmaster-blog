@@ -81,7 +81,8 @@
 	.tool-container {
 		border-radius: 10px;
 		padding: 15px 10px;
-		background-color: var(--theme-tool-color);
+		background: var(--card-reset-bg);
+		// background-color: var(--theme-tool-color);
 		position: fixed;
 		top: 200px;
 		.tool-list {
@@ -98,7 +99,7 @@
 				width: 50px;
 				height: 50px;
 				border-radius: 50%;
-				background-color: var(--theme-tool-item-color);
+				// background-color: var(--theme-tool-item-color);
 				line-height: 50px;
 				text-align: center;
 				font-size: 12px;
@@ -128,6 +129,7 @@
 	}
 
 	.active {
+		opacity: 0.7;
 		background-color: var(--theme-tool-active-color) !important;
 	}
 </style>

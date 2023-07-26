@@ -110,13 +110,13 @@ ul {
 }
 
 html {
-	background-color: var(--theme-background-color);
+	background: var(--theme-background-color);
 }
 
 body {
 	line-height: 1;
 	transition: 0.4s;
-	background-color: var(--theme-background-color) !important;
+	background: var(--theme-background-color) !important;
 }
 
 blockquote,

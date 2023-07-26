@@ -134,7 +134,7 @@
 	}
 	.leaveWord-container {
 		padding: 40px 40px;
-		background-color: var(--theme-card-color);
+		background: var(--card-reset-bg);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -179,13 +179,11 @@
 				margin-top: 20px;
 				:deep(.el-button) {
 					width: 100px;
-					color: var(--theme-active-color);
-					// background-color: var(--theme-color);
 					border-radius: 6px;
 					transition: 1s;
 				}
 				:deep(.el-button:hover) {
-					color: #fff;
+					color: var(--theme-tool-item-color);
 					width: 120px;
 					background-color: var(--theme-color);
 					border-radius: 6px;

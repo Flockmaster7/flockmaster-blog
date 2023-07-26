@@ -185,7 +185,7 @@
 		margin: 15px;
 
 		.left {
-			background-color: var(--theme-card-color);
+			background: var(--card-reset-bg);
 			border-radius: 20px;
 			flex-basis: 40%;
 			height: 600px;
@@ -250,7 +250,7 @@
 
 		.right {
 			flex-basis: 60%;
-			background-color: var(--theme-card-color);
+			background: var(--card-reset-bg);
 			border-radius: 20px;
 
 			.top {
