@@ -17,13 +17,24 @@
 
 <script setup lang="ts">
 	import Header from '@/components/layout/header.vue';
+	import useGetPageScroll from '@/hooks/useGetPageScroll';
 	import { useUserStore } from '@/store/user';
 	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
-	import { onMounted } from 'vue';
+	import { onMounted, ref, watch } from 'vue';
 
 	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
+
+	// const isShowHeader = ref(true);
+	// const { y } = useGetPageScroll();
+	// watch(y, (newVal) => {
+	// 	if (newVal >= 500) {
+	// 		isShowHeader.value = false;
+	// 	} else {
+	// 		isShowHeader.value = true;
+	// 	}
+	// });
 
 	onMounted(() => {
 		if (isLogin()) store.getUserProfile();
@@ -48,7 +59,6 @@
 
 <style lang="scss" scoped>
 	.layout-container--header {
-		// transform: translate3d(0, -100%, 0);
 		position: sticky;
 		top: -1px;
 		z-index: 999;

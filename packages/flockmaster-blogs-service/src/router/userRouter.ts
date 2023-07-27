@@ -91,4 +91,7 @@ router.get(
 	userController.getUserFansList
 );
 
+// 获取关注列表
+router.get('/isFollow/:id?', auth, validatorId, userController.isFollowUser);
+
 module.exports = router;

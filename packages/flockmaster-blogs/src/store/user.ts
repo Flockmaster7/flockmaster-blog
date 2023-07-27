@@ -1,3 +1,4 @@
+import { cancelFollowUser, followUser, isFollow } from './../http/user';
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
 import { GetUserInfoResType } from '@/types';
 import { defineStore } from 'pinia';
@@ -45,6 +46,27 @@ export const useUserStore = defineStore('user', () => {
 			followerList.value = res.data.rows;
 		}
 	};
+	// 关注用户
+	const follow = async (user_id: number) => {
+		const { data: res } = await followUser(user_id);
+		if (res.code === 200) {
+			return Promise.resolve('success');
+		}
+	};
+	// 取消关注用户
+	const cancelFollow = async (
+		user_id: number
+	): Promise<string | undefined> => {
+		const { data: res } = await cancelFollowUser(user_id);
+		if (res.code === 200) {
+			return Promise.resolve('success');
+		}
+	};
+	// 是否关注用户
+	const isFollowUser = async (follow_id: number): Promise<boolean> => {
+		const { data: res } = await isFollow(follow_id);
+		return res.data;
+	};
 	return {
 		userInfo,
 		followerList,
@@ -52,6 +74,9 @@ export const useUserStore = defineStore('user', () => {
 		type,
 		getUserProfile,
 		getUserFollowingList,
-		getUserFollowerList
+		getUserFollowerList,
+		follow,
+		cancelFollow,
+		isFollowUser
 	};
 });

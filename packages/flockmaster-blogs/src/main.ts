@@ -19,7 +19,7 @@ import lazyPlugin from 'vue3-lazy';
 
 const app = createApp(App);
 lazyPlugin.install(app, {
-	loading: new URL('@/static/images/error.png', import.meta.url).href,
+	loading: new URL('@/static/images/loading.png', import.meta.url).href,
 	error: new URL('@/static/images/error.png', import.meta.url).href
 });
 app.use(pinia);

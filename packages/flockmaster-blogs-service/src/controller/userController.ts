@@ -192,6 +192,19 @@ class UserController {
 			ctx.app.emit('error', ERROR.getUserFansListError, ctx, error);
 		}
 	}
+
+	// 是否关注用户
+	async isFollowUser(ctx: Context) {
+		try {
+			const { id } = ctx.params;
+			const fans_id = ctx.state.user.id;
+			console.log(id, fans_id);
+			const data = await userService.isFollowUser(id * 1, fans_id * 1);
+			ctx.body = new Result(200, '获取关注状态成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.isFollowUserError, ctx, error);
+		}
+	}
 }
 
 export default UserController;

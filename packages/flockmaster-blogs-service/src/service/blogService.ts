@@ -12,12 +12,14 @@ import User_Blog_CollectService from './user_blog_collectService';
 import User_Blog_Like from '../model/User_Blog_Like';
 import User_Blog_Collect from '../model/User_Blog_Collect';
 import CommentService from './commentService';
+import User_FocusService from './user_focusService';
 
 const tagService = new TagService();
 const blogTagService = new Bolg_tagService();
 const commentService = new CommentService();
 const user_blog_likeService = new User_Blog_LikeService();
 const user_blog_collectService = new User_Blog_CollectService();
+const user_focusService = new User_FocusService();
 class BlogService {
 	// 添加博客
 	async createBlog(
@@ -33,7 +35,6 @@ class BlogService {
 			return false;
 		}
 		// 添加博客对应的标签
-		console.log(tagIdList);
 		await blog.$add('tags', tagIdList);
 		return true;
 	}
@@ -166,7 +167,7 @@ class BlogService {
 	}
 
 	//获取文章详情
-	async getBlogInfo(id: string | number): Promise<Blog | null> {
+	async getBlogInfo(id: string | number) {
 		const wrapper = { id };
 		const res = await Blog.findOne({
 			attributes: [
@@ -188,6 +189,11 @@ class BlogService {
 				{
 					model: Tag,
 					attributes: ['id', 'tag_name', 'tag_classify']
+				},
+				{
+					model: User,
+					as: 'user',
+					attributes: ['id', 'name', 'is_admin']
 				}
 			]
 		});

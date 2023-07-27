@@ -1,5 +1,38 @@
 <template>
-	<!-- <transition> -->
+	<div
+		class="blog-header"
+		:style="{
+			transform: !isShowHeader
+				? 'translate3d(0, -100%, 0)'
+				: 'translate3d(0, 0, 0)'
+		}">
+		<div class="blog-header-box">
+			<div class="header-title">
+				{{ blogDeatil.title }}
+			</div>
+			<div class="header-author">
+				<div class="author-name">
+					{{ blogDeatil.author }}
+				</div>
+				<div class="author-follow">
+					<el-button
+						class="follow"
+						type="primary"
+						@click="userFollow('follow')"
+						v-if="!isFollow && !isOwn"
+						>关注</el-button
+					>
+					<el-button
+						type="default"
+						class="cancel-follow"
+						@click="userFollow('cancel')"
+						v-if="isFollow && !isOwn"
+						>已关注</el-button
+					>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="blog-container">
 		<!-- 左侧 -->
 		<div class="blog-card">
@@ -374,6 +407,16 @@
 		getCommentList();
 		// 获取推荐文章
 		blog.getRecommendBlogList(Number(id));
+		// 是否关注
+		if (isLogin()) {
+			const res = await user.isFollowUser(blogDeatil.value.user.id);
+			isFollow.value = res;
+		}
+		// 是否是本人
+		isOwn.value = userInfo.value.id === blogDeatil.value.user.id;
+		window.scrollTo({
+			top: 0
+		});
 	});
 
 	onBeforeUnmount(() => {
@@ -466,9 +509,11 @@
 		});
 	};
 	const isShowScrollToTop = ref(false);
+
 	const { y } = useGetPageScroll(commentRef.value);
 	// 阅读进度
 	const progressDepth = ref(0);
+	const isShowHeader = ref(false);
 	// 获取高度
 	const getEndHeight = (y: number) => {
 		nextTick(() => {
@@ -480,6 +525,8 @@
 	};
 	watch(y, (newVal) => {
 		getEndHeight(newVal);
+		if (newVal >= 600) isShowHeader.value = true;
+		else isShowHeader.value = false;
 		if (newVal >= 1000) {
 			isShowScrollToTop.value = true;
 		} else {
@@ -501,11 +548,35 @@
 		}
 		// 获取信息
 		await blog.getBlogDetail(Number(id));
+		nextTick(() => {
+			content.value = blogDeatil.value.content_text;
+		});
 		// 获取评论
 		getCommentList();
 		// 获取推荐文章
 		blog.getRecommendBlogList(Number(id));
+		// 是否关注
+		if (isLogin()) {
+			const res = await user.isFollowUser(blogDeatil.value.user.id);
+			isFollow.value = res;
+		}
+		// 是否是本人
+		isOwn.value = userInfo.value.id === blogDeatil.value.user.id;
 		router.push('/blog/detail?id=' + id);
+	};
+
+	// 关注与取消
+	const isFollow = ref(false);
+	const isOwn = ref(false);
+	const userFollow = async (type: string) => {
+		const user_id = blogDeatil.value.user.id;
+		if (type === 'follow') {
+			await user.follow(user_id);
+		} else if (type === 'cancel') {
+			await user.cancelFollow(user_id);
+		}
+		const res = await user.isFollowUser(user_id);
+		isFollow.value = res;
 	};
 </script>
 
@@ -628,6 +699,49 @@
 
 		.right-card {
 			display: none !important;
+		}
+	}
+
+	.blog-header {
+		z-index: 1000;
+		width: 100%;
+		height: 58px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: var(--theme-color);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: 0.4s;
+
+		.blog-header-box {
+			padding: 20px;
+			width: 1100px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.header-title {
+				font-size: 20px;
+				font-weight: 700;
+			}
+
+			.header-author {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 17px;
+				.follow {
+					padding: 4px 8px;
+					border-radius: 5px;
+					font-size: 14px;
+				}
+
+				.follow:hover {
+					color: var(--theme-background-color);
+					cursor: pointer;
+				}
+			}
 		}
 	}
 

@@ -64,6 +64,7 @@ export interface getBlogListResType {
 	tags: GetTagListResType[];
 	createdAt: string;
 	updatedAt: string;
+	user: GetUserInfoResType;
 }
 
 // 获取博客列表表单
@@ -93,6 +94,7 @@ export interface GetBlogDetailResType {
 	tags: GetTagListResType[];
 	createdAt: string;
 	updatedAt: string;
+	user: GetUserInfoResType;
 }
 
 // 获取作品列表接口

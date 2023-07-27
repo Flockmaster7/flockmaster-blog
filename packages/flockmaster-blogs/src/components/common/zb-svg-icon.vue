@@ -32,7 +32,7 @@
 		return props.autoDark
 			? isDark.value
 				? 'var(--theme-active-color)'
-				: ''
+				: props.color
 			: props.color;
 	});
 </script>

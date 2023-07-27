@@ -98,3 +98,39 @@ export const getFansList = (pageNum: number, pageSize: number) => {
 		method: 'GET'
 	});
 };
+
+/**
+ * 关注用户
+ * @param user_id
+ * @returns
+ */
+export const followUser = (user_id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/users/follow/${user_id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 取消关注用户
+ * @param user_id
+ * @returns
+ */
+export const cancelFollowUser = (user_id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/users/unfollow/${user_id}`,
+		method: 'POST'
+	});
+};
+
+/**
+ * 是否关注用户
+ * @param follow_id 用户id
+ * @returns
+ */
+export const isFollow = (follow_id: number) => {
+	return request<HttpResponse<boolean>>({
+		url: `/users/isFollow/${follow_id}`,
+		method: 'GET'
+	});
+};

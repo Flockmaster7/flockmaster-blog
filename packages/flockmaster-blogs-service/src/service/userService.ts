@@ -213,6 +213,12 @@ class UserService {
 			rows: rows1
 		};
 	}
+
+	// 是否关注
+	async isFollowUser(follow_id: number, fans_id: number): Promise<boolean> {
+		const isFollow = await user_focusService.isFollow(follow_id, fans_id);
+		return isFollow;
+	}
 }
 
 export default UserService;

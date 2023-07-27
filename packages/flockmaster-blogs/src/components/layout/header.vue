@@ -20,9 +20,6 @@
 					<div class="navLink-item" @click="changeTab(item)">
 						{{ item.title }}
 					</div>
-					<!-- <router-link :to="item.src" @click="changeTag(item)">{{
-						item.title
-					}}</router-link> -->
 				</div>
 			</div>
 			<!-- <div class="header-nav-mobile">
@@ -60,22 +57,8 @@
 				class="right-open"
 				@click="openRight"
 				v-if="route.meta.isShowRight">
-				<!-- <el-icon color="#fff" :size="20"><Operation /></el-icon> -->
 				<zb-svg-icon name="rightzhankai" :autoDark="true"></zb-svg-icon>
 			</div>
-			<!-- <el-popconfirm
-				v-if="isLogin()"
-				width="220"
-				confirm-button-text="确定"
-				cancel-button-text="取消"
-				:icon="InfoFilled"
-				icon-color="$themeColor"
-				@confirm="confirm"
-				title="是否退出登录？">
-				<template #reference>
-					<el-icon color="#fff" :size="20"><Operation /></el-icon>
-				</template>
-			</el-popconfirm> -->
 		</div>
 	</div>
 	<el-drawer v-model="showOperator" size="30%" title="导航" direction="ltr">
@@ -103,8 +86,6 @@
 	import { useRoute, useRouter } from 'vue-router';
 	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
-	import { Search } from '@element-plus/icons-vue';
-	import { InfoFilled, ArrowDown } from '@element-plus/icons-vue';
 	import { ref } from 'vue';
 	import { HeaderNavType } from '@/types';
 	import { storeToRefs } from 'pinia';
