@@ -98,7 +98,8 @@
 	.searchResult-container {
 		width: 100%;
 		height: 100%;
-		background-color: var(--theme-card-color);
+		// background-color: var(--theme-card-color);
+		background: var(--card-reset-bg);
 
 		.blog-area {
 			box-sizing: border-box;

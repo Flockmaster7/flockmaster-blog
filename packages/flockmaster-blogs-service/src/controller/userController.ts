@@ -205,6 +205,16 @@ class UserController {
 			ctx.app.emit('error', ERROR.isFollowUserError, ctx, error);
 		}
 	}
+
+	// 获取管理员个人信息
+	async getAdminInfo(ctx: Context) {
+		try {
+			const data = await userService.adminInfo();
+			ctx.body = new Result(200, '获取管理员信息成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getAdminInfoError, ctx, error);
+		}
+	}
 }
 
 export default UserController;

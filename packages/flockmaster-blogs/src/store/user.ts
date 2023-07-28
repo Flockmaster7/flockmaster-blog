@@ -1,17 +1,35 @@
-import { cancelFollowUser, followUser, isFollow } from './../http/user';
+import {
+	adminInfo,
+	cancelFollowUser,
+	followUser,
+	isFollow
+} from './../http/user';
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
-import { GetUserInfoResType } from '@/types';
+import { AdminInfoType, GetUserInfoResType } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useUserStore = defineStore('user', () => {
+	const admin = ref<AdminInfoType>({
+		id: 0,
+		user_name: '登录',
+		is_admin: false,
+		name: '登录',
+		description: '这个人很懒，什么都没有留下',
+		user_image: '/55335778bf61b1ae4a6217d00.png',
+		user_focus: 0,
+		user_fans: 0,
+		tagNum: 0,
+		blogNum: 0,
+		workNum: 0
+	});
 	const userInfo = ref<GetUserInfoResType>({
 		id: 0,
-		user_name: '游客',
+		user_name: '登录',
 		is_admin: false,
-		name: '游客',
+		name: '登录',
 		description: '这个人很懒，什么都没有留下',
-		user_image: '/70819f913636cc5b697a88c00.jpg',
+		user_image: '/55335778bf61b1ae4a6217d00.png',
 		user_focus: 0,
 		user_fans: 0
 	});
@@ -31,6 +49,7 @@ export const useUserStore = defineStore('user', () => {
 			// 	imgUrl(imgEnvironment) + userInfo.value.user_image;
 		}
 	};
+
 	// 获取用户关注列表
 	const getUserFollowingList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getFollowList(pageNum, pageSize);
@@ -38,6 +57,7 @@ export const useUserStore = defineStore('user', () => {
 			followingList.value = res.data.rows;
 		}
 	};
+
 	// 获取用户粉丝列表
 	const getUserFollowerList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getFansList(pageNum, pageSize);
@@ -46,6 +66,7 @@ export const useUserStore = defineStore('user', () => {
 			followerList.value = res.data.rows;
 		}
 	};
+
 	// 关注用户
 	const follow = async (user_id: number) => {
 		const { data: res } = await followUser(user_id);
@@ -53,6 +74,7 @@ export const useUserStore = defineStore('user', () => {
 			return Promise.resolve('success');
 		}
 	};
+
 	// 取消关注用户
 	const cancelFollow = async (
 		user_id: number
@@ -62,10 +84,19 @@ export const useUserStore = defineStore('user', () => {
 			return Promise.resolve('success');
 		}
 	};
+
 	// 是否关注用户
 	const isFollowUser = async (follow_id: number): Promise<boolean> => {
 		const { data: res } = await isFollow(follow_id);
 		return res.data;
+	};
+
+	// 获取管理员信息
+	const getAdminInfo = async () => {
+		const { data: res } = await adminInfo();
+		if (res.code === 200) {
+			admin.value = res.data;
+		}
 	};
 	return {
 		userInfo,
@@ -77,6 +108,8 @@ export const useUserStore = defineStore('user', () => {
 		getUserFollowerList,
 		follow,
 		cancelFollow,
-		isFollowUser
+		isFollowUser,
+		getAdminInfo,
+		admin
 	};
 });

@@ -20,6 +20,7 @@ import {
 	CommentType,
 	GetBlogDetailResType,
 	GetBlogListForm,
+	GetUserInfoResType,
 	getBlogListResType
 } from '@/types';
 import { defineStore } from 'pinia';
@@ -54,7 +55,8 @@ export const useBlogStore = defineStore('blog', () => {
 		blog_read: 0,
 		tags: [],
 		createdAt: '',
-		updatedAt: ''
+		updatedAt: '',
+		user: {} as GetUserInfoResType
 	});
 	// 评论列表
 	const commentList = ref<CommentType[]>([]);

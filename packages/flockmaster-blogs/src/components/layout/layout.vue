@@ -45,7 +45,7 @@
 				is_admin: false,
 				name: '游客',
 				description: '这个人很懒，什么都没有留下',
-				user_image: '/70819f913636cc5b697a88c00.jpg',
+				user_image: '/55335778bf61b1ae4a6217d00.png',
 				user_focus: 0,
 				user_fans: 0
 			};

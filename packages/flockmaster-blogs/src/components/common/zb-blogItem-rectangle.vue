@@ -1,44 +1,82 @@
 <template>
-	<div class="card">
-		<div class="blogInfo">
-			<div class="container">
-				<div class="top">
-					<div class="title">{{ blog.title }}</div>
-				</div>
-				<div class="main">
-					<div class="author">作者：{{ blog.author }}</div>
-				</div>
-				<div class="bottom">
-					<div class="data">
-						<div class="data-item">
-							<zb-svg-icon
-								name="yanjing"
-								color="#717775"></zb-svg-icon
-							>{{ blog.blog_read }}
+	<el-skeleton animated :loading="isLoading">
+		<template #template>
+			<div class="card">
+				<div class="blogInfo">
+					<div class="container">
+						<div class="top">
+							<div class="title">
+								<el-skeleton-item
+									variant="text"
+									:style="{ width: 200 + 'px' }" />
+							</div>
 						</div>
-						<div class="data-item">
-							<zb-svg-icon
-								name="dianzan"
-								color="#717775"></zb-svg-icon
-							>{{ blog.blog_like }}
+						<div class="main">
+							<div class="author">
+								<el-skeleton-item
+									variant="text"
+									:style="{ width: 200 + 'px' }" />
+							</div>
 						</div>
-						<div class="data-item">
-							<zb-svg-icon
-								name="shoucang"
-								color="#717775"></zb-svg-icon
-							>{{ blog.blog_collect }}
+						<div class="bottom">
+							<el-skeleton-item variant="text" />
 						</div>
 					</div>
-					<div class="date">
-						发布于：{{ getTimeFormNow(blog.createdAt) }}
-					</div>
+				</div>
+				<div class="blogImg">
+					<el-skeleton-item
+						variant="image"
+						:style="{
+							width: 100 + '%',
+							height: 170 + 'px',
+							borderRadius: 8 + 'px'
+						}" />
 				</div>
 			</div>
-		</div>
-		<div class="blogImg">
-			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
-		</div>
-	</div>
+		</template>
+		<template #default>
+			<div class="card">
+				<div class="blogInfo">
+					<div class="container">
+						<div class="top">
+							<div class="title">{{ blog.title }}</div>
+						</div>
+						<div class="main">
+							<div class="author">作者：{{ blog.author }}</div>
+						</div>
+						<div class="bottom">
+							<div class="data">
+								<div class="data-item">
+									<zb-svg-icon
+										name="yanjing"
+										color="#717775"></zb-svg-icon
+									>{{ blog.blog_read }}
+								</div>
+								<div class="data-item">
+									<zb-svg-icon
+										name="dianzan"
+										color="#717775"></zb-svg-icon
+									>{{ blog.blog_like }}
+								</div>
+								<div class="data-item">
+									<zb-svg-icon
+										name="shoucang"
+										color="#717775"></zb-svg-icon
+									>{{ blog.blog_collect }}
+								</div>
+							</div>
+							<div class="date">
+								发布于：{{ getTimeFormNow(blog.createdAt) }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="blogImg">
+					<img v-lazy="imgUrl(blog.blog_image)" alt="" />
+				</div>
+			</div>
+		</template>
+	</el-skeleton>
 </template>
 
 <script setup lang="ts">
@@ -48,6 +86,7 @@
 
 	interface PropType {
 		blog: GetBlogDetailResType;
+		isLoading: boolean;
 	}
 
 	defineProps<PropType>();

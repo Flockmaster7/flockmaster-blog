@@ -297,6 +297,7 @@
 		display: flex;
 		min-height: 90vh;
 		padding: 10px 0;
+		background: var(--card-reset-bg);
 
 		&--leftBox {
 			flex-basis: 50%;
@@ -307,6 +308,7 @@
 			justify-content: center;
 			gap: 1rem;
 			background-color: var(--theme-color);
+			opacity: 0.8;
 
 			img {
 				width: 100%;
@@ -316,14 +318,12 @@
 			h2 {
 				font-size: 1.75rem;
 				font-weight: 500;
-				color: $white;
 			}
 
 			p {
 				max-width: 500px;
 				font-size: 1.2rem;
 				text-align: center;
-				color: $white;
 			}
 		}
 

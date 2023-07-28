@@ -1,11 +1,47 @@
 <template>
 	<div class="container">
 		<!-- 个人信息卡片 -->
-		<el-card>
+		<el-card :body-style="{ padding: 0 }">
 			<div class="info-card">
-				<img class="avatar" :src="imgUrl(userInfo.user_image)" />
-				<text class="name">{{ userInfo.name }}</text>
-				<text class="description">{{ userInfo.description }}</text>
+				<img class="info-bg" :src="adminBg" alt="" />
+				<div class="info-center">
+					<div class="info-center-top">
+						<img class="avatar" :src="imgUrl(admin.user_image)" />
+						<p class="name">{{ admin.name }}</p>
+					</div>
+					<div class="description">{{ admin.description }}</div>
+				</div>
+				<div class="info-data">
+					<div class="data-item">
+						<div class="text">文章</div>
+						<div class="number" @click="gotoAdminData('blog')">
+							{{ admin.blogNum }}
+						</div>
+					</div>
+					<div class="data-item">
+						<div class="text">标签</div>
+						<div class="number" @click="gotoAdminData('tag')">
+							{{ admin.tagNum }}
+						</div>
+					</div>
+					<div class="data-item">
+						<div class="text">作品</div>
+						<div class="number" @click="gotoAdminData('work')">
+							{{ admin.workNum }}
+						</div>
+					</div>
+				</div>
+				<div class="info-link">
+					<div class="info-link-item" @click="gotoSite('bilibili')">
+						<img class="icon" src="@/static/images/bilibili.png" />
+					</div>
+					<div class="info-link-item" @click="gotoSite('github')">
+						<img class="icon" src="@/static/images/github.png" />
+					</div>
+					<div class="info-link-item" @click="gotoSite('gitee')">
+						<img class="icon" src="@/static/images/gitee.png" />
+					</div>
+				</div>
 			</div>
 		</el-card>
 		<!-- 设置 -->
@@ -66,16 +102,12 @@
 			</el-collapse>
 		</el-card>
 		<!-- 标签云卡片 -->
-		<el-card>
+		<!-- <el-card>
 			<el-collapse v-model="activeTag">
 				<el-collapse-item name="1">
 					<template #title>
 						<el-icon class="head-icon"><Guide /></el-icon>
 						<text class="head-text"> 标签云 </text>
-						<!-- TO DO -->
-						<!-- <div class="head-refresh">
-							<el-icon size="15"><RefreshRight /></el-icon>
-						</div> -->
 					</template>
 					<div class="tag-List">
 						<el-check-tag
@@ -89,26 +121,54 @@
 					</div>
 				</el-collapse-item>
 			</el-collapse>
-		</el-card>
+		</el-card> -->
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { useTagStore } from '@/store/tag';
 	import { storeToRefs } from 'pinia';
-	import { ref } from 'vue';
+	import { computed, onMounted, ref } from 'vue';
 	import { imgUrl } from '@/utils/common';
 	import zbTheme from '@/components/common/zb-theme.vue';
 	import useTheme from '@/hooks/useTheme';
 	import useStore from '@/store';
 	import { allTheme } from '@/config/theme';
+	import router from '@/router';
 
-	const { blog, user } = useStore();
+	const { blog, user, common } = useStore();
 
-	const { userInfo } = storeToRefs(user);
+	const { admin } = storeToRefs(user);
+	const { activeNav } = storeToRefs(common);
 	const activeNames = ref(['1']);
 	const handleChange = (val: string[]) => {
 		console.log(val);
+	};
+	// 个人信息
+	onMounted(async () => {
+		await user.getAdminInfo();
+	});
+	const adminBg = computed(() => {
+		return new URL('../../static/images/admin_bg.png', import.meta.url)
+			.href;
+	});
+	const gotoAdminData = (type: string) => {
+		switch (type) {
+			case 'blog':
+				router.push('/pigeonhole');
+				activeNav.value = '/pigeonhole';
+				break;
+			case 'tag':
+				router.push('/tag');
+				activeNav.value = '/tag';
+				break;
+			case 'work':
+				router.push('/work');
+				activeNav.value = '/work';
+				break;
+			default:
+				break;
+		}
 	};
 	// 设置
 	const activeSettings = ref(['1']);
@@ -174,7 +234,7 @@
 		justify-content: space-between;
 		align-items: center;
 		// margin-top: 15px;
-		gap: 15px;
+		gap: 10px;
 		// overflow-y: scroll;
 		// 个人信息卡片
 		.info-card {
@@ -182,19 +242,96 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			padding: 20px 0 20px;
 			gap: 10px;
-			.avatar {
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
+
+			.info-bg {
+				width: 100%;
+				height: 120px;
 			}
-			.name {
-				font-weight: 700;
+			.info-center {
+				width: 100%;
+				transform: translate(5%, -50%);
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				.info-center-top {
+					display: flex;
+					gap: 6px;
+					.avatar {
+						width: 60px;
+						height: 60px;
+						border-radius: 50%;
+						transition: 1s ease-in-out;
+					}
+					.avatar:hover {
+						cursor: pointer;
+						// transform: rotate3d(1turn);
+						transform: rotate3d(1, 1, 1, 360deg);
+					}
+					.name {
+						transform: translateY(60%);
+						font-weight: 700;
+						font-size: 17px;
+					}
+				}
+
+				.description {
+					font-size: 15px;
+					color: $gray;
+				}
 			}
-			.description {
-				font-size: 12px;
-				color: #a8a4a4;
+			.info-data {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 40px;
+				padding: 0 0 20px;
+				.data-item {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 6px;
+					.text {
+						font-weight: 500;
+						color: $gray;
+					}
+					.number {
+					}
+					.number:hover {
+						color: var(--theme-nav-active-color);
+						cursor: pointer;
+						font-weight: 600;
+					}
+				}
+			}
+			.info-link {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap: 20px;
+				padding-bottom: 20px;
+				.info-link-item {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 5px;
+					.icon {
+						width: 30px;
+						height: 30px;
+						border-radius: 50%;
+					}
+
+					.text {
+						font-size: 15px;
+					}
+				}
+
+				.info-link-item:hover {
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -210,7 +347,7 @@
 			}
 
 			.active {
-				color: var(--theme-tool-active-color);
+				color: var(--theme-nav-active-color);
 			}
 
 			.theme-item:hover {

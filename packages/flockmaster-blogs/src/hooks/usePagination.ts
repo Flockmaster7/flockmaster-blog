@@ -11,6 +11,8 @@ export default function (
 	const isLoading = ref(false);
 	const getBlogListParams = ref<GetBlogListForm>({});
 
+	const delay = 500;
+
 	const delayGetList = () => {
 		if (typeof getList !== 'function') return Promise.reject(false);
 		isLoading.value = true;
@@ -23,18 +25,18 @@ export default function (
 
 	const handleSizeChange = async (val: number) => {
 		pageSize.value = val;
-		await minDelay<boolean>(delayGetList(), 500);
+		await minDelay<boolean>(delayGetList(), delay);
 		isLoading.value = false;
 	};
 
 	const handleCurrentChange = async (val: number) => {
 		pageNum.value = val;
-		await minDelay<boolean>(delayGetList(), 500);
+		await minDelay<boolean>(delayGetList(), delay);
 		isLoading.value = false;
 	};
 
 	onMounted(async () => {
-		await minDelay<boolean>(delayGetList(), 500);
+		await minDelay<boolean>(delayGetList(), delay);
 		isLoading.value = false;
 	});
 

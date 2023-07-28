@@ -170,3 +170,10 @@ export interface ClassifyType {
 	id: string;
 	text: string;
 }
+
+// 管理员信息
+export interface AdminInfoType extends GetUserInfoResType {
+	tagNum: number;
+	blogNum: number;
+	workNum: number;
+}

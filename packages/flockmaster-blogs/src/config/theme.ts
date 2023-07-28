@@ -1,6 +1,6 @@
 export const allTheme = [
 	{
-		text: '绿',
+		text: '默认',
 		theme: 'default'
 	},
 	{
@@ -16,7 +16,7 @@ export const allTheme = [
 		theme: 'purple'
 	},
 	{
-		text: '白',
-		theme: 'white'
+		text: '绿',
+		theme: 'green'
 	}
 ];

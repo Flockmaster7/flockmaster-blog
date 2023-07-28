@@ -1,9 +1,9 @@
 <template>
 	<div class="empty-container" :style="{ height: height + 'px' }">
 		<div class="center">
-			<!-- <div class="img">
-				<img src="../../static/images/logo/empty.png" alt="" />
-			</div> -->
+			<div class="img">
+				<zb-svg-icon name="empty" :size="iconSize"></zb-svg-icon>
+			</div>
 			<div class="text" :style="{ fontSize: textSize + 'px' }">
 				{{ text }}
 			</div>
@@ -16,12 +16,14 @@
 		text: string;
 		height: number;
 		textSize: number;
+		iconSize: number;
 	}
 
 	withDefaults(defineProps<propsType>(), {
 		text: '空空如也~',
 		height: 250,
-		textSize: 20
+		textSize: 16,
+		iconSize: 50
 	});
 </script>
 
@@ -38,8 +40,8 @@
 			flex-direction: column;
 			gap: 15px;
 			.text {
-				font-size: 20px;
-				color: var(--theme-active-color);
+				color: var(--theme-empty-color);
+				font-size: 16px;
 			}
 		}
 	}

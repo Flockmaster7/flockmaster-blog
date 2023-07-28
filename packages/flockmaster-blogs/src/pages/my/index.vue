@@ -2,7 +2,6 @@
 	<div class="my-container">
 		<div class="left">
 			<p class="title">个人信息</p>
-			<!-- <zbInfoItem :info="userInfo" /> -->
 			<div class="avatar">
 				<img :src="imgUrl(userInfo.user_image)" alt="" />
 			</div>
@@ -69,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-	import { useRoute, useRouter } from 'vue-router';
+	import { useRouter } from 'vue-router';
 	import blogItem from './components/blogItem.vue';
 	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
@@ -83,7 +82,6 @@
 	import { imgUrl } from '@/utils/common';
 
 	const router = useRouter();
-	const route = useRoute();
 
 	// 获取设备
 	useIsMobile();
@@ -240,7 +238,7 @@
 					}
 
 					.number:hover {
-						color: $themeColor;
+						color: var(--theme-active-color);
 						cursor: pointer;
 						font-weight: 600;
 					}

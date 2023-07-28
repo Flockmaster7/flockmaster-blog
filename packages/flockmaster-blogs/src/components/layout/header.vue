@@ -22,30 +22,9 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="header-nav-mobile">
-				<el-dropdown trigger="click" @command="handleCommand">
-					<span class="el-dropdown-link">
-						{{ currentNav }}
-						<el-icon class="el-icon--right">
-							<arrow-down />
-						</el-icon>
-					</span>
-					<template #dropdown>
-						<el-dropdown-menu>
-							<el-dropdown-item
-								:command="item"
-								v-for="(item, index) in navLinkList"
-								:key="index"
-								>{{ item.title }}</el-dropdown-item
-							>
-						</el-dropdown-menu>
-					</template>
-				</el-dropdown>
-			</div> -->
 		</div>
 		<div class="rightBox">
 			<div class="search" @click="gotoSearch">
-				<!-- <el-icon :size="22"><Search /></el-icon> -->
 				<zb-svg-icon name="search" :autoDark="true"></zb-svg-icon>
 				<span class="text">搜索</span>
 			</div>
@@ -86,7 +65,7 @@
 	import { useRoute, useRouter } from 'vue-router';
 	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
-	import { ref } from 'vue';
+	import { ref, watch } from 'vue';
 	import { HeaderNavType } from '@/types';
 	import { storeToRefs } from 'pinia';
 	import { imgUrl } from '@/utils/common';
@@ -96,7 +75,7 @@
 
 	const { user, common } = useStore();
 	const { userInfo } = storeToRefs(user);
-	const { isDark, rightOpen } = storeToRefs(common);
+	const { activeNav, rightOpen } = storeToRefs(common);
 	const router = useRouter();
 	const route = useRoute();
 
@@ -123,7 +102,6 @@
 	};
 
 	// 选中nav
-	const activeNav = ref('/');
 	const changeTab = (nav: HeaderNavType) => {
 		router.push(nav.src);
 		window.scrollTo({
@@ -247,6 +225,7 @@
 		align-items: center;
 		padding: 10px 80px;
 		background-color: var(--theme-color);
+		opacity: 0.75;
 		transition: 0.4s;
 
 		.leftBox {
@@ -293,7 +272,7 @@
 			justify-content: center;
 			align-items: center;
 			.navLink {
-				width: 100px;
+				width: 60px;
 				height: 100%;
 				text-align: center;
 

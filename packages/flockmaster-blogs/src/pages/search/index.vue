@@ -1,5 +1,10 @@
 <template>
-	<div class="search-container" :style="{ height: windowHeight + 'px' }">
+	<div
+		class="search-container"
+		:style="{
+			height: windowHeight + 'px',
+			...bgImg
+		}">
 		<div class="title">搜索</div>
 		<div class="input">
 			<el-input
@@ -15,8 +20,13 @@
 </template>
 
 <script setup lang="ts">
-	import { nextTick, ref } from 'vue';
+	import { computed, nextTick, ref } from 'vue';
 	import router from '@/router';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
+
+	const { common } = useStore();
+	const { isDark } = storeToRefs(common);
 
 	const windowHeight = ref(0);
 	nextTick(() => {
@@ -29,6 +39,20 @@
 	const gotoSearchResult = () => {
 		router.push('/searchResult?query=' + searchText.value);
 	};
+
+	const bgImg = computed(() => {
+		return {
+			backgroundSize: 'cover',
+			backgroundImage: `url(${
+				new URL(
+					isDark.value
+						? '../../static/images/search_bg_dark.png'
+						: '../../static/images/search_bg.png',
+					import.meta.url
+				).href
+			})`
+		};
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -59,14 +83,7 @@
 		border-radius: 20px;
 		width: 100%;
 		gap: 20px;
-		background-image: var(--theme-search-bg-color);
-		// background-image: linear-gradient(
-		// 	25deg,
-		// 	#f84b00,
-		// 	#dd8754,
-		// 	#adb296,
-		// 	#00d9db
-		// );
+
 		.title {
 			font-size: 40px;
 			font-weight: 700;

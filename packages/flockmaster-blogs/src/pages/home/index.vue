@@ -8,20 +8,21 @@
 				v-for="item in blogList"
 				:key="item.id"
 				@click="gotoBlogDetail(item.id)"
-				class="item"
-				v-show="!isLoading && blogList.length > 0">
+				class="item">
 				<zbBlogItemRectangleMobile
 					:blog="item"
-					v-if="isMobile"></zbBlogItemRectangleMobile>
+					v-if="isMobile"
+					:isLoading="isLoading"></zbBlogItemRectangleMobile>
 				<zbBlogItemRectangle
 					:blog="item"
-					v-if="!isMobile"></zbBlogItemRectangle>
+					v-if="!isMobile"
+					:isLoading="isLoading"></zbBlogItemRectangle>
 			</div>
 		</div>
-		<zb-loading v-show="isLoading"></zb-loading>
+		<!-- <zb-loading v-show="isLoading"></zb-loading> -->
 		<zb-empty
 			v-if="!isLoading && blogList.length === 0"
-			:height="500"></zb-empty>
+			:height="600"></zb-empty>
 		<div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"

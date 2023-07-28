@@ -50,7 +50,7 @@
 				@click="gotoTop"
 				v-show="isShowScrollToTop">
 				<div class="icon">
-					<el-icon color="#ffffff"><ArrowUpBold /></el-icon>
+					<zb-svg-icon name="rocket" size="50"></zb-svg-icon>
 				</div>
 			</div>
 			<el-card>
@@ -355,7 +355,14 @@
 </template>
 
 <script setup lang="ts">
-	import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+	import {
+		nextTick,
+		onBeforeMount,
+		onBeforeUnmount,
+		onMounted,
+		ref,
+		watch
+	} from 'vue';
 	import { storeToRefs } from 'pinia';
 	import { useRoute } from 'vue-router';
 	import { imgUrl } from '@/utils/common';
@@ -375,7 +382,7 @@
 	import router from '@/router';
 
 	const { common, blog, user } = useStore();
-	const { isDark, previewId, rightOpen } = storeToRefs(common);
+	const { isDark, rightOpen } = storeToRefs(common);
 
 	const { blogDeatil, blogStatus, commentList, commentTotal, recommendList } =
 		storeToRefs(blog);
@@ -386,6 +393,8 @@
 	const id = route.query.id! as string;
 
 	const scrollElement = document.documentElement;
+
+	const previewId = ref('myPreview');
 
 	onMounted(async () => {
 		// 获取状态
@@ -860,15 +869,23 @@
 			bottom: 50px;
 			width: 50px;
 			height: 50px;
-			background-color: var(--theme-color);
 			text-align: center;
 			line-height: 50px;
-			transition: 0.7s;
 		}
 
 		.icon:hover {
 			cursor: pointer;
-			transform: translate(-3px, -5px);
+			animation: translate 1.2s ease-in-out infinite;
+		}
+
+		@keyframes translate {
+			from {
+				transform: translateY(15px);
+			}
+
+			to {
+				transform: translateY(0);
+			}
 		}
 	}
 

@@ -4,6 +4,9 @@ import User_Follow from '../model/User_Follow';
 import { GetUserInfoParamsType, UpdateUserInfoParamsType } from '../types/user';
 import User_FocusService from './user_focusService';
 import { uid } from 'uid';
+import Tag from '../model/Tag';
+import Blog from '../model/Blog';
+import Work from '../model/Work';
 
 const user_focusService = new User_FocusService();
 class UserService {
@@ -12,7 +15,7 @@ class UserService {
 		const id = uid();
 		const name = '用户' + id;
 		const description = '用户有点懒，什么都没留下';
-		const user_image = '/70819f913636cc5b697a88c00.jpg';
+		const user_image = '/7186f3071749102df3fc62a00.png';
 		const res = await User.create(
 			{
 				user_name,
@@ -218,6 +221,37 @@ class UserService {
 	async isFollowUser(follow_id: number, fans_id: number): Promise<boolean> {
 		const isFollow = await user_focusService.isFollow(follow_id, fans_id);
 		return isFollow;
+	}
+
+	// 获取管理员个人信息
+	async adminInfo() {
+		const res = await User.findOne({
+			where: {
+				user_name: 'admin',
+				is_admin: 1
+			},
+			attributes: [
+				'id',
+				'user_name',
+				'is_admin',
+				'name',
+				'user_image',
+				'description'
+			]
+		});
+		if (res) {
+			const tagNum = await Tag.count();
+			const blogNum = await Blog.count();
+			const workNum = await Work.count();
+			return {
+				...res.dataValues,
+				tagNum,
+				blogNum,
+				workNum
+			};
+		} else {
+			return '未找到管理员信息';
+		}
 	}
 }
 

@@ -23,7 +23,7 @@
 					</el-collapse-item>
 				</el-collapse>
 			</div>
-			<div class="blog" v-show="!isLoading && blogList.length > 0">
+			<div class="blog">
 				<div
 					v-for="(item, index) in blogList"
 					:key="item.id"
@@ -31,13 +31,15 @@
 					class="item">
 					<zbBlogItemRectangleMobile
 						:blog="item"
-						v-if="isMobile"></zbBlogItemRectangleMobile>
+						v-if="isMobile"
+						:isLoading="isLoading"></zbBlogItemRectangleMobile>
 					<zbBlogItemRectangle
 						:blog="item"
-						v-if="!isMobile"></zbBlogItemRectangle>
+						v-if="!isMobile"
+						:isLoading="isLoading"></zbBlogItemRectangle>
 				</div>
 			</div>
-			<zb-loading v-show="isLoading"></zb-loading>
+			<!-- <zb-loading v-show="isLoading"></zb-loading> -->
 			<zb-empty :height="310" v-show="blogList.length === 0"></zb-empty>
 		</div>
 		<div class="pagination" v-show="blogList.length > 0">

@@ -6,7 +6,8 @@ import type {
 	RegisterResType,
 	UserUpdatePasswordForm,
 	UpdateUserInfoFrom,
-	GetUserInfoResType
+	GetUserInfoResType,
+	AdminInfoType
 } from '@/types/index.d.ts';
 import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
@@ -131,6 +132,17 @@ export const cancelFollowUser = (user_id: number) => {
 export const isFollow = (follow_id: number) => {
 	return request<HttpResponse<boolean>>({
 		url: `/users/isFollow/${follow_id}`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 获取管理员信息
+ * @returns AdminInfoType
+ */
+export const adminInfo = () => {
+	return request<HttpResponse<AdminInfoType>>({
+		url: `/users/admin`,
 		method: 'GET'
 	});
 };

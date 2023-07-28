@@ -94,4 +94,7 @@ router.get(
 // 获取关注列表
 router.get('/isFollow/:id?', auth, validatorId, userController.isFollowUser);
 
+// 获取管理员个人信息
+router.get('/admin', userController.getAdminInfo);
+
 module.exports = router;

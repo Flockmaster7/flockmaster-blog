@@ -93,7 +93,7 @@
 
 		.search-button {
 			border: none;
-			background-color: var(--theme-color);
+			background-color: var(--theme-active-color);
 			color: $white;
 			padding: 10px 25px;
 			border-radius: 3px;

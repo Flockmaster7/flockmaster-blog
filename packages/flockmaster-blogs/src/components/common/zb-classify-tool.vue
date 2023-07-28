@@ -53,8 +53,9 @@
 				// background-color: var(--theme-tool-item-color);
 				line-height: 50px;
 				text-align: center;
-				font-size: 12px;
+				font-size: 16px;
 				transition: 0.6s;
+				font-weight: 700;
 
 				.subscript {
 					position: absolute;
@@ -81,6 +82,7 @@
 
 	.active {
 		// color: $white;
+		color: var(--theme-nav-active-color);
 		background-color: var(--theme-tool-active-color) !important;
 	}
 </style>
