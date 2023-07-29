@@ -29,9 +29,9 @@ export const routers = [
 						component: () => import('@/pages/work/index.vue')
 					},
 					{
-						path: '/service',
-						name: 'Service',
-						component: () => import('@/pages/service/index.vue')
+						path: '/album',
+						name: 'Album',
+						component: () => import('@/pages/album/index.vue')
 					},
 					{
 						path: '/about',

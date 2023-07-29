@@ -95,7 +95,6 @@
 		min-height: 580px;
 		padding: 20px 15px 0;
 		background: var(--card-reset-bg);
-		// margin: 15px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;

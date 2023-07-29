@@ -34,6 +34,9 @@ importers:
       '@vueuse/core':
         specifier: ^10.2.0
         version: 10.2.0(vue@3.3.1)
+      animate.css:
+        specifier: ^4.1.1
+        version: 4.1.1
       axios:
         specifier: ^1.4.0
         version: 1.4.0
@@ -61,12 +64,12 @@ importers:
       postcss-pxtorem:
         specifier: ^6.0.0
         version: 6.0.0(postcss@8.4.24)
-      prismjs:
-        specifier: ^1.29.0
-        version: 1.29.0
       vue:
         specifier: ^3.3.1
         version: 3.3.1
+      vue-perfect-scrollbar:
+        specifier: ^0.2.1
+        version: 0.2.1
       vue-router:
         specifier: ^4.2.2
         version: 4.2.2(vue@3.3.1)
@@ -1887,6 +1890,10 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
+
+  /animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
+    dev: false
 
   /ansi-regex@2.1.1:
     resolution: {integrity: sha512-TIGnTpdo+E3+pCyAluZvtED5p5wCqLdezCyhPZzKPcxvFplEt4i+W7OONCKgeZFT3+y5NZZfOOS/Bdcanm1MYA==}
@@ -4556,11 +4563,6 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-    dev: false
-
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
@@ -5736,6 +5738,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-perfect-scrollbar@0.2.1:
+    resolution: {integrity: sha512-45rOonNrZaKX0mu0N9v422+c3Ngm8iTnVAP0N2iUwPfWZJds4S6eRGdmiNbrVFqmUc8IfRNI0Dpa3Zk8ntjaZQ==}
+    dev: false
 
   /vue-router@4.2.2(vue@3.3.1):
     resolution: {integrity: sha512-cChBPPmAflgBGmy3tBsjeoe3f3VOSG6naKyY5pjtrqLGbNEXdzCigFUHgBvp9e3ysAtFtEx7OLqcSDh/1Cq2TQ==}

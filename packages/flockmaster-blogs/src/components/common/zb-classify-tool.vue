@@ -36,9 +36,7 @@
 		border-radius: 10px;
 		padding: 8px 5px;
 		background: var(--card-reset-bg);
-		// background-color: var(--theme-tool-color);
 		position: fixed;
-		top: 75px;
 		.tool-list {
 			display: flex;
 			flex-direction: column;

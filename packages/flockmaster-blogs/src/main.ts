@@ -16,6 +16,8 @@ import 'virtual:svg-icons-register';
 import zbSvgIconVue from './components/common/zb-svg-icon.vue';
 // 图片懒加载
 import lazyPlugin from 'vue3-lazy';
+// 动画
+import 'animate.css';
 
 const app = createApp(App);
 lazyPlugin.install(app, {

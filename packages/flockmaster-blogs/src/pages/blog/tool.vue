@@ -54,7 +54,7 @@
 	};
 
 	const blogStore = useBlogStore();
-	const { blogDeatil, blogStatus } = storeToRefs(blogStore);
+	const { blogStatus } = storeToRefs(blogStore);
 
 	// 点赞
 	const likeBlog = async () => {
@@ -84,7 +84,7 @@
 		background: var(--card-reset-bg);
 		// background-color: var(--theme-tool-color);
 		position: fixed;
-		top: 200px;
+		top: 170px;
 		.tool-list {
 			display: flex;
 			flex-direction: column;

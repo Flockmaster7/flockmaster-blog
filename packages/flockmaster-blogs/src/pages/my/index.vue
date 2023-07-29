@@ -1,5 +1,5 @@
 <template>
-	<div class="my-container">
+	<div class="my-container animate__animated animate__zoomInUp">
 		<div class="left">
 			<p class="title">个人信息</p>
 			<div class="avatar">

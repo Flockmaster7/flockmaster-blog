@@ -33,26 +33,29 @@
 			</div>
 		</div>
 	</div>
-	<div class="blog-container">
+	<div class="tool-list">
+		<div class="tool-card">
+			<tool :id="id" @toComment="toComment"></tool>
+		</div>
+		<div class="progress-card">
+			<zb-progress
+				:progressDepth="progressDepth"
+				text="泰裤辣"></zb-progress>
+		</div>
+		<div
+			ref="scrollToTopRef"
+			class="scrollToTop"
+			@click="gotoTop"
+			v-show="isShowScrollToTop">
+			<div class="icon">
+				<zb-svg-icon name="rocket" size="50"></zb-svg-icon>
+			</div>
+		</div>
+	</div>
+
+	<div class="blog-container animate__animated animate__fadeInLeft">
 		<!-- 左侧 -->
 		<div class="blog-card">
-			<div class="tool-card">
-				<tool :id="id" @toComment="toComment"></tool>
-			</div>
-			<div class="progress-card">
-				<zb-progress
-					:progressDepth="progressDepth"
-					text="泰裤辣"></zb-progress>
-			</div>
-			<div
-				ref="scrollToTopRef"
-				class="scrollToTop"
-				@click="gotoTop"
-				v-show="isShowScrollToTop">
-				<div class="icon">
-					<zb-svg-icon name="rocket" size="50"></zb-svg-icon>
-				</div>
-			</div>
 			<el-card>
 				<div class="blog-info">
 					<div class="top">
@@ -370,7 +373,6 @@
 	import { ElMessage } from 'element-plus';
 	import { CommentParamsType } from '@/types/index';
 	import useGetPageScroll from '@/hooks/useGetPageScroll';
-	import { ArrowUpBold } from '@element-plus/icons-vue';
 	import { isLogin } from '@/utils/login';
 	import zbCommentArea from '@/components/common/zb-comment-area.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
@@ -740,6 +742,17 @@
 				align-items: center;
 				gap: 8px;
 				font-size: 17px;
+
+				:deep(.el-button--primary) {
+					width: 50px;
+					background-color: var(--theme-active-color);
+					border-radius: 6px;
+					transition: 1s;
+				}
+				:deep(.el-button--primary:hover) {
+					width: 73px;
+				}
+
 				.follow {
 					padding: 4px 8px;
 					border-radius: 5px;
@@ -747,7 +760,6 @@
 				}
 
 				.follow:hover {
-					color: var(--theme-background-color);
 					cursor: pointer;
 				}
 			}
@@ -842,49 +854,52 @@
 		background-color: var(--theme-color) !important;
 	}
 
-	.tool-card {
-		position: absolute;
-		left: -100px;
-	}
-
-	.progress-card {
-		position: absolute;
-		left: -85px;
-		// bottom: 200px;
-
-		.progress-container {
-			position: fixed;
-			bottom: 120px;
-		}
-	}
-
-	.scrollToTop {
-		z-index: 10;
-		opacity: 0.6;
-		position: absolute;
-		right: -50px;
-		.icon {
-			border-radius: 40%;
-			position: fixed;
-			bottom: 50px;
-			width: 50px;
-			height: 50px;
-			text-align: center;
-			line-height: 50px;
+	.tool-list {
+		position: relative;
+		.tool-card {
+			position: absolute;
+			left: -75px;
 		}
 
-		.icon:hover {
-			cursor: pointer;
-			animation: translate 1.2s ease-in-out infinite;
+		.progress-card {
+			position: absolute;
+			left: -60px;
+			// bottom: 200px;
+
+			.progress-container {
+				position: fixed;
+				bottom: 100px;
+			}
 		}
 
-		@keyframes translate {
-			from {
-				transform: translateY(15px);
+		.scrollToTop {
+			z-index: 10;
+			opacity: 0.6;
+			position: absolute;
+			right: -50px;
+			.icon {
+				border-radius: 40%;
+				position: fixed;
+				bottom: 50px;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
 			}
 
-			to {
-				transform: translateY(0);
+			.icon:hover {
+				cursor: pointer;
+				animation: translate 1.2s ease-in-out infinite;
+			}
+
+			@keyframes translate {
+				from {
+					transform: translateY(15px);
+				}
+
+				to {
+					transform: translateY(0);
+				}
 			}
 		}
 	}

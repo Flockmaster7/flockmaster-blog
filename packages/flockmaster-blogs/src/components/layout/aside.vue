@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container animate__animated animate__fadeInLeft">
 		<!-- 个人信息卡片 -->
 		<el-card :body-style="{ padding: 0 }">
 			<div class="info-card">

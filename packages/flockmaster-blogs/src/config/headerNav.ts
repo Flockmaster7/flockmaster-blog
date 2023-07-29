@@ -30,12 +30,13 @@ export const navLinkList: HeaderNavType[] = [
 		src: '/leaveWord',
 		name: '',
 		icon: 'fengche'
+	},
+	{
+		title: '相册',
+		src: '/album',
+		name: '',
+		icon: 'fengche'
 	}
-	// {
-	// 	title: '关于',
-	// 	src: '/about',
-	// 	name: ''
-	// }
 ];
 
 export const mobileNav: HeaderNavType[] = [

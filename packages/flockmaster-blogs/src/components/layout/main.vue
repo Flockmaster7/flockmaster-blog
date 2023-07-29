@@ -2,13 +2,14 @@
 	<div class="layout-container">
 		<!-- 主体区域 -->
 		<div class="main-area">
-			<router-view v-slot="{ Component }">
-				<transition>
+			<transition
+				enter-active-class="animate__animated animate__bounceInLeft">
+				<router-view v-slot="{ Component }">
 					<keep-alive include="searchResult">
 						<component :is="Component"></component>
 					</keep-alive>
-				</transition>
-			</router-view>
+				</router-view>
+			</transition>
 		</div>
 		<!-- 右侧边栏 -->
 		<div class="aside-area">
@@ -37,20 +38,19 @@
 		margin: 15px 8px 15px;
 		.main-area {
 			flex-basis: 75%;
-			// background-color: $white;
 		}
 		.aside-area {
 			flex-basis: 25%;
 		}
 	}
 
-	.v-enter-active,
-	.v-leave-active {
-		transition: opacity 0.4s ease;
-	}
+	// .v-enter-active,
+	// .v-leave-active {
+	// 	transition: opacity 0.7s ease;
+	// }
 
-	.v-enter-from,
-	.v-leave-to {
-		opacity: 0;
-	}
+	// .v-enter-from,
+	// .v-leave-to {
+	// 	opacity: 0;
+	// }
 </style>
