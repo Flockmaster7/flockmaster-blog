@@ -5,13 +5,13 @@
 		</div>
 	</div>
 	<div class="layout-container--main">
-		<!-- <transition> -->
-		<router-view v-slot="{ Component }">
-			<keep-alive include="main">
-				<component :is="Component"></component>
-			</keep-alive>
-		</router-view>
-		<!-- </transition> -->
+		<transition enter-active-class="animate__animated animate__fadeInLeft">
+			<router-view v-slot="{ Component }">
+				<keep-alive include="main">
+					<component :is="Component"></component>
+				</keep-alive>
+			</router-view>
+		</transition>
 	</div>
 </template>
 

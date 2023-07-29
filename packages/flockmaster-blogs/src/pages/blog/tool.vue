@@ -84,7 +84,6 @@
 		background: var(--card-reset-bg);
 		// background-color: var(--theme-tool-color);
 		position: fixed;
-		top: 170px;
 		.tool-list {
 			display: flex;
 			flex-direction: column;
