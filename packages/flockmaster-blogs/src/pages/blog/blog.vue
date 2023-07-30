@@ -133,7 +133,10 @@
 							<el-button @click="comment">发布</el-button>
 						</div>
 					</div>
-					<div class="list">
+					<div
+						class="list"
+						v-infinite-scroll="getCommentList"
+						:infinite-scroll-delay="500">
 						<div class="title">
 							全部评论
 							{{ commentTotal === 0 ? '' : commentTotal }}

@@ -5,7 +5,7 @@
 			<transition
 				enter-active-class="animate__animated animate__bounceInLeft">
 				<router-view v-slot="{ Component }">
-					<keep-alive include="searchResult">
+					<keep-alive :include="['searchResult', 'home']">
 						<component :is="Component"></component>
 					</keep-alive>
 				</router-view>

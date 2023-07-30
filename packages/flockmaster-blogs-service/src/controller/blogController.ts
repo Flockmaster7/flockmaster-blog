@@ -2,11 +2,11 @@ import { Context } from 'koa';
 import Result from '../utils/Result';
 import ERROR from '../utils/Error';
 import BlogService from '../service/blogService';
-import path from 'path';
 import TagService from '../service/tagService';
 import { BlogObject } from '../types/blog';
 import { TagType } from '../types/tag';
 import { useGetBlogTagById } from '../utils/useBlogTag';
+import { uploadFile } from '../utils/cos';
 
 const blogService = new BlogService();
 const tagService = new TagService();
@@ -16,8 +16,10 @@ class BlogController {
 	async uploadBlogImg(ctx: Context) {
 		try {
 			const blog_img = ctx.state.blog_img;
+			// 上传到腾讯云cos
+			await uploadFile(blog_img.filepath, blog_img.newFilename);
 			const res = {
-				blog_img: `/${blog_img.newFilename}`
+				blog_img: `/flockmaster-blogs/images/${blog_img.newFilename}`
 			};
 			ctx.body = new Result(200, '上传图片成功', res);
 		} catch (error) {

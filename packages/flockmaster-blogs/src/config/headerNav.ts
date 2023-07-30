@@ -26,14 +26,14 @@ export const navLinkList: HeaderNavType[] = [
 		icon: 'fengche'
 	},
 	{
-		title: '留言',
-		src: '/leaveWord',
+		title: '相册',
+		src: '/album',
 		name: '',
 		icon: 'fengche'
 	},
 	{
-		title: '相册',
-		src: '/album',
+		title: '留言',
+		src: '/leaveWord',
 		name: '',
 		icon: 'fengche'
 	}
@@ -75,6 +75,12 @@ export const mobileNav: HeaderNavType[] = [
 		src: '/leaveWord',
 		name: '',
 		icon: 'liuyan'
+	},
+	{
+		title: '相册',
+		src: '/album',
+		name: '',
+		icon: 'fengche'
 	},
 	{
 		title: '设置',

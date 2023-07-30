@@ -7,7 +7,8 @@ import type {
 	UserUpdatePasswordForm,
 	UpdateUserInfoFrom,
 	GetUserInfoResType,
-	AdminInfoType
+	AdminInfoType,
+	getBlogListResType
 } from '@/types/index.d.ts';
 import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
@@ -143,6 +144,32 @@ export const isFollow = (follow_id: number) => {
 export const adminInfo = () => {
 	return request<HttpResponse<AdminInfoType>>({
 		url: `/users/admin`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 获取用户收藏文章列表
+ * @param pageNum
+ * @param pageSize
+ * @returns
+ */
+export const getCollectList = (pageNum: number, pageSize: number) => {
+	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+		url: `/blog/getUserCollectList/${pageNum}/${pageSize}`,
+		method: 'GET'
+	});
+};
+
+/**
+ * 获取用户收藏文章列表
+ * @param pageNum
+ * @param pageSize
+ * @returns
+ */
+export const getLikeList = (pageNum: number, pageSize: number) => {
+	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+		url: `/blog/getUserLikeList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
 };

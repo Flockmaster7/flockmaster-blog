@@ -136,3 +136,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+// 自定义滚动条
+::-webkit-scrollbar {
+	width: 10px;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: $nprogressColor;
+	border-radius: 10px;
+}

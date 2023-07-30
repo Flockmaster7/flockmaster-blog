@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
@@ -48,5 +49,8 @@ declare module '@vue/runtime-core' {
     ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
     ZbTheme: typeof import('./src/components/common/zb-theme.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
   }
 }

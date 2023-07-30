@@ -1,3 +1,4 @@
+import Blog from '../model/Blog';
 import User_Blog_Collect from '../model/User_Blog_Collect';
 
 class User_Blog_CollectService {

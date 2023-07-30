@@ -16,7 +16,7 @@ export const routers = [
 					{
 						path: '/home',
 						name: 'Home',
-						component: () => import('@/pages/home/index.vue')
+						component: () => import('@/pages/home/home.vue')
 					},
 					{
 						path: '/settings',

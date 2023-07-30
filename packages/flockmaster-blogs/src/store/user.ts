@@ -2,10 +2,16 @@ import {
 	adminInfo,
 	cancelFollowUser,
 	followUser,
+	getCollectList,
+	getLikeList,
 	isFollow
 } from './../http/user';
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
-import { AdminInfoType, GetUserInfoResType } from '@/types';
+import {
+	AdminInfoType,
+	GetBlogDetailResType,
+	GetUserInfoResType
+} from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -38,6 +44,8 @@ export const useUserStore = defineStore('user', () => {
 	// 粉丝列表
 	const followerList = ref<GetUserInfoResType[]>([]);
 	const type = ref<string>('read');
+	// 用户个人文章
+	const userBlog = ref<GetBlogDetailResType[]>([]);
 
 	// 获取用户信息
 	const getUserProfile = async () => {
@@ -98,6 +106,23 @@ export const useUserStore = defineStore('user', () => {
 			admin.value = res.data;
 		}
 	};
+
+	// 获取用户收藏文章
+	const getUserCollect = async (pageNum: number, pageSize: number) => {
+		const { data: res } = await getCollectList(pageNum, pageSize);
+		if (res.code === 200) {
+			userBlog.value = res.data.rows;
+		}
+	};
+
+	// 获取用户点赞文章
+	const getUserLike = async (pageNum: number, pageSize: number) => {
+		const { data: res } = await getLikeList(pageNum, pageSize);
+		if (res.code === 200) {
+			userBlog.value = res.data.rows;
+		}
+	};
+
 	return {
 		userInfo,
 		followerList,
@@ -110,6 +135,9 @@ export const useUserStore = defineStore('user', () => {
 		cancelFollow,
 		isFollowUser,
 		getAdminInfo,
-		admin
+		admin,
+		userBlog,
+		getUserCollect,
+		getUserLike
 	};
 });

@@ -1,11 +1,19 @@
 <template>
 	<div class="theme-container" @click="changeDark">
+		<!-- <el-switch
+			v-model="isDark"
+			style="margin-left: 24px"
+			inline-prompt
+			:active-icon="Sunny"
+			:inactive-icon="Moon"
+			@change="changeDark" /> -->
 		<el-icon size="20" v-if="isDark"><Sunny /></el-icon>
 		<el-icon size="20" v-if="!isDark"><Moon /></el-icon>
 	</div>
 </template>
 
 <script lang="ts" setup>
+	import { Moon, Sunny } from '@element-plus/icons-vue';
 	import useTheme from '@/hooks/useTheme';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';

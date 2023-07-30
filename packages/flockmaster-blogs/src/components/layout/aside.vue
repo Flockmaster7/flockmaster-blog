@@ -67,6 +67,14 @@
 							>{{ item.text }}</span
 						>
 					</div>
+					<div class="change-dark">
+						登出:
+						<zb-svg-icon
+							class="theme-item"
+							name="logout"
+							:size="20"
+							@click="logoutBlog"></zb-svg-icon>
+					</div>
 				</el-collapse-item>
 			</el-collapse>
 		</el-card>
@@ -126,6 +134,7 @@
 </template>
 
 <script setup lang="ts">
+	import { logout } from '@/utils/login';
 	import { useTagStore } from '@/store/tag';
 	import { storeToRefs } from 'pinia';
 	import { computed, onMounted, ref } from 'vue';
@@ -135,6 +144,7 @@
 	import useStore from '@/store';
 	import { allTheme } from '@/config/theme';
 	import router from '@/router';
+	import { ElMessageBox } from 'element-plus';
 
 	const { blog, user, common } = useStore();
 
@@ -173,6 +183,15 @@
 	// 设置
 	const activeSettings = ref(['1']);
 	const { theme, changeActiveTheme } = useTheme();
+	const logoutBlog = () => {
+		ElMessageBox.confirm('是否退出登录', 'Warning', {
+			confirmButtonText: '确定',
+			cancelButtonText: '取消',
+			type: 'warning'
+		}).then(() => {
+			logout();
+		});
+	};
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {

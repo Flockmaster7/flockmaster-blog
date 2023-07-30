@@ -10,7 +10,7 @@
 				<div class="data-item">
 					<div class="text">文章</div>
 					<div class="number" @click="() => changeList('blog')">
-						{{ blogTotal }}
+						{{ 0 }}
 					</div>
 				</div>
 				<div class="data-item">
@@ -30,18 +30,22 @@
 		<div class="right">
 			<div class="top">
 				<div class="item">{{ title }}</div>
+				<div class="collect" @click="changeBlog('collect')">收藏</div>
+				<div class="like" @click="changeBlog('like')">点赞</div>
 			</div>
 			<div class="main">
-				<div
-					v-show="showBlogs && blogList.length > 0"
-					class="blog-item"
-					v-for="(item, index) in blogList"
-					:key="item.id"
-					@click="gotoBlogDetail(item.id)">
-					<zbBlogItemRectangleMobile
-						:blog="item"
-						v-if="isMobile"></zbBlogItemRectangleMobile>
-					<blogItem :blog="item" v-if="!isMobile"></blogItem>
+				<div v-infinite-scroll="loadMoreBlog">
+					<div
+						v-show="showBlogs && userBlog.length > 0"
+						class="blog-item"
+						v-for="(item, index) in userBlog"
+						:key="item.id"
+						@click="gotoBlogDetail(item.id)">
+						<zbBlogItemRectangleMobile
+							:blog="item"
+							v-if="isMobile"></zbBlogItemRectangleMobile>
+						<blogItem :blog="item" v-if="!isMobile"></blogItem>
+					</div>
 				</div>
 				<div
 					v-show="showFollow && followingList.length > 0"
@@ -62,6 +66,9 @@
 				<div v-show="isShowEmpty">
 					<zb-empty :height="500"></zb-empty>
 				</div>
+				<zb-loadMore
+					direction="center"
+					:isLoading="isLoading"></zb-loadMore>
 			</div>
 		</div>
 	</div>
@@ -70,7 +77,6 @@
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import blogItem from './components/blogItem.vue';
-	import { useBlogStore } from '@/store/blog';
 	import { useUserStore } from '@/store/user';
 	import { storeToRefs } from 'pinia';
 	import { computed, onMounted, ref } from 'vue';
@@ -80,6 +86,7 @@
 	import { useCommonStore } from '@/store/common';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { imgUrl } from '@/utils/common';
+	import useStore from '@/store';
 
 	const router = useRouter();
 
@@ -96,17 +103,44 @@
 
 	onMounted(async () => {
 		await getUserInfo();
-		await getBlogListByUser();
 		await getFollowList();
-		isShowEmpty.value = !blogList.value.length;
+		isShowEmpty.value = !userBlog.value.length;
 	});
 
-	const blogStore = useBlogStore();
-	const { blogList, blogTotal } = storeToRefs(blogStore);
+	const currentPage = ref(1);
+	const { user } = useStore();
+	const { userBlog } = storeToRefs(user);
 
-	// 获取用户列表
-	const getBlogListByUser = async () => {
-		await blogStore.getBlogList(1, 999, { user_id: userInfo.value.id });
+	const currentBlog = ref<'collect' | 'like'>('collect');
+	const isLoading = ref(false);
+	// 切换文章列表
+	const changeBlog = async (type: 'collect' | 'like') => {
+		console.log('changeBlog执行了');
+		currentBlog.value = type;
+		currentPage.value = 1;
+		loadMoreBlog();
+	};
+	// 加载更多
+	const loadMoreBlog = async () => {
+		console.log('执行了');
+		isLoading.value = true;
+		if (currentBlog.value === 'collect') {
+			await getCollectBlogList();
+		} else {
+			await getLikeBlogList();
+		}
+	};
+	// 获取收藏文章列表
+	const getCollectBlogList = async () => {
+		await user.getUserCollect(currentPage.value, 3);
+		currentPage.value += 1;
+		isLoading.value = false;
+	};
+	// 获取点赞文章列表
+	const getLikeBlogList = async () => {
+		await user.getUserLike(currentPage.value, 3);
+		currentPage.value += 1;
+		isLoading.value = false;
 	};
 
 	// 获取用户关注列表和粉丝列表
@@ -136,7 +170,7 @@
 				showBlogs.value = true;
 				showFans.value = false;
 				showFollow.value = false;
-				if (!blogList.value.length) isShowEmpty.value = true;
+				if (!userBlog.value.length) isShowEmpty.value = true;
 				break;
 			case 'following':
 				showFollow.value = true;
