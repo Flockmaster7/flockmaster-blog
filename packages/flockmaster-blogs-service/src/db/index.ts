@@ -78,6 +78,7 @@ const sequelize =
 // );
 
 // sequelize.sync({ force: true });
+// sequelize.sync();
 
 sequelize
 	.authenticate()

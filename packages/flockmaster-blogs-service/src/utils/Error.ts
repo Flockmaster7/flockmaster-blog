@@ -71,5 +71,13 @@ export default {
 	addLeaveWordsError: errorForm('50001', '发布留言失败', ''),
 	getLeaveWordsListError: errorForm('50002', '获取留言列表失败', ''),
 	removeLeaveWordsError: errorForm('50003', '删除留言失败', ''),
-	updateLeaveWordsError: errorForm('50004', '修改留言失败', '')
+	updateLeaveWordsError: errorForm('50004', '修改留言失败', ''),
+	createAlbumError: errorForm('60001', '添加相册失败', ''),
+	updateAlbumError: errorForm('60002', '修改相册失败', ''),
+	removeAlbumError: errorForm('60003', '删除作品失败', ''),
+	createPhotoError: errorForm('60004', '添加相册图片失败', ''),
+	removePhotoError: errorForm('60005', '删除相册图片失败', ''),
+	updatePhotoError: errorForm('60006', '修改相册图片失败', ''),
+	getPhotoListError: errorForm('60007', '修改相册图片失败', ''),
+	getAllPhotoListError: errorForm('60008', '修改所有相册图片失败', '')
 };

@@ -6,7 +6,7 @@ import TagService from '../service/tagService';
 import { BlogObject } from '../types/blog';
 import { TagType } from '../types/tag';
 import { useGetBlogTagById } from '../utils/useBlogTag';
-import { uploadFile } from '../utils/cos';
+import { uploadFile } from '../utils/Cos';
 
 const blogService = new BlogService();
 const tagService = new TagService();
@@ -17,7 +17,7 @@ class BlogController {
 		try {
 			const blog_img = ctx.state.blog_img;
 			// 上传到腾讯云cos
-			await uploadFile(blog_img.filepath, blog_img.newFilename);
+			await uploadFile(blog_img.filepath, blog_img.newFilename, 'images');
 			const res = {
 				blog_img: `/flockmaster-blogs/images/${blog_img.newFilename}`
 			};

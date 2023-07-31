@@ -9,13 +9,17 @@ const cos = new COS({
 const Bucket = processEnv.Bucket;
 
 // 上传图片到cos
-export const uploadFile = async (filePath: string, fileName: string) => {
+export const uploadFile = async (
+	filePath: string,
+	fileName: string,
+	path: string
+) => {
 	return new Promise((resolve, reject) => {
 		cos.putObject(
 			{
 				Bucket,
 				Region: 'ap-guangzhou',
-				Key: 'flockmaster-blogs/images/' + fileName,
+				Key: `flockmaster-blogs/${path}/${fileName}`,
 				Body: fs.createReadStream(filePath),
 				ContentLength: fs.statSync(filePath).size,
 				ContentType: 'image/jpeg'

@@ -38,7 +38,14 @@ export const verifyUploadImg = async (ctx: Context, next: Next) => {
 			ctx.state.blog_img = file;
 			ctx.state.img = file;
 		} else {
-			return ctx.app.emit('error', ERROR.uploadError, ctx);
+			console.log(file);
+			file.every((item) => {
+				if (!fileTypes.includes(item.mimetype!)) {
+					return ctx.app.emit('error', ERROR.uploadError, ctx);
+				}
+			});
+			ctx.state.imgList = file;
+			// return ctx.app.emit('error', ERROR.uploadError, ctx);
 		}
 	} catch (error) {
 		return ctx.app.emit('error', ERROR.uploadError, ctx, error);
