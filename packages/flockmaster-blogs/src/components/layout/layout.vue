@@ -17,16 +17,16 @@
 
 <script setup lang="ts">
 	import Header from '@/components/layout/header.vue';
-	import { useUserStore } from '@/store/user';
+	import useStore from '@/store';
 	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
 	import { onMounted } from 'vue';
 
-	const store = useUserStore();
-	const { userInfo } = storeToRefs(store);
+	const { user, common } = useStore();
+	const { userInfo } = storeToRefs(user);
 
 	onMounted(() => {
-		if (isLogin()) store.getUserProfile();
+		if (isLogin()) user.getUserProfile();
 		else {
 			userInfo.value = {
 				id: 0,
@@ -39,6 +39,7 @@
 				user_fans: 0
 			};
 		}
+		common.addWebsiteVisit();
 	});
 </script>
 

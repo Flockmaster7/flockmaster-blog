@@ -9,12 +9,15 @@ import errHandler from './errHandler';
 import router from '../router/index';
 import { corsHandler } from '../middleware/cors';
 import Result from '../utils/Result';
+import { websiteVisit } from '../utils/Schedule';
 // import sequelize from '../db/index';
 
 const parameter = require('koa-parameter');
 const koaStatic = require('koa-static');
 const logger = require('koa-logger');
-const sequelize = require('../db/index');
+// 引入数据库
+const sequelize = require('../db/mysql');
+const redis = require('../db/redis');
 
 // // 初始化模型
 // sequelize.addModels([
@@ -73,5 +76,8 @@ app.use(router.allowedMethods());
 app.use(cors(corsHandler));
 
 app.on('error', errHandler);
+
+// 执行定时任务
+websiteVisit();
 
 export default app;

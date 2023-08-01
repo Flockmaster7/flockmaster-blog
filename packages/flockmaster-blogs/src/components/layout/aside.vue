@@ -78,6 +78,21 @@
 				</el-collapse-item>
 			</el-collapse>
 		</el-card>
+		<!-- 网站资讯 -->
+		<el-card>
+			<el-collapse v-model="activeWebsiteInfo">
+				<el-collapse-item name="1">
+					<template #title>
+						<el-icon class="head-icon"><Monitor /></el-icon>
+						<text class="head-text"> 网站资讯 </text>
+					</template>
+					<div class="change-dark">
+						总访问量:
+						{{ websiteInfo.website_visit }}
+					</div>
+				</el-collapse-item>
+			</el-collapse>
+		</el-card>
 		<!-- 站点信息卡片 -->
 		<el-card>
 			<el-collapse v-model="activeNames" @change="handleChange">
@@ -149,14 +164,15 @@
 	const { blog, user, common } = useStore();
 
 	const { admin } = storeToRefs(user);
-	const { activeNav } = storeToRefs(common);
-	const activeNames = ref(['1']);
+	const { activeNav, websiteInfo } = storeToRefs(common);
+	const activeNames = ref([]);
 	const handleChange = (val: string[]) => {
 		console.log(val);
 	};
 	// 个人信息
 	onMounted(async () => {
 		await user.getAdminInfo();
+		await common.getWebsite();
 	});
 	const adminBg = computed(() => {
 		return new URL('../../static/images/admin_bg.png', import.meta.url)
@@ -192,6 +208,8 @@
 			logout();
 		});
 	};
+	// 网站资讯
+	const activeWebsiteInfo = ref(['1']);
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {

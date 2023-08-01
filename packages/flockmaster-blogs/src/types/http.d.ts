@@ -18,3 +18,7 @@ export interface PageRequest<T> {
 	count?: number;
 	rows: T[];
 }
+
+export interface WebSiteInfoType {
+	website_visit: number;
+}

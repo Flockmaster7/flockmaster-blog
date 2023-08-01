@@ -3,3 +3,7 @@ export interface ResultType<T> {
 	data: T;
 	message: string;
 }
+
+export interface WebsiteType {
+	website_visit: string | number;
+}

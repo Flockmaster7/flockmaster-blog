@@ -79,5 +79,7 @@ export default {
 	removePhotoError: errorForm('60005', '删除相册图片失败', ''),
 	updatePhotoError: errorForm('60006', '修改相册图片失败', ''),
 	getPhotoListError: errorForm('60007', '修改相册图片失败', ''),
-	getAllPhotoListError: errorForm('60008', '修改所有相册图片失败', '')
+	getAllPhotoListError: errorForm('60008', '修改所有相册图片失败', ''),
+	addVisitError: errorForm('70001', '增加网站访问量失败', ''),
+	getWebsiteInfoError: errorForm('70002', '获取网站资讯失败', '')
 };

@@ -1,3 +1,6 @@
+import { addVisit } from './../http/common';
+import { getWebsiteInfo } from '@/http/common';
+import { WebSiteInfoType } from '@/types/http';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -7,9 +10,23 @@ export const useCommonStore = defineStore('common', () => {
 	const isShowStickyBar = ref(false);
 	const isDark = ref(false);
 	const currentTheme = ref('default');
+	const websiteInfo = ref<WebSiteInfoType>({
+		website_visit: 0
+	});
 
 	const rightOpen = ref(false);
 	const activeNav = ref('/home');
+
+	// 增加网站访问量
+	const addWebsiteVisit = async () => {
+		await addVisit();
+	};
+
+	// 获取网站资讯
+	const getWebsite = async () => {
+		const { data: res } = await getWebsiteInfo();
+		websiteInfo.value = res.data;
+	};
 
 	return {
 		isDark,
@@ -18,6 +35,9 @@ export const useCommonStore = defineStore('common', () => {
 		isShowStickyBar,
 		currentTheme,
 		rightOpen,
-		activeNav
+		activeNav,
+		getWebsite,
+		websiteInfo,
+		addWebsiteVisit
 	};
 });
