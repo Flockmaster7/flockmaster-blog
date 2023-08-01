@@ -19,6 +19,8 @@ import zbSvgIconVue from './components/common/zb-svg-icon.vue';
 import lazyPlugin from 'vue3-lazy';
 // 动画
 import 'animate.css';
+// 引入tailwind
+import '@/static/css/tailwind.css';
 
 const app = createApp(App);
 lazyPlugin.install(app, {

@@ -1,5 +1,7 @@
 <template>
-	<div class="album-container"></div>
+	<div class="flex justify-center">
+		<div class="text-6xl">11</div>
+	</div>
 </template>
 
 <script setup lang="ts"></script>
