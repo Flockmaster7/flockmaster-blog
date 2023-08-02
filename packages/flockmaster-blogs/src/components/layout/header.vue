@@ -65,7 +65,7 @@
 	import { useRoute, useRouter } from 'vue-router';
 	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { isLogin, logout } from '@/utils/login';
-	import { ref, watch } from 'vue';
+	import { ref } from 'vue';
 	import { HeaderNavType } from '@/types';
 	import { storeToRefs } from 'pinia';
 	import { imgUrl } from '@/utils/common';
@@ -223,7 +223,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px 80px;
+		padding: 6.5px 80px;
 		background-color: var(--theme-color);
 		opacity: 0.75;
 		transition: 0.4s;

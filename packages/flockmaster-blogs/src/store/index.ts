@@ -1,3 +1,4 @@
+import { useAlbumStore } from './album';
 import { useBlogStore } from './blog';
 import { useCommonStore } from './common';
 import { useLeaveWordStore } from './leaveWord';
@@ -13,6 +14,7 @@ export default function useStore() {
 		tag: useTagStore(pinia),
 		user: useUserStore(pinia),
 		work: useWorkStore(pinia),
-		leaveWord: useLeaveWordStore(pinia)
+		leaveWord: useLeaveWordStore(pinia),
+		album: useAlbumStore(pinia)
 	};
 }

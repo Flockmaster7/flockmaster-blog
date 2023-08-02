@@ -177,3 +177,17 @@ export interface AdminInfoType extends GetUserInfoResType {
 	blogNum: number;
 	workNum: number;
 }
+
+export interface AlbumType {
+	id: number;
+	album_name: string;
+	album_cover: string;
+	createdAt: string;
+}
+
+export interface PhotoType {
+	id: number;
+	album_id: number;
+	photo_url: string;
+	createdAt: string;
+}
