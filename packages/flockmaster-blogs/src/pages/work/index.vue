@@ -6,14 +6,14 @@
 		</el-divider>
 		<div class="work-list">
 			<div
-				v-for="(item, index) in workList"
+				v-for="item in workList"
 				:key="item.id"
 				@click="gotoWorkDetail(item.work_url)"
 				:style="{ width: 100 + '%' }">
 				<work-item :work="item"></work-item>
 			</div>
 		</div>
-		<zb-empty v-if="workList.length === 0" :height="300"></zb-empty>
+		<zb-empty v-if="workList.length === 0" :height="500"></zb-empty>
 	</div>
 </template>
 
