@@ -7,15 +7,20 @@
 		<div
 			class="album-content"
 			v-infinite-scroll="loadMore"
-			:infinite-scroll-disabled="isLoadMore">
-			<div v-for="item in albumList" :key="item.id">
+			:infinite-scroll-disabled="isLoadMore"
+			:infinite-scroll-delay="600">
+			<div
+				v-for="item in albumList"
+				:key="item.id"
+				@click="gotoPhoto(item.id)">
 				<zb-album-item :album="item"></zb-album-item>
 			</div>
 		</div>
 		<zb-load-more
-			v-if="!isLoadMore"
+			v-if="!isLoadMore && albumList.length > 0"
 			:isLoading="isLoading"
 			:isLoadMore="!isLoadMore"></zb-load-more>
+		<zb-empty :height="500" v-if="albumList.length === 0"></zb-empty>
 	</div>
 	<!-- </el-card> -->
 </template>
@@ -26,9 +31,12 @@
 	import { computed, onMounted, ref } from 'vue';
 	import zbAlbumItem from './components/zb-album-item.vue';
 	import ZbLoadMore from '@/components/common/zb-loadMore.vue';
+	import { useRouter } from 'vue-router';
 
 	const { album } = useStore();
 	const { albumList, albumTotal } = storeToRefs(album);
+
+	const router = useRouter();
 
 	// 加载
 	const pageNum = ref(1);
@@ -45,6 +53,10 @@
 			console.log(pageNum.value);
 		}
 	};
+	// 跳转到图片
+	const gotoPhoto = (id: number) => {
+		router.push('/photo?id=' + id);
+	};
 
 	onMounted(async () => {
 		loadMore();
@@ -52,11 +64,16 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.album-content {
+			grid-template-columns: repeat(2, 160px) !important;
+		}
+	}
 	.album-container {
 		min-height: 700px;
 		display: flex;
 		background: var(--card-reset-bg);
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
 		flex-wrap: wrap;
@@ -65,7 +82,7 @@
 		.album-bg {
 			width: 100%;
 			height: 300px;
-			background: url('../../static/images/admin_bg.png');
+			background: url('../../static/images/album_bg.png');
 			background-size: cover;
 			display: flex;
 			justify-content: center;
@@ -79,8 +96,8 @@
 
 		.album-content {
 			display: grid;
-			grid-template-columns: repeat(4, 165px);
-			grid-column-gap: 20px;
+			grid-template-columns: repeat(4, 180px);
+			grid-column-gap: 10px;
 			grid-row-gap: 15px;
 		}
 	}

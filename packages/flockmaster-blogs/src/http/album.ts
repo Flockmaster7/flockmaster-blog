@@ -21,9 +21,9 @@ export const getAlbum = (pageNum: number, pageSize: number) => {
  * @param pageSize 每一页数量
  * @returns PageRequest<GetTagListResType>
  */
-export const getPhoto = (pageNum: number, pageSize: number) => {
+export const getPhoto = (id: number, pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<PhotoType>>>({
-		url: `/photo/getList/${pageNum}/${pageSize}`,
+		url: `/photo/getList/${id}/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
 };

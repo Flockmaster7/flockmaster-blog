@@ -91,6 +91,11 @@ export const routers = [
 				meta: {
 					isShowRight: true
 				}
+			},
+			{
+				path: '/photo',
+				name: 'Photo',
+				component: () => import('@/pages/photo/index.vue')
 			}
 		]
 	}

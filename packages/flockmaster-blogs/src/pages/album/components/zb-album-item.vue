@@ -25,7 +25,7 @@
 		width: 100%;
 		height: 200px;
 		background-color: var(--theme-color);
-		border-radius: 10px;
+		border-radius: 6px;
 
 		.img {
 			position: absolute;
@@ -33,7 +33,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			border-radius: 20px;
+			border-radius: 6px;
 			background-size: cover;
 			background-repeat: no-repeat;
 		}
