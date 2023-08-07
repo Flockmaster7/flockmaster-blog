@@ -1,5 +1,8 @@
 <template>
 	<div class="photo-container">
+		<div class="photo-bg">
+			<span class="photo-bg-title">{{ `${albumName}` }}</span>
+		</div>
 		<div
 			class="photo-list"
 			v-infinite-scroll="loadMore"
@@ -9,6 +12,7 @@
 				<img v-lazy="imgUrl(item.photo_url)" alt="" />
 			</div>
 		</div>
+		<zb-empty :height="400"></zb-empty>
 		<zb-load-more
 			v-if="!isLoadMore"
 			:isLoading="isLoading"
@@ -27,6 +31,7 @@
 
 	const route = useRoute();
 	const id = route.query.id;
+	const albumName = route.query.album;
 
 	const { album } = useStore();
 	const { photoList, photoTotal } = storeToRefs(album);
@@ -73,6 +78,23 @@
 	.photo-container {
 		padding: 10px 0;
 		width: 100%;
+		.photo-bg {
+			width: 100%;
+			height: 330px;
+			background: url('../../static/images/photo_bg.png');
+			background-size: cover;
+			background-repeat: no-repeat;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 15px;
+
+			&-title {
+				font-weight: 700;
+				font-size: 40px;
+				color: $white;
+			}
+		}
 		.photo-list {
 			column-count: 4;
 			column-gap: 5px;

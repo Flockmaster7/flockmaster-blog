@@ -12,7 +12,7 @@
 			<div
 				v-for="item in albumList"
 				:key="item.id"
-				@click="gotoPhoto(item.id)">
+				@click="gotoPhoto(item)">
 				<zb-album-item :album="item"></zb-album-item>
 			</div>
 		</div>
@@ -32,6 +32,7 @@
 	import zbAlbumItem from './components/zb-album-item.vue';
 	import ZbLoadMore from '@/components/common/zb-loadMore.vue';
 	import { useRouter } from 'vue-router';
+	import { AlbumType } from '@/types';
 
 	const { album } = useStore();
 	const { albumList, albumTotal } = storeToRefs(album);
@@ -54,8 +55,8 @@
 		}
 	};
 	// 跳转到图片
-	const gotoPhoto = (id: number) => {
-		router.push('/photo?id=' + id);
+	const gotoPhoto = (item: AlbumType) => {
+		router.push(`/photo?id=${item.id}&album=${item.album_name}`);
 	};
 
 	onMounted(async () => {
@@ -91,6 +92,7 @@
 			&-title {
 				font-weight: 700;
 				font-size: 30px;
+				color: $white;
 			}
 		}
 
