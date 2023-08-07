@@ -21,4 +21,5 @@ export interface PageRequest<T> {
 
 export interface WebSiteInfoType {
 	website_visit: number;
+	website_visit_today: number;
 }

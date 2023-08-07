@@ -9,3 +9,9 @@ dayjs.locale('zh-cn'); // 使用本地化语言
 export const getTimeFormNow = (time: string) => {
 	return dayjs(time).fromNow().replace(' ', '');
 };
+
+export const getWorkDay = (time: string) => {
+	const targetDate = dayjs(time);
+	const today = dayjs();
+	return today.diff(targetDate, 'day');
+};

@@ -35,11 +35,14 @@ class CommonService {
 				}
 			});
 			return {
-				website_visit: realNum?.dataValues.website_views!
+				website_visit: realNum?.dataValues.website_views!,
+				website_visit_today: 1
 			};
 		}
+		const num_today = await redis.pfcount('website_visit');
 		return {
-			website_visit: num
+			website_visit: num,
+			website_visit_today: num_today
 		};
 	}
 

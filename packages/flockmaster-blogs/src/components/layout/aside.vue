@@ -96,6 +96,14 @@
 						总访问量:
 						{{ websiteInfo.website_visit }}
 					</div>
+					<div class="change-dark">
+						今日访问量:
+						{{ websiteInfo.website_visit_today }}
+					</div>
+					<div class="change-dark">
+						网站已运行:
+						{{ workDay }}天
+					</div>
 				</el-collapse-item>
 			</el-collapse>
 		</el-card>
@@ -166,6 +174,7 @@
 	import { allTheme } from '@/config/theme';
 	import router from '@/router';
 	import { ElMessageBox } from 'element-plus';
+	import { getWorkDay } from '@/utils/dayFormat';
 
 	const { blog, user, common } = useStore();
 
@@ -216,6 +225,9 @@
 	};
 	// 网站资讯
 	const activeWebsiteInfo = ref(['1']);
+	const workDay = computed(() => {
+		return getWorkDay('2023-6-17');
+	});
 	// 跳转到外站
 	const gotoSite = (type: string) => {
 		switch (type) {

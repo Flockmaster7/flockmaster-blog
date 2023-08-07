@@ -6,4 +6,5 @@ export interface ResultType<T> {
 
 export interface WebsiteType {
 	website_visit: string | number;
+	website_visit_today: string | number;
 }
