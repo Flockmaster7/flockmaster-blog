@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', () => {
 		is_admin: false,
 		name: '登录',
 		description: '这个人很懒，什么都没有留下',
-		user_image: '/55335778bf61b1ae4a6217d00.png',
+		user_image: '/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
 		user_focus: 0,
 		user_fans: 0,
 		tagNum: 0,
@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
 		is_admin: false,
 		name: '登录',
 		description: '这个人很懒，什么都没有留下',
-		user_image: '/55335778bf61b1ae4a6217d00.png',
+		user_image: '/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
 		user_focus: 0,
 		user_fans: 0
 	});

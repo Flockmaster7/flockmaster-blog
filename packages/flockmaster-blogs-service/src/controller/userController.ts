@@ -5,6 +5,7 @@ import Result from '../utils/Result';
 import ERROR from '../utils/Error';
 import processEnv from '../config/config.default';
 import User from '../model/User';
+import { uploadFile } from '../utils/Cos';
 
 const userService = new UserService();
 
@@ -102,8 +103,10 @@ class UserController {
 	async uploadAvatar(ctx: Context) {
 		try {
 			const avatar = ctx.state.img;
+			// 上传到腾讯云cos
+			await uploadFile(avatar.filepath, avatar.newFilename, 'images');
 			const res = {
-				avatar: `/${avatar.newFilename}`
+				avatar: `/flockmaster-blogs/images/${avatar.newFilename}`
 			};
 			ctx.body = new Result(200, '上传头像成功', res);
 		} catch (error) {

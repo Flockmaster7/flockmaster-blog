@@ -15,7 +15,8 @@ class UserService {
 		const id = uid();
 		const name = '用户' + id;
 		const description = '用户有点懒，什么都没留下';
-		const user_image = '/7186f3071749102df3fc62a00.png';
+		const user_image =
+			'/flockmaster-blogs/images/b7a10b5f3c91973d716b5ee07.png';
 		const res = await User.create(
 			{
 				user_name,

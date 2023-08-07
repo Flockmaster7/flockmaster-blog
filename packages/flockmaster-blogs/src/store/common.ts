@@ -11,7 +11,8 @@ export const useCommonStore = defineStore('common', () => {
 	const isDark = ref(false);
 	const currentTheme = ref('default');
 	const websiteInfo = ref<WebSiteInfoType>({
-		website_visit: 0
+		website_visit: 0,
+		website_visit_today: 0
 	});
 
 	const rightOpen = ref(false);
