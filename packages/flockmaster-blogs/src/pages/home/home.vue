@@ -10,11 +10,11 @@
 				@click="gotoBlogDetail(item.id)"
 				class="item">
 				<zbBlogItemRectangleMobile
-					:blog="item"
+					:blog="(item as Blog)"
 					v-if="isMobile"
 					:isLoading="isLoading"></zbBlogItemRectangleMobile>
 				<zbBlogItemRectangle
-					:blog="item"
+					:blog="(item as Blog)"
 					v-if="!isMobile"
 					:isLoading="isLoading"></zbBlogItemRectangle>
 			</div>
@@ -47,6 +47,7 @@
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import zbLoading from '@/components/common/zb-loading.vue';
+	import { Blog } from '@/types';
 	import tool from '@/components/common/zb-classify-tool.vue';
 
 	const { blog, common } = useStore();
@@ -67,7 +68,8 @@
 	useIsMobile();
 	const { isMobile } = storeToRefs(common);
 
-	const gotoBlogDetail = (id: number) => {
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
 		router.push('/blog/detail?id=' + id);
 	};
 
@@ -118,6 +120,7 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				content-visibility: auto;
 			}
 		}
 	}

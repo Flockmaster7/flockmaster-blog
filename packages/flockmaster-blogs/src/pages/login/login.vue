@@ -135,7 +135,7 @@
 	import cache from '@/utils/cache';
 	import { useRouter } from 'vue-router';
 	import { useUserStore } from '@/store/user';
-	import { GetUserInfoResType } from '@/types';
+	import { UserInfo } from '@/types';
 
 	const store = useUserStore();
 	const { userInfo } = storeToRefs(store);
@@ -274,10 +274,7 @@
 		const { data: res } = await getUserInfo();
 		if (res.code === 200) {
 			userInfo.value = res.data;
-			cache.setCache<GetUserInfoResType>(
-				import.meta.env.VITE_USERINFO,
-				res.data
-			);
+			cache.setCache<UserInfo>(import.meta.env.VITE_USERINFO, res.data);
 		}
 	};
 </script>

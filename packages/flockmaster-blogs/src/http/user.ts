@@ -1,14 +1,11 @@
 import request from './index';
 import type {
-	UserLoginForm,
-	LoginResType,
-	UserRegisterForm,
-	RegisterResType,
-	UserUpdatePasswordForm,
-	UpdateUserInfoFrom,
-	GetUserInfoResType,
-	AdminInfoType,
-	getBlogListResType
+	LoginRes,
+	UpdateUserFrom,
+	AdminInfo,
+	Blog,
+	UserForm,
+	UserInfo
 } from '@/types/index.d.ts';
 import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
@@ -17,8 +14,8 @@ import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
  * @param data 表单
  * @returns LoginResType
  */
-export const login = (data: UserLoginForm) => {
-	return request<HttpResponse<LoginResType>>({
+export const login = (data: Required<UserForm>) => {
+	return request<HttpResponse<LoginRes>>({
 		url: '/users/login',
 		method: 'POST',
 		data
@@ -30,8 +27,8 @@ export const login = (data: UserLoginForm) => {
  * @param data 表单
  * @returns RegisterResType
  */
-export const register = (data: UserRegisterForm) => {
-	return request<HttpResponse<RegisterResType>>({
+export const register = (data: Required<UserForm>) => {
+	return request<HttpResponse<Readonly<UserInfo>>>({
 		url: '/users/register',
 		method: 'POST',
 		data
@@ -43,7 +40,7 @@ export const register = (data: UserRegisterForm) => {
  * @param data 表单
  * @returns string
  */
-export const updatePassword = (data: UserUpdatePasswordForm) => {
+export const updatePassword = (data: Required<UserForm>) => {
 	return request<HttpResponse<string>>({
 		url: '/users/updatepwd',
 		method: 'POST',
@@ -56,7 +53,7 @@ export const updatePassword = (data: UserUpdatePasswordForm) => {
  * @returns string
  */
 export const getUserInfo = () => {
-	return request<HttpResponse<GetUserInfoResType>>({
+	return request<HttpResponse<Required<UserInfo>>>({
 		url: '/users/getUserInfo',
 		method: 'GET'
 	});
@@ -67,7 +64,7 @@ export const getUserInfo = () => {
  * @param data 信息表单
  * @returns GetUserInfoResType
  */
-export const updateUserInfo = (data: UpdateUserInfoFrom) => {
+export const updateUserInfo = (data: Partial<UpdateUserFrom>) => {
 	return request<HttpResponse<string>>({
 		url: '/users/updateUserInfo',
 		method: 'POST',
@@ -82,7 +79,7 @@ export const updateUserInfo = (data: UpdateUserInfoFrom) => {
  * @returns
  */
 export const getFollowList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<GetUserInfoResType>>>({
+	return request<HttpResponse<PageRequest<Required<UserInfo>>>>({
 		url: `/users/getUserFollow/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -95,7 +92,7 @@ export const getFollowList = (pageNum: number, pageSize: number) => {
  * @returns
  */
 export const getFansList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<GetUserInfoResType>>>({
+	return request<HttpResponse<PageRequest<Required<UserInfo>>>>({
 		url: `/users/getUserFans/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -142,7 +139,7 @@ export const isFollow = (follow_id: number) => {
  * @returns AdminInfoType
  */
 export const adminInfo = () => {
-	return request<HttpResponse<AdminInfoType>>({
+	return request<HttpResponse<AdminInfo>>({
 		url: `/users/admin`,
 		method: 'GET'
 	});
@@ -155,7 +152,7 @@ export const adminInfo = () => {
  * @returns
  */
 export const getCollectList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getUserCollectList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -168,7 +165,7 @@ export const getCollectList = (pageNum: number, pageSize: number) => {
  * @returns
  */
 export const getLikeList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getUserLikeList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});

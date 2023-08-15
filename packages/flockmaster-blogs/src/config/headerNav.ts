@@ -80,7 +80,7 @@ export const mobileNav: HeaderNavType[] = [
 		title: '相册',
 		src: '/album',
 		name: '',
-		icon: 'fengche'
+		icon: 'album'
 	},
 	{
 		title: '设置',

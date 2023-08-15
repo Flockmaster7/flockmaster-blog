@@ -1,6 +1,7 @@
 <template>
 	<div class="leaveWord-container">
 		<div class="leaveWord-title">留言板</div>
+		<zb-barrage></zb-barrage>
 		<el-divider border-style="dashed" />
 		<div class="top">
 			<div class="text-input">
@@ -56,6 +57,7 @@
 	import { useUserStore } from '@/store/user';
 	import { ElMessage } from 'element-plus';
 	import { validatorNotEmpty } from '@/utils/common';
+	import zbBarrage from './components/zb-barrage.vue';
 
 	const leaveWordStore = useLeaveWordStore();
 	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWordStore);

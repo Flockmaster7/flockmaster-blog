@@ -1,3 +1,4 @@
+import { uid } from 'uid';
 import redis from '../db/redis';
 import Common from '../model/Common';
 import { WebsiteType } from '../types';
@@ -5,7 +6,8 @@ import { WebsiteType } from '../types';
 class CommonService {
 	// 增加网站访问量
 	async addWebsiteVisit(userAgent: string): Promise<boolean> {
-		const res = await redis.pfadd('website_visit', userAgent);
+		const id = uid();
+		const res = await redis.pfadd('website_visit', id);
 		if (res) {
 			const num = await redis.get('website_visit_num');
 			if (!num) {

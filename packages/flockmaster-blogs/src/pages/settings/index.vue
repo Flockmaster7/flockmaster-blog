@@ -15,8 +15,10 @@
 					:class="{ active: theme === item.theme }"
 					:key="index"
 					@click="changeActiveTheme(item.theme)"
-					>{{ item.text }}</span
-				>
+					><zb-svg-icon
+						:name="theme === item.theme ? 'colorselect' : 'color'"
+						:color="item.icon"></zb-svg-icon
+				></span>
 			</div>
 		</div>
 	</el-card>

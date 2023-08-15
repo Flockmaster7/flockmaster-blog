@@ -14,11 +14,11 @@
 </template>
 
 <script setup lang="ts">
-	import { GetUserInfoResType } from '@/types';
+	import { UserInfo } from '@/types';
 	import { imgUrl } from '@/utils/common';
 
 	interface propsType {
-		user: GetUserInfoResType;
+		user: UserInfo;
 	}
 	defineProps<propsType>();
 </script>

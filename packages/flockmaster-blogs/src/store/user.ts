@@ -7,16 +7,12 @@ import {
 	isFollow
 } from './../http/user';
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
-import {
-	AdminInfoType,
-	GetBlogDetailResType,
-	GetUserInfoResType
-} from '@/types';
+import { AdminInfo, Blog, UserInfo } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useUserStore = defineStore('user', () => {
-	const admin = ref<AdminInfoType>({
+	const admin = ref<AdminInfo>({
 		id: 0,
 		user_name: '登录',
 		is_admin: false,
@@ -29,7 +25,7 @@ export const useUserStore = defineStore('user', () => {
 		blogNum: 0,
 		workNum: 0
 	});
-	const userInfo = ref<GetUserInfoResType>({
+	const userInfo = ref<UserInfo>({
 		id: 0,
 		user_name: '登录',
 		is_admin: false,
@@ -40,12 +36,12 @@ export const useUserStore = defineStore('user', () => {
 		user_fans: 0
 	});
 	// 关注列表
-	const followingList = ref<GetUserInfoResType[]>([]);
+	const followingList = ref<UserInfo[]>([]);
 	// 粉丝列表
-	const followerList = ref<GetUserInfoResType[]>([]);
+	const followerList = ref<UserInfo[]>([]);
 	const type = ref<string>('read');
 	// 用户个人文章
-	const userBlog = ref<GetBlogDetailResType[]>([]);
+	const userBlog = ref<Partial<Blog>[]>([]);
 
 	// 获取用户信息
 	const getUserProfile = async () => {

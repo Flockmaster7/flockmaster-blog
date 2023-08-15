@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 	import { getUserInfo, updateUserInfo } from '@/http/user';
-	import { GetUserInfoResType } from '@/types';
+	import { UserInfo } from '@/types';
 	import cache from '@/utils/cache';
 	import type { FormInstance, FormRules } from 'element-plus';
 	import { ElMessage } from 'element-plus';
@@ -39,7 +39,7 @@
 	const { type } = storeToRefs(user);
 
 	const userInfo = ref(
-		cache.getCache<GetUserInfoResType>(import.meta.env.VITE_USERINFO)
+		cache.getCache<UserInfo>(import.meta.env.VITE_USERINFO)
 	);
 
 	const updateForm = reactive({
@@ -83,10 +83,7 @@
 		const { data: res } = await getUserInfo();
 		if (res.code === 200) {
 			userInfo.value = res.data;
-			cache.setCache<GetUserInfoResType>(
-				import.meta.env.VITE_USERINFO,
-				res.data
-			);
+			cache.setCache<UserInfo>(import.meta.env.VITE_USERINFO, res.data);
 		}
 	};
 

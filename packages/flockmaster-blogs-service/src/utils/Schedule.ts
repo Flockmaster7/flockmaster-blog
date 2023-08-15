@@ -5,12 +5,11 @@ import CommonService from '../service/commonService';
 const commonService = new CommonService();
 
 export const websiteVisit = () => {
-	schedule.scheduleJob('59 23 1 * *', async () => {
+	schedule.scheduleJob('59 23 * * *', async () => {
 		console.log('定时任务执行');
-		const count = await redis.pfcount('website_visit');
+		const count = await redis.get('website_visit_num');
 		await redis.del('website_visit');
-		await redis.del('website_visit_num');
-		const res = await commonService.addVisitNum(count);
+		const res = await commonService.addVisitNum(Number(count));
 		return res;
 	});
 };

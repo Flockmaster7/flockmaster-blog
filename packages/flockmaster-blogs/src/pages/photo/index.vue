@@ -12,7 +12,7 @@
 				<img v-lazy="imgUrl(item.photo_url)" alt="" />
 			</div>
 		</div>
-		<zb-empty :height="400"></zb-empty>
+		<zb-empty :height="400" v-if="photoList.length === 0"></zb-empty>
 		<zb-load-more
 			v-if="!isLoadMore"
 			:isLoading="isLoading"

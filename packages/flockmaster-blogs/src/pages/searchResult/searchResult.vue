@@ -9,11 +9,11 @@
 				@click="gotoBlogDetail(item.id)">
 				<div class="result-item-pc">
 					<zbSearchResultBlogItem
-						:blog="item"></zbSearchResultBlogItem>
+						:blog="(item as Blog)"></zbSearchResultBlogItem>
 				</div>
 				<div class="result-item-mobile">
 					<zbSearchResultBlogItemMobile
-						:blog="item"></zbSearchResultBlogItemMobile>
+						:blog="(item as Blog)"></zbSearchResultBlogItemMobile>
 				</div>
 			</div>
 		</div>
@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
+	import { Blog } from '@/types';
 	import { storeToRefs } from 'pinia';
 	import { onMounted } from 'vue';
 	import zbSearchArea, {
@@ -76,7 +77,8 @@
 	};
 
 	// 跳转到详情页
-	const gotoBlogDetail = (id: number) => {
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
 		router.push('/blog/detail?id=' + id);
 	};
 </script>

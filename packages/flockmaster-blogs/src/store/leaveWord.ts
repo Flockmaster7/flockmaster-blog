@@ -3,13 +3,13 @@ import {
 	getLeaveWordList,
 	leaveWord
 } from '@/http/leaveWord';
-import { CommentParamsType, LeaveWordType } from '@/types';
+import { CommentParamsType, LeaveWord } from '@/types';
 import { minDelay } from '@/utils/common';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useLeaveWordStore = defineStore('leaveWord', () => {
-	const leaveWordList = ref<LeaveWordType[]>([]);
+	const leaveWordList = ref<LeaveWord[]>([]);
 	const leaveWordTotal = ref<number>(0);
 
 	// 留言

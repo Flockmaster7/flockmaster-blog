@@ -11,9 +11,9 @@
 
 <script setup lang="ts">
 	import { imgUrl } from '@/utils/common';
-	import type { AlbumType } from '@/types/index.d.ts';
+	import type { Album } from '@/types/index.d.ts';
 	interface PropsType {
-		album: AlbumType;
+		album: Album;
 	}
 
 	defineProps<PropsType>();

@@ -30,8 +30,8 @@
 		<div class="right">
 			<div class="top">
 				<div class="item">{{ title }}</div>
-				<div class="collect" @click="changeBlog('collect')">收藏</div>
-				<div class="like" @click="changeBlog('like')">点赞</div>
+				<!-- <div class="collect" @click="changeBlog('collect')">收藏</div>
+				<div class="like" @click="changeBlog('like')">点赞</div> -->
 			</div>
 			<div class="main">
 				<div v-infinite-scroll="loadMoreBlog">
@@ -42,9 +42,11 @@
 						:key="item.id"
 						@click="gotoBlogDetail(item.id)">
 						<zbBlogItemRectangleMobile
-							:blog="item"
+							:blog="(item as Blog)"
 							v-if="isMobile"></zbBlogItemRectangleMobile>
-						<blogItem :blog="item" v-if="!isMobile"></blogItem>
+						<blogItem
+							:blog="(item as Blog)"
+							v-if="!isMobile"></blogItem>
 					</div>
 				</div>
 				<div
@@ -66,9 +68,9 @@
 				<div v-show="isShowEmpty">
 					<zb-empty :height="500"></zb-empty>
 				</div>
-				<zb-loadMore
+				<!-- <zb-loadMore
 					direction="center"
-					:isLoading="isLoading"></zb-loadMore>
+					:isLoading="isLoading"></zb-loadMore> -->
 			</div>
 		</div>
 	</div>
@@ -87,6 +89,7 @@
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { imgUrl } from '@/utils/common';
 	import useStore from '@/store';
+	import { Blog } from '@/types';
 
 	const router = useRouter();
 
@@ -150,7 +153,8 @@
 	};
 
 	// 跳转到文章详情
-	const gotoBlogDetail = (id: number) => {
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
 		router.push('/blog/detail?id=' + id);
 	};
 

@@ -119,7 +119,7 @@
 
 <script setup lang="ts">
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { CommentType, GetUserInfoResType } from '@/types';
+	import { Comment, UserInfo } from '@/types';
 	// import { useUserStore } from '@/store/user';
 	import { CommentParamsType } from '@/types/index';
 	import { computed, nextTick, onMounted, ref } from 'vue';
@@ -130,7 +130,7 @@
 	import useStore from '@/store';
 
 	interface propsType {
-		item: CommentType;
+		item: Comment;
 		type: 'blog' | 'leaveWord';
 	}
 
@@ -185,7 +185,7 @@
 	};
 
 	// 跳转到用户详情页
-	const gotoUser = (userInfo: GetUserInfoResType) => {
+	const gotoUser = (userInfo: UserInfo) => {
 		router.push('/my?id=' + userInfo.id);
 	};
 

@@ -27,10 +27,10 @@
 </template>
 
 <script setup lang="ts">
-	import { GetUserInfoResType } from '@/types';
+	import { UserInfo } from '@/types';
 
 	interface propType {
-		info: GetUserInfoResType;
+		info: UserInfo;
 	}
 	const props = defineProps<propType>();
 </script>

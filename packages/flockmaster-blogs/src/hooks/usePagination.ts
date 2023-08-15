@@ -4,12 +4,16 @@ import { onMounted, ref } from 'vue';
 
 // 分页器
 export default function (
-	getList: (pageNum: number, pageSize: number, arg: GetBlogListForm) => any
+	getList: (
+		pageNum: number,
+		pageSize: number,
+		arg: Partial<GetBlogListForm>
+	) => any
 ) {
 	const pageNum = ref(1);
 	const pageSize = ref(9);
 	const isLoading = ref(false);
-	const getBlogListParams = ref<GetBlogListForm>({});
+	const getBlogListParams = ref<Partial<GetBlogListForm>>({});
 
 	const delay = 500;
 

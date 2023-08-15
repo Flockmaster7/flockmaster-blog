@@ -1,4 +1,4 @@
-import { CommentParamsType, LeaveWordType } from '@/types';
+import { CommentParamsType, LeaveWord } from '@/types';
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index';
 
@@ -23,7 +23,7 @@ export const leaveWord = (data: CommentParamsType) => {
  * @returns
  */
 export const getLeaveWordList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<LeaveWordType>>>({
+	return request<HttpResponse<PageRequest<LeaveWord>>>({
 		url: `/getLeaveWordList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -41,7 +41,7 @@ export const getChildLeaveWordList = (
 	pageNum: number,
 	pageSize: number
 ) => {
-	return request<HttpResponse<PageRequest<LeaveWordType>>>({
+	return request<HttpResponse<PageRequest<LeaveWord>>>({
 		url: `/getChildrenLeaveWordList/${parent_id}/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});

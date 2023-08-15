@@ -1,6 +1,6 @@
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
-import type { AlbumType, PhotoType } from '@/types/index.d.ts';
+import type { Album, Photo } from '@/types/index.d.ts';
 
 /**
  * 获取相册
@@ -9,7 +9,7 @@ import type { AlbumType, PhotoType } from '@/types/index.d.ts';
  * @returns PageRequest<GetTagListResType>
  */
 export const getAlbum = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<AlbumType>>>({
+	return request<HttpResponse<PageRequest<Album>>>({
 		url: `/album/getList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -22,7 +22,7 @@ export const getAlbum = (pageNum: number, pageSize: number) => {
  * @returns PageRequest<GetTagListResType>
  */
 export const getPhoto = (id: number, pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<PhotoType>>>({
+	return request<HttpResponse<PageRequest<Photo>>>({
 		url: `/photo/getList/${id}/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});

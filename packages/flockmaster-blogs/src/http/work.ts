@@ -1,4 +1,4 @@
-import { GetWorkListResType } from '@/types';
+import { Work } from '@/types';
 import request from './index';
 import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 
@@ -9,7 +9,7 @@ import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
  * @returns PageRequest<GetWorkListResType>
  */
 export const getWorkList = async (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<GetWorkListResType>>>({
+	return request<HttpResponse<PageRequest<Work>>>({
 		url: `work/getList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});

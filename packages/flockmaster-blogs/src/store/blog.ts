@@ -16,12 +16,11 @@ import {
 	unlike
 } from '@/http/blog';
 import {
+	Blog,
+	BlogListForm,
 	CommentParamsType,
-	CommentType,
-	GetBlogDetailResType,
-	GetBlogListForm,
-	GetUserInfoResType,
-	getBlogListResType
+	Comment,
+	UserInfo
 } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -39,10 +38,10 @@ export const useBlogStore = defineStore('blog', () => {
 		collect: false,
 		read: false
 	});
-	const getBlogListParams = ref<GetBlogListForm>({});
+	const getBlogListParams = ref<Partial<BlogListForm>>({});
 	const blogTotal = ref(0);
-	const blogList = ref<getBlogListResType[]>([]);
-	const blogDeatil = ref<GetBlogDetailResType>({
+	const blogList = ref<Partial<Blog>[]>([]);
+	const blogDeatil = ref<Blog>({
 		id: 0,
 		author: '',
 		title: '',
@@ -56,13 +55,13 @@ export const useBlogStore = defineStore('blog', () => {
 		tags: [],
 		createdAt: '',
 		updatedAt: '',
-		user: {} as GetUserInfoResType
+		user: {} as UserInfo
 	});
 	// 评论列表
-	const commentList = ref<CommentType[]>([]);
+	const commentList = ref<Comment[]>([]);
 	const commentTotal = ref<number>(0);
 	// 文章推荐列表
-	const recommendList = ref<getBlogListResType[]>([]);
+	const recommendList = ref<Partial<Blog>[]>([]);
 
 	// 获取文章推荐列表
 	const getRecommendBlogList = async (id: number) => {
@@ -130,7 +129,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const getBlogList = async (
 		pageNum: number,
 		pageSize: number,
-		data?: GetBlogListForm
+		data?: Partial<BlogListForm>
 	) => {
 		const { data: res } = await getArticleList(pageNum, pageSize, data);
 		if (res.code === 200) {

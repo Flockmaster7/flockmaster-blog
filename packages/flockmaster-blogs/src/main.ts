@@ -21,6 +21,7 @@ import lazyPlugin from 'vue3-lazy';
 import 'animate.css';
 // 引入tailwind
 import '@/static/css/tailwind.css';
+import { rollingOptimization } from './utils/common';
 
 const app = createApp(App);
 lazyPlugin.install(app, {
@@ -38,3 +39,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.component(zbSvgIconVue.name, zbSvgIconVue);
 
 app.mount('#app');
+
+// 滚动优化
+rollingOptimization();

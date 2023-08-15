@@ -19,3 +19,15 @@ export const validatorNotEmpty = (target: string) => {
 export const imgUrl = (path: string) => {
 	return import.meta.env.VITE_IMGURL + path;
 };
+
+// 滚动优化
+export const rollingOptimization = () => {
+	let timer: NodeJS.Timeout | null = null;
+	window.addEventListener('scroll', function () {
+		document.body.style.pointerEvents = 'none';
+		if (timer) clearTimeout(timer);
+		timer = setTimeout(() => {
+			document.body.style.pointerEvents = 'auto';
+		}, 100);
+	});
+};

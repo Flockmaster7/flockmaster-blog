@@ -1,25 +1,25 @@
 // http请求返回data类型
 export interface HttpResponse<T = any> {
-	code: number | string;
-	data: T;
-	message: string;
+	readonly code: number | string;
+	readonly data: T;
+	readonly message: string;
 }
 
 export interface HttpError<T = any> {
-	code: number | string;
-	data: T;
-	message: string;
+	readonly code: number | string;
+	readonly data: T;
+	readonly message: string;
 }
 
 export interface PageRequest<T> {
-	pageNum: string;
-	pageSize: string;
-	total: number;
-	count?: number;
-	rows: T[];
+	readonly pageNum: string;
+	readonly pageSize: string;
+	readonly total: number;
+	readonly count?: number;
+	readonly rows: T[];
 }
 
 export interface WebSiteInfoType {
-	website_visit: number;
-	website_visit_today: number;
+	readonly website_visit: number;
+	readonly website_visit_today: number;
 }

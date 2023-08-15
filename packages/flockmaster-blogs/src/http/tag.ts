@@ -1,6 +1,6 @@
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
-import type { GetTagListResType } from '@/types/index.d.ts';
+import type { Tag } from '@/types/index.d.ts';
 
 /**
  * 获取标签列表接口
@@ -9,7 +9,7 @@ import type { GetTagListResType } from '@/types/index.d.ts';
  * @returns PageRequest<GetTagListResType>
  */
 export const getTagList = (pageNum: number, pageSize: number) => {
-	return request<HttpResponse<PageRequest<GetTagListResType>>>({
+	return request<HttpResponse<PageRequest<Tag>>>({
 		url: `/blog/tag/getTagList/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});

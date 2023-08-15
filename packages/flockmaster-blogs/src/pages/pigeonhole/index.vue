@@ -62,7 +62,8 @@
 	} = usePagination(blog.getBlogList);
 
 	// 跳转到文章详情
-	const gotoBlogDetail = (id: number) => {
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
 		router.push('/blog/detail/?id=' + id);
 	};
 

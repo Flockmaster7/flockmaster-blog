@@ -30,11 +30,11 @@
 					@click="gotoBlogDetail(item.id)"
 					class="item">
 					<zbBlogItemRectangleMobile
-						:blog="item"
+						:blog="(item as Blog)"
 						v-if="isMobile"
 						:isLoading="isLoading"></zbBlogItemRectangleMobile>
 					<zbBlogItemRectangle
-						:blog="item"
+						:blog="(item as Blog)"
 						v-if="!isMobile"
 						:isLoading="isLoading"></zbBlogItemRectangle>
 				</div>
@@ -61,6 +61,7 @@
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
 	import { useRouter } from 'vue-router';
+	import { Blog } from '@/types';
 	import zbLoading from '@/components/common/zb-loading.vue';
 	import zbBlogItemRectangle from '@/components/common/zb-blogItem-rectangle.vue';
 	import zbBlogItemRectangleMobile from '@/components/mobile/zb-blogItem-rectangle-mobile.vue';
@@ -112,7 +113,8 @@
 		handleCurrentChange(1);
 	};
 
-	const gotoBlogDetail = (id: number) => {
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
 		router.push('/blog/detail?id=' + id);
 	};
 </script>

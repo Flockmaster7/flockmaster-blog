@@ -1,14 +1,14 @@
 import { getAlbum, getPhoto } from '@/http/album';
-import { AlbumType, PhotoType } from '@/types';
+import { Album, Photo } from '@/types';
 import { minDelay } from '@/utils/common';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useAlbumStore = defineStore('album', () => {
-	const albumList = ref<AlbumType[]>([]);
+	const albumList = ref<Album[]>([]);
 	const albumTotal = ref<number>(0);
 	const photoTotal = ref<number>(0);
-	const photoList = ref<PhotoType[]>([]);
+	const photoList = ref<Photo[]>([]);
 
 	const getAlbumList = async (pageNum: number, pageSize: number) => {
 		const timeout = pageNum === 1 ? 0 : 500;

@@ -560,7 +560,8 @@
 	});
 
 	// 跳转到文章详情
-	const gotoBlogDetail = async (id: number) => {
+	const gotoBlogDetail = async (id?: number) => {
+		if (!id) return;
 		// 获取状态
 		if (isLogin()) {
 			blog.isBlogLike(Number(id));

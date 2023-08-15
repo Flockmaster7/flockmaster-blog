@@ -1,10 +1,4 @@
-import {
-	CommentParamsType,
-	CommentType,
-	GetBlogDetailResType,
-	GetBlogListForm,
-	getBlogListResType
-} from '@/types';
+import { CommentParamsType, Comment, BlogListForm, Blog } from '@/types';
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
 
@@ -17,9 +11,9 @@ import request from './index.ts';
 export const getArticleList = (
 	pageNum: number,
 	pageSize: number,
-	data?: GetBlogListForm
+	data?: Partial<BlogListForm>
 ) => {
-	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getList/${pageNum}/${pageSize}`,
 		method: 'POST',
 		data
@@ -32,7 +26,7 @@ export const getArticleList = (
  * @returns GetBlogDetailResType
  */
 export const getArticleDetail = (id: number) => {
-	return request<HttpResponse<GetBlogDetailResType>>({
+	return request<HttpResponse<Readonly<Blog>>>({
 		url: `/blog/getdetail/${id}`,
 		method: 'GET'
 	});
@@ -50,7 +44,7 @@ export const getBlogListByTagId = (
 	pageNum: number,
 	pageSize: number
 ) => {
-	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getBlogListByTag/${pageNum}/${pageSize}`,
 		method: 'POST',
 		data: {
@@ -168,7 +162,7 @@ export const getCommentList = (
 	pageNum: number,
 	pageSize: number
 ) => {
-	return request<HttpResponse<PageRequest<CommentType>>>({
+	return request<HttpResponse<PageRequest<Comment>>>({
 		url: `/blog/getCommentList/${id}/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -186,7 +180,7 @@ export const getChildCommentList = (
 	pageNum: number,
 	pageSize: number
 ) => {
-	return request<HttpResponse<PageRequest<CommentType>>>({
+	return request<HttpResponse<PageRequest<Comment>>>({
 		url: `/blog/getChildrenCommentList/${parent_id}/${pageNum}/${pageSize}`,
 		method: 'GET'
 	});
@@ -198,7 +192,7 @@ export const getChildCommentList = (
  * @returns
  */
 export const getRecommendBlog = (id: number) => {
-	return request<HttpResponse<PageRequest<getBlogListResType>>>({
+	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getRecommendBlog/${id}`,
 		method: 'GET'
 	});

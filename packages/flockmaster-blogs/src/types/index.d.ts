@@ -1,44 +1,23 @@
-// 登录提交表单
-export interface UserLoginForm {
+// 提交表单
+export interface UserForm {
 	user_name: string;
 	password: string;
 }
 
-// 登录接口
-export interface LoginResType {
+// 登录
+export interface LoginRes {
 	token: string;
 }
 
-// 注册提交表单
-export interface UserRegisterForm {
-	user_name: string;
-	password: string;
-}
-
-// 注册接口
-export interface RegisterResType {
-	createdAt: string;
-	id: number;
-	is_admin: boolean;
-	updatedAt: string;
-	user_name: string;
-}
-
-// 修改密码表单
-export interface UserUpdatePasswordForm {
-	user_name: string;
-	password: string;
-}
-
 // 修改信息表单
-export interface UpdateUserInfoFrom {
-	name?: string;
-	description?: string;
-	isAdmin?: boolean;
+export interface UpdateUserFrom {
+	name: string;
+	description: string;
+	isAdmin: boolean;
 }
 
-// 修改信息接口
-export interface GetUserInfoResType {
+// 用户信息
+export interface UserInfo {
 	id: number;
 	user_name: string;
 	is_admin: boolean;
@@ -49,38 +28,20 @@ export interface GetUserInfoResType {
 	user_fans: number;
 }
 
-// 获取博客列表接口
-export interface getBlogListResType {
-	id: number;
-	title: string;
-	author: string;
-	blog_image: string;
-	classify: string;
-	content_html: string;
-	content_text: string;
-	blog_like: number;
-	blog_collect: number;
-	blog_read: number;
-	tags: GetTagListResType[];
-	createdAt: string;
-	updatedAt: string;
-	user: GetUserInfoResType;
-}
-
 // 获取博客列表表单
-export interface GetBlogListForm {
-	user_id?: number;
-	author?: string;
-	title?: string;
-	content_text?: string;
-	order?: string;
-	classify?: string;
-	tags?: number[];
-	querySearch?: string;
+export interface BlogListForm {
+	user_id: number;
+	author: string;
+	title: string;
+	content_text: string;
+	order: string;
+	classify: string;
+	tags: number[];
+	querySearch: string;
 }
 
-// 获取博客详情接口
-export interface GetBlogDetailResType {
+// 博客
+export interface Blog {
 	id: number;
 	author: string;
 	title: string;
@@ -91,15 +52,15 @@ export interface GetBlogDetailResType {
 	blog_like: number;
 	blog_collect: number;
 	blog_read: number;
-	tags: GetTagListResType[];
+	tags: TagList[];
 	createdAt: string;
 	updatedAt: string;
-	user: GetUserInfoResType;
+	user: UserInfo;
 }
 
 // 获取作品列表接口
 
-export interface GetWorkListResType {
+export interface Work {
 	id?: number;
 	work_image: string;
 	work_title: string;
@@ -110,7 +71,7 @@ export interface GetWorkListResType {
 }
 
 // 获取标签列表接口
-export interface GetTagListResType {
+export interface Tag {
 	id: number;
 	tag_name: string;
 	tag_classify: string;
@@ -134,7 +95,7 @@ export interface CommentParamsType {
 	reply_to?: number;
 }
 
-export interface CommentType {
+export interface Comment {
 	id: number;
 	content: string;
 	parent_id: number | null;
@@ -144,13 +105,13 @@ export interface CommentType {
 	isDeleted: string;
 	createdAt: string;
 	updatedAt: string;
-	user: GetUserInfoResType;
+	user: UserInfo;
 	children: CommentType[];
 	targetComment?: CommentType;
 	targetLeaveWords?: CommentType;
 }
 
-export interface LeaveWordType {
+export interface LeaveWord {
 	id: number;
 	content: string;
 	parent_id: number | null;
@@ -160,9 +121,9 @@ export interface LeaveWordType {
 	isDeleted: string;
 	createdAt: string;
 	updatedAt: string;
-	user: GetUserInfoResType;
+	user: UserInfo;
 	children: LeaveWord[];
-	targetComment?: LeaveWordType;
+	targetComment?: LeaveWord;
 }
 
 // 分类类型
@@ -172,20 +133,20 @@ export interface ClassifyType {
 }
 
 // 管理员信息
-export interface AdminInfoType extends GetUserInfoResType {
+export interface AdminInfo extends UserInfo {
 	tagNum: number;
 	blogNum: number;
 	workNum: number;
 }
 
-export interface AlbumType {
+export interface Album {
 	id: number;
 	album_name: string;
 	album_cover: string;
 	createdAt: string;
 }
 
-export interface PhotoType {
+export interface Photo {
 	id: number;
 	album_id: number;
 	photo_url: string;

@@ -32,7 +32,7 @@
 	import zbAlbumItem from './components/zb-album-item.vue';
 	import ZbLoadMore from '@/components/common/zb-loadMore.vue';
 	import { useRouter } from 'vue-router';
-	import { AlbumType } from '@/types';
+	import { Album } from '@/types';
 
 	const { album } = useStore();
 	const { albumList, albumTotal } = storeToRefs(album);
@@ -55,7 +55,7 @@
 		}
 	};
 	// 跳转到图片
-	const gotoPhoto = (item: AlbumType) => {
+	const gotoPhoto = (item: Album) => {
 		router.push(`/photo?id=${item.id}&album=${item.album_name}`);
 	};
 

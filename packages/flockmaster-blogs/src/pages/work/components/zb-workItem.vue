@@ -12,11 +12,11 @@
 
 <script setup lang="ts">
 	import { imgUrl } from '@/utils/common';
-	import { GetWorkListResType } from '@/types';
+	import { Work } from '@/types';
 	import { computed } from 'vue';
 
 	interface PropType {
-		work: GetWorkListResType;
+		work: Work;
 	}
 
 	const props = defineProps<PropType>();
