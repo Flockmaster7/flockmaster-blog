@@ -42,6 +42,9 @@
 						<img class="icon" src="@/static/images/gitee.png" />
 					</div>
 				</div>
+				<div class="info-visualize">
+					<el-button @click="gotoDataVisualize">可视化大屏</el-button>
+				</div>
 			</div>
 		</el-card>
 		<!-- 设置 -->
@@ -210,6 +213,10 @@
 			default:
 				break;
 		}
+	};
+	const gotoDataVisualize = () => {
+		console.log('跳转');
+		router.push('/visualize');
 	};
 	// 设置
 	const activeSettings = ref(['1']);

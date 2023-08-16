@@ -152,3 +152,32 @@ export interface Photo {
 	photo_url: string;
 	createdAt: string;
 }
+
+export interface DataScreen {
+	website_visit_today: number;
+	blogData: Data[];
+	hotBlog: HotBlog[];
+	moduleNum: Data[];
+}
+
+export interface BlogClassifiy {
+	classify: string;
+	articleCount: number;
+}
+
+export type Data = {
+	value: number;
+	name: string;
+	percentage: string;
+};
+
+export type HotBlog = DataBlogClassifiy & { maxValue: number };
+
+export interface ModuleNum {
+	albumCount: number;
+	blogCount: number;
+	leaveWordCount: number;
+	tagCount: number;
+	workCount: number;
+	[key: string]: any;
+}

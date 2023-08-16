@@ -98,5 +98,10 @@ export const routers = [
 				component: () => import('@/pages/photo/index.vue')
 			}
 		]
+	},
+	{
+		path: '/visualize',
+		name: 'Visualize',
+		component: () => import('@/pages/dataVisualize/index.vue')
 	}
 ];

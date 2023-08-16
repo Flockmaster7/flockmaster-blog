@@ -100,6 +100,8 @@ export default class Blog extends Model<Blog> {
 	})
 	isDeleted: Date | null;
 
+	articleCount?: number;
+
 	@HasMany(() => Comment)
 	comments: Comment[];
 
