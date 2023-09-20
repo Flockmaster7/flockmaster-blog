@@ -1,7 +1,7 @@
 <template>
 	<div class="leaveWord-container">
 		<div class="leaveWord-title">留言板</div>
-		<zb-barrage></zb-barrage>
+		<!-- <zb-barrage></zb-barrage> -->
 		<el-divider border-style="dashed" />
 		<div class="top">
 			<div class="text-input">

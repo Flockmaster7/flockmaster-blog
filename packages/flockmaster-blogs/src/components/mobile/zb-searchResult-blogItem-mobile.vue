@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
-	import { GetBlogDetailResType } from '@/types';
+	import { Blog } from '@/types';
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { imgUrl } from '@/utils/common';
 
 	interface PropsType {
-		blog: GetBlogDetailResType;
+		blog: Blog;
 	}
 
 	defineProps<PropsType>();

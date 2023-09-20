@@ -36,12 +36,12 @@
 </template>
 
 <script setup lang="ts">
-	import { GetBlogDetailResType } from '@/types';
+	import { Blog } from '@/types';
 	import { imgUrl } from '@/utils/common';
 	import { imgEnvironment } from '@/constant/index';
 
 	export interface PropType {
-		blog: GetBlogDetailResType;
+		blog: Blog;
 	}
 
 	defineProps<PropType>();

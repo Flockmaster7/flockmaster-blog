@@ -1,4 +1,4 @@
-import { GetBlogListForm } from '@/types';
+import { BlogListForm } from '@/types';
 import { minDelay } from '@/utils/common';
 import { onMounted, ref } from 'vue';
 
@@ -7,13 +7,13 @@ export default function (
 	getList: (
 		pageNum: number,
 		pageSize: number,
-		arg: Partial<GetBlogListForm>
+		arg: Partial<BlogListForm>
 	) => any
 ) {
 	const pageNum = ref(1);
 	const pageSize = ref(9);
 	const isLoading = ref(false);
-	const getBlogListParams = ref<Partial<GetBlogListForm>>({});
+	const getBlogListParams = ref<Partial<BlogListForm>>({});
 
 	const delay = 500;
 

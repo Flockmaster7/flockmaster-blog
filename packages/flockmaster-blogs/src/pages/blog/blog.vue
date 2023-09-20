@@ -798,7 +798,7 @@
 	}
 
 	.blog-card {
-		width: 100%;
+		max-width: 758.4px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;

@@ -24,11 +24,13 @@
 		];
 		const option: EChartsOption = {
 			color: colors,
+			// 配置提示框组件，用于在鼠标悬停在图表上时显示提示信息
 			tooltip: {
 				show: true,
 				trigger: 'item',
 				formatter: '{b} <br/>占比：{d}%'
 			},
+			// 配置图例组件，用于展示图表的数据项及其对应的颜色
 			legend: {
 				orient: 'vertical',
 				right: '20px',
@@ -48,6 +50,7 @@
 					color: '#fff'
 				}
 			},
+			// 配置网格组件，用于控制图表的位置和大小
 			grid: {
 				top: 'bottom',
 				left: 10,
@@ -56,7 +59,7 @@
 			series: [
 				{
 					zlevel: 1,
-					name: '年龄比例',
+					name: '分类文章比例',
 					type: 'pie',
 					selectedMode: 'single',
 					radius: [50, 90],

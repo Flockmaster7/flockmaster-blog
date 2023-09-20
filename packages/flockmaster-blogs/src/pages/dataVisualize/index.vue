@@ -166,8 +166,8 @@
 
 	// 根据浏览器大小推断缩放比例
 	const getScale = (width = 1920, height = 1080) => {
-		let ww = window.innerWidth / width;
-		let wh = window.innerHeight / height;
+		const ww = window.innerWidth / width;
+		const wh = window.innerHeight / height;
 		return ww < wh ? ww : wh;
 	};
 
@@ -487,6 +487,7 @@
 	onBeforeUnmount(() => {
 		window.removeEventListener('resize', resize);
 		clearInterval(timer!);
+		// 释放echarts图标占用的内存
 		Object.values(dataScreen).forEach((val) => val?.dispose());
 	});
 </script>

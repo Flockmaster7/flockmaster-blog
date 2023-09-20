@@ -43,7 +43,9 @@
 					</div>
 				</div>
 				<div class="info-visualize">
-					<el-button @click="gotoDataVisualize">可视化大屏</el-button>
+					<el-button @click="gotoDataVisualize"
+						>数据可视化(beta)</el-button
+					>
 				</div>
 			</div>
 		</el-card>
@@ -393,6 +395,20 @@
 
 				.info-link-item:hover {
 					cursor: pointer;
+				}
+			}
+
+			.info-visualize {
+				margin-bottom: 20px;
+				:deep(.el-button) {
+					width: 150px;
+					border-radius: 30px;
+					transition: 1s;
+				}
+				:deep(.el-button:hover) {
+					color: var(--theme-tool-item-color);
+					width: 200px;
+					background-color: var(--theme-color);
 				}
 			}
 		}

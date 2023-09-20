@@ -19,7 +19,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
 	if (isLogin()) {
-		config.headers = cache.getCache('TOKEN');
+		config.headers.authorization = cache.getCache('TOKEN');
 	}
 	return config;
 });
