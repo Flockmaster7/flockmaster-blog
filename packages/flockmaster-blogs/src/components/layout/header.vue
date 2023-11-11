@@ -107,7 +107,7 @@
 		window.scrollTo({
 			top: 0
 		});
-		activeNav.value = nav.src;
+		common.changeActiveNav(nav.src);
 	};
 
 	// 跳转到首页

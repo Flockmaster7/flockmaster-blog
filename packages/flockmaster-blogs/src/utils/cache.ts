@@ -14,4 +14,29 @@ const clearCache = () => {
 	window.localStorage.clear();
 };
 
-export default { getCache, setCache, removeCache, clearCache };
+const getShortCache = <T>(key: string): T => {
+	return JSON.parse(window.sessionStorage.getItem(key) as string);
+};
+
+const setShortCache = <T>(key: string, value: T) => {
+	window.sessionStorage.setItem(key, JSON.stringify(value));
+};
+
+const removeShortCache = (key: string) => {
+	window.sessionStorage.removeItem(key);
+};
+
+const clearShortCache = () => {
+	window.sessionStorage.clear();
+};
+
+export default {
+	getCache,
+	setCache,
+	removeCache,
+	clearCache,
+	getShortCache,
+	setShortCache,
+	removeShortCache,
+	clearShortCache
+};

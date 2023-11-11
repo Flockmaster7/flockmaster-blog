@@ -1,6 +1,7 @@
 import { addVisit } from './../http/common';
 import { getWebsiteInfo } from '@/http/common';
 import { WebSiteInfoType } from '@/types/http';
+import cache from '@/utils/cache';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -16,7 +17,13 @@ export const useCommonStore = defineStore('common', () => {
 	});
 
 	const rightOpen = ref(false);
-	const activeNav = ref('/home');
+	const activeNav = ref(cache.getShortCache('activeNav') || '/home');
+
+	// 持久化存储
+	const changeActiveNav = (nav: string) => {
+		cache.setShortCache('activeNav', nav);
+		activeNav.value = nav;
+	};
 
 	// 增加网站访问量
 	const addWebsiteVisit = async () => {
@@ -39,6 +46,7 @@ export const useCommonStore = defineStore('common', () => {
 		activeNav,
 		getWebsite,
 		websiteInfo,
-		addWebsiteVisit
+		addWebsiteVisit,
+		changeActiveNav
 	};
 });
