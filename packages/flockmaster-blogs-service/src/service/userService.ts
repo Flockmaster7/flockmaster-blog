@@ -237,7 +237,10 @@ class UserService {
 				'is_admin',
 				'name',
 				'user_image',
-				'description'
+				'description',
+				'user_focus',
+				'user_fans',
+				'createdAt'
 			]
 		});
 		if (res) {
@@ -253,6 +256,24 @@ class UserService {
 		} else {
 			return '未找到管理员信息';
 		}
+	}
+
+	// 获取用户列表
+	async userList() {
+		const res = User.findAll({
+			attributes: [
+				'id',
+				'user_name',
+				'is_admin',
+				'name',
+				'user_image',
+				'description',
+				'user_focus',
+				'user_fans',
+				'createdAt'
+			]
+		});
+		return res;
 	}
 }
 

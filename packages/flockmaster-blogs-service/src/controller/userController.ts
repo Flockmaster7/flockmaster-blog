@@ -84,8 +84,8 @@ class UserController {
 	// 修改用户信息
 	async updateUserInfo(ctx: Context) {
 		try {
-			const id = ctx.state.user.id;
 			const user = ctx.request.body;
+			const id = user.id || ctx.state.user.id;
 			const userInfo = Object.assign(user, { id });
 			const res = await userService.updateUser(userInfo);
 			if (res) {
@@ -216,6 +216,16 @@ class UserController {
 			ctx.body = new Result(200, '获取管理员信息成功', data);
 		} catch (error) {
 			ctx.app.emit('error', ERROR.getAdminInfoError, ctx, error);
+		}
+	}
+
+	//获取用户列表
+	async getUserList(ctx: Context) {
+		try {
+			const data = await userService.userList();
+			ctx.body = new Result(200, '获取用户列表成功', data);
+		} catch (error) {
+			ctx.app.emit('error', ERROR.getUserListError, ctx, error);
 		}
 	}
 }

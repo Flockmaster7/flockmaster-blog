@@ -26,6 +26,7 @@ export default {
 	getUserFansListError: errorForm('10014', '获取粉丝列表失败', ''),
 	isFollowUserError: errorForm('10015', '获取关注状态失败', ''),
 	getAdminInfoError: errorForm('10016', '获取管理员信息失败', ''),
+	getUserListError: errorForm('10016', '获取用户列表失败', ''),
 	uploadError: errorForm('20001', '上传失败', ''),
 	markdownRenderError: errorForm('20002', 'md文件解析失败', ''),
 	FormValidatorError: errorForm('20003', '参数错误', ''),

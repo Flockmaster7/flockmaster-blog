@@ -6,12 +6,12 @@ export const routers = [
 	{
 		path: '/home',
 		name: 'Layout',
-		component: () => import('@/components/layout/layout.vue'),
+		component: () => import('@/layout/layout.vue'),
 		children: [
 			{
 				path: '/main',
 				name: 'Main',
-				component: () => import('@/components/layout/main.vue'),
+				component: () => import('@/layout/main.vue'),
 				children: [
 					{
 						path: '/home',
