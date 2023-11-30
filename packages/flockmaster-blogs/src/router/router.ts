@@ -1,7 +1,8 @@
 export const routers = [
 	{
 		path: '/',
-		redirect: '/home'
+		name: 'Guide',
+		component: () => import('@/pages/guide/index.vue')
 	},
 	{
 		path: '/home',

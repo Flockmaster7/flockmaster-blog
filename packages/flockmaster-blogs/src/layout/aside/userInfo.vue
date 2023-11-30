@@ -57,8 +57,8 @@
 	import { imgUrl } from '@/utils/common';
 
 	const { user, common } = useStore();
-	const { activeNav } = storeToRefs(common);
 	const { admin } = storeToRefs(user);
+	const { activeNav } = storeToRefs(common);
 
 	onMounted(async () => {
 		await user.getAdminInfo();
