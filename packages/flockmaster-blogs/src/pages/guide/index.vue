@@ -15,6 +15,16 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.leftBox {
+			height: 100vh;
+		}
+
+		.rightBox {
+			display: none !important;
+		}
+	}
+
 	.guide-container {
 		display: flex;
 		// padding: 50px 80px 0;

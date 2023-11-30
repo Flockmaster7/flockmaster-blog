@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Aside: typeof import('./src/components/layout/aside/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckTag: typeof import('element-plus/es')['ElCheckTag']
@@ -27,15 +26,8 @@ declare module '@vue/runtime-core' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
-    Header: typeof import('./src/components/layout/header.vue')['default']
-    Layout: typeof import('./src/components/layout/layout.vue')['default']
-    Main: typeof import('./src/components/layout/main.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Setting: typeof import('./src/components/layout/aside/setting.vue')['default']
-    SiteInfo: typeof import('./src/components/layout/aside/siteInfo.vue')['default']
-    UserInfo: typeof import('./src/components/layout/aside/userInfo.vue')['default']
-    WebsiteInfo: typeof import('./src/components/layout/aside/websiteInfo.vue')['default']
     ZbBlogItemFlexible: typeof import('./src/components/common/zb-blogItem-flexible.vue')['default']
     ZbBlogItemRectangle: typeof import('./src/components/common/zb-blogItem-rectangle.vue')['default']
     ZbBlogItemRectangleMobile: typeof import('./src/components/mobile/zb-blogItem-rectangle-mobile.vue')['default']

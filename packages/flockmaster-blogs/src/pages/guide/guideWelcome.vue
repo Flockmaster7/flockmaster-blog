@@ -21,6 +21,16 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.center-top {
+			font-size: 24px !important;
+		}
+
+		.center-bottom {
+			font-size: 35px !important;
+		}
+	}
+
 	.guide-welcome-container {
 		display: flex;
 		flex-direction: column;
