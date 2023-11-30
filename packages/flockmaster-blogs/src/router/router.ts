@@ -12,12 +12,12 @@ export const routers = [
 			{
 				path: '/main',
 				name: 'Main',
-				component: () => import('@/newLayout/main.vue'),
+				component: () => import('@/newLayout/main/index.vue'),
 				children: [
 					{
 						path: '/home',
 						name: 'Home',
-						component: () => import('@/pages/home/home.vue')
+						component: () => import('@/pages/home/index.vue')
 					},
 					{
 						path: '/settings',
