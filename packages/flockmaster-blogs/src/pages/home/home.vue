@@ -1,7 +1,7 @@
 <template>
 	<div class="blog-container">
 		<div class="tool-card">
-			<tool @getBlogList="changeClassify"></tool>
+			<!-- <tool @getBlogList="changeClassify"></tool> -->
 		</div>
 		<div class="blog-list">
 			<div

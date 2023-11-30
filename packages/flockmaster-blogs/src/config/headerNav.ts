@@ -5,37 +5,37 @@ export const navLinkList: HeaderNavType[] = [
 		title: '首页',
 		src: '/home',
 		name: '',
-		icon: 'fengche'
+		icon: 'home'
 	},
 	{
 		title: '归档',
 		src: '/pigeonhole',
 		name: '',
-		icon: 'fengche'
+		icon: 'guidang'
 	},
 	{
 		title: '标签',
 		src: '/tag',
 		name: '',
-		icon: 'fengche'
+		icon: 'tag'
 	},
 	{
 		title: '作品',
 		src: '/work',
 		name: '',
-		icon: 'fengche'
+		icon: 'work'
 	},
 	{
 		title: '相册',
 		src: '/album',
 		name: '',
-		icon: 'fengche'
+		icon: 'album'
 	},
 	{
 		title: '留言',
 		src: '/leaveWord',
 		name: '',
-		icon: 'fengche'
+		icon: 'liuyan'
 	}
 ];
 

@@ -7,12 +7,12 @@ export const routers = [
 	{
 		path: '/home',
 		name: 'Layout',
-		component: () => import('@/layout/layout.vue'),
+		component: () => import('@/newLayout/layout.vue'),
 		children: [
 			{
 				path: '/main',
 				name: 'Main',
-				component: () => import('@/layout/main.vue'),
+				component: () => import('@/newLayout/main.vue'),
 				children: [
 					{
 						path: '/home',
