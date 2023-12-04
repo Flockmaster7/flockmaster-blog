@@ -8,7 +8,8 @@
     "build:service": "pnpm -F @bin/flockmaster-blogs-service build",
     "start:blogs": "pnpm -F @bin/flockmaster-blogs start",
     "start:service": "pnpm -F @bin/flockmaster-blogs-service start",
-    "preview:blogs": "pnpm -F @bin/flockmaster-blogs preview"
+    "preview:blogs": "pnpm -F @bin/flockmaster-blogs preview",
+    "lint:blogs": "pnpm -F @bin/flockmaster-blogs lint"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.0.0",

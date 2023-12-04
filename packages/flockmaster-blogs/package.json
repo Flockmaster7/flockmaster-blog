@@ -6,7 +6,8 @@
 		"dev": "vite",
 		"pro": "vite --mode production",
 		"build": "vue-tsc && vite build",
-		"preview": "vite preview --port 8080"
+		"preview": "vite preview --port 8080",
+		"lint": "eslint \"src/**/*.{js,ts,vue}\""
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.1.0",

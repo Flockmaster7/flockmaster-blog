@@ -42,9 +42,11 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.31.1",
     "sequelize-typescript": "^2.1.5",
-    "uid": "^2.0.2"
+    "uid": "^2.0.2",
+    "markdown-it": "^13.0.1"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/koa": "^2.13.6",
