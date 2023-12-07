@@ -7,17 +7,17 @@ export const routers = [
 	{
 		path: '/home',
 		name: 'Layout',
-		component: () => import('@/newLayout/layout.vue'),
+		component: () => import('@/layout/layout.vue'),
 		children: [
 			{
 				path: '/main',
 				name: 'Main',
-				component: () => import('@/newLayout/main/index.vue'),
+				component: () => import('@/layout/main.vue'),
 				children: [
 					{
 						path: '/home',
 						name: 'Home',
-						component: () => import('@/pages/home/index.vue')
+						component: () => import('@/pages/home/home.vue')
 					},
 					{
 						path: '/settings',
@@ -42,12 +42,13 @@ export const routers = [
 					{
 						path: '/pigeonhole',
 						name: 'Pigeonhole',
-						component: () => import('@/pages/pigeonhole/index.vue')
+						component: () =>
+							import('@/pages/pigeonhole/pigeonhole.vue')
 					},
 					{
 						path: '/tag',
 						name: 'Tag',
-						component: () => import('@/pages/tag/index.vue')
+						component: () => import('@/pages/tag/tag.vue')
 					},
 					{
 						path: '/leaveWord',
@@ -96,7 +97,7 @@ export const routers = [
 			{
 				path: '/photo',
 				name: 'Photo',
-				component: () => import('@/pages/photo/index.vue')
+				component: () => import('@/pages/photo/photo.vue')
 			}
 		]
 	},

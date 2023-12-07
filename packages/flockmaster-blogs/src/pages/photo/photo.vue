@@ -1,5 +1,8 @@
 <template>
 	<div class="photo-container">
+		<div class="photo-bg">
+			<span class="photo-bg-title">{{ `${albumName}` }}</span>
+		</div>
 		<div
 			class="photo-list"
 			v-infinite-scroll="loadMore"

@@ -52,7 +52,6 @@
 			display: flex;
 			align-items: center;
 			gap: 20px;
-			padding-bottom: 20px;
 			.info-link-item {
 				display: flex;
 				flex-direction: column;

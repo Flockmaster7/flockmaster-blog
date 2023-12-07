@@ -1,14 +1,13 @@
 <template>
 	<div class="work-container">
-		<div class="header">作品集</div>
+		<!-- <div class="header">作品集</div>
 		<el-divider>
 			<el-icon><star-filled /></el-icon>
-		</el-divider>
+		</el-divider> -->
 		<div class="work-list">
 			<div
 				v-for="item in workList"
 				:key="item.id"
-				@click="gotoWorkDetail(item.work_url)"
 				:style="{ width: 100 + '%' }">
 				<work-item :work="item"></work-item>
 			</div>
@@ -19,7 +18,7 @@
 
 <script setup lang="ts">
 	import { StarFilled } from '@element-plus/icons-vue';
-	import workItem from '@/pages/work/components/zb-workItem.vue';
+	import workItem from '@/pages/work/workItem.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { useWorkStore } from '@/store/work';
 	import { storeToRefs } from 'pinia';
@@ -32,9 +31,6 @@
 	});
 	workStore.getWork(params.value.pageNum, params.value.pageSize);
 	const { workList } = storeToRefs(workStore);
-	const gotoWorkDetail = (url: string) => {
-		window.open(url);
-	};
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +40,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 50px 10px 25px;
+		padding: 40px 40px 25px;
 
 		.header {
 			// margin-top: 45px;
@@ -60,7 +56,7 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			gap: 20px;
+			gap: 40px;
 		}
 	}
 </style>

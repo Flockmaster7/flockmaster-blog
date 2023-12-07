@@ -2,51 +2,22 @@
 	<div class="latestComments-container">
 		<zbCard title="最新评论">
 			<div class="comment-list">
-				<div class="comment-item">
+				<div
+					class="comment-item"
+					v-for="item in latestComments"
+					:key="item.id">
 					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
+						<img v-lazy="imgUrl(item.user.user_image)" alt="" />
 					</div>
 					<div class="comment-item-info">
 						<div class="top">
-							<div class="name">flockmaster</div>
-							<div class="date">2023年11月30日</div>
+							<div class="name">{{ item.user.name }}</div>
+							<div class="date">
+								{{ getTimeFormNow(item.createdAt) }}
+							</div>
 						</div>
 						<div class="bottom">
-							<p>哈UI沙嗲壶大赛或大四或111111111111</p>
-						</div>
-					</div>
-				</div>
-				<div class="comment-item">
-					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="name">flockmaster</div>
-							<div class="date">2023年11月30日</div>
-						</div>
-						<div class="bottom">
-							<p>哈UI沙嗲壶大赛或大四或111111111111</p>
-						</div>
-					</div>
-				</div>
-				<div class="comment-item">
-					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="name">Flockmaster</div>
-							<div class="date">2023年11月30日</div>
-						</div>
-						<div class="bottom">
-							<p>哈UI沙嗲壶大赛或大四或111111111111</p>
+							<p>{{ item.content }}</p>
 						</div>
 					</div>
 				</div>
@@ -57,6 +28,15 @@
 
 <script setup lang="ts">
 	import zbCard from '@/components/common/zb-card.vue';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
+	import { getTimeFormNow } from '@/utils/dayFormat';
+	import { imgUrl } from '@/utils/common';
+
+	const { common } = useStore();
+	const { latestComments } = storeToRefs(common);
+
+	common.getHomeComments();
 </script>
 
 <style lang="scss" scoped>
@@ -69,6 +49,7 @@
 			gap: 15px;
 
 			.comment-item {
+				max-width: 210px;
 				display: flex;
 				align-items: center;
 				gap: 10px;

@@ -22,4 +22,8 @@ export interface PageRequest<T> {
 export interface WebSiteInfoType {
 	readonly website_visit: number;
 	readonly website_visit_today: number;
+	website_blogs: string | number;
+	website_tags: string | number;
+	website_works: string | number;
+	website_leaveWords: string | number;
 }

@@ -20,4 +20,8 @@
 		font-weight: 600;
 		color: $gray;
 	}
+
+	.content {
+		margin-bottom: 20px;
+	}
 </style>

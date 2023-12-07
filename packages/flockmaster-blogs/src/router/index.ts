@@ -8,10 +8,12 @@ import {
 } from 'vue-router';
 import { closeProgress, startProgress } from '@/utils/progress';
 import { routers } from './router';
+import { routers as newRouters } from './newRouter';
+
 import { ElMessageBox } from 'element-plus';
 import { isLogin } from '@/utils/login';
 
-const routes: Array<RouteRecordRaw> = routers;
+const routes: Array<RouteRecordRaw> = newRouters;
 
 const router = createRouter({
 	history: createWebHashHistory(),

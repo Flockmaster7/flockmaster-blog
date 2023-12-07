@@ -2,53 +2,21 @@
 	<div class="latestComments-container">
 		<zbCard title="热门文章">
 			<div class="comment-list">
-				<div class="comment-item">
+				<div
+					class="comment-item"
+					v-for="item in hotBlogs"
+					:key="item.id">
 					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
+						<img v-lazy="imgUrl(item.blog_image!)" alt="" />
 					</div>
 					<div class="comment-item-info">
 						<div class="top">
-							<div class="title">vue3在组件外获取路由信息</div>
+							<div class="title">{{ item.title }}</div>
 						</div>
 						<div class="bottom">
 							<span class="info"
-								>阅读 {{ 10 }}，点赞 {{ 10 }}</span
-							>
-						</div>
-					</div>
-				</div>
-				<div class="comment-item">
-					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="title">vue3在组件外获取路由信息</div>
-						</div>
-						<div class="bottom">
-							<span class="info"
-								>阅读 {{ 10 }}，点赞 {{ 10 }}</span
-							>
-						</div>
-					</div>
-				</div>
-				<div class="comment-item">
-					<div class="comment-item-avatar">
-						<img
-							src="../../static/images/admin_bg_dark.png"
-							alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="title">vue3在组件外获取路由信息</div>
-						</div>
-						<div class="bottom">
-							<span class="info"
-								>阅读 {{ 10 }}，点赞 {{ 10 }}</span
+								>阅读 {{ item.blog_read }}，点赞
+								{{ item.blog_like }}</span
 							>
 						</div>
 					</div>
@@ -60,6 +28,14 @@
 
 <script setup lang="ts">
 	import zbCard from '@/components/common/zb-card.vue';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
+	import { imgUrl } from '@/utils/common';
+
+	const { common } = useStore();
+	const { hotBlogs } = storeToRefs(common);
+
+	common.getHomeBlogs();
 </script>
 
 <style lang="scss" scoped>

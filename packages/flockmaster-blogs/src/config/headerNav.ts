@@ -7,12 +7,12 @@ export const navLinkList: HeaderNavType[] = [
 		name: '',
 		icon: 'home'
 	},
-	{
-		title: '归档',
-		src: '/pigeonhole',
-		name: '',
-		icon: 'guidang'
-	},
+	// {
+	// 	title: '归档',
+	// 	src: '/pigeonhole',
+	// 	name: '',
+	// 	icon: 'guidang'
+	// },
 	{
 		title: '标签',
 		src: '/tag',

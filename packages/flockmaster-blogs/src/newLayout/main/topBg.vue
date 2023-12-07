@@ -1,34 +1,28 @@
 <template>
-	<div class="top-container">
-		<div class="top-tool">
-			<zb-svg-icon name="search" color="#494848"></zb-svg-icon>
-		</div>
+	<div class="top-bg-container">
 		<div class="top-info">
 			<div class="info">
-				<p class="name">{{ 'flockmaster' }}</p>
-				<div class="description">{{ '这个人很懒没有留下什么' }}</div>
+				<p class="name">{{ admin.name }}</p>
+				<div class="description">{{ admin.description }}</div>
 			</div>
-			<img class="avatar" src="../../static/images/admin_bg_dark.png" />
+			<img class="avatar" v-lazy="imgUrl(admin.user_image)" />
 		</div>
 	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import useAdminInfo from '@/hooks/useAdminInfo';
+	import { imgUrl } from '@/utils/common';
+
+	const { admin } = useAdminInfo();
+</script>
 
 <style lang="scss" scoped>
-	.top-container {
+	.top-bg-container {
 		height: 290px;
 		position: relative;
 		background: url('../../static/images/admin_bg.png');
 		background-size: cover;
-
-		.top-tool {
-			background-color: #fff;
-			height: 70px;
-			display: flex;
-			padding: 0 20px;
-			align-items: center;
-		}
 
 		.top-info {
 			display: flex;

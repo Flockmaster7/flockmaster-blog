@@ -56,6 +56,8 @@ export interface Blog {
 	createdAt: string;
 	updatedAt: string;
 	user: UserInfo;
+	year?: string;
+	date?: string;
 }
 
 // 获取作品列表接口

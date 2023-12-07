@@ -6,10 +6,14 @@ import { ref } from 'vue';
 export const useTagStore = defineStore('tag', () => {
 	const tagList = ref<Tag[]>([]);
 	const tagAsideList = ref<Tag[]>([]);
+	const tagTotal = ref<number>(0);
 
 	const getTgLIst = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getTagList(pageNum, pageSize);
-		if (res.code === 200) tagList.value = res.data.rows;
+		if (res.code === 200) {
+			tagList.value = res.data.rows;
+			tagTotal.value = res.data.total;
+		}
 	};
 
 	const getAsideTgLIst = async (pageNum: number, pageSize: number) => {
@@ -19,6 +23,7 @@ export const useTagStore = defineStore('tag', () => {
 
 	return {
 		tagList,
+		tagTotal,
 		tagAsideList,
 		getAsideTgLIst,
 		getTgLIst

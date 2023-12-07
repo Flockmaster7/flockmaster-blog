@@ -6,6 +6,7 @@
 		</div>
 		<!-- 主体区域 -->
 		<div class="main-area">
+			<TopTool></TopTool>
 			<TopBg></TopBg>
 			<transition
 				enter-active-class="animate__animated animate__bounceInLeft">
@@ -24,9 +25,11 @@
 </template>
 
 <script setup lang="ts">
+	import useAdminInfo from '@/hooks/useAdminInfo';
 	import LeftAside from '../leftAside/index.vue';
 	import RightAside from '../rightAside/index.vue';
 	import TopBg from './topBg.vue';
+	import TopTool from './topTool.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -46,6 +49,8 @@
 		background: hsla(0, 0, 100%, 0.7);
 		border-radius: 10px;
 		height: 100%;
+		width: 1300px;
+		margin: 40px auto;
 
 		.left-aside {
 			flex-basis: 20%;
@@ -54,7 +59,7 @@
 		.main-area {
 			background-color: #fff;
 			flex-basis: 60%;
-			height: 100%;
+			// height: 100%;
 			overflow: hidden;
 		}
 		.right-aside {

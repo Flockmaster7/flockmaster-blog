@@ -35,6 +35,7 @@ export const useUserStore = defineStore('user', () => {
 		user_focus: 0,
 		user_fans: 0
 	});
+
 	// 关注列表
 	const followingList = ref<UserInfo[]>([]);
 	// 粉丝列表

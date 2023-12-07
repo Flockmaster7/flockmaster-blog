@@ -1,39 +1,26 @@
 <template>
 	<div class="leaveWord-container">
-		<div class="leaveWord-title">留言板</div>
-		<!-- <zb-barrage></zb-barrage> -->
-		<el-divider border-style="dashed" />
-		<div class="top">
-			<div class="text-input">
-				<div class="avatar">
-					<img :src="imgUrl(userInfo.user_image)" alt="" />
-				</div>
-				<div class="input">
-					<el-input
-						:rows="4"
-						v-model="leaveWordInput"
-						maxlength="255"
-						placeholder="请输入~"
-						show-word-limit
-						type="textarea" />
-				</div>
-			</div>
-			<div class="comfirm">
-				<el-button @click="leaveWord">发布</el-button>
-			</div>
-		</div>
 		<div class="list">
 			<div class="title">
-				全部留言 {{ leaveWordTotal === 0 ? '' : leaveWordTotal }}
+				<span
+					>全部留言
+					{{ leaveWordTotal === 0 ? '' : leaveWordTotal }}</span
+				>
+				<el-button
+					link
+					:icon="Edit"
+					@click="() => (dialogVisible = !dialogVisible)"
+					>留言</el-button
+				>
 			</div>
 			<div
 				class="comment"
 				v-for="(item, index) in leaveWordList"
 				:key="item.id">
-				<zb-comment-area
+				<leaveWordItem
 					type="leaveWord"
 					:item="item"
-					@getCommentList="getLeaveWordList"></zb-comment-area>
+					@getCommentList="getLeaveWordList"></leaveWordItem>
 			</div>
 			<zb-empty
 				v-if="leaveWordList.length === 0"
@@ -46,23 +33,23 @@
 			</div>
 		</div>
 	</div>
+
+	<el-dialog v-model="dialogVisible" title="留言" draggable>
+		<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>
+	</el-dialog>
 </template>
 
 <script setup lang="ts">
-	import zbCommentArea from '@/components/common/zb-comment-area.vue';
 	import { useLeaveWordStore } from '@/store/leaveWord';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
-	import { imgUrl } from '@/utils/common';
-	import { useUserStore } from '@/store/user';
-	import { ElMessage } from 'element-plus';
-	import { validatorNotEmpty } from '@/utils/common';
-	import zbBarrage from './components/zb-barrage.vue';
+	import { Edit } from '@element-plus/icons-vue';
+
+	import leaveWordItem from './leaveWordItem.vue';
+	import addLeaveWord from './addLeaveWord.vue';
 
 	const leaveWordStore = useLeaveWordStore();
 	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWordStore);
-	const userStore = useUserStore();
-	const { userInfo } = storeToRefs(userStore);
 
 	onMounted(() => {
 		getLeaveWordList();
@@ -84,20 +71,12 @@
 	};
 
 	// 留言
-	const leaveWordInput = ref('');
-	const leaveWord = async () => {
-		if (validatorNotEmpty(leaveWordInput.value)) {
-			return ElMessage.warning('不能为空');
-		}
-		const params = {
-			content: leaveWordInput.value
-		};
-		console.log(params);
-		await leaveWordStore.addLeaveWord(params);
-		ElMessage.success('发布留言成功');
-		leaveWordInput.value = '';
+	const dialogVisible = ref(false);
+
+	const closeDialog = () => {
 		// 重新获取留言
 		getLeaveWordList(true);
+		dialogVisible.value = false;
 	};
 </script>
 
@@ -135,7 +114,7 @@
 		}
 	}
 	.leaveWord-container {
-		padding: 40px 40px;
+		padding: 20px 40px;
 		background: var(--card-reset-bg);
 		display: flex;
 		justify-content: center;
@@ -205,8 +184,11 @@
 			.title {
 				font-size: 23px;
 				font-weight: 700;
-				height: 80px;
-				line-height: 80px;
+				height: 100px;
+				line-height: 100px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 			}
 
 			.comment {

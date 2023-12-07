@@ -1,7 +1,8 @@
 <template>
 	<div class="leftAside-container">
 		<div class="top">
-			<img src="../../static/images/admin_bg.png" alt="" />
+			<img :src="imgUrl(userInfo.user_image)" alt="" />
+			<p class="name">{{ userInfo.name }}</p>
 		</div>
 		<div class="center">
 			<navBar></navBar>
@@ -13,20 +14,38 @@
 </template>
 
 <script lang="ts" setup>
+	import useStore from '@/store';
 	import navBar from './navBar.vue';
 	import SiteSratistics from './siteStatistics.vue';
+	import { imgUrl } from '@/utils/common';
+	import { storeToRefs } from 'pinia';
+	import { isLogin } from '@/utils/login';
+
+	const { common, user } = useStore();
+	const { userInfo } = storeToRefs(user);
+	if (isLogin()) user.getUserProfile();
+	common.getWebsite();
 </script>
 
 <style lang="scss" scoped>
 	.leftAside-container {
 		padding: 20px 40px;
 		.top {
-			width: 40px;
-			height: 40px;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 15px;
+			.name {
+				color: #fcbffc;
+				font-size: 14px;
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
+					'Trebuchet MS', sans-serif;
+			}
 
 			img {
-				width: 100%;
-				height: 100%;
+				width: 40px;
+				height: 40px;
 				border-radius: 50%;
 			}
 		}

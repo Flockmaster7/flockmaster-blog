@@ -37,8 +37,8 @@
 		<template #default>
 			<div class="card">
 				<div class="blogImg">
-					<!-- <img v-lazy="imgUrl(blog.blog_image)" alt="" /> -->
-					<img src="../../static/images/admin_bg.png" alt="" />
+					<img v-lazy="imgUrl(blog.blog_image)" alt="" />
+					<!-- <img src="../../static/images/admin_bg.png" alt="" /> -->
 				</div>
 				<div class="blogInfo">
 					<div class="top">
@@ -51,7 +51,10 @@
 							按时丢卡hsudhaush后端刷刷思安还晒是撒后悔死数据库砂浆喀什卡哈萨克杀寇决
 						</div>
 						<div class="tag">
-							<el-tag v-for="item in blog.tags" :key="item.id">
+							<el-tag
+								v-for="item in blog.tags"
+								:key="item.id"
+								color="var(--theme-active-color)">
 								{{ item.tag_name }}</el-tag
 							>
 						</div>

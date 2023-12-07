@@ -1,4 +1,5 @@
-import { addVisit } from './../http/common';
+import { Blog, Comment } from '@/types';
+import { addVisit, getHotBlogs, getLatestComments } from './../http/common';
 import { getWebsiteInfo } from '@/http/common';
 import { WebSiteInfoType } from '@/types/http';
 import cache from '@/utils/cache';
@@ -13,8 +14,14 @@ export const useCommonStore = defineStore('common', () => {
 	const currentTheme = ref('default');
 	const websiteInfo = ref<WebSiteInfoType>({
 		website_visit: 0,
-		website_visit_today: 0
+		website_visit_today: 0,
+		website_blogs: 0,
+		website_tags: 0,
+		website_works: 0,
+		website_leaveWords: 0
 	});
+	const hotBlogs = ref<Partial<Blog>[]>();
+	const latestComments = ref<Comment[]>();
 
 	const rightOpen = ref(false);
 	const activeNav = ref(cache.getShortCache('activeNav') || '/home');
@@ -36,6 +43,20 @@ export const useCommonStore = defineStore('common', () => {
 		websiteInfo.value = res.data;
 	};
 
+	const getHomeComments = async () => {
+		const { data: res } = await getLatestComments();
+		if (res.code === 200) {
+			latestComments.value = res.data;
+		}
+	};
+
+	const getHomeBlogs = async () => {
+		const { data: res } = await getHotBlogs();
+		if (res.code === 200) {
+			hotBlogs.value = res.data;
+		}
+	};
+
 	return {
 		isDark,
 		isMobile,
@@ -47,6 +68,10 @@ export const useCommonStore = defineStore('common', () => {
 		getWebsite,
 		websiteInfo,
 		addWebsiteVisit,
-		changeActiveNav
+		changeActiveNav,
+		getHomeComments,
+		getHomeBlogs,
+		hotBlogs,
+		latestComments
 	};
 });

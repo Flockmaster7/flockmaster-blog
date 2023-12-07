@@ -4,23 +4,33 @@
 			<div class="info-list">
 				<div class="info-item">
 					<div class="info-item-title">文章</div>
-					<p class="info-item-number">45</p>
+					<p class="info-item-number">
+						{{ websiteInfo.website_blogs }}
+					</p>
 				</div>
 				<div class="info-item">
 					<div class="info-item-title">标签</div>
-					<p class="info-item-number">45</p>
+					<p class="info-item-number">
+						{{ websiteInfo.website_tags }}
+					</p>
 				</div>
 				<div class="info-item">
 					<div class="info-item-title">作品</div>
-					<p class="info-item-number">45</p>
+					<p class="info-item-number">
+						{{ websiteInfo.website_works }}
+					</p>
 				</div>
 				<div class="info-item">
 					<div class="info-item-title">留言</div>
-					<p class="info-item-number">45</p>
+					<p class="info-item-number">
+						{{ websiteInfo.website_leaveWords }}
+					</p>
 				</div>
 				<div class="info-item">
 					<div class="info-item-title">访问</div>
-					<p class="info-item-number">45</p>
+					<p class="info-item-number">
+						{{ websiteInfo.website_visit }}
+					</p>
 				</div>
 			</div>
 		</zbCard>
@@ -29,6 +39,11 @@
 
 <script setup lang="ts">
 	import zbCard from '@/components/common/zb-card.vue';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
+
+	const { common } = useStore();
+	const { websiteInfo } = storeToRefs(common);
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,9 @@
 <template>
 	<!-- <el-card> -->
 	<div class="album-container">
-		<div class="album-bg">
+		<!-- <div class="album-bg">
 			<span class="album-bg-title">相册</span>
-		</div>
+		</div> -->
 		<div
 			class="album-content"
 			v-infinite-scroll="loadMore"
@@ -29,7 +29,7 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { computed, onMounted, ref } from 'vue';
-	import zbAlbumItem from './components/zb-album-item.vue';
+	import zbAlbumItem from './albumItem.vue';
 	import ZbLoadMore from '@/components/common/zb-loadMore.vue';
 	import { useRouter } from 'vue-router';
 	import { Album } from '@/types';
@@ -79,6 +79,7 @@
 		flex-direction: column;
 		flex-wrap: wrap;
 		gap: 20px;
+		margin: 40px 0;
 
 		.album-bg {
 			width: 100%;
@@ -98,9 +99,9 @@
 
 		.album-content {
 			display: grid;
-			grid-template-columns: repeat(4, 180px);
-			grid-column-gap: 10px;
-			grid-row-gap: 15px;
+			grid-template-columns: repeat(2, 330px);
+			grid-column-gap: 40px;
+			grid-row-gap: 20px;
 		}
 	}
 </style>

@@ -1,9 +1,4 @@
 <template>
-	<div class="layout-container--header">
-		<div class="header">
-			<Header></Header>
-		</div>
-	</div>
 	<div class="layout-container--main">
 		<transition enter-active-class="animate__animated animate__fadeInLeft">
 			<router-view v-slot="{ Component }">
@@ -16,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-	import Header from '@/layout/header/index.vue';
 	import useStore from '@/store';
 	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
@@ -45,17 +39,6 @@
 </script>
 
 <style lang="scss" scoped>
-	.layout-container--header {
-		position: sticky;
-		top: -1px;
-		z-index: 999;
-		background-color: var(--theme-color);
-		transition: 0.4s;
-		.header {
-			width: 1450px;
-			margin: 0 auto;
-		}
-	}
 	.layout-container--main {
 		width: 1300px;
 		margin: 0 auto;

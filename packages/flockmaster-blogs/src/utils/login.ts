@@ -54,3 +54,12 @@ export const logout = () => {
 		path: '/login'
 	});
 };
+
+// 退出登录
+export const newLogout = () => {
+	clearInfo();
+	ElMessage({
+		type: 'success',
+		message: '退出登录成功'
+	});
+};
