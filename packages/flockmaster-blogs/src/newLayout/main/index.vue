@@ -46,7 +46,7 @@
 		display: flex;
 		gap: 10px;
 		margin: 15px 8px 15px;
-		background: hsla(0, 0, 100%, 0.7);
+		background: var(--theme-card-bg-color);
 		border-radius: 10px;
 		height: 100%;
 		width: 1300px;
@@ -57,7 +57,7 @@
 			max-width: 20%;
 		}
 		.main-area {
-			background-color: #fff;
+			background: var(--theme-center-card-bg-color);
 			flex-basis: 60%;
 			// height: 100%;
 			overflow: hidden;

@@ -23,7 +23,7 @@
 	.album-item {
 		width: 100%;
 		height: 200px;
-		background-color: var(--theme-color);
+		background-color: var(--theme-card-bg-color);
 		border-radius: 6px;
 		display: flex;
 		flex-direction: column;

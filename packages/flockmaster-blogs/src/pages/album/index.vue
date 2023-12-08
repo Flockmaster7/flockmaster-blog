@@ -73,7 +73,7 @@
 	.album-container {
 		min-height: 700px;
 		display: flex;
-		background: var(--card-reset-bg);
+		// background: var(--card-reset-bg);
 		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;

@@ -115,7 +115,6 @@
 	}
 	.leaveWord-container {
 		padding: 20px 40px;
-		background: var(--card-reset-bg);
 		display: flex;
 		justify-content: center;
 		align-items: center;

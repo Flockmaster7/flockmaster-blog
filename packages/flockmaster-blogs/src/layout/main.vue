@@ -37,6 +37,7 @@
 		gap: 10px;
 		margin: 15px 8px 15px;
 		.main-area {
+			background: var(--card-reset-bg);
 			flex-basis: 75%;
 		}
 		.aside-area {

@@ -95,7 +95,7 @@
 
 	.blog-container {
 		padding: 20px 40px 0;
-		background: var(--card-reset-bg);
+		// background: var(--card-reset-bg);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;

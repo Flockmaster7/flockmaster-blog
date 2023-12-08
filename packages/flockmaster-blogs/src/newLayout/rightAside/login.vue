@@ -98,6 +98,7 @@
 					import.meta.env.VITE_ACCESS_TOKEN,
 					res.data.token
 				);
+				emits('closeLogin');
 				// 跳转
 				if (router.currentRoute.value.query.from)
 					router.push(String(router.currentRoute.value.query.from));
@@ -194,7 +195,6 @@
 
 		.content-box {
 			width: 400px;
-			border: 1px solid #717775;
 			border-radius: 16px;
 			display: flex;
 			flex-direction: column;
@@ -249,7 +249,7 @@
 			font-size: 14px;
 			color: #717775;
 			.create {
-				color: #a4c4b5;
+				color: var(--theme-active-color);
 				margin-left: 10px;
 				text-decoration: underline;
 			}

@@ -39,7 +39,7 @@
 		position: relative;
 		width: 100%;
 		height: 200px;
-		background-color: var(--theme-color);
+		// background-color: var(--theme-color);
 		display: flex;
 		gap: 20px;
 

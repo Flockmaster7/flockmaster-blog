@@ -9,7 +9,6 @@
 
 <style lang="scss" scoped>
 	.top-tool-container {
-		background-color: #fff;
 		height: 70px;
 		display: flex;
 		padding: 0 20px;
