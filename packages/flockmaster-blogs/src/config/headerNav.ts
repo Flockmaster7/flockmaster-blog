@@ -7,6 +7,12 @@ export const navLinkList: HeaderNavType[] = [
 		name: '',
 		icon: 'home'
 	},
+	{
+		title: '朋友圈',
+		src: '/circleFriend',
+		name: '',
+		icon: 'circleFriend'
+	},
 	// {
 	// 	title: '归档',
 	// 	src: '/pigeonhole',

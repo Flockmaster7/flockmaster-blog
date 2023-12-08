@@ -20,6 +20,11 @@ export const routers = [
 				component: () => import('@/pages/home/index.vue')
 			},
 			{
+				path: '/circleFriend',
+				name: 'CircleFriend',
+				component: () => import('@/pages/circleFriend/index.vue')
+			},
+			{
 				path: '/settings',
 				name: 'Settings',
 				component: () => import('@/pages/settings/index.vue')

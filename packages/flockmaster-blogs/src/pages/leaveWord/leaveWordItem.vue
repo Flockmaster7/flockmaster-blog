@@ -18,7 +18,7 @@
 						<zb-svg-icon
 							name="like"
 							color="var(--theme-active-color)"></zb-svg-icon>
-						100
+						{{ item.dianzan }}
 					</div>
 				</div>
 				<div class="content">
@@ -31,11 +31,11 @@
 
 <script setup lang="ts">
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { Comment } from '@/types';
 	import { imgUrl } from '@/utils/common';
+	import { LeaveWord } from '@/types';
 
 	interface propsType {
-		item: Comment;
+		item: LeaveWord;
 		type: 'blog' | 'leaveWord';
 	}
 

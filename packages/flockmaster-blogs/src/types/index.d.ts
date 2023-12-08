@@ -123,6 +123,7 @@ export interface LeaveWord {
 	isDeleted: string;
 	createdAt: string;
 	updatedAt: string;
+	dianzan: number;
 	user: UserInfo;
 	children: LeaveWord[];
 	targetComment?: LeaveWord;

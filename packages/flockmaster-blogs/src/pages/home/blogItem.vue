@@ -48,7 +48,7 @@
 							{{ getTimeFormNow(blog.createdAt) }}
 						</div>
 						<div class="description">
-							按时丢卡hsudhaush后端刷刷思安还晒是撒后悔死数据库砂浆喀什卡哈萨克杀寇决
+							{{ blog.content_html }}
 						</div>
 						<div class="tag">
 							<el-tag
