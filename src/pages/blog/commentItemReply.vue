@@ -139,6 +139,7 @@
 
 			.replied-content {
 				padding: 10px;
+				border-radius: 8px;
 				background-color: var(--theme-reply-content-color);
 				color: $gray;
 			}

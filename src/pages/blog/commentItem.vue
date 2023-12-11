@@ -20,9 +20,8 @@
 </template>
 
 <script setup lang="ts">
-	import { Comment, UserInfo } from '@/types';
+	import { Comment } from '@/types';
 	import { onMounted, ref } from 'vue';
-	import router from '@/router';
 	import useStore from '@/store';
 	import CommentItemReply from './commentItemReply.vue';
 
@@ -30,12 +29,7 @@
 		item: Comment;
 	}
 
-	interface emitsType {
-		(e: 'getCommentList', newStart?: boolean): void;
-	}
-
 	const props = defineProps<propsType>();
-	const emit = defineEmits<emitsType>();
 
 	const { blog } = useStore();
 
@@ -158,7 +152,7 @@
 	.commentItem-container {
 		margin-bottom: 30px;
 		.child-reply {
-			background: var(--theme-card-bg-color);
+			background: var(--theme-operator-color);
 			margin-left: 65px;
 			padding: 20px;
 			border-radius: 8px;

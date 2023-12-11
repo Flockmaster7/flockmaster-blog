@@ -89,7 +89,7 @@
 					.bottom {
 						border-radius: 4px;
 						padding: 2px 5px;
-						background-color: rgb(188, 217, 233);
+						background: var(--theme-data-show);
 						width: 160px;
 						font-size: 12px;
 

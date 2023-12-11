@@ -12,7 +12,9 @@
 			v-for="item in commentList"
 			:key="item.id"></commentItem>
 		<zb-empty v-if="commentList.length === 0" :height="400"></zb-empty>
-		<div @click="() => getCommentList()">
+		<div
+			@click="() => getCommentList()"
+			v-if="commentTotal > 9 && commentTotal > commentList.length">
 			<zb-loadMore
 				v-if="isLoadMore"
 				direction="center"

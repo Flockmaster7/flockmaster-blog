@@ -31,11 +31,12 @@
 			gap: 7px;
 			align-items: center;
 			border-radius: 8px;
+			color: var(--theme-text-show);
 		}
 
 		.nav-item:hover {
 			cursor: pointer;
-			background-color: rgb(248, 226, 253);
+			background: var(--theme-data-show-2);
 		}
 	}
 </style>

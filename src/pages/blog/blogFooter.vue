@@ -2,9 +2,12 @@
 	<div class="blogFooter-container">
 		标签：
 		<div class="tag-list">
-			<el-tag v-for="(item, index) in blogDeatil.tags" :key="item.id">{{
-				item.tag_name
-			}}</el-tag>
+			<el-tag
+				color="#5cbfef"
+				v-for="(item, index) in blogDeatil.tags"
+				:key="item.id"
+				>{{ item.tag_name }}</el-tag
+			>
 		</div>
 	</div>
 </template>

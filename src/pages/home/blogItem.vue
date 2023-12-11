@@ -54,7 +54,7 @@
 							<el-tag
 								v-for="item in blog.tags"
 								:key="item.id"
-								color="var(--theme-active-color)">
+								color="#5cbfef">
 								{{ item.tag_name }}</el-tag
 							>
 						</div>
@@ -173,7 +173,7 @@
 
 			.bottom {
 				padding: 4px 8px;
-				background: linear-gradient(to right, rgb(210, 237, 248), #fff);
+				background: var(--theme-data-show);
 				border-radius: 8px;
 				display: flex;
 				justify-content: space-between;

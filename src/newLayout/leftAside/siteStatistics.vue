@@ -60,11 +60,7 @@
 				width: 80px;
 				padding: 8px;
 				border-radius: 8px;
-				background: linear-gradient(
-					to bottom right,
-					rgb(248, 226, 253),
-					#ffffff
-				);
+				background: var(--theme-data-show-2);
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
