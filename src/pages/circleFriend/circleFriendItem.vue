@@ -20,9 +20,11 @@
 				</div>
 			</div>
 			<Operator
+				:isDianzan="userDianzanList.includes(cirFriend.id)"
 				:dianzanCount="cirFriend.dianzanCount"
 				:circleFriendId="cirFriend.id"
-				@dianzan="dianzanCircleFriend"></Operator>
+				@dianzan="dianzanCircleFriend"
+				@cancelDianzan="cancelDianzanCircleFriend"></Operator>
 		</div>
 	</div>
 </template>
@@ -30,11 +32,12 @@
 <script setup lang="ts">
 	import ImgList from './imgList.vue';
 	import VideoList from './videoList.vue';
-	// import Operator from './operator.vue';
+	import Operator from './operator.vue';
 	import useStore from '@/store';
 	import { imgUrl } from '@/utils/common';
 	import { CircleFriend } from '@/types';
 	import { ElMessage } from 'element-plus';
+	import { storeToRefs } from 'pinia';
 
 	interface PropsType {
 		cirFriend: CircleFriend;
@@ -44,6 +47,8 @@
 
 	const { circleFriend } = useStore();
 
+	const { userDianzanList } = storeToRefs(circleFriend);
+
 	const videos = props.cirFriend.videos.map((item) => {
 		return item.video_url;
 	});
@@ -52,9 +57,21 @@
 		return item.image_url;
 	});
 
-	const dianzanCircleFriend = (id: number) => {
-		circleFriend.dianzan(id);
-		ElMessage.success('点赞成功');
+	const dianzanCircleFriend = async (id: number) => {
+		const flag = await circleFriend.dianzan(id);
+		if (flag) {
+			userDianzanList.value.push(id);
+			ElMessage.success('点赞成功');
+		}
+	};
+
+	const cancelDianzanCircleFriend = async (id: number) => {
+		const flag = await circleFriend.cancelDianzan(id);
+		if (flag) {
+			userDianzanList.value = userDianzanList.value.filter(
+				(item) => item !== id
+			);
+		}
 	};
 </script>
 
@@ -64,6 +81,8 @@
 		display: flex;
 		padding: 30px 0;
 		gap: 15px;
+		border-bottom: 1px solid var(--theme-divider);
+
 		.left {
 			width: 56px;
 			height: 56px;

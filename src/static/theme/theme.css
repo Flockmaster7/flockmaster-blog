@@ -34,6 +34,7 @@
 	--theme-card-bg-color: hsla(0, 0%, 100%, 0.7);
 	--theme-center-card-bg-color: #ffffff;
 	--theme-operator-color: rgb(244, 247, 248);
+	--theme-divider: #e8e8e8;
 }
 
 .dark {
@@ -62,6 +63,7 @@
 	--theme-center-card-bg-color: #161829;
 	--el-bg-color: var(--theme-center-card-bg-color) !important;
 	--theme-operator-color: #111324;
+	--theme-divider: #23242c;
 }
 
 .skyblue {

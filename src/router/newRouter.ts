@@ -70,11 +70,11 @@ export const routers = [
 				name: 'LeaveWord',
 				component: () => import('@/pages/leaveWord/index.vue')
 			},
-			// {
-			// 	path: '/blog/detail',
-			// 	name: 'Detail',
-			// 	component: () => import('@/pages/blog/index.vue')
-			// },
+			{
+				path: '/blog/detail',
+				name: 'Detail',
+				component: () => import('@/pages/blog/index.vue')
+			},
 			{
 				path: '/searchResult',
 				name: 'SearchResult',
@@ -100,14 +100,14 @@ export const routers = [
 			loginRequest: true
 		}
 	},
-	{
-		path: '/blog/detail',
-		name: 'Detail',
-		component: () => import('@/pages/blog/index.vue'),
-		meta: {
-			isShowRight: true
-		}
-	},
+	// {
+	// 	path: '/blog/detail',
+	// 	name: 'Detail',
+	// 	component: () => import('@/pages/blog/index.vue'),
+	// 	meta: {
+	// 		isShowRight: true
+	// 	}
+	// },
 
 	{
 		path: '/visualize',

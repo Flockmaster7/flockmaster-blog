@@ -67,7 +67,8 @@
 			gap: 5px;
 			padding-top: 10px;
 			padding-left: 20px;
-			border-bottom: 1px solid #e8e8e8;
+			// border-bottom: 1px solid #e8e8e8;
+			border-bottom: 1px solid var(--theme-divider);
 
 			.title {
 				font-size: 28px;

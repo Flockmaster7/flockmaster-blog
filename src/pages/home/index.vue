@@ -20,7 +20,7 @@
 			</div>
 		</div>
 		<!-- <zb-loading v-show="isLoading"></zb-loading> -->
-		<zb-empty></zb-empty>
+		<zb-empty v-if="blogList.length === 0"></zb-empty>
 
 		<!-- <zb-empty v-if="!isLoading || blogList.length === 0"></zb-empty> -->
 		<div class="pagination" v-if="blogList.length > 0">

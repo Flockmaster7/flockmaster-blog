@@ -16,6 +16,7 @@
 	const { circleFriendList } = storeToRefs(circleFriend);
 
 	circleFriend.getList(1, 9);
+	circleFriend.getUserDianzan();
 </script>
 
 <style lang="scss" scoped>

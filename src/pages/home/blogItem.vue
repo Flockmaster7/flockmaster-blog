@@ -122,12 +122,12 @@
 	.card {
 		gap: 15px;
 		margin: 20px 10px 30px;
-		border-radius: 15px;
 		width: 100%;
 		height: 250px;
 		display: flex;
 		justify-content: space-around;
 		transition: 0.6s;
+		border-bottom: 1px solid var(--theme-divider);
 
 		.blogInfo {
 			flex-basis: 60%;

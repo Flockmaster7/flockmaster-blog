@@ -5,6 +5,7 @@ import {
 	getUserDianzanList
 } from '@/http/circleFriend';
 import { CircleFriend } from '@/types/index.js';
+import { isLogin } from '@/utils/login';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -20,9 +21,11 @@ export const useCircleFriendStore = defineStore('circleFriend', () => {
 	};
 
 	const getUserDianzan = async () => {
-		const { data: res } = await getUserDianzanList();
-		if (res.code === 200) {
-			userDianzanList.value = res.data;
+		if (isLogin()) {
+			const { data: res } = await getUserDianzanList();
+			if (res.code === 200) {
+				userDianzanList.value = res.data;
+			}
 		}
 	};
 
