@@ -1,39 +1,18 @@
-## 前言
+# Vue 3 + TypeScript + Vite
 
-本项目为个人博客项目，目标是实现一个前后端分离的个人博客
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## 启动命令
+## Recommended IDE Setup
 
-安装依赖：pnpm install<br>
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-前端：pnpm run dev:blogs<br>
+## Type Support For `.vue` Imports in TS
 
-后端：pnpm run dev:service<br>
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-## 技术栈
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-包管理：pnpm monorepo <br>
-
-前端： vue3、pinia、ts、vite<br>
-
-后端： koa2、sequalize-typescript、ts、mysql5.7<br>
-
-## 后续计划
-
-购买腾讯云或阿里云进行部署 ---已部署<br>
-
-h5---已配置<br>
-
-文章搜素 --已增加<br>
-
-增加 redis 缓存<br>
-
-网站访问量统计<br>
-
-前端监控<br>
-
-文章代码高亮，显示行号，可复制<br>
-
-后台管理系统<br>
-
-可视化大屏<br>
+1. Disable the built-in TypeScript Extension
+   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.

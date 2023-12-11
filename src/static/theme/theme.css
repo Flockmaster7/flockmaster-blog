@@ -1,0 +1,189 @@
+:root {
+	/* 主题颜色 */
+	color-scheme: light;
+	--theme-color: #ffffff;
+	--theme-background-color: linear-gradient(
+		90deg,
+		#fff 1%,
+		#ead2ea 10.2%,
+		#e4d5ee 19.6%,
+		#d1def3 36.8%,
+		#b5dee5 62.2%,
+		#cfebf3 88.9%,
+		#fff 99%
+	);
+	--theme-card-color: #ffffff;
+	--theme-card-item-color: #e1ffff42;
+	--theme-nav-color: rgb(230, 230, 230);
+	--theme-nav-active-color: #5cbfef;
+	--theme-tool-color: #eef9fc;
+	--theme-tool-item-color: #000000;
+	--theme-reply-content-color: rgb(245, 237, 237);
+	--theme-tag-color: #5cbfef;
+	--theme-active-color: #5cbfef;
+	--theme-tool-active-color: var(--theme-color);
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#434950,
+		#626663,
+		#838577,
+		#a4a58b
+	);
+	--card-reset-bg: hsla(0, 0%, 100%, 0.3);
+	--theme-empty-color: #000000;
+	--theme-card-bg-color: hsla(0, 0%, 100%, 0.7);
+	--theme-center-card-bg-color: #ffffff;
+	--theme-operator-color: rgb(244, 247, 248);
+}
+
+.dark {
+	--theme-color: #232424;
+	--theme-background-color: #0a0c19;
+	--theme-card-color: #1d1e1f;
+	--theme-card-item-color: #333434;
+	--theme-nav-color: #2d3030;
+	--theme-nav-active-color: #e6eaea7b;
+	--theme-tool-color: #3b3b3b;
+	--theme-tool-item-color: #3b3b3b;
+	--theme-reply-content-color: var(--theme-color);
+	--theme-tag-color: var(--theme-color);
+	--theme-active-color: #b9b9b9;
+	--theme-tool-active-color: #686969;
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#434950,
+		#626663,
+		#838577,
+		#a4a58b
+	);
+	--card-reset-bg: var(--theme-card-color);
+	--theme-empty-color: #b9b9b9;
+	--theme-card-bg-color: #111324;
+	--theme-center-card-bg-color: #161829;
+	--el-bg-color: var(--theme-center-card-bg-color) !important;
+	--theme-operator-color: #111324;
+}
+
+.skyblue {
+	--theme-color: rgb(137, 186, 206);
+	--theme-background-color: linear-gradient(
+		90deg,
+		#fff 1%,
+		#ead2ea 10.2%,
+		#e4d5ee 19.6%,
+		#d1def3 36.8%,
+		#b5dee5 62.2%,
+		#cfebf3 88.9%,
+		#fff 99%
+	);
+	--theme-card-color: #ffffff;
+	--theme-card-item-color: #e1ffff42;
+	--theme-nav-color: rgb(97, 194, 233);
+	--theme-nav-active-color: #ffffff;
+	--theme-tool-color: #ffffff;
+	--theme-tool-item-color: #ffffff;
+	--theme-reply-content-color: rgb(241, 245, 249);
+	--theme-tag-color: var(--theme-color);
+	--theme-active-color: var(--theme-color);
+	--theme-tool-active-color: var(--theme-color);
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#afcdd9,
+		#9bb6c0,
+		#a2b6ce,
+		#a8c6d6
+	);
+}
+
+.winered {
+	--theme-color: rgb(206, 137, 137);
+	--theme-background-color: linear-gradient(
+		90deg,
+		#fff 1%,
+		#ead2ea 10.2%,
+		#e4d5ee 19.6%,
+		#d1def3 36.8%,
+		#b5dee5 62.2%,
+		#cfebf3 88.9%,
+		#fff 99%
+	);
+	--theme-card-color: #ffffff;
+	--theme-card-item-color: #e1ffff42;
+	--theme-nav-color: rgb(233, 97, 97);
+	--theme-nav-active-color: #ffffff;
+	--theme-tool-color: #ffffff;
+	--theme-tool-item-color: #ffffff;
+	--theme-reply-content-color: rgb(245, 237, 237);
+	--theme-tag-color: var(--theme-color);
+	--theme-active-color: var(--theme-color);
+	--theme-tool-active-color: var(--theme-color);
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#efbdbd,
+		#c09b9b,
+		#cea2a2,
+		#d5b5b5
+	);
+}
+
+.purple {
+	--theme-color: rgb(192, 152, 215);
+	--theme-background-color: linear-gradient(
+		90deg,
+		#fff 1%,
+		#ead2ea 10.2%,
+		#e4d5ee 19.6%,
+		#d1def3 36.8%,
+		#b5dee5 62.2%,
+		#cfebf3 88.9%,
+		#fff 99%
+	);
+	--theme-card-color: #ffffff;
+	--theme-card-item-color: #e1ffff42;
+	--theme-nav-color: rgb(156, 97, 233);
+	--theme-nav-active-color: #ffffff;
+	--theme-tool-color: #ffffff;
+	--theme-tool-item-color: #ffffff;
+	--theme-reply-content-color: rgb(241, 237, 245);
+	--theme-tag-color: var(--theme-color);
+	--theme-active-color: var(--theme-color);
+	--theme-tool-active-color: var(--theme-color);
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#dbbee6,
+		#b89bc0,
+		#c2a2ce,
+		#c7b0d1
+	);
+}
+
+.green {
+	--theme-color: #a4c4b5;
+	--theme-background-color: linear-gradient(
+		90deg,
+		#fff 1%,
+		#ead2ea 10.2%,
+		#e4d5ee 19.6%,
+		#d1def3 36.8%,
+		#b5dee5 62.2%,
+		#cfebf3 88.9%,
+		#fff 99%
+	);
+	--theme-card-color: #ffffff;
+	--theme-card-item-color: #e1ffff42;
+	--theme-nav-active-color: #ffffff;
+	--theme-nav-color: #b4e3cc;
+	--theme-tool-color: #ffffff;
+	--theme-tool-item-color: #ffffff;
+	--theme-reply-content-color: #eef0ef87;
+	--theme-tag-color: var(--theme-color);
+	--theme-active-color: var(--theme-color);
+	--theme-tool-active-color: var(--theme-color);
+	--theme-search-bg-color: linear-gradient(
+		186deg,
+		#accfb9,
+		#9bc0ad,
+		#a2ceb8,
+		#b3dccd
+	);
+}

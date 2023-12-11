@@ -1,0 +1,21 @@
+@import url(./theme.css);
+
+:root {
+	--el-color-primary: var(--theme-tag-color) !important;
+	--el-text-color-primary: var(--theme-text-color);
+	--el-color-info-light-9: hsla(0, 0%, 100%, 0.3);
+	--el-fill-color-blank: hsla(0, 0%, 100%, 0.3);
+}
+
+.el-collapse {
+	--el-collapse-header-bg-color: transparent !important;
+	--el-collapse-content-bg-color: transparent !important;
+}
+
+.md-editor {
+	--md-bk-color: transparent !important;
+}
+
+.md-editor-dark {
+	--md-bk-color: #1d1e1f !important;
+}

@@ -1,0 +1,83 @@
+/* 响应式布局 - 小于 1200px */
+@media screen and (max-width: 1200px) {
+}
+
+/* 响应式布局 - 小于 990px */
+@media screen and (max-width: 990px) {
+	.header-nav-pc {
+		display: none !important;
+	}
+	.header-nav-mobile {
+		display: block !important;
+	}
+}
+
+/* 响应式布局 - 小于 540px */
+@media screen and (max-width: 540px) {
+	.main-area {
+		width: 100% !important;
+	}
+	.aside-area {
+		display: none !important;
+	}
+	.layout-container {
+		margin: 8px 5px !important;
+	}
+	.layout-container--header {
+		.header {
+			padding: 0 !important;
+			box-sizing: border-box;
+			width: 100% !important;
+		}
+	}
+	.layout-container--main {
+		box-sizing: border-box;
+		width: 100% !important;
+	}
+
+	.pagination {
+		padding: 20px 0 10px !important;
+	}
+}
+
+/* 响应式布局 - 大于540px */
+@media screen and (min-width: 540px) {
+	.header-wrap,
+	.main-wrap,
+	.type-wrap {
+		width: 100%;
+	}
+}
+
+/* 响应式布局 - 大于 990px */
+@media screen and (min-width: 990px) {
+	.main-wrap,
+	.type-wrap {
+		width: 900px;
+	}
+	.header-wrap {
+		width: 960px;
+	}
+	.header-nav-mobile {
+		display: none !important;
+	}
+}
+
+/* 响应式布局 - 大于 1200px */
+@media screen and (min-width: 1200px) {
+	// .main-wrap,
+	// .type-wrap {
+	// 	width: 1100px;
+	// }
+	// .header-wrap {
+	// 	width: 1200px;
+	// }
+	// .layout-container--header {
+	// 	.header {
+	// 		width: 1200px !important;
+	// 	}
+	// }
+	// .layout-container--main {
+	// 	width: 1100px !important;
+	// }
+}
