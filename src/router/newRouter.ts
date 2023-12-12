@@ -61,6 +61,11 @@ export const routers = [
 				component: () => import('@/pages/tag/index.vue')
 			},
 			{
+				path: '/music',
+				name: 'Music',
+				component: () => import('@/pages/music/index.vue')
+			},
+			{
 				path: '/tagDetail',
 				name: 'TagDetail',
 				component: () => import('@/pages/tag/tagDetail.vue')

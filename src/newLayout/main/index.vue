@@ -22,10 +22,11 @@
 			<RightAside></RightAside>
 		</div>
 	</div>
+	<MusicPlayer></MusicPlayer>
 </template>
 
 <script setup lang="ts">
-	import useAdminInfo from '@/hooks/useAdminInfo';
+	import MusicPlayer from '@/pages/music/musicPlayer.vue';
 	import LeftAside from '../leftAside/index.vue';
 	import RightAside from '../rightAside/index.vue';
 	import TopBg from './topBg.vue';

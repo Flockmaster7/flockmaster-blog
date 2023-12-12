@@ -11,7 +11,6 @@ export default function () {
 		result.value = window.matchMedia('(max-width: 540px)').matches;
 		isMobile.value = result.value;
 		window.onresize = function () {
-			console.log('触发resize');
 			result.value = window.matchMedia('(max-width: 540px)').matches;
 		};
 	});

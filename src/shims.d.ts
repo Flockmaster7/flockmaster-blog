@@ -5,3 +5,4 @@ declare module '@kangc/v-md-editor';
 declare module '@kangc/v-md-editor/lib/plugins/line-number/index';
 declare module '@kangc/v-md-editor/lib/preview';
 declare module 'prismjs';
+declare module 'aplayer';
