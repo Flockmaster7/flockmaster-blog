@@ -23,7 +23,7 @@
 		<zb-empty v-if="blogList.length === 0"></zb-empty>
 
 		<!-- <zb-empty v-if="!isLoading || blogList.length === 0"></zb-empty> -->
-		<div class="pagination" v-if="blogList.length > 0">
+		<!-- <div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"
 				v-model:page-size="pageSize"
@@ -33,7 +33,7 @@
 				:total="blogTotal"
 				@size-change="handleSizeChange"
 				@current-change="handleCurrentChange" />
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -95,7 +95,6 @@
 
 	.blog-container {
 		padding: 20px 40px 0;
-		// background: var(--card-reset-bg);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -103,7 +102,6 @@
 		flex-wrap: wrap;
 		gap: 10px;
 		position: relative;
-		height: 100%;
 		overflow: auto;
 
 		.tool-card {

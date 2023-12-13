@@ -54,7 +54,7 @@
 		.comment-list {
 			display: flex;
 			flex-direction: column;
-			gap: 15px;
+			gap: 20px;
 
 			.comment-item {
 				display: flex;

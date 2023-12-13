@@ -62,7 +62,7 @@
 		const flag = await circleFriend.dianzan(id);
 		if (flag) {
 			userDianzanList.value.push(id);
-			ElMessage.success('点赞成功');
+			ElMessage.success('感谢支持！');
 		}
 	};
 

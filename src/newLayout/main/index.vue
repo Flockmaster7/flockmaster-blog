@@ -58,15 +58,21 @@
 		.left-aside {
 			flex-basis: 20%;
 			max-width: 20%;
+			position: sticky;
+			top: -50px;
+			height: 767px;
 		}
+
 		.main-area {
 			background: var(--theme-center-card-bg-color);
 			flex-basis: 60%;
-			// height: 100%;
-			overflow: hidden;
 		}
+
 		.right-aside {
 			flex-basis: 20%;
+			position: sticky;
+			top: -70px;
+			height: 784px;
 		}
 	}
 </style>

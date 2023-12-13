@@ -1,5 +1,5 @@
 <template>
-	<div class="leftAside-container">
+	<div class="leftAside-container" ref="leftAside">
 		<div class="top">
 			<img :src="imgUrl(userInfo.user_image)" alt="" />
 			<p class="name">{{ userInfo.name }}</p>
@@ -38,7 +38,7 @@
 			gap: 15px;
 			.name {
 				color: #fcbffc;
-				font-size: 14px;
+				font-size: 16px;
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
 					'Trebuchet MS', sans-serif;
 			}

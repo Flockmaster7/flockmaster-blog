@@ -58,6 +58,9 @@
 		align-items: center;
 		justify-content: space-between;
 		z-index: 999;
+		position: sticky;
+		top: 0;
+		background: var(--theme-center-card-bg-color);
 
 		.right {
 			display: flex;
