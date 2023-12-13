@@ -1,6 +1,6 @@
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
-type Fn = (value: number) => Promise<boolean>;
+type Fn = (page: number) => Promise<boolean>;
 
 export default function useInfiniteScroll(fn: Fn) {
 	const pageNum = ref(1);
@@ -16,6 +16,10 @@ export default function useInfiniteScroll(fn: Fn) {
 			console.log(pageNum.value);
 		}
 	};
+
+	onMounted(() => {
+		loadMore();
+	});
 
 	return {
 		pageNum,

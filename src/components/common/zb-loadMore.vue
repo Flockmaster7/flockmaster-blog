@@ -2,14 +2,15 @@
 	<div class="loadMore-container">
 		<div
 			class="loadMore-default"
-			v-if="!isLoading"
+			v-if="!isLoading && isLoadMore"
 			:style="{ justifyContent: direction }">
 			<zb-svg-icon name="more"></zb-svg-icon>
 			{{ text }}
 		</div>
-		<div class="loadMore-fallback" v-else>
+		<div class="loadMore-fallback" v-if="isLoading">
 			<zb-loading :height="40" :size="25"></zb-loading>
 		</div>
+		<div class="loadMore-default" v-if="!isLoadMore">已经到底了噢~</div>
 	</div>
 </template>
 

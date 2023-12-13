@@ -22,6 +22,7 @@ import {
 	Comment,
 	UserInfo
 } from '@/types';
+import { fa } from 'element-plus/es/locale';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -130,12 +131,17 @@ export const useBlogStore = defineStore('blog', () => {
 		pageNum: number,
 		pageSize: number,
 		data?: Partial<BlogListForm>
-	) => {
+	): Promise<boolean> => {
 		const { data: res } = await getArticleList(pageNum, pageSize, data);
 		if (res.code === 200) {
-			blogList.value = res.data.rows;
+			if (pageNum === 1) {
+				blogList.value = res.data.rows;
+			} else {
+				blogList.value.push(...res.data.rows);
+			}
 			blogTotal.value = res.data.total;
-		}
+			return true;
+		} else return false;
 	};
 
 	// 获取文章详情

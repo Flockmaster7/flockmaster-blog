@@ -95,6 +95,13 @@
 		.photo-list {
 			column-count: 4;
 			column-gap: 5px;
+
+			.img {
+				img {
+					width: 100%;
+					object-fit: cover;
+				}
+			}
 		}
 	}
 </style>

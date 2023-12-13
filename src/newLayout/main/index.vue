@@ -56,8 +56,9 @@
 		margin: 40px auto;
 
 		.left-aside {
+			box-sizing: border-box;
 			flex-basis: 20%;
-			max-width: 20%;
+			min-width: 20%;
 			position: sticky;
 			top: -50px;
 			height: 767px;
@@ -66,9 +67,11 @@
 		.main-area {
 			background: var(--theme-center-card-bg-color);
 			flex-basis: 60%;
+			max-width: 60%;
 		}
 
 		.right-aside {
+			min-width: 20%;
 			flex-basis: 20%;
 			position: sticky;
 			top: -70px;

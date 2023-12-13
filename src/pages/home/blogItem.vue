@@ -120,8 +120,8 @@
 		}
 	}
 	.card {
+		padding: 30px 0 20px;
 		gap: 15px;
-		margin: 20px 10px 30px;
 		width: 100%;
 		height: 250px;
 		display: flex;

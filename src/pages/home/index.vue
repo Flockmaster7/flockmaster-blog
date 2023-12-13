@@ -1,9 +1,10 @@
 <template>
 	<div class="blog-container">
-		<div class="tool-card">
-			<!-- <tool @getBlogList="changeClassify"></tool> -->
-		</div>
-		<div class="blog-list">
+		<div
+			class="blog-list"
+			:infinite-scroll-disabled="!isLoadMore"
+			v-infinite-scroll="loadMore"
+			:infinite-scroll-delay="600">
 			<div
 				v-for="item in blogList"
 				:key="item.id"
@@ -19,7 +20,10 @@
 					:isLoading="isLoading"></BlogItem>
 			</div>
 		</div>
-		<!-- <zb-loading v-show="isLoading"></zb-loading> -->
+		<zb-load-more
+			:isLoading="isLoading"
+			direction="center"
+			:isLoadMore="isLoadMore"></zb-load-more>
 		<zb-empty v-if="blogList.length === 0"></zb-empty>
 
 		<!-- <zb-empty v-if="!isLoading || blogList.length === 0"></zb-empty> -->
@@ -48,21 +52,22 @@
 	import useIsMobile from '@/hooks/useIsMobile';
 	import zbLoading from '@/components/common/zb-loading.vue';
 	import { Blog } from '@/types';
-	import tool from '@/components/common/zb-classify-tool.vue';
+	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+	import { computed, onMounted } from 'vue';
 
 	const { blog, common } = useStore();
 	const router = useRouter();
 
 	const { blogList, blogTotal } = storeToRefs(blog);
 
-	const {
-		pageNum,
-		pageSize,
-		handleSizeChange,
-		handleCurrentChange,
-		isLoading,
-		getBlogListParams
-	} = usePagination(blog.getBlogList);
+	// const {
+	// 	pageNum,
+	// 	pageSize,
+	// 	handleSizeChange,
+	// 	handleCurrentChange,
+	// 	isLoading,
+	// 	getBlogListParams
+	// } = usePagination(blog.getBlogList);
 
 	// 获取设备
 	useIsMobile();
@@ -73,17 +78,13 @@
 		router.push('/blog/detail?id=' + id);
 	};
 
-	// 切换分类
-	const changeClassify = (id: string) => {
-		if (id !== '0') {
-			getBlogListParams.value = {
-				classify: id
-			};
-		} else {
-			getBlogListParams.value = {};
-		}
-		handleCurrentChange(1);
+	// 无线滚动加载
+	const getBlogs = async (pageNum: number) => {
+		const res = await blog.getBlogList(pageNum, 9);
+		return res;
 	};
+	const { isLoading, loadMore } = useInfiniteScroll(getBlogs);
+	const isLoadMore = computed(() => blogTotal.value > blogList.value.length);
 </script>
 
 <style lang="scss" scoped>
@@ -102,12 +103,6 @@
 		flex-wrap: wrap;
 		gap: 10px;
 		position: relative;
-		overflow: auto;
-
-		.tool-card {
-			position: absolute;
-			left: -110px;
-		}
 
 		.blog-list {
 			width: 100%;
