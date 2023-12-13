@@ -6,6 +6,12 @@
 		<div class="title">
 			全部评论
 			{{ commentTotal === 0 ? '' : commentTotal }}
+			<el-button
+				:loading-icon="Refresh"
+				:loading="isLoading"
+				@click="getCommentList">
+				刷新
+			</el-button>
 		</div>
 		<commentItem
 			:item="item"
@@ -28,6 +34,7 @@
 	import commentItem from './commentItem.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
+	import { Refresh } from '@element-plus/icons-vue';
 
 	// interface PropsType {
 	// }
@@ -66,6 +73,9 @@
 <style lang="scss" scoped>
 	.commentList-container {
 		.title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			font-size: 21px;
 			font-weight: 700;
 			height: 80px;

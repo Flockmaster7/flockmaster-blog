@@ -22,7 +22,7 @@
 	.nav-list {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 20px;
 		padding: 40px 0;
 
 		.nav-item {

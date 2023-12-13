@@ -1,12 +1,14 @@
 <template>
 	<div class="commentItem-container">
 		<CommentItemReply
+			type="comment"
 			:replyId="item.id"
 			:commentInfo="item"></CommentItemReply>
 		<div class="child-reply" v-if="item.children.length > 0">
 			<CommentItemReply
 				v-for="childReply in item.children"
 				:key="childReply.id"
+				type="reply"
 				:replyId="item.id"
 				:replyChildId="childReply.id"
 				:commentInfo="childReply"></CommentItemReply>

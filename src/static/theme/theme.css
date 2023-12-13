@@ -38,6 +38,7 @@
 	--theme-data-show: linear-gradient(to right, rgb(210, 237, 248), #fff);
 	--theme-data-show-1: linear-gradient(to right, rgb(248, 226, 253), #fff);
 	--theme-data-show-2: linear-gradient(to right, rgb(248, 226, 253), #fff);
+	--theme-active-show: #5cbfef;
 }
 
 .dark {
@@ -50,7 +51,7 @@
 	--theme-tool-color: #3b3b3b;
 	--theme-tool-item-color: #3b3b3b;
 	--theme-reply-content-color: #1a1c31;
-	--theme-tag-color: var(--theme-color);
+	/* --theme-tag-color: var(--theme-color); */
 	--theme-active-color: #b9b9b9;
 	--theme-tool-active-color: #686969;
 	--theme-search-bg-color: linear-gradient(
@@ -71,6 +72,7 @@
 	--theme-data-show-1: linear-gradient(to right, #3e2649, #111324);
 	--theme-data-show-2: linear-gradient(to right, #263449, #161829);
 	--theme-text-show: #ada9a9;
+	--theme-active-show: #5cbfef;
 }
 
 .skyblue {

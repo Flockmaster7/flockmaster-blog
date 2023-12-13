@@ -100,7 +100,6 @@
 	}
 
 	.tagDetail-container {
-		width: 100%;
 		padding: 80px 120px;
 
 		.name {

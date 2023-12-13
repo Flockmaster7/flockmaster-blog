@@ -57,7 +57,7 @@
 			flex-wrap: wrap;
 
 			.info-item {
-				width: 80px;
+				width: 60px;
 				padding: 8px;
 				border-radius: 8px;
 				background: var(--theme-data-show-2);
@@ -66,6 +66,7 @@
 				justify-content: center;
 				margin: 0 0 10px 0;
 				padding-left: 10px;
+				gap: 5px;
 
 				&-title {
 					color: #ada9a9;

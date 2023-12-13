@@ -6,7 +6,7 @@
 		<div class="right">
 			<div class="top">
 				<div class="name">{{ cirFriend.user.name }}</div>
-				<div class="date">{{ cirFriend.createdAt }}</div>
+				<ZbTime :time="cirFriend.createdAt"></ZbTime>
 			</div>
 			<div class="center">
 				<div class="text">
@@ -38,6 +38,7 @@
 	import { CircleFriend } from '@/types';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
+	import ZbTime from '@/components/common/zb-time.vue';
 
 	interface PropsType {
 		cirFriend: CircleFriend;
@@ -106,7 +107,10 @@
 			.top {
 				color: $gray;
 				font-size: 15px;
+
 				.name {
+					height: 30px;
+					line-height: 30px;
 					font-size: 20px;
 				}
 			}

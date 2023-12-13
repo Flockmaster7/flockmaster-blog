@@ -18,8 +18,8 @@
 
 	const playerInfo = ref({
 		fixed: true,
-		mini: true,
-		autoplay: true
+		mini: true
+		// autoplay: true
 	});
 
 	const addMyAudio = () => {

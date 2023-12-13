@@ -22,6 +22,6 @@
 <style lang="scss" scoped>
 	.circleFriend-container {
 		padding: 20px 105px 0;
-		width: 100%;
+		// width: 100%;
 	}
 </style>

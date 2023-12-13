@@ -88,10 +88,11 @@
 
 					.bottom {
 						border-radius: 4px;
-						padding: 2px 5px;
+						padding: 4px;
 						background: var(--theme-data-show);
-						width: 160px;
+						width: 150px;
 						font-size: 12px;
+						margin-top: 4px;
 
 						p {
 							overflow: hidden;

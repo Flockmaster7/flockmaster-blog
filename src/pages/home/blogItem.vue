@@ -144,6 +144,7 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
+				gap: 12px;
 
 				.title {
 					font-weight: 700;

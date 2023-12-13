@@ -35,12 +35,6 @@
 			</div>
 		</div> -->
 
-		<!-- <div class="tool-list">
-			<div class="tool-card">
-				<tool :id="id" @toComment="toComment"></tool>
-			</div>
-		</div> -->
-
 		<div class="blog-container">
 			<!-- 左侧 -->
 			<div class="blog-card">
@@ -69,39 +63,49 @@
 		</div>
 
 		<!-- 右侧抽屉 -->
-		<el-drawer v-model="rightOpen" size="60%" title="目录" direction="rtl">
-			<!-- 目录卡片 -->
-			<div class="catalog-card">
-				<div class="catalog-box">
-					<MdCatalog
-						:editorId="previewId"
-						:scrollElement="scrollElement" />
-				</div>
-			</div>
+		<el-drawer
+			:show-close="false"
+			v-model="rightOpen"
+			size="25%"
+			direction="rtl"
+			:lock-scroll="false">
+			<ZbCard title="操作">
+				<BlogOperator :id="id"></BlogOperator>
+			</ZbCard>
+			<ZbCard title="目录">
+				<MdCatalog
+					:editorId="previewId"
+					:scrollElement="scrollElement" />
+			</ZbCard>
+		</el-drawer>
+
+		<el-drawer
+			v-model="commentOpen"
+			title="评论"
+			:lock-scroll="false"
+			direction="rtl">
+			<commentPost
+				:blogId="blogDeatil.id"
+				:userImage="userInfo.user_image"
+				@refreshComment="getCommentList"></commentPost>
+			<CommentList></CommentList>
 		</el-drawer>
 	</div>
-
-	<!-- <div
-		ref="scrollToTopRef"
-		class="scrollToTop"
-		@click="gotoTop"
-		v-show="isShowScrollToTop">
-		<div class="icon">
-			<zb-svg-icon name="rocket" size="50"></zb-svg-icon>
-		</div>
-	</div> -->
 </template>
 
 <script setup lang="ts">
-	import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+	import {
+		computed,
+		nextTick,
+		onBeforeUnmount,
+		onMounted,
+		ref,
+		watch
+	} from 'vue';
 	import { storeToRefs } from 'pinia';
-	import { useRoute } from 'vue-router';
+	import { LocationQueryValue, useRoute } from 'vue-router';
 	import { imgUrl } from '@/utils/common';
-	import { ElMessage } from 'element-plus';
-	import { CommentParamsType } from '@/types/index';
-	import useGetPageScroll from '@/hooks/useGetPageScroll';
 	import { isLogin } from '@/utils/login';
-
 	import { MdPreview, MdCatalog } from 'md-editor-v3';
 	import 'md-editor-v3/lib/style.css';
 	import useStore from '@/store';
@@ -110,20 +114,30 @@
 	import blogFooter from './blogFooter.vue';
 	import commentPost from './commentPost.vue';
 	import CommentList from './commentList.vue';
+	import BlogOperator from './blogOperator.vue';
+	import ZbCard from '@/components/common/zb-card.vue';
 
 	const { common, blog, user } = useStore();
-	const { isDark, rightOpen } = storeToRefs(common);
+	const { isDark, rightOpen, commentOpen } = storeToRefs(common);
 
 	const { blogDeatil, blogStatus } = storeToRefs(blog);
 	const { userInfo } = storeToRefs(user);
 	const route = useRoute();
 
 	const content = ref('');
-	const id = route.query.id! as string;
+	const id = route.query.id as string;
+
+	const blogId = computed(() => {
+		return route.query.id;
+	});
 
 	const scrollElement = document.documentElement;
 
 	const previewId = ref('myPreview');
+
+	watch(blogId, (newVal) => {
+		gotoBlogDetail(newVal);
+	});
 
 	onMounted(async () => {
 		// 获取状态
@@ -201,7 +215,9 @@
 	// });
 
 	// 跳转到文章详情
-	const gotoBlogDetail = async (id?: number) => {
+	const gotoBlogDetail = async (
+		id?: LocationQueryValue | LocationQueryValue[]
+	) => {
 		if (!id) return;
 		// 获取状态
 		if (isLogin()) {
@@ -519,5 +535,13 @@
 			width: 100%;
 			border-radius: 5px;
 		}
+	}
+
+	:deep(.md-editor-catalog-active > span) {
+		color: var(--theme-active-show) !important;
+	}
+
+	:deep(.md-editor-catalog-link span:hover) {
+		color: var(--theme-active-show) !important;
 	}
 </style>

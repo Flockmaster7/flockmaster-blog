@@ -5,6 +5,7 @@
 				<div
 					class="comment-item"
 					v-for="item in hotBlogs"
+					@click="gotoBlogDetail(item.id)"
 					:key="item.id">
 					<div class="comment-item-avatar">
 						<img v-lazy="imgUrl(item.blog_image!)" alt="" />
@@ -31,11 +32,19 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { imgUrl } from '@/utils/common';
+	import { useRouter } from 'vue-router';
 
 	const { common } = useStore();
 	const { hotBlogs } = storeToRefs(common);
 
+	const router = useRouter();
+
 	common.getHomeBlogs();
+
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
+		router.push('/blog/detail?id=' + id);
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -80,9 +89,15 @@
 							text-overflow: ellipsis;
 							white-space: nowrap;
 						}
+
+						.title:hover {
+							cursor: pointer;
+							color: var(--theme-data-show-1);
+						}
 					}
 
 					.bottom {
+						margin-top: 2px;
 						.info {
 							font-size: 13px;
 							color: $gray;

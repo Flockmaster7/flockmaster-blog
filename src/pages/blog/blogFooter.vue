@@ -3,8 +3,8 @@
 		标签：
 		<div class="tag-list">
 			<el-tag
-				color="#5cbfef"
 				v-for="(item, index) in blogDeatil.tags"
+				:color="tagPropMap[Number(item.tag_classify)].color"
 				:key="item.id"
 				>{{ item.tag_name }}</el-tag
 			>
@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 	import { Blog } from '@/types';
+	import { tagPropMap } from '@/config/tag';
 
 	interface PropsType {
 		blogDeatil: Blog;

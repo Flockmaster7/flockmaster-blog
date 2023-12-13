@@ -22,6 +22,7 @@
 			<RightAside></RightAside>
 		</div>
 	</div>
+	<ZbBacktop></ZbBacktop>
 	<MusicPlayer></MusicPlayer>
 </template>
 
@@ -31,6 +32,7 @@
 	import RightAside from '../rightAside/index.vue';
 	import TopBg from './topBg.vue';
 	import TopTool from './topTool.vue';
+	import ZbBacktop from '@/components/common/zb-backtop.vue';
 </script>
 
 <style lang="scss" scoped>

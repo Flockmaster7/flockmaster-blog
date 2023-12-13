@@ -5,35 +5,42 @@
 		</div>
 		<div class="box">
 			<div class="info">
-				<div class="topInfo">
-					<div class="name">
-						<div class="name-name">
-							{{ commentInfo.user.name }}
-						</div>
-						<span
-							class="name-reply"
-							v-if="commentInfo.targetComment">
-							回复
-						</span>
-						<div class="name-replyName">
-							{{
-								commentInfo.targetComment
-									? commentInfo.targetComment?.user.name
-									: ''
-							}}
-						</div>
-					</div>
-					<div class="time">
-						{{ getTimeFormNow(commentInfo.createdAt) }}
-					</div>
+				<div class="comment" v-if="type === 'comment'">
+					<span class="name">{{ commentInfo.user.name }}</span>
+					<div class="content">{{ commentInfo.content }}</div>
 				</div>
-				<div class="content">
-					{{ commentInfo.content }}
+				<div class="reply" v-else>
+					<span class="name">{{ commentInfo.user.name }}</span>
+					<span class="name-reply" v-if="commentInfo.targetComment">
+						{{ ' 回复 ' }}
+						<span class="name">{{
+							commentInfo.targetComment
+								? commentInfo.targetComment?.user.name
+								: ''
+						}}</span>
+					</span>
+					：{{ commentInfo.content }}
 				</div>
 				<div class="replied-content" v-if="commentInfo.targetComment">
 					{{ commentInfo.targetComment?.content }}
 				</div>
+				<div class="bottom">
+					<ZbTime
+						:time="commentInfo.createdAt"
+						type="fromNow"></ZbTime>
+					<span
+						class="reply"
+						@click="
+							() => {
+								isReply = !isReply;
+							}
+						">
+						{{ isReply ? '取消回复' : '回复' }}
+					</span>
+				</div>
 				<CommentItemReplyPost
+					v-model="isReply"
+					v-show="isReply"
 					:replyId="replyId"
 					:replyChildId="replyChildId" />
 			</div>
@@ -44,29 +51,36 @@
 <script setup lang="ts">
 	import { Comment } from '@/types';
 	import { imgUrl } from '@/utils/common';
-	import { getTimeFormNow } from '@/utils/dayFormat';
 	import CommentItemReplyPost from './commentItemReplyPost.vue';
+	import ZbTime from '@/components/common/zb-time.vue';
+	import { ref } from 'vue';
 
 	interface PropsType {
 		replyId: number;
 		commentInfo: Comment;
 		replyChildId?: number;
+		type: 'comment' | 'reply';
 	}
 
 	defineProps<PropsType>();
+
+	const isReply = ref(false);
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (min-width: 540px) {
+	}
+
 	.comment-container {
 		width: 100%;
 		display: flex;
-		gap: 20px;
+		gap: 16px;
 		margin-bottom: 25px;
 		justify-content: space-between;
 
 		.avatar {
-			width: 45px;
-			height: 45px;
+			width: 40px;
+			height: 40px;
 			border-radius: 50%;
 
 			img {
@@ -82,66 +96,48 @@
 				display: flex;
 				flex-direction: column;
 				padding-top: 4px;
-				gap: 20px;
-				.topInfo {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					.user-name {
-						font-size: 18px;
-					}
-					.time {
-						color: $grayWhite;
-						font-size: 15px;
-					}
-				}
-
-				.content {
-					word-break: break-all;
-					font-size: 16px;
-					line-height: 1.4;
-					// color: $gray;
-				}
-			}
-
-			.operator {
-				.reply {
-					color: $gray;
-				}
-
-				.reply:hover {
-					cursor: pointer;
-					color: var(--theme-active-color);
-				}
-			}
-
-			.replyArea {
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-
-				.reply {
-					align-self: flex-end;
-				}
-			}
-
-			.name {
-				display: flex;
-				justify-content: center;
-				align-items: center;
 				gap: 15px;
-				.name-reply {
-					display: inline-block;
-					color: $gray;
-					font-size: 16px;
-				}
-			}
 
-			.replied-content {
-				padding: 10px;
-				border-radius: 8px;
-				background-color: var(--theme-reply-content-color);
-				color: $gray;
+				.comment {
+					word-break: break-all;
+
+					.content {
+						margin-top: 15px;
+						line-height: 1.5;
+					}
+				}
+
+				.reply {
+					word-break: break-all;
+					line-height: 1.5;
+
+					.name {
+						color: #515767;
+					}
+				}
+
+				.replied-content {
+					word-break: break-all;
+					box-sizing: border-box;
+					line-height: 1.5;
+					padding: 10px;
+					border-radius: 8px;
+					background-color: var(--theme-reply-content-color);
+					color: $gray;
+				}
+
+				.bottom {
+					display: flex;
+					align-items: center;
+					gap: 15px;
+					font-size: 14px;
+					color: #8a919f;
+
+					.reply:hover {
+						cursor: pointer;
+						color: var(--theme-active-color);
+					}
+				}
 			}
 		}
 	}

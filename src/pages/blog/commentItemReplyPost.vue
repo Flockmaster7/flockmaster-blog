@@ -1,10 +1,5 @@
 <template>
-	<div class="operator">
-		<div class="reply" @click="openReply">
-			{{ isReply ? '取消回复' : '回复' }}
-		</div>
-	</div>
-	<div class="replyArea" v-show="isReply">
+	<div class="replyArea">
 		<div class="input">
 			<el-input
 				:rows="3"
@@ -29,21 +24,22 @@
 	import { ref } from 'vue';
 
 	interface propsType {
+		modelValue: boolean;
 		replyId: number;
 		replyChildId?: number;
 	}
-	const props = defineProps<propsType>();
+
+	interface EmitsType {
+		(e: 'update:modelValue', flag: boolean): void;
+	}
+
+	defineProps<propsType>();
+	const emits = defineEmits<EmitsType>();
 
 	const replyContent = ref('');
 
 	const { blog } = useStore();
 	const { blogDeatil } = storeToRefs(blog);
-
-	const isReply = ref(false);
-
-	const openReply = () => {
-		isReply.value = !isReply.value;
-	};
 
 	const reply = async (parent_id: number, reply_to?: number) => {
 		if (validatorNotEmpty(replyContent.value)) {
@@ -58,22 +54,11 @@
 		await blog.addComment(params);
 		ElMessage.success('发布评论成功');
 		replyContent.value = '';
-		isReply.value = false;
+		emits('update:modelValue', false);
 	};
 </script>
 
 <style lang="scss" scoped>
-	.operator {
-		.reply {
-			color: $gray;
-		}
-
-		.reply:hover {
-			cursor: pointer;
-			color: var(--theme-active-color);
-		}
-	}
-
 	.replyArea {
 		display: flex;
 		flex-direction: column;

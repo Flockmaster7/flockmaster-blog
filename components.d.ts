@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckTag: typeof import('element-plus/es')['ElCheckTag']
@@ -30,6 +31,7 @@ declare module 'vue' {
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ZbBacktop: typeof import('./src/components/common/zb-backtop.vue')['default']
     ZbBlogItemFlexible: typeof import('./src/components/common/zb-blogItem-flexible.vue')['default']
     ZbBlogItemRectangle: typeof import('./src/components/common/zb-blogItem-rectangle.vue')['default']
     ZbBlogItemRectangleMobile: typeof import('./src/components/mobile/zb-blogItem-rectangle-mobile.vue')['default']
@@ -47,6 +49,7 @@ declare module 'vue' {
     ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
     ZbTheme: typeof import('./src/components/common/zb-theme.vue')['default']
+    ZbTime: typeof import('./src/components/common/zb-time.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']

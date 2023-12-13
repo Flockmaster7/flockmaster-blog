@@ -175,23 +175,43 @@ export const useBlogStore = defineStore('blog', () => {
 	};
 
 	const blogLike = async () => {
-		await like(blogDeatil.value.id);
-		blogStatus.value.like = !blogStatus.value.like;
+		const { data: res } = await like(blogDeatil.value.id);
+		if (res.code === 200) {
+			blogStatus.value.like = !blogStatus.value.like;
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	const blogUnlike = async () => {
-		await unlike(blogDeatil.value.id);
-		blogStatus.value.like = !blogStatus.value.like;
+		const { data: res } = await unlike(blogDeatil.value.id);
+		if (res.code === 200) {
+			blogStatus.value.like = !blogStatus.value.like;
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	const blogCollect = async () => {
-		await collect(blogDeatil.value.id);
-		blogStatus.value.collect = !blogStatus.value.collect;
+		const { data: res } = await collect(blogDeatil.value.id);
+		if (res.code === 200) {
+			blogStatus.value.collect = !blogStatus.value.collect;
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	const blogUncollect = async () => {
-		await uncollect(blogDeatil.value.id);
-		blogStatus.value.collect = !blogStatus.value.collect;
+		const { data: res } = await uncollect(blogDeatil.value.id);
+		if (res.code === 200) {
+			blogStatus.value.collect = !blogStatus.value.collect;
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	return {

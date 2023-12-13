@@ -33,6 +33,8 @@
 
 			.info {
 				display: flex;
+				gap: 5px;
+				justify-content: center;
 				flex-direction: column;
 				align-items: flex-end;
 				.name {

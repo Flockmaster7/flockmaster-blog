@@ -282,14 +282,11 @@
 			margin-top: 20px;
 			:deep(.el-button) {
 				width: 130px;
-				// background-color: #a4c4b5;
 				border-radius: 15px;
 				transition: 1s;
 			}
 			:deep(.el-button:hover) {
-				color: #fff;
 				width: 160px;
-				background-color: var(--theme-color);
 				border-radius: 15px;
 			}
 		}
