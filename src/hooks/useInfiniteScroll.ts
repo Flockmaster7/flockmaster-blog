@@ -6,7 +6,8 @@ export default function useInfiniteScroll(fn: Fn) {
 	const pageNum = ref(1);
 	const isLoading = ref(false);
 
-	const loadMore = async () => {
+	const loadMore = async (newStart?: boolean) => {
+		if (newStart) pageNum.value = 1;
 		isLoading.value = true;
 		const isSuccess = await fn(pageNum.value);
 		// const isSuccess = await album.getAlbumList(pageNum.value, 12);

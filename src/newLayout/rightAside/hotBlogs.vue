@@ -57,6 +57,7 @@
 			gap: 20px;
 
 			.comment-item {
+				border-radius: 8px;
 				display: flex;
 				align-items: center;
 				gap: 10px;
@@ -104,6 +105,11 @@
 						}
 					}
 				}
+			}
+
+			.comment-item:hover {
+				cursor: pointer;
+				background: var(--theme-data-show);
 			}
 		}
 	}

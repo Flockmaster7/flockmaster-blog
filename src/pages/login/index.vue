@@ -6,55 +6,24 @@
 			<p>欢迎来到我的个人博客</p>
 		</div>
 		<div class="login-container--rightBox">
+			<zb-svg-icon
+				name="close"
+				@click="onClose"
+				class="icon"></zb-svg-icon>
 			<Login redirect></Login>
-			<!-- <img class="logo" src="@/static/images/logo.png	" alt="" />
-			<p class="header">Welcome to Flockmaster Blog</p>
-			<div class="form" v-show="type === 'login'">
-				<el-form
-					ref="loginFormRef"
-					label-width="60px"
-					:rules="formRules"
-					inline
-					hide-required-asterisk
-					:model="loginForm"
-					style="max-width: 460px">
-					<div class="form-list">
-						<el-form-item prop="user_name">
-							<el-input v-model="loginForm.user_name" />
-						</el-form-item>
-						<el-form-item prop="password">
-							<el-input
-								v-model="loginForm.password"
-								show-password
-								type="password" />
-						</el-form-item>
-						<el-form-item>
-							<div class="bottom-button">
-								<el-button
-									@click="submitLoginForm(loginFormRef)"
-									>登录</el-button
-								>
-							</div>
-						</el-form-item>
-					</div>
-				</el-form>
-			</div>
-			<div
-				class="create-account"
-				@click="
-					changeFormType(type === 'login' ? 'register' : 'login')
-				">
-				<p>{{ type === 'login' ? '游客' : '已有账号' }}?</p>
-				<p class="create">
-					{{ type === 'register' ? '去登录' : '点我快速登录' }}
-				</p>
-			</div> -->
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import Login from '@/newLayout/rightAside/login.vue';
+	import { useRouter } from 'vue-router';
+
+	const router = useRouter();
+
+	const onClose = () => {
+		router.go(-1);
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -109,11 +78,20 @@
 			justify-content: center;
 			align-items: center;
 			gap: 30px;
+			position: relative;
+
+			.icon {
+				position: absolute;
+				top: 20px;
+				right: 40px;
+			}
+
+			.icon:hover {
+				cursor: pointer;
+			}
 
 			.logo {
 				max-width: 150px;
-				// margin: auto;
-				// margin-bottom: 2rem;
 			}
 
 			.header {

@@ -2,9 +2,19 @@
 	<div class="top-tool-container">
 		<!-- <zb-svg-icon name="search" color="#494848"></zb-svg-icon> -->
 		<div class="left">
-			<zb-svg-icon class="icon" name="back" @click="onBack"></zb-svg-icon>
+			<zb-svg-icon
+				v-if="!zhankai"
+				class="icon"
+				name="back"
+				@click="onBack"></zb-svg-icon>
 		</div>
 		<div class="right">
+			<zb-svg-icon
+				v-if="showOperator"
+				class="icon"
+				name="zhankai"
+				:size="18"
+				@click="onZhankai"></zb-svg-icon>
 			<zb-svg-icon
 				v-if="showOperator"
 				class="icon"
@@ -35,7 +45,7 @@
 	};
 
 	const { common } = useStore();
-	const { rightOpen, commentOpen } = storeToRefs(common);
+	const { rightOpen, commentOpen, zhankai } = storeToRefs(common);
 
 	const showOperator = computed(() => {
 		return route.meta.operator ? true : false;
@@ -48,16 +58,20 @@
 	const openComment = () => {
 		commentOpen.value = !commentOpen.value;
 	};
+
+	const onZhankai = () => {
+		zhankai.value = !zhankai.value;
+	};
 </script>
 
 <style lang="scss" scoped>
 	.top-tool-container {
+		z-index: 2;
 		height: 70px;
 		display: flex;
 		padding: 0 20px;
 		align-items: center;
 		justify-content: space-between;
-		z-index: 999;
 		position: sticky;
 		top: 0;
 		background: var(--theme-center-card-bg-color);

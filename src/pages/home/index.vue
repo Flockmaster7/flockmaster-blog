@@ -21,12 +21,12 @@
 			</div>
 		</div>
 		<zb-load-more
+			v-if="blogList.length !== 0"
 			:isLoading="isLoading"
 			direction="center"
 			:isLoadMore="isLoadMore"></zb-load-more>
-		<zb-empty v-if="blogList.length === 0"></zb-empty>
+		<zb-empty v-else></zb-empty>
 
-		<!-- <zb-empty v-if="!isLoading || blogList.length === 0"></zb-empty> -->
 		<!-- <div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
 				v-model:current-page="pageNum"

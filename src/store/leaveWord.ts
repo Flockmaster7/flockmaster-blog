@@ -29,11 +29,9 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 					? res.data.rows
 					: [...leaveWordList.value, ...res.data.rows];
 			leaveWordTotal.value = res.data.total;
-			if (res.data.count! <= pageSize * pageNum) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
+		} else {
+			return false;
 		}
 	};
 

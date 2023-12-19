@@ -20,10 +20,10 @@
 	}
 
 	withDefaults(defineProps<propsType>(), {
-		text: '空空如也~',
+		text: '没有更多了哦',
 		height: 250,
-		textSize: 16,
-		iconSize: 50
+		textSize: 14,
+		iconSize: 100
 	});
 </script>
 

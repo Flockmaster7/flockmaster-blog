@@ -7,6 +7,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useCommonStore = defineStore('common', () => {
+	const zhankai = ref(false);
 	const commentOpen = ref(false);
 	const isMobile = ref(false);
 	const isLoading = ref(false);
@@ -59,6 +60,7 @@ export const useCommonStore = defineStore('common', () => {
 	};
 
 	return {
+		zhankai,
 		isDark,
 		isMobile,
 		isLoading,

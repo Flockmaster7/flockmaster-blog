@@ -82,7 +82,7 @@ export const useBlogStore = defineStore('blog', () => {
 		id: number,
 		pageNum: number,
 		pageSize: number
-	) => {
+	): Promise<boolean> => {
 		const { data: res } = await minDelay(
 			getCommentList(id, pageNum, pageSize),
 			500
@@ -92,13 +92,10 @@ export const useBlogStore = defineStore('blog', () => {
 				pageNum === 1
 					? res.data.rows
 					: [...commentList.value, ...res.data.rows];
-			commentTotal.value = res.data.total;
-			if (res.data.count! <= pageSize * pageNum) {
-				return false;
-			} else {
-				return true;
-			}
+			commentTotal.value = res.data.count!;
+			return true;
 		}
+		return false;
 	};
 
 	// 获取子评论列表

@@ -22,7 +22,7 @@
 
 <style lang="scss" scoped>
 	.rightAside-container {
-		padding: 20px 35px;
+		padding: 20px;
 		.top {
 			// width: 40px;
 			height: 50px;

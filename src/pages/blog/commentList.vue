@@ -1,40 +1,42 @@
 <template>
-	<div
-		class="commentList-container"
-		v-infinite-scroll="getCommentList"
-		:infinite-scroll-delay="500">
+	<div class="commentList-container">
 		<div class="title">
 			全部评论
 			{{ commentTotal === 0 ? '' : commentTotal }}
 			<el-button
 				:loading-icon="Refresh"
 				:loading="isLoading"
-				@click="getCommentList">
+				@click="loadMore(true)">
 				刷新
 			</el-button>
 		</div>
-		<commentItem
-			:item="item"
-			v-for="item in commentList"
-			:key="item.id"></commentItem>
-		<zb-empty v-if="commentList.length === 0" :height="400"></zb-empty>
 		<div
-			@click="() => getCommentList()"
-			v-if="commentTotal > 9 && commentTotal > commentList.length">
-			<zb-loadMore
-				v-if="isLoadMore"
-				direction="center"
-				:isLoading="isLoading"></zb-loadMore>
+			class="comment-list"
+			:infinite-scroll-disabled="!isLoadMore"
+			v-infinite-scroll="loadMore"
+			:infinite-scroll-delay="500">
+			<commentItem
+				v-for="item in commentList"
+				:item="item"
+				:key="item.id"></commentItem>
 		</div>
+		<zb-load-more
+			v-if="commentList.length !== 0"
+			:isLoading="isLoading"
+			direction="center"
+			:isLoadMore="isLoadMore"></zb-load-more>
+		<zb-empty v-else></zb-empty>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { ref } from 'vue';
+	import { computed } from 'vue';
 	import commentItem from './commentItem.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { Refresh } from '@element-plus/icons-vue';
+	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+	import zbLoadMore from '@/components/common/zb-loadMore.vue';
 
 	// interface PropsType {
 	// }
@@ -45,29 +47,17 @@
 	// const props = defineProps<PropsType>();
 	// const emits = defineEmits<EmitsType>();
 
-	const currentPage = ref(0);
-	const isLoadMore = ref(true);
-	const isLoading = ref(false);
-
 	const { blog } = useStore();
 	const { blogDeatil, commentList, commentTotal } = storeToRefs(blog);
 
-	const getCommentList = async (newStart?: boolean) => {
-		if (newStart) {
-			currentPage.value = 0;
-		}
-		isLoading.value = true;
-		currentPage.value += 1;
-		const res = await blog.getComment(
-			blogDeatil.value.id,
-			currentPage.value,
-			9
-		);
-		isLoading.value = false;
-		if (!res) {
-			isLoadMore.value = false;
-		}
+	const getCommentList = async (pageNum: number) => {
+		const res = await blog.getComment(blogDeatil.value.id, pageNum, 9);
+		return res;
 	};
+	const { loadMore, isLoading } = useInfiniteScroll(getCommentList);
+	const isLoadMore = computed(
+		() => commentTotal.value > commentList.value.length
+	);
 </script>
 
 <style lang="scss" scoped>

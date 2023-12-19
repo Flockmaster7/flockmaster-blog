@@ -30,7 +30,6 @@
 		#a4a58b
 	);
 	--card-reset-bg: hsla(0, 0%, 100%, 0.3);
-	--theme-empty-color: #000000;
 	--theme-card-bg-color: hsla(0, 0%, 100%, 0.7);
 	--theme-center-card-bg-color: #ffffff;
 	--theme-operator-color: rgb(244, 247, 248);
@@ -39,6 +38,7 @@
 	--theme-data-show-1: linear-gradient(to right, rgb(248, 226, 253), #fff);
 	--theme-data-show-2: linear-gradient(to right, rgb(248, 226, 253), #fff);
 	--theme-active-show: #5cbfef;
+	--theme-empty-color: #abcdff;
 }
 
 .dark {
@@ -62,7 +62,6 @@
 		#a4a58b
 	);
 	--card-reset-bg: var(--theme-card-color);
-	--theme-empty-color: #b9b9b9;
 	--theme-card-bg-color: #111324;
 	--theme-center-card-bg-color: #161829;
 	--el-bg-color: var(--theme-center-card-bg-color) !important;

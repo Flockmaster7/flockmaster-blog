@@ -1,19 +1,12 @@
 <template>
-	<div class="top">
-		<div class="text-input">
-			<!-- <div class="avatar">
-				<img :src="imgUrl(userInfo.user_image)" alt="" />
-			</div> -->
-			<div class="input">
-				<el-input
-					:rows="8"
-					v-model="leaveWordInput"
-					maxlength="255"
-					placeholder="留个言吧~"
-					show-word-limit
-					type="textarea" />
-			</div>
-		</div>
+	<div class="addLeaveWord-container">
+		<el-input
+			:rows="8"
+			v-model="leaveWordInput"
+			maxlength="255"
+			placeholder="留个言吧~"
+			show-word-limit
+			type="textarea" />
 		<div class="comfirm">
 			<el-button @click="addLeaveWord">发布</el-button>
 		</div>
@@ -55,36 +48,10 @@
 </script>
 
 <style lang="scss" scoped>
-	.top {
-		width: 100%;
+	.addLeaveWord-container {
 		display: flex;
 		flex-direction: column;
-		padding: 0 20px;
-
-		.text-input {
-			width: 100%;
-			display: flex;
-			gap: 20px;
-			justify-content: space-around;
-			align-items: center;
-			padding: 10px;
-			.avatar {
-				width: 60px;
-				border-radius: 50%;
-				height: 60px;
-				img {
-					width: 100%;
-					height: 100%;
-					border-radius: 50%;
-				}
-			}
-
-			.input {
-				width: 100%;
-				flex: 1;
-				margin-right: 14px;
-			}
-		}
+		padding: 0 30px;
 
 		.comfirm {
 			margin-top: 6px !important;
