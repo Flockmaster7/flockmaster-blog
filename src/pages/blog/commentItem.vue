@@ -12,20 +12,19 @@
 				:replyId="item.id"
 				:replyChildId="childReply.id"
 				:commentInfo="childReply"></CommentItemReply>
-			<div @click="getChildrenList(item.id)">
-				<zb-loadMore
-					v-if="isLoadMore"
-					:isLoading="isLoading"></zb-loadMore>
-			</div>
+			<CommentItemAllReplayOperator
+				v-if="showAllReply"
+				:id="item.id"
+				@closeAllReply="closeAllReply"></CommentItemAllReplayOperator>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { Comment } from '@/types';
-	import { onMounted, ref } from 'vue';
-	import useStore from '@/store';
 	import CommentItemReply from './commentItemReply.vue';
+	import { ref } from 'vue';
+	import CommentItemAllReplayOperator from './commentItemAllReplayOperator.vue';
 
 	interface propsType {
 		item: Comment;
@@ -33,27 +32,10 @@
 
 	const props = defineProps<propsType>();
 
-	const { blog } = useStore();
+	const showAllReply = ref(props.item.children.length === 3);
 
-	//获取子评论
-	onMounted(() => {
-		if (props.item.children.length < 3) isLoadMore.value = false;
-	});
-
-	const currentPage = ref(1);
-	const isLoadMore = ref(true);
-	const isLoading = ref(false);
-
-	//获取子评论
-	const getChildrenList = async (id: number) => {
-		isLoading.value = true;
-		currentPage.value += 1;
-		let res: boolean | undefined = true;
-		res = await blog.getChildrenComment(id, currentPage.value, 3);
-		isLoading.value = false;
-		if (!res) {
-			isLoadMore.value = false;
-		}
+	const closeAllReply = () => {
+		showAllReply.value = false;
 	};
 </script>
 
@@ -155,9 +137,19 @@
 		margin-bottom: 30px;
 		.child-reply {
 			background: var(--theme-operator-color);
-			margin-left: 65px;
 			padding: 20px;
 			border-radius: 8px;
+			margin: 25px 0 0 65px;
+
+			.allReply {
+				margin-top: 15px;
+				font-size: 13px;
+				color: var(--theme-text-1);
+			}
+
+			.allReply:hover {
+				cursor: pointer;
+			}
 		}
 	}
 </style>

@@ -46,3 +46,17 @@ export const getChildLeaveWordList = (
 		method: 'GET'
 	});
 };
+
+export const dianzan = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/leaveWord/dianzan/${id}`,
+		method: 'POST'
+	});
+};
+
+export const cancelDianzan = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/leaveWord/cancelDianzan/${id}`,
+		method: 'POST'
+	});
+};

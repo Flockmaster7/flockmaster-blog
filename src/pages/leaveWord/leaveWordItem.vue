@@ -14,11 +14,15 @@
 							{{ getTimeFormNow(item.createdAt) }}
 						</div>
 					</div>
-					<div :class="{ operator: true, active: true }">
+					<div
+						:class="{ operator: true, active: isDianzan }"
+						@click="onDianzan">
 						<zb-svg-icon
 							name="like"
-							color="var(--theme-active-color)"></zb-svg-icon>
-						{{ item.dianzan }}
+							:color="
+								isDianzan ? 'var(--theme-active-color)' : ''
+							"></zb-svg-icon>
+						{{ dianzanCount }}
 					</div>
 				</div>
 				<div class="content">
@@ -33,13 +37,44 @@
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { imgUrl } from '@/utils/common';
 	import { LeaveWord } from '@/types';
+	import useStore from '@/store';
+	import { computed, ref } from 'vue';
+	import cache from '@/utils/cache';
+	import { ElMessage } from 'element-plus';
+	import { storeToRefs } from 'pinia';
 
 	interface propsType {
 		item: LeaveWord;
 		type: 'blog' | 'leaveWord';
 	}
 
-	defineProps<propsType>();
+	const props = defineProps<propsType>();
+
+	const { leaveWord } = useStore();
+	const { dianzanList } = storeToRefs(leaveWord);
+
+	const isDianzan = computed(() => {
+		return dianzanList.value.includes(props.item.id);
+	});
+
+	const dianzanCount = ref(props.item.dianzan);
+
+	const onDianzan = () => {
+		if (isDianzan.value) {
+			leaveWord.cancelDianzanLeaveWord(props.item.id);
+			dianzanList.value = dianzanList.value.filter(
+				(item) => item !== props.item.id
+			);
+			cache.setCache('DIANZAN_LEAVEWORD', dianzanList.value);
+			dianzanCount.value--;
+		} else {
+			leaveWord.dianzanLeaveWord(props.item.id);
+			dianzanList.value.push(props.item.id);
+			cache.setCache('DIANZAN_LEAVEWORD', dianzanList.value || []);
+			ElMessage.success('点赞成功');
+			dianzanCount.value++;
+		}
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -149,12 +184,13 @@
 
 					.operator {
 						display: flex;
+						justify-content: center;
+						align-items: center;
 						gap: 4px;
 					}
 
 					.operator:hover {
 						cursor: pointer;
-						color: var(--theme-active-color);
 					}
 
 					.active {

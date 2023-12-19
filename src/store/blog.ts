@@ -61,6 +61,8 @@ export const useBlogStore = defineStore('blog', () => {
 	// 评论列表
 	const commentList = ref<Comment[]>([]);
 	const commentTotal = ref<number>(0);
+	const commentCount = ref<number>(0);
+
 	// 文章推荐列表
 	const recommendList = ref<Partial<Blog>[]>([]);
 
@@ -92,7 +94,8 @@ export const useBlogStore = defineStore('blog', () => {
 				pageNum === 1
 					? res.data.rows
 					: [...commentList.value, ...res.data.rows];
-			commentTotal.value = res.data.count!;
+			commentCount.value = res.data.count!;
+			commentTotal.value = res.data.total;
 			return true;
 		}
 		return false;
@@ -111,15 +114,12 @@ export const useBlogStore = defineStore('blog', () => {
 		if (res.code === 200) {
 			commentList.value.forEach((item) => {
 				if (item.id === parent_id) {
-					item.children = [...item.children, ...res.data.rows];
+					item.children = res.data.rows;
 				}
 			});
-			commentTotal.value += res.data.total;
-			if (res.data.total <= pageSize * pageNum) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
+		} else {
+			return false;
 		}
 	};
 
@@ -239,6 +239,7 @@ export const useBlogStore = defineStore('blog', () => {
 		commentTotal,
 		getRecommendBlogList,
 		recommendList,
-		getChildrenComment
+		getChildrenComment,
+		commentCount
 	};
 });

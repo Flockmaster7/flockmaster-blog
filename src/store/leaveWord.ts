@@ -1,9 +1,12 @@
 import {
+	cancelDianzan,
+	dianzan,
 	getChildLeaveWordList,
 	getLeaveWordList,
 	leaveWord
 } from '@/http/leaveWord';
 import { CommentParamsType, LeaveWord } from '@/types';
+import cache from '@/utils/cache';
 import { minDelay } from '@/utils/common';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -11,6 +14,10 @@ import { ref } from 'vue';
 export const useLeaveWordStore = defineStore('leaveWord', () => {
 	const leaveWordList = ref<LeaveWord[]>([]);
 	const leaveWordTotal = ref<number>(0);
+
+	const dianzanList = ref<number[]>(
+		cache.getCache('DIANZAN_LEAVEWORD') || []
+	);
 
 	// 留言
 	const addLeaveWord = async (data: CommentParamsType) => {
@@ -60,7 +67,20 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 		}
 	};
 
+	const dianzanLeaveWord = async (id: number) => {
+		const { data: res } = await dianzan(id);
+		return res.code === 200 ? true : false;
+	};
+
+	const cancelDianzanLeaveWord = async (id: number) => {
+		const { data: res } = await cancelDianzan(id);
+		return res.code === 200 ? true : false;
+	};
+
 	return {
+		dianzanList,
+		dianzanLeaveWord,
+		cancelDianzanLeaveWord,
 		leaveWordList,
 		leaveWordTotal,
 		addLeaveWord,

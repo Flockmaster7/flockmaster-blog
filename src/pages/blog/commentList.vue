@@ -48,7 +48,8 @@
 	// const emits = defineEmits<EmitsType>();
 
 	const { blog } = useStore();
-	const { blogDeatil, commentList, commentTotal } = storeToRefs(blog);
+	const { blogDeatil, commentList, commentTotal, commentCount } =
+		storeToRefs(blog);
 
 	const getCommentList = async (pageNum: number) => {
 		const res = await blog.getComment(blogDeatil.value.id, pageNum, 9);
@@ -56,7 +57,7 @@
 	};
 	const { loadMore, isLoading } = useInfiniteScroll(getCommentList);
 	const isLoadMore = computed(
-		() => commentTotal.value > commentList.value.length
+		() => commentCount.value > commentList.value.length
 	);
 </script>
 
