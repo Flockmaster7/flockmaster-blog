@@ -14,9 +14,9 @@
 
 	interface PropsType {
 		name: string;
-		color: string;
-		size: number;
-		autoDark: boolean;
+		color?: string;
+		size?: number;
+		autoDark?: boolean;
 	}
 
 	const { common } = useStore();

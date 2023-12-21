@@ -45,7 +45,6 @@
 		background: hsla(0, 0%, 100%, 0.5);
 		padding: 50px 30px;
 		border-radius: 20px;
-		width: 70%;
 
 		.avatar-info {
 			display: flex;

@@ -13,10 +13,10 @@
 
 <script setup lang="ts">
 	interface propsType {
-		text: string;
-		height: number;
-		textSize: number;
-		iconSize: number;
+		text?: string;
+		height?: number;
+		textSize?: number;
+		iconSize?: number;
 	}
 
 	withDefaults(defineProps<propsType>(), {

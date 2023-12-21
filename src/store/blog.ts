@@ -129,7 +129,10 @@ export const useBlogStore = defineStore('blog', () => {
 		pageSize: number,
 		data?: Partial<BlogListForm>
 	): Promise<boolean> => {
-		const { data: res } = await getArticleList(pageNum, pageSize, data);
+		const { data: res } = await minDelay(
+			getArticleList(pageNum, pageSize, data),
+			500
+		);
 		if (res.code === 200) {
 			if (pageNum === 1) {
 				blogList.value = res.data.rows;

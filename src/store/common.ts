@@ -49,6 +49,9 @@ export const useCommonStore = defineStore('common', () => {
 		const { data: res } = await getLatestComments();
 		if (res.code === 200) {
 			latestComments.value = res.data;
+			return true;
+		} else {
+			return false;
 		}
 	};
 

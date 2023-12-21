@@ -8,7 +8,7 @@
 			<navBar></navBar>
 		</div>
 		<div class="footer">
-			<SiteSratistics></SiteSratistics>
+			<SiteSratistics :isLoading="isLoading"></SiteSratistics>
 		</div>
 	</div>
 </template>
@@ -20,11 +20,13 @@
 	import { imgUrl } from '@/utils/common';
 	import { storeToRefs } from 'pinia';
 	import { isLogin } from '@/utils/login';
+	import useSkeleton from '@/hooks/useSkeleton';
 
 	const { common, user } = useStore();
 	const { userInfo } = storeToRefs(user);
 	if (isLogin()) user.getUserProfile();
-	common.getWebsite();
+
+	const { isLoading } = useSkeleton(common.getWebsite);
 </script>
 
 <style lang="scss" scoped>

@@ -2,25 +2,34 @@
 	<div class="latestComments-container">
 		<zbCard title="最新评论">
 			<div class="comment-list">
-				<div
-					class="comment-item"
-					v-for="item in latestComments"
-					:key="item.id">
-					<div class="comment-item-avatar">
-						<img v-lazy="imgUrl(item.user.user_image)" alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="name">{{ item.user.name }}</div>
-							<div class="date">
-								{{ getTimeFormNow(item.createdAt) }}
+				<el-skeleton animated :loading="isLoading">
+					<template #template>
+						<Skeleton></Skeleton>
+					</template>
+					<template #default>
+						<div
+							class="comment-item"
+							v-for="item in latestComments"
+							:key="item.id">
+							<div class="comment-item-avatar">
+								<img
+									v-lazy="imgUrl(item.user.user_image)"
+									alt="" />
+							</div>
+							<div class="comment-item-info">
+								<div class="top">
+									<div class="name">{{ item.user.name }}</div>
+									<div class="date">
+										{{ getTimeFormNow(item.createdAt) }}
+									</div>
+								</div>
+								<div class="bottom">
+									<p>{{ item.content }}</p>
+								</div>
 							</div>
 						</div>
-						<div class="bottom">
-							<p>{{ item.content }}</p>
-						</div>
-					</div>
-				</div>
+					</template>
+				</el-skeleton>
 			</div>
 		</zbCard>
 	</div>
@@ -32,11 +41,13 @@
 	import { storeToRefs } from 'pinia';
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { imgUrl } from '@/utils/common';
+	import Skeleton from './rightSkeleton.vue';
+	import useSkeleton from '@/hooks/useSkeleton';
 
 	const { common } = useStore();
 	const { latestComments } = storeToRefs(common);
 
-	common.getHomeComments();
+	const { isLoading } = useSkeleton(common.getHomeComments);
 </script>
 
 <style lang="scss" scoped>

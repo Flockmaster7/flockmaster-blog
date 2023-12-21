@@ -5,20 +5,26 @@
 			:infinite-scroll-disabled="!isLoadMore"
 			v-infinite-scroll="loadMore"
 			:infinite-scroll-delay="600">
-			<div
-				v-for="item in blogList"
-				:key="item.id"
-				@click="gotoBlogDetail(item.id)"
-				class="item">
-				<zbBlogItemRectangleMobile
-					:blog="(item as Blog)"
-					v-if="isMobile"
-					:isLoading="isLoading"></zbBlogItemRectangleMobile>
-				<BlogItem
-					:blog="(item as Blog)"
-					v-if="!isMobile"
-					:isLoading="isLoading"></BlogItem>
-			</div>
+			<el-skeleton animated :loading="pageNum === 1 && isLoading">
+				<template #template>
+					<Skeleton></Skeleton>
+				</template>
+				<template #default>
+					<div
+						v-for="item in blogList"
+						:key="item.id"
+						@click="gotoBlogDetail(item.id)"
+						class="item">
+						<zbBlogItemRectangleMobile
+							:blog="(item as Blog)"
+							v-if="isMobile"
+							:isLoading="isLoading"></zbBlogItemRectangleMobile>
+						<BlogItem
+							:blog="(item as Blog)"
+							v-if="!isMobile"></BlogItem>
+					</div>
+				</template>
+			</el-skeleton>
 		</div>
 		<zb-load-more
 			v-if="blogList.length !== 0"
@@ -42,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+	import Skeleton from './homeSkeleton.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';
@@ -50,7 +57,6 @@
 	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';
-	import zbLoading from '@/components/common/zb-loading.vue';
 	import { Blog } from '@/types';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 	import { computed, onMounted } from 'vue';
@@ -83,7 +89,7 @@
 		const res = await blog.getBlogList(pageNum, 9);
 		return res;
 	};
-	const { isLoading, loadMore } = useInfiniteScroll(getBlogs);
+	const { isLoading, loadMore, pageNum } = useInfiniteScroll(getBlogs);
 	const isLoadMore = computed(() => blogTotal.value > blogList.value.length);
 </script>
 

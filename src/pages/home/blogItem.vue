@@ -1,91 +1,53 @@
 <template>
-	<el-skeleton animated :loading="isLoading">
-		<template #template>
-			<div class="card">
-				<div class="blogInfo">
-					<div class="container">
-						<div class="top">
-							<div class="title">
-								<el-skeleton-item
-									variant="text"
-									:style="{ width: 200 + 'px' }" />
-							</div>
-						</div>
-						<div class="main">
-							<div class="author">
-								<el-skeleton-item
-									variant="text"
-									:style="{ width: 200 + 'px' }" />
-							</div>
-						</div>
-						<div class="bottom">
-							<el-skeleton-item variant="text" />
-						</div>
-					</div>
+	<div class="card">
+		<div class="blogImg">
+			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
+			<!-- <img src="../../static/images/admin_bg.png" alt="" /> -->
+		</div>
+		<div class="blogInfo">
+			<div class="top">
+				<div class="title">{{ blog.title }}</div>
+				<div class="author">
+					@{{ blog.author }} -
+					{{ getTimeFormNow(blog.createdAt) }}
 				</div>
-				<div class="blogImg">
-					<el-skeleton-item
-						variant="image"
-						:style="{
-							width: 100 + '%',
-							height: 170 + 'px',
-							borderRadius: 8 + 'px'
-						}" />
+				<div class="description">
+					{{ blog.content_html }}
+				</div>
+				<div class="tag">
+					<el-tag
+						v-for="item in blog.tags"
+						:key="item.id"
+						color="#5cbfef">
+						{{ item.tag_name }}</el-tag
+					>
 				</div>
 			</div>
-		</template>
-		<template #default>
-			<div class="card">
-				<div class="blogImg">
-					<img v-lazy="imgUrl(blog.blog_image)" alt="" />
-					<!-- <img src="../../static/images/admin_bg.png" alt="" /> -->
-				</div>
-				<div class="blogInfo">
-					<div class="top">
-						<div class="title">{{ blog.title }}</div>
-						<div class="author">
-							@{{ blog.author }} -
-							{{ getTimeFormNow(blog.createdAt) }}
-						</div>
-						<div class="description">
-							{{ blog.content_html }}
-						</div>
-						<div class="tag">
-							<el-tag
-								v-for="item in blog.tags"
-								:key="item.id"
-								color="#5cbfef">
-								{{ item.tag_name }}</el-tag
-							>
-						</div>
-					</div>
 
-					<div class="bottom">
-						<div class="data">
-							<div class="data-item">
-								<zb-svg-icon
-									name="yanjing"
-									color="#717775"></zb-svg-icon
-								>{{ blog.blog_read }}
-							</div>
-							<div class="data-item">
-								<zb-svg-icon
-									name="dianzan"
-									color="#717775"></zb-svg-icon
-								>{{ blog.blog_like }}
-							</div>
-							<div class="data-item">
-								<zb-svg-icon
-									name="shoucang"
-									color="#717775"></zb-svg-icon
-								>{{ blog.blog_collect }}
-							</div>
-						</div>
+			<div class="bottom">
+				<div class="data">
+					<div class="data-item">
+						<zb-svg-icon
+							name="yanjing"
+							color="#717775"></zb-svg-icon
+						>{{ blog.blog_read }}
+					</div>
+					<div class="data-item">
+						<zb-svg-icon
+							name="dianzan"
+							color="#717775"></zb-svg-icon
+						>{{ blog.blog_like }}
+					</div>
+					<div class="data-item">
+						<zb-svg-icon
+							name="shoucang"
+							color="#717775"></zb-svg-icon
+						>{{ blog.blog_collect }}
 					</div>
 				</div>
 			</div>
-		</template>
-	</el-skeleton>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -95,7 +57,6 @@
 
 	interface PropType {
 		blog: Blog;
-		isLoading: boolean;
 	}
 
 	defineProps<PropType>();

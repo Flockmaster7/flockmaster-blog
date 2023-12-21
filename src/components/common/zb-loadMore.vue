@@ -18,10 +18,10 @@
 
 <script setup lang="ts">
 	interface PropsType {
-		text: string;
-		isLoading: boolean;
+		text?: string;
+		isLoading?: boolean;
 		isLoadMore: boolean;
-		direction: 'left' | 'center' | 'right';
+		direction?: 'left' | 'center' | 'right';
 	}
 	withDefaults(defineProps<PropsType>(), {
 		text: '加载更多',

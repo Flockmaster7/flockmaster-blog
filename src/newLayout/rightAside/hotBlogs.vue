@@ -2,26 +2,33 @@
 	<div class="latestComments-container">
 		<zbCard title="热门文章">
 			<div class="comment-list">
-				<div
-					class="comment-item"
-					v-for="item in hotBlogs"
-					@click="gotoBlogDetail(item.id)"
-					:key="item.id">
-					<div class="comment-item-avatar">
-						<img v-lazy="imgUrl(item.blog_image!)" alt="" />
-					</div>
-					<div class="comment-item-info">
-						<div class="top">
-							<div class="title">{{ item.title }}</div>
+				<el-skeleton animated :loading="isLoading">
+					<template #template>
+						<Skeleton></Skeleton>
+					</template>
+					<template #default>
+						<div
+							class="comment-item"
+							v-for="item in hotBlogs"
+							@click="gotoBlogDetail(item.id)"
+							:key="item.id">
+							<div class="comment-item-avatar">
+								<img v-lazy="imgUrl(item.blog_image!)" alt="" />
+							</div>
+							<div class="comment-item-info">
+								<div class="top">
+									<div class="title">{{ item.title }}</div>
+								</div>
+								<div class="bottom">
+									<span class="info"
+										>阅读 {{ item.blog_read }}，点赞
+										{{ item.blog_like }}</span
+									>
+								</div>
+							</div>
 						</div>
-						<div class="bottom">
-							<span class="info"
-								>阅读 {{ item.blog_read }}，点赞
-								{{ item.blog_like }}</span
-							>
-						</div>
-					</div>
-				</div>
+					</template>
+				</el-skeleton>
 			</div>
 		</zbCard>
 	</div>
@@ -33,13 +40,15 @@
 	import { storeToRefs } from 'pinia';
 	import { imgUrl } from '@/utils/common';
 	import { useRouter } from 'vue-router';
+	import Skeleton from './rightSkeleton.vue';
+	import useSkeleton from '@/hooks/useSkeleton';
 
 	const { common } = useStore();
 	const { hotBlogs } = storeToRefs(common);
 
 	const router = useRouter();
 
-	common.getHomeBlogs();
+	const { isLoading } = useSkeleton(common.getHomeBlogs);
 
 	const gotoBlogDetail = (id?: number) => {
 		if (!id) return;
