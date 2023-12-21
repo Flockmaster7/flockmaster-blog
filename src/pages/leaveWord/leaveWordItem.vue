@@ -168,6 +168,7 @@
 				.topInfo {
 					display: flex;
 					justify-content: space-between;
+					align-items: flex-start;
 					.infoBox {
 						display: flex;
 						flex-direction: column;

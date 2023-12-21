@@ -100,7 +100,7 @@
 	.bottom {
 		display: flex;
 		align-items: center;
-		gap: 15px;
+		gap: 20px;
 		font-size: 14px;
 		color: #8a919f;
 
