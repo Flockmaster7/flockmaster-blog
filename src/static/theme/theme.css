@@ -40,6 +40,7 @@
 	--theme-active-show: #5cbfef;
 	--theme-empty-color: #abcdff;
 	--theme-text-1: #9499a0;
+	--theme-text-2: #8a919f;
 }
 
 .dark {
@@ -53,7 +54,7 @@
 	--theme-tool-item-color: #3b3b3b;
 	--theme-reply-content-color: #1a1c31;
 	/* --theme-tag-color: var(--theme-color); */
-	--theme-active-color: #b9b9b9;
+	/* --theme-active-color: #b9b9b9; */
 	--theme-tool-active-color: #686969;
 	--theme-search-bg-color: linear-gradient(
 		186deg,

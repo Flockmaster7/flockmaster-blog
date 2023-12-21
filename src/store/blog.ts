@@ -3,12 +3,15 @@ import {
 	blogRead,
 	collect,
 	comment,
+	commentCancelDianzan,
+	commentDianzan,
 	getArticleDetail,
 	getArticleList,
 	getBlogListByTagId,
 	getChildCommentList,
 	getCommentList,
 	getRecommendBlog,
+	getUserCommentDianzanList,
 	isCollect,
 	isLike,
 	like,
@@ -22,6 +25,7 @@ import {
 	Comment,
 	UserInfo
 } from '@/types';
+import { isLogin } from '@/utils/login';
 import { fa } from 'element-plus/es/locale';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -62,6 +66,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const commentList = ref<Comment[]>([]);
 	const commentTotal = ref<number>(0);
 	const commentCount = ref<number>(0);
+	const userCommentDianzanList = ref<number[]>([]);
 
 	// 文章推荐列表
 	const recommendList = ref<Partial<Blog>[]>([]);
@@ -220,7 +225,28 @@ export const useBlogStore = defineStore('blog', () => {
 		}
 	};
 
+	const dianzanComment = async (id: number) => {
+		const { data: res } = await commentDianzan(id);
+		return res.code === 200 ? true : false;
+	};
+
+	const cancelDianzanComment = async (id: number) => {
+		const { data: res } = await commentCancelDianzan(id);
+		return res.code === 200 ? true : false;
+	};
+
+	const getUserDianzanIdList = async () => {
+		if (isLogin()) {
+			const { data: res } = await getUserCommentDianzanList();
+			if (res.code === 200) {
+				userCommentDianzanList.value = res.data;
+			}
+		}
+	};
+
 	return {
+		userCommentDianzanList,
+		getUserDianzanIdList,
 		blogList,
 		blogDeatil,
 		getBlogDetail,
@@ -243,6 +269,8 @@ export const useBlogStore = defineStore('blog', () => {
 		getRecommendBlogList,
 		recommendList,
 		getChildrenComment,
-		commentCount
+		commentCount,
+		dianzanComment,
+		cancelDianzanComment
 	};
 });

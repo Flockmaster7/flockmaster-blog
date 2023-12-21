@@ -111,6 +111,7 @@ export interface Comment {
 	children: CommentType[];
 	targetComment?: CommentType;
 	targetLeaveWords?: CommentType;
+	dianzanCount: number;
 }
 
 export interface LeaveWord {

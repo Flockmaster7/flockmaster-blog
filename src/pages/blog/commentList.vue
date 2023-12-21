@@ -55,6 +55,7 @@
 		const res = await blog.getComment(blogDeatil.value.id, pageNum, 9);
 		return res;
 	};
+	blog.getUserDianzanIdList();
 	const { loadMore, isLoading } = useInfiniteScroll(getCommentList);
 	const isLoadMore = computed(
 		() => commentCount.value > commentList.value.length

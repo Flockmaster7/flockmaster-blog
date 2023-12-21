@@ -24,25 +24,12 @@
 				<div class="replied-content" v-if="commentInfo.targetComment">
 					{{ commentInfo.targetComment?.content }}
 				</div>
-				<div class="bottom">
-					<ZbTime
-						:time="commentInfo.createdAt"
-						type="fromNow"></ZbTime>
-					<span
-						class="reply"
-						@click="
-							() => {
-								isReply = !isReply;
-							}
-						">
-						{{ isReply ? '取消回复' : '回复' }}
-					</span>
-				</div>
-				<CommentItemReplyPost
-					v-model="isReply"
-					v-show="isReply"
+				<CommentItemReplyBottomOperator
+					:data="commentInfo"
 					:replyId="replyId"
-					:replyChildId="replyChildId" />
+					:replyChildId="
+						replyChildId
+					"></CommentItemReplyBottomOperator>
 			</div>
 		</div>
 	</div>
@@ -51,20 +38,16 @@
 <script setup lang="ts">
 	import { Comment } from '@/types';
 	import { imgUrl } from '@/utils/common';
-	import CommentItemReplyPost from './commentItemReplyPost.vue';
-	import ZbTime from '@/components/common/zb-time.vue';
-	import { ref } from 'vue';
+	import CommentItemReplyBottomOperator from './commentItemReplyBottomOperator.vue';
 
 	interface PropsType {
-		replyId: number;
 		commentInfo: Comment;
+		replyId: number;
 		replyChildId?: number;
 		type: 'comment' | 'reply';
 	}
 
 	defineProps<PropsType>();
-
-	const isReply = ref(false);
 </script>
 
 <style lang="scss" scoped>
@@ -131,8 +114,14 @@
 					align-items: center;
 					gap: 15px;
 					font-size: 14px;
-					color: #8a919f;
+					color: var(--theme-text-2);
 
+					.dianzan {
+						display: flex;
+						align-items: center;
+					}
+
+					.dianzan:hover,
 					.reply:hover {
 						cursor: pointer;
 						color: var(--theme-active-color);

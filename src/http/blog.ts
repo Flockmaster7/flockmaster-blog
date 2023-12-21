@@ -197,3 +197,24 @@ export const getRecommendBlog = (id: number) => {
 		method: 'GET'
 	});
 };
+
+export const commentDianzan = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/dianzan/${id}`,
+		method: 'POST'
+	});
+};
+
+export const commentCancelDianzan = (id: number) => {
+	return request<HttpResponse<string>>({
+		url: `/blog/cancelDianzan/${id}`,
+		method: 'POST'
+	});
+};
+
+export const getUserCommentDianzanList = () => {
+	return request<HttpResponse<number[]>>({
+		url: `/blog/getUserDianzanIdList`,
+		method: 'get'
+	});
+};

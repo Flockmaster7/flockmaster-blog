@@ -10,7 +10,9 @@
 				type="textarea" />
 		</div>
 		<div class="reply">
-			<el-button @click="reply(replyId, replyChildId)">发布</el-button>
+			<el-button type="primary" @click="reply(replyId, replyChildId)"
+				>发布</el-button
+			>
 		</div>
 	</div>
 </template>

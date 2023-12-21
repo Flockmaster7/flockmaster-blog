@@ -31,7 +31,7 @@
 	const fillColor = computed(() => {
 		return props.autoDark && !props.color
 			? isDark.value
-				? 'var(--theme-active-color)'
+				? 'var(--theme-text-1)'
 				: props.color
 			: props.color;
 	});
