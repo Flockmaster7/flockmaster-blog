@@ -87,7 +87,7 @@
 				}
 
 				&-number {
-					color: #494949;
+					color: var(--theme-text-3);
 					font-weight: 600;
 				}
 			}

@@ -31,7 +31,7 @@
 			gap: 7px;
 			align-items: center;
 			border-radius: 8px;
-			color: var(--theme-text-show);
+			color: var(--theme-text-3);
 		}
 
 		.nav-item:hover {

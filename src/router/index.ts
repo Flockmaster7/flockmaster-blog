@@ -17,10 +17,10 @@ const routes: Array<RouteRecordRaw> = newRouters;
 
 const router = createRouter({
 	history: createWebHashHistory(),
-	routes
-	// scrollBehavior(to, from, savedPosition) {
-	// 	return { top: 0 };
-	// }
+	routes,
+	scrollBehavior(to, from, savedPosition) {
+		if (to.meta.scrollTop) return { top: 0 };
+	}
 } as RouterOptions);
 
 // 设置全局路由守卫

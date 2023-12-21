@@ -80,7 +80,8 @@ export const routers = [
 				name: 'Detail',
 				component: () => import('@/pages/blog/index.vue'),
 				meta: {
-					operator: true
+					operator: true,
+					scrollTop: true
 				}
 			},
 			{

@@ -32,11 +32,11 @@
 			direction="center"
 			:isLoadMore="isLoadMore"></zb-load-more>
 		<zb-empty v-else :height="400"></zb-empty>
-	</div>
 
-	<el-dialog v-model="dialogVisible" title="留言" draggable>
-		<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>
-	</el-dialog>
+		<el-dialog v-model="dialogVisible" title="留言" draggable>
+			<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>
+		</el-dialog>
+	</div>
 </template>
 
 <script setup lang="ts">
