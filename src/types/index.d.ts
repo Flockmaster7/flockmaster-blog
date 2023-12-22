@@ -194,6 +194,7 @@ export interface CircleFriend {
 	updatedAt: string;
 	dianzanCount: number;
 	user: UserInfo;
+	top: number;
 	images: {
 		id: number;
 		image_url: string;

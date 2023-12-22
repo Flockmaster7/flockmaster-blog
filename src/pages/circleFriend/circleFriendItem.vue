@@ -5,17 +5,20 @@
 		</div>
 		<div class="right">
 			<div class="top">
-				<div class="name">{{ cirFriend.user.name }}</div>
-				<ZbTime :time="cirFriend.createdAt"></ZbTime>
+				<div>
+					<div class="name">{{ cirFriend.user.name }}</div>
+					<ZbTime :time="cirFriend.createdAt"></ZbTime>
+				</div>
+				<img src="../../static/images/top.png" v-if="cirFriend.top" />
 			</div>
 			<div class="center">
 				<div class="text">
 					{{ cirFriend.content }}
 				</div>
-				<div class="img">
+				<div class="img" v-if="images.length !== 0">
 					<ImgList :urls="images"></ImgList>
 				</div>
-				<div class="video">
+				<div class="video" v-if="videos.length !== 0">
 					<VideoList :urls="videos"></VideoList>
 				</div>
 			</div>
@@ -105,6 +108,9 @@
 			width: 100%;
 
 			.top {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 				color: $gray;
 				font-size: 15px;
 
@@ -112,6 +118,10 @@
 					height: 30px;
 					line-height: 30px;
 					font-size: 20px;
+				}
+
+				img {
+					width: 50px;
 				}
 			}
 
@@ -121,6 +131,7 @@
 				gap: 8px;
 				font-size: 18px;
 				margin-top: 10px;
+				min-height: 50px;
 
 				.img {
 					max-width: 100%;

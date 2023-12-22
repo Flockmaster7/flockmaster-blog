@@ -8,7 +8,7 @@
 
 	interface PropsType {
 		time: string;
-		type: 'date' | 'fromNow' | 'all';
+		type?: 'date' | 'fromNow' | 'all';
 	}
 
 	const props = withDefaults(defineProps<PropsType>(), {
