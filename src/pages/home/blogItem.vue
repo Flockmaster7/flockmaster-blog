@@ -6,7 +6,13 @@
 		</div>
 		<div class="blogInfo">
 			<div class="top">
-				<div class="title">{{ blog.title }}</div>
+				<div class="title-box">
+					<div class="title">{{ blog.title }}</div>
+					<img
+						v-if="blog.top"
+						src="../../static/images/top.png"
+						alt="" />
+				</div>
 				<div class="author">
 					@{{ blog.author }} -
 					{{ getTimeFormNow(blog.createdAt) }}
@@ -107,9 +113,18 @@
 				justify-content: space-between;
 				gap: 12px;
 
-				.title {
-					font-weight: 700;
-					font-size: 25px;
+				.title-box {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					.title {
+						font-weight: 700;
+						font-size: 25px;
+					}
+
+					img {
+						width: 50px;
+					}
 				}
 
 				.author {

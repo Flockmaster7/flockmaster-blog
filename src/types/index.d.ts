@@ -56,6 +56,7 @@ export interface Blog {
 	createdAt: string;
 	updatedAt: string;
 	user: UserInfo;
+	top: number;
 	year?: string;
 	date?: string;
 }
