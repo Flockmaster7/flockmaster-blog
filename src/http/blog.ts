@@ -1,4 +1,10 @@
-import { CommentParamsType, Comment, BlogListForm, Blog } from '@/types';
+import {
+	CommentParamsType,
+	Comment,
+	BlogListForm,
+	Blog,
+	SubField
+} from '@/types';
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
 
@@ -215,6 +221,13 @@ export const commentCancelDianzan = (id: number) => {
 export const getUserCommentDianzanList = () => {
 	return request<HttpResponse<number[]>>({
 		url: `/blog/getUserDianzanIdList`,
+		method: 'get'
+	});
+};
+
+export const getSubfield = () => {
+	return request<HttpResponse<SubField[]>>({
+		url: `/blog/subfield/list`,
 		method: 'get'
 	});
 };

@@ -1,3 +1,4 @@
+import { getSubfield } from './../http/blog';
 import { minDelay } from './../utils/common';
 import {
 	blogRead,
@@ -23,7 +24,8 @@ import {
 	BlogListForm,
 	CommentParamsType,
 	Comment,
-	UserInfo
+	UserInfo,
+	SubField
 } from '@/types';
 import { isLogin } from '@/utils/login';
 import { fa } from 'element-plus/es/locale';
@@ -60,8 +62,10 @@ export const useBlogStore = defineStore('blog', () => {
 		tags: [],
 		createdAt: '',
 		updatedAt: '',
+		top: 0,
 		user: {} as UserInfo
 	});
+	const blogSubfield = ref<SubField[]>([]);
 	// 评论列表
 	const commentList = ref<Comment[]>([]);
 	const commentTotal = ref<number>(0);
@@ -244,7 +248,16 @@ export const useBlogStore = defineStore('blog', () => {
 		}
 	};
 
+	const getSubfieldList = async () => {
+		const { data: res } = await getSubfield();
+		if (res.code === 200) {
+			blogSubfield.value = res.data;
+		}
+	};
+
 	return {
+		blogSubfield,
+		getSubfieldList,
 		userCommentDianzanList,
 		getUserDianzanIdList,
 		blogList,

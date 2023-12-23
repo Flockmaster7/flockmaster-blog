@@ -66,8 +66,8 @@
 			flex-shrink: 0;
 			flex-basis: 20%;
 			position: sticky;
-			top: -50px;
-			height: 767px;
+			top: -300px;
+			height: 1007px;
 		}
 
 		.main-area {

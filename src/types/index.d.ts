@@ -205,3 +205,8 @@ export interface CircleFriend {
 		video_url: string;
 	}[];
 }
+
+export interface SubField {
+	count?: number;
+	classify: number;
+}

@@ -21,6 +21,14 @@ export const routers = [
 				component: () => import('@/pages/home/index.vue')
 			},
 			{
+				path: '/subfield/:classify',
+				name: 'Subfield',
+				component: () => import('@/pages/home/subfieldDetail.vue'),
+				meta: {
+					scrollTop: true
+				}
+			},
+			{
 				path: '/circleFriend',
 				name: 'CircleFriend',
 				component: () => import('@/pages/circleFriend/index.vue')

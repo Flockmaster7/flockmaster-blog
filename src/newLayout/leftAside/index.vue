@@ -9,6 +9,7 @@
 		</div>
 		<div class="footer">
 			<SiteSratistics :isLoading="isLoading"></SiteSratistics>
+			<Subfield></Subfield>
 		</div>
 	</div>
 </template>
@@ -21,6 +22,7 @@
 	import { storeToRefs } from 'pinia';
 	import { isLogin } from '@/utils/login';
 	import useSkeleton from '@/hooks/useSkeleton';
+	import Subfield from './subfield.vue';
 
 	const { common, user } = useStore();
 	const { userInfo } = storeToRefs(user);

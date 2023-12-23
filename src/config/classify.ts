@@ -2,10 +2,6 @@ import { ClassifyType } from '@/types';
 
 export const allClassify: ClassifyType[] = [
 	{
-		id: '0',
-		text: '综合'
-	},
-	{
 		id: '1',
 		text: '前端'
 	},
