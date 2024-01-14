@@ -128,10 +128,9 @@
 			.center {
 				display: flex;
 				flex-direction: column;
-				gap: 8px;
+				gap: 15px;
 				font-size: 18px;
-				margin-top: 10px;
-				min-height: 50px;
+				margin: 20px 0;
 
 				.img {
 					max-width: 100%;
