@@ -14,6 +14,7 @@
 <script setup lang="ts">
 	import { allClassify } from '@/config/classify';
 	import useStore from '@/store';
+	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
 	import { useRouter } from 'vue-router';
 
@@ -23,7 +24,11 @@
 	blog.getSubfieldList();
 
 	const gotoSubfield = (classify: number) => {
-		router.push(`/subfield/${classify}`);
+		ElMessage({
+			message: '正在维护中，敬请期待',
+			type: 'info'
+		});
+		// router.push(`/subfield/${classify}`);
 	};
 </script>
 

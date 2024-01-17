@@ -48,8 +48,10 @@
 			align-items: center;
 			gap: 10px;
 			.title {
+				text-align: center;
 				font-size: 35px;
 				font-weight: 700;
+				margin-bottom: 14px;
 			}
 
 			.createdAt {

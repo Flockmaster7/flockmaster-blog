@@ -71,7 +71,6 @@
 		}
 	}
 	.album-container {
-		min-height: 700px;
 		display: flex;
 		// background: var(--card-reset-bg);
 		justify-content: space-between;

@@ -4,6 +4,7 @@
 			:cirFriend="item"
 			v-for="item in circleFriendList"
 			:key="item.id"></CircleFriendItem>
+		<zb-empty :height="500" v-if="circleFriendList.length === 0" />
 	</div>
 </template>
 
