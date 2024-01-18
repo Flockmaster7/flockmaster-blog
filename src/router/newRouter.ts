@@ -130,5 +130,9 @@ export const routers = [
 		path: '/visualize',
 		name: 'Visualize',
 		component: () => import('@/pages/dataVisualize/index.vue')
+	},
+	{
+		path: '/:pathMatch(.*)',
+		component: () => import('@/components/common/zb-notFound.vue')
 	}
 ];

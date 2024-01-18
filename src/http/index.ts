@@ -6,18 +6,25 @@ import axios, {
 import cache from '@/utils/cache';
 import type { HttpError, HttpResponse } from '@/types/http.d.ts';
 import { clearInfo, isLogin } from '@/utils/login';
-import { ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import router from '@/router';
+import { AxiosCanceler } from './helper/axiosCancel';
+
+const axiosCanceler = new AxiosCanceler();
 
 const baseUrl = '/api';
 // const baseUrl = '/';
 
-const instance = axios.create({
+const config = {
 	baseURL: baseUrl,
-	timeout: 5000
-});
+	timeout: 10000
+};
+
+const instance = axios.create(config);
 
 instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
+	// * 将当前请求添加到 pending 中
+	axiosCanceler.addPending(config);
 	if (isLogin()) {
 		config.headers.authorization = cache.getCache('TOKEN');
 	}
@@ -26,13 +33,13 @@ instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
 
 instance.interceptors.response.use(
 	(res: AxiosResponse<HttpResponse, any>): any => {
+		axiosCanceler.removePending(config);
 		return res;
 	},
 	(err: AxiosError<HttpError>) => {
 		const code = err.response?.data.code;
-		if (!err.response) {
-			return Promise.reject('网络错误');
-		}
+		if (err.message.indexOf('timeout') !== -1)
+			ElMessage.error('请求超时，请稍后再试');
 		// 登录权限控制
 		if (code === '10102') {
 			ElMessageBox.confirm(
@@ -70,7 +77,7 @@ instance.interceptors.response.use(
 					clearInfo();
 				});
 		}
-		return Promise.reject(err.response.data);
+		return Promise.reject(err.response?.data);
 	}
 );
 

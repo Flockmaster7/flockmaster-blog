@@ -27,6 +27,7 @@ module.exports = {
 		'vue/no-unused-vars': 1,
 		'@typescript-eslint/no-explicit-any': 1,
 		'@typescript-eslint/no-unused-vars': 1,
+		'@typescript-eslint/ban-types': 0,
 		'@typescript-eslint/no-non-null-asserted-optional-chain': 1,
 		'prefer-const': 1, //使用const
 		'no-var': 2, //对var禁止
