@@ -63,6 +63,7 @@
 		"sass": "^1.62.1",
 		"sass-loader": "^13.3.1",
 		"tailwindcss": "^3.3.3",
+		"terser": "^5.27.0",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.0.4",
 		"unplugin-auto-import": "^0.16.4",

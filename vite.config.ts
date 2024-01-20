@@ -134,6 +134,13 @@ export default defineConfig(({ command, mode }) => {
 							}
 						}
 					}
+				},
+				minify: 'terser',
+				terserOptions: {
+					compress: {
+						drop_console: true,
+						drop_debugger: true // 去除报错
+					}
 				}
 			}
 		};
