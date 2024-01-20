@@ -24,7 +24,7 @@
 			</div>
 			<Operator
 				:isDianzan="userDianzanList.includes(cirFriend.id)"
-				:dianzanCount="cirFriend.dianzanCount"
+				:dianzanCount="count"
 				:circleFriendId="cirFriend.id"
 				@dianzan="dianzanCircleFriend"
 				@cancelDianzan="cancelDianzanCircleFriend"></Operator>
@@ -42,6 +42,7 @@
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
 	import ZbTime from '@/components/common/zb-time.vue';
+	import { ref } from 'vue';
 
 	interface PropsType {
 		cirFriend: CircleFriend;
@@ -52,6 +53,8 @@
 	const { circleFriend } = useStore();
 
 	const { userDianzanList } = storeToRefs(circleFriend);
+
+	const count = ref(props.cirFriend.dianzanCount);
 
 	const videos = props.cirFriend.videos.map((item) => {
 		return item.video_url;
@@ -65,6 +68,7 @@
 		const flag = await circleFriend.dianzan(id);
 		if (flag) {
 			userDianzanList.value.push(id);
+			count.value += 1;
 			ElMessage.success('感谢支持！');
 		}
 	};
@@ -75,6 +79,7 @@
 			userDianzanList.value = userDianzanList.value.filter(
 				(item) => item !== id
 			);
+			count.value -= 1;
 		}
 	};
 </script>

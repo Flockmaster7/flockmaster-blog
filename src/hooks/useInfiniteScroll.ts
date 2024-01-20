@@ -14,7 +14,6 @@ export default function useInfiniteScroll(fn: Fn) {
 		if (isSuccess) {
 			isLoading.value = false;
 			pageNum.value += 1;
-			console.log(pageNum.value);
 		}
 	};
 

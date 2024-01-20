@@ -52,9 +52,9 @@
 	import { getUserInfo, login, register } from '@/http/user.ts';
 	import cache from '@/utils/cache';
 	import { useRouter } from 'vue-router';
-	import { useUserStore } from '@/store/user';
 	import { UserInfo } from '@/types';
 	import { v4 as uuidv4 } from 'uuid';
+	import useStore from '@/store';
 
 	interface PropsType {
 		redirect?: boolean;
@@ -64,8 +64,8 @@
 		(e: 'closeLogin'): void;
 	}
 
-	const store = useUserStore();
-	const { userInfo } = storeToRefs(store);
+	const { user, circleFriend } = useStore();
+	const { userInfo } = storeToRefs(user);
 
 	const router = useRouter();
 	const emits = defineEmits<EmitsType>();
@@ -104,6 +104,7 @@
 					import.meta.env.VITE_ACCESS_TOKEN,
 					res.data.token
 				);
+				circleFriend.getUserDianzan();
 				emits('closeLogin');
 				// 跳转
 				redirect();

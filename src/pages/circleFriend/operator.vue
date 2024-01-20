@@ -7,14 +7,12 @@
 				name="like"
 				:size="18"
 				:color="isDianzan ? '#5cbfef' : ''" />
-			{{ count }}
+			{{ dianzanCount }}
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { ref } from 'vue';
-
 	interface PropsType {
 		circleFriendId: number;
 		dianzanCount: number;
@@ -29,8 +27,6 @@
 	const props = defineProps<Readonly<PropsType>>();
 	const emits = defineEmits<EmitsType>();
 
-	const count = ref(props.dianzanCount);
-
 	const handlerDianzan = () => {
 		if (!props.isDianzan) dianzan();
 		else cancelDianzan();
@@ -38,14 +34,10 @@
 
 	const dianzan = () => {
 		emits('dianzan', props.circleFriendId);
-		count.value += 1;
-		console.log('点赞朋友圈');
 	};
 
 	const cancelDianzan = () => {
 		emits('cancelDianzan', props.circleFriendId);
-		count.value -= 1;
-		console.log('取消点赞朋友圈');
 	};
 </script>
 

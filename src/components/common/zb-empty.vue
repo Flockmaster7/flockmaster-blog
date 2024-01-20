@@ -40,7 +40,7 @@
 			flex-direction: column;
 			gap: 15px;
 			.text {
-				color: var(--theme-empty-color);
+				color: var(--theme-text-3);
 				font-size: 16px;
 			}
 		}

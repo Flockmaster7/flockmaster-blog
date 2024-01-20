@@ -1,12 +1,15 @@
 import { ElMessage } from 'element-plus';
 import cache from './cache';
 import router from '@/router/index';
-import { useUserStore } from '@/store/user';
 import { storeToRefs } from 'pinia';
-import pinia from '@/store/store';
+import useStore from '@/store';
+import { DIANZAN_LEAVEWORD } from '@/constant';
 
-const userStore = useUserStore(pinia);
-const { userInfo } = storeToRefs(userStore);
+const { user, circleFriend, leaveWord } = useStore();
+const { userInfo } = storeToRefs(user);
+const { dianzanList } = storeToRefs(leaveWord);
+
+const { userDianzanList } = storeToRefs(circleFriend);
 
 // 判断是否登录
 export const isLogin = (): boolean => {
@@ -38,8 +41,12 @@ export const clearInfo = () => {
 		user_focus: 0,
 		user_fans: 0
 	};
+	// 清除点赞
+	userDianzanList.value = [];
 	// 清除用户信息
 	cache.removeCache(import.meta.env.VITE_USERINFO);
+	// cache.removeCache(DIANZAN_LEAVEWORD);
+	dianzanList.value = [];
 };
 
 // 退出登录

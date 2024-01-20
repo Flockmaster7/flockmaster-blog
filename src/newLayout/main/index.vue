@@ -72,7 +72,7 @@
 
 		.main-area {
 			background: var(--theme-center-card-bg-color);
-			// flex-basis: 60%;
+			width: 760px;
 			flex: 1;
 		}
 

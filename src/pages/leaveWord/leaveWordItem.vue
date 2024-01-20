@@ -42,6 +42,7 @@
 	import cache from '@/utils/cache';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
+	import { DIANZAN_LEAVEWORD } from '@/constant';
 
 	interface propsType {
 		item: LeaveWord;
@@ -59,18 +60,20 @@
 
 	const dianzanCount = ref(props.item.dianzan);
 
-	const onDianzan = () => {
+	const onDianzan = async () => {
 		if (isDianzan.value) {
-			leaveWord.cancelDianzanLeaveWord(props.item.id);
+			const flag = await leaveWord.cancelDianzanLeaveWord(props.item.id);
+			if (!flag) return;
 			dianzanList.value = dianzanList.value.filter(
 				(item) => item !== props.item.id
 			);
-			cache.setCache('DIANZAN_LEAVEWORD', dianzanList.value);
+			cache.setCache(DIANZAN_LEAVEWORD, dianzanList.value);
 			dianzanCount.value--;
 		} else {
-			leaveWord.dianzanLeaveWord(props.item.id);
+			const flag = await leaveWord.dianzanLeaveWord(props.item.id);
+			if (!flag) return;
 			dianzanList.value.push(props.item.id);
-			cache.setCache('DIANZAN_LEAVEWORD', dianzanList.value || []);
+			cache.setCache(DIANZAN_LEAVEWORD, dianzanList.value || []);
 			ElMessage.success('点赞成功');
 			dianzanCount.value++;
 		}

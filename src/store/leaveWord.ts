@@ -1,3 +1,4 @@
+import { DIANZAN_LEAVEWORD } from '@/constant';
 import {
 	cancelDianzan,
 	dianzan,
@@ -15,9 +16,7 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 	const leaveWordList = ref<LeaveWord[]>([]);
 	const leaveWordTotal = ref<number>(0);
 
-	const dianzanList = ref<number[]>(
-		cache.getCache('DIANZAN_LEAVEWORD') || []
-	);
+	const dianzanList = ref<number[]>(cache.getCache(DIANZAN_LEAVEWORD) || []);
 
 	// 留言
 	const addLeaveWord = async (data: CommentParamsType) => {
@@ -26,10 +25,7 @@ export const useLeaveWordStore = defineStore('leaveWord', () => {
 
 	// 获取留言列表
 	const getLeaveWord = async (pageNum: number, pageSize: number) => {
-		const { data: res } = await minDelay(
-			getLeaveWordList(pageNum, pageSize),
-			500
-		);
+		const { data: res } = await getLeaveWordList(pageNum, pageSize);
 		if (res.code === 200) {
 			leaveWordList.value =
 				Number(pageNum) === 1
