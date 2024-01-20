@@ -30,7 +30,7 @@
 		#a4a58b
 	);
 	--card-reset-bg: hsla(0, 0%, 100%, 0.3);
-	--theme-card-bg-color: hsla(0, 0%, 100%, 0.7);
+	--theme-card-bg-color: #f7f7f7;
 	--theme-center-card-bg-color: #ffffff;
 	--theme-operator-color: rgb(244, 247, 248);
 	--theme-divider: #e8e8e8;

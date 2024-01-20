@@ -5,18 +5,19 @@
 			<div class="center-top">NICE CHOICE：</div>
 			<span class="center-bottom">欢迎来到我的博客</span>
 		</div>
-		<a class="start-read" @click="gotoHome">开始阅读 →</a>
+		<div class="start-read" @click="gotoHome">开始阅读 →</div>
 		<div class="footer"></div>
 	</div>
 </template>
 
 <script setup lang="ts">
+	import { HOME_URL } from '@/config';
 	import { useRouter } from 'vue-router';
 
 	const router = useRouter();
 
 	const gotoHome = () => {
-		router.push('/home');
+		router.replace(HOME_URL);
 	};
 </script>
 

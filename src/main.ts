@@ -43,13 +43,13 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //全局注册组件
 app.component(zbSvgIconVue.name, zbSvgIconVue);
 
-app.mount('#app');
-
 app.use(Particles, {
 	init: async (engine: Engine) => {
 		await loadFull(engine);
 	}
 });
+
+app.mount('#app');
 
 // 滚动优化
 rollingOptimization();
