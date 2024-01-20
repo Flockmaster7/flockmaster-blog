@@ -1,7 +1,7 @@
 <template>
 	<div class="nav-list">
 		<div
-			class="nav-item"
+			:class="{ 'nav-item': true, active: activeNav === item.src }"
 			@click="changeTab(item)"
 			v-for="(item, index) in navLinkList"
 			:key="index">
@@ -15,7 +15,7 @@
 	import { navLinkList } from '@/config/headerNav';
 	import useNavi from '@/hooks/useNavi';
 
-	const { changeTab } = useNavi();
+	const { changeTab, activeNav } = useNavi();
 </script>
 
 <style lang="scss" scoped>
@@ -24,6 +24,10 @@
 		flex-direction: column;
 		gap: 20px;
 		padding: 40px 0;
+
+		.active {
+			background: var(--theme-data-show-2);
+		}
 
 		.nav-item {
 			padding: 10px 15px;

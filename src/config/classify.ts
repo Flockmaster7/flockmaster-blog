@@ -16,5 +16,9 @@ export const allClassify: ClassifyType[] = [
 	{
 		id: '4',
 		text: '日记'
+	},
+	{
+		id: '5',
+		text: '问题记录'
 	}
 ];

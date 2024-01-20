@@ -5,6 +5,8 @@ import { WebSiteInfoType } from '@/types/http';
 import cache from '@/utils/cache';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { ACTIVENAV } from '@/constant';
+import { HOME_URL } from '@/config';
 
 export const useCommonStore = defineStore('common', () => {
 	const zhankai = ref(false);
@@ -26,11 +28,11 @@ export const useCommonStore = defineStore('common', () => {
 	const latestComments = ref<Comment[]>();
 
 	const rightOpen = ref(false);
-	const activeNav = ref(cache.getShortCache('activeNav') || '/home');
+	const activeNav = ref(cache.getShortCache(ACTIVENAV) || HOME_URL);
 
 	// 持久化存储
 	const changeActiveNav = (nav: string) => {
-		cache.setShortCache('activeNav', nav);
+		cache.setShortCache(ACTIVENAV, nav);
 		activeNav.value = nav;
 	};
 
