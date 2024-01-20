@@ -1,10 +1,9 @@
 <template>
 	<div class="card">
 		<div class="blogImg">
-			<img v-lazy="imgUrl(blog.blog_image)" alt="" />
-			<!-- <img src="../../static/images/admin_bg.png" alt="" /> -->
+			<zb-image :src="blog.blog_image" :style="{ height: 250 + 'px' }" />
 		</div>
-		<div class="blogInfo">
+		<div class="blogInfo" @click="gotoBlogDetail(blog.id)">
 			<div class="top">
 				<div class="title-box">
 					<div class="title">{{ blog.title }}</div>
@@ -58,14 +57,22 @@
 
 <script setup lang="ts">
 	import { Blog } from '@/types';
-	import { imgUrl } from '@/utils/common';
+	import zbImage from '@/components/common/zb-image.vue';
 	import { getTimeFormNow } from '@/utils/dayFormat';
+	import { useRouter } from 'vue-router';
 
 	interface PropType {
 		blog: Blog;
 	}
 
+	const router = useRouter();
+
 	defineProps<PropType>();
+
+	const gotoBlogDetail = (id?: number) => {
+		if (!id) return;
+		router.push('/blog/detail?id=' + id);
+	};
 </script>
 
 <style lang="scss" scoped>

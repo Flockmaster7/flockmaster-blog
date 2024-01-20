@@ -10,11 +10,7 @@
 					<Skeleton></Skeleton>
 				</template>
 				<template #default>
-					<div
-						v-for="item in blogList"
-						:key="item.id"
-						@click="gotoBlogDetail(item.id)"
-						class="item">
+					<div v-for="item in blogList" :key="item.id" class="item">
 						<zbBlogItemRectangleMobile
 							:blog="(item as Blog)"
 							v-if="isMobile"
@@ -54,7 +50,6 @@
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import BlogItem from './blogItem.vue';
 	import zbBlogItemRectangleMobile from '@/components/mobile/zb-blogItem-rectangle-mobile.vue';
-	import { useRouter } from 'vue-router';
 	import usePagination from '@/hooks/usePagination';
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { Blog } from '@/types';
@@ -62,7 +57,6 @@
 	import { computed, onMounted } from 'vue';
 
 	const { blog, common } = useStore();
-	const router = useRouter();
 
 	const { blogList, blogTotal } = storeToRefs(blog);
 
@@ -78,11 +72,6 @@
 	// 获取设备
 	useIsMobile();
 	const { isMobile } = storeToRefs(common);
-
-	const gotoBlogDetail = (id?: number) => {
-		if (!id) return;
-		router.push('/blog/detail?id=' + id);
-	};
 
 	// 无线滚动加载
 	const getBlogs = async (pageNum: number) => {

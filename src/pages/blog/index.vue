@@ -41,7 +41,7 @@
 				<div class="blog-detail-card">
 					<blogInfo :blogDeatil="blogDeatil" />
 					<div class="mainImg">
-						<img v-lazy="imgUrl(blogDeatil.blog_image)" alt="" />
+						<zb-image :src="blogDeatil.blog_image" />
 					</div>
 					<!-- 文章预览 -->
 					<MdPreview

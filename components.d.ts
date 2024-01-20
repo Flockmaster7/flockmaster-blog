@@ -35,6 +35,7 @@ declare module 'vue' {
     ZbClassifyTool: typeof import('./src/components/common/zb-classify-tool.vue')['default']
     ZbCommentArea: typeof import('./src/components/common/zb-comment-area.vue')['default']
     ZbEmpty: typeof import('./src/components/common/zb-empty.vue')['default']
+    ZbImage: typeof import('./src/components/common/zb-image.vue')['default']
     ZbImageLazy: typeof import('./src/components/common/zb-image-lazy.vue')['default']
     ZbInfoItem: typeof import('./src/components/common/zb-infoItem.vue')['default']
     ZbItemInBook: typeof import('./src/components/common/zb-itemInBook.vue')['default']
