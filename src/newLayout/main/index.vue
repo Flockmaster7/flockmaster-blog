@@ -8,8 +8,7 @@
 		<div class="main-area">
 			<TopTool></TopTool>
 			<TopBg v-show="!zhankai"></TopBg>
-			<transition
-				enter-active-class="animate__animated animate__fadeInLeft">
+			<transition enter-active-class="animate__animated animate__fadeIn">
 				<router-view v-slot="{ Component }">
 					<keep-alive :include="['searchResult', 'home']">
 						<component :is="Component"></component>
@@ -50,6 +49,7 @@
 			display: none !important;
 		}
 	}
+
 	.layout-container {
 		display: flex;
 		gap: 10px;
