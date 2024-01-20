@@ -6,3 +6,5 @@ declare module '@kangc/v-md-editor/lib/plugins/line-number/index';
 declare module '@kangc/v-md-editor/lib/preview';
 declare module 'prismjs';
 declare module 'aplayer';
+declare module '@tsparticles/vue3';
+declare module 'tsparticles';

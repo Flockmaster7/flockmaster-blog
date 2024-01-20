@@ -34,8 +34,8 @@
 	.guide-welcome-container {
 		display: flex;
 		flex-direction: column;
-		gap: 60px;
-		padding: 60px 100px;
+		gap: 80px;
+		padding: 60px 80px;
 
 		.center {
 			.center-top {
@@ -45,7 +45,7 @@
 
 			.center-bottom {
 				font-size: 80px;
-				color: #494646;
+				color: var(--theme-text-1);
 				font-weight: 800;
 			}
 		}

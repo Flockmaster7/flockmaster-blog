@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.1.0",
+		"@tsparticles/vue3": "^3.0.0",
 		"animate.css": "^4.1.1",
 		"aplayer": "^1.10.1",
 		"axios": "^1.4.0",
@@ -26,6 +27,7 @@
 		"path-browserify": "^1.0.1",
 		"pinia": "^2.0.36",
 		"qs": "^6.11.2",
+		"tsparticles": "^3.1.0",
 		"uuid": "^9.0.1",
 		"vue": "^3.3.1",
 		"vue-perfect-scrollbar": "^0.2.1",

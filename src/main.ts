@@ -1,4 +1,3 @@
-import { addVisit } from './http/common';
 import { createApp } from 'vue';
 import App from './App.vue';
 import pinia from '@/store/store';
@@ -23,11 +22,17 @@ import 'animate.css';
 import '@/static/css/tailwind.css';
 import { rollingOptimization } from './utils/common';
 
+// 粒子
+import Particles from '@tsparticles/vue3';
+import { loadFull } from 'tsparticles';
+import type { Engine } from '@tsparticles/engine';
+
 const app = createApp(App);
 lazyPlugin.install(app, {
 	loading: new URL('@/static/images/loading.png', import.meta.url).href,
 	error: new URL('@/static/images/error.png', import.meta.url).href
 });
+
 app.use(pinia);
 app.use(router);
 
@@ -39,6 +44,12 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.component(zbSvgIconVue.name, zbSvgIconVue);
 
 app.mount('#app');
+
+app.use(Particles, {
+	init: async (engine: Engine) => {
+		await loadFull(engine);
+	}
+});
 
 // 滚动优化
 rollingOptimization();

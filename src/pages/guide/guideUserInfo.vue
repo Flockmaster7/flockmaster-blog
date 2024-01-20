@@ -42,7 +42,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
-		background: hsla(0, 0%, 100%, 0.5);
+		background: hsla(0, 0%, 100%, 0.2);
 		padding: 50px 30px;
 		border-radius: 20px;
 
