@@ -74,7 +74,7 @@
 				width: 60px;
 				padding: 8px;
 				border-radius: 8px;
-				background: var(--theme-data-show-2);
+				background: var(--theme-data-show);
 				display: flex;
 				flex-direction: column;
 				justify-content: center;

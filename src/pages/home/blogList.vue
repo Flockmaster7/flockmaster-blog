@@ -28,7 +28,7 @@
 			:isLoading="isLoading"
 			direction="center"
 			:isLoadMore="isLoadMore"></zb-load-more>
-		<zb-empty v-else></zb-empty>
+		<zb-empty v-if="blogList.length === 0 && !isLoading"></zb-empty>
 
 		<!-- <div class="pagination" v-if="blogList.length > 0">
 			<el-pagination
@@ -55,7 +55,7 @@
 	import useIsMobile from '@/hooks/useIsMobile';
 	import { Blog } from '@/types';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-	import { computed, onMounted } from 'vue';
+	import { computed } from 'vue';
 
 	const { blog, common } = useStore();
 

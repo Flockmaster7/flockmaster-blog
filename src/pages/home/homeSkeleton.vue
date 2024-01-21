@@ -1,35 +1,39 @@
 <template>
 	<div class="skeleton">
-		<div class="card" v-for="item in 3" :key="item">
+		<div class="card" v-for="item in 9" :key="item">
+			<div class="blogImg">
+				<el-skeleton-item
+					variant="image"
+					:style="{
+						width: 100 + '%',
+						height: 250 + 'px',
+						borderRadius: 8 + 'px'
+					}" />
+			</div>
 			<div class="blogInfo">
 				<div class="container">
 					<div class="top">
-						<div class="title">
-							<el-skeleton-item
-								variant="text"
-								:style="{ width: 200 + 'px' }" />
-						</div>
+						<el-skeleton-item
+							variant="text"
+							:style="{ width: 400 + 'px' }" />
+						<el-skeleton-item
+							variant="text"
+							:style="{ width: 200 + 'px' }" />
+						<el-skeleton-item
+							variant="text"
+							:style="{ width: 400 + 'px' }" />
 					</div>
 					<div class="main">
 						<div class="author">
 							<el-skeleton-item
 								variant="text"
-								:style="{ width: 200 + 'px' }" />
+								:style="{ width: 300 + 'px' }" />
 						</div>
 					</div>
 					<div class="bottom">
 						<el-skeleton-item variant="text" />
 					</div>
 				</div>
-			</div>
-			<div class="blogImg">
-				<el-skeleton-item
-					variant="image"
-					:style="{
-						width: 100 + '%',
-						height: 170 + 'px',
-						borderRadius: 8 + 'px'
-					}" />
 			</div>
 		</div>
 	</div>
@@ -38,6 +42,14 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.card {
+			flex-wrap: wrap;
+			width: 100vw !important;
+			overflow: hidden !important;
+		}
+	}
+
 	.skeleton {
 		display: flex;
 		flex-wrap: wrap;
@@ -47,7 +59,7 @@
 		padding: 30px 0 20px;
 		gap: 15px;
 		width: 100%;
-		height: 250px;
+		height: 100%;
 		display: flex;
 		justify-content: space-around;
 		transition: 0.6s;
@@ -68,61 +80,18 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				gap: 12px;
-
-				.title {
-					font-weight: 700;
-					font-size: 25px;
-				}
-
-				.author {
-					font-size: 16px;
-					color: $gray;
-				}
-
-				.tag {
-					margin-top: 15px;
-					display: flex;
-					gap: 5px;
-				}
-
-				.description {
-					margin-top: 5px;
-					font-size: 15px;
-					color: rgb(126, 126, 126);
-					white-space: nowrap;
-					text-overflow: ellipsis;
-					overflow: hidden;
-				}
+				gap: 15px;
+				margin-bottom: 40px;
 			}
 
 			.bottom {
-				padding: 4px 8px;
-				background: var(--theme-data-show);
-				border-radius: 8px;
-				display: flex;
-				justify-content: space-between;
-				.data {
-					display: flex;
-					gap: 40px;
-					.data-item {
-						color: $gray;
-						display: flex;
-						align-items: center;
-					}
-				}
+				margin-top: 30px;
 			}
 		}
 
 		.blogImg {
 			width: 100%;
 			height: 100%;
-
-			img {
-				width: 100%;
-				height: 100%;
-				border-radius: 8px;
-			}
 		}
 	}
 </style>

@@ -26,7 +26,7 @@
 		padding: 40px 0;
 
 		.active {
-			background: var(--theme-data-show-2);
+			background: var(--theme-data-show);
 		}
 
 		.nav-item {
@@ -40,7 +40,7 @@
 
 		.nav-item:hover {
 			cursor: pointer;
-			background: var(--theme-data-show-2);
+			background: var(--theme-data-show);
 		}
 	}
 </style>
