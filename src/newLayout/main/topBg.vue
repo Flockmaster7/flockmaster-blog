@@ -1,5 +1,11 @@
 <template>
 	<div class="top-bg-container">
+		<el-carousel :height="carouselHeight">
+			<el-carousel-item v-for="item in carouselImg" :key="item">
+				<el-image :src="item" fit="cover" />
+			</el-carousel-item>
+		</el-carousel>
+
 		<div class="top-info">
 			<div class="info">
 				<p class="name">{{ admin.name }}</p>
@@ -18,6 +24,21 @@
 
 <script setup lang="ts">
 	import useAdminInfo from '@/hooks/useAdminInfo';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
+	import { computed } from 'vue';
+
+	const { common } = useStore();
+	const { isMobile } = storeToRefs(common);
+	const carouselHeight = computed(() => {
+		return isMobile.value ? '220px' : '290px';
+	});
+	const carouselImg = [
+		new URL('@/static/images/home_bg.jpg', import.meta.url).href,
+		new URL('@/static/images/home_bg1.jpg', import.meta.url).href,
+		new URL('@/static/images/home_bg2.jpg', import.meta.url).href,
+		new URL('@/static/images/home_bg3.jpg', import.meta.url).href
+	];
 
 	const { admin } = useAdminInfo();
 </script>
@@ -36,8 +57,9 @@
 	.top-bg-container {
 		height: 290px;
 		position: relative;
-		background: url('../../static/images/admin_bg.png');
-		background-size: cover;
+		// background: url('../../static/images/home_bg.jpg') no-repeat center
+		// 	center;
+		// background-size: cover;
 
 		.top-info {
 			display: flex;

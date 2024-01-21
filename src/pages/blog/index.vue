@@ -290,6 +290,7 @@
 
 	.blog-container {
 		display: flex;
+		justify-content: center;
 		gap: 10px;
 		padding: 40px 20px;
 
@@ -298,6 +299,7 @@
 			flex-direction: column;
 			gap: 10px;
 			position: relative;
+			max-width: 720px;
 
 			.mainImg {
 				width: 100%;

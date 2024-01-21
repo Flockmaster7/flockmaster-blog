@@ -43,7 +43,7 @@
 		align-items: center;
 		width: 100%;
 		height: 100%;
-		background: #1d1f34;
+		background: var(--theme-box-show-1);
 		color: var(--el-text-color-secondary);
 		gap: 10px;
 		border-radius: 6px;
