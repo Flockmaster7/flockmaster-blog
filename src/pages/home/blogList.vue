@@ -59,7 +59,6 @@
 		padding: 20px 40px 0;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 10px;

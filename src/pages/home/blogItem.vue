@@ -3,7 +3,7 @@
 		<div class="blogImg">
 			<zb-image
 				:src="blog.blog_image"
-				:style="{ height: (isMobile ? 180 : 250) + 'px' }" />
+				:style="{ height: (isMobile ? 160 : 250) + 'px' }" />
 		</div>
 		<div class="blogInfo" @click="gotoBlogDetail(blog.id)">
 			<div class="top">

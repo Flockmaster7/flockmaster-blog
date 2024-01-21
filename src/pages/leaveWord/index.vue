@@ -106,7 +106,6 @@
 		box-sizing: border-box;
 		padding: 20px 40px;
 		display: flex;
-		justify-content: center;
 		align-items: center;
 		flex-direction: column;
 

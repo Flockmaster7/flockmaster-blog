@@ -44,7 +44,6 @@
 	.work-container {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
 		padding: 40px 40px 25px;
 

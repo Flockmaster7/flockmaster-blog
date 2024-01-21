@@ -78,7 +78,6 @@
 	.album-container {
 		display: flex;
 		// background: var(--card-reset-bg);
-		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
 		flex-wrap: wrap;
