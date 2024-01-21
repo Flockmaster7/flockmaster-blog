@@ -3,6 +3,12 @@
 		<!-- <zb-svg-icon name="search" color="#494848"></zb-svg-icon> -->
 		<div class="left">
 			<zb-svg-icon
+				v-if="isMobile"
+				class="icon"
+				:size="22"
+				name="mobilenav"
+				@click="openMobileNav"></zb-svg-icon>
+			<zb-svg-icon
 				v-if="!zhankai"
 				class="icon"
 				name="back"
@@ -45,7 +51,8 @@
 	};
 
 	const { common } = useStore();
-	const { rightOpen, commentOpen, zhankai } = storeToRefs(common);
+	const { rightOpen, commentOpen, isMobile, zhankai, mobileNavOpen } =
+		storeToRefs(common);
 
 	const showOperator = computed(() => {
 		return route.meta.operator ? true : false;
@@ -62,9 +69,19 @@
 	const onZhankai = () => {
 		zhankai.value = !zhankai.value;
 	};
+
+	const openMobileNav = () => {
+		mobileNavOpen.value = !mobileNavOpen.value;
+	};
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.top-tool-container {
+			height: 55px !important;
+			padding: 0 12px !important;
+		}
+	}
 	.top-tool-container {
 		z-index: 2;
 		height: 70px;
@@ -76,6 +93,7 @@
 		top: 0;
 		background: var(--theme-center-card-bg-color);
 
+		.left,
 		.right {
 			display: flex;
 			align-items: center;

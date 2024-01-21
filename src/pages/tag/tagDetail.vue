@@ -99,6 +99,12 @@
 		margin-right: 6px;
 	}
 
+	@media screen and (max-width: 540px) {
+		.tagDetail-container {
+			padding: 50px 18px !important;
+		}
+	}
+
 	.tagDetail-container {
 		padding: 80px 120px;
 

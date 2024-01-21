@@ -77,6 +77,10 @@
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
+		.card {
+			flex-wrap: wrap;
+		}
+
 		.title {
 			font-size: 20px !important;
 		}
@@ -89,6 +93,10 @@
 			font-size: 14px !important;
 		}
 
+		.blogInfo {
+			padding: 0 30px !important;
+		}
+
 		.bottom {
 			flex-direction: column;
 		}
@@ -97,7 +105,7 @@
 		padding: 30px 0 20px;
 		gap: 15px;
 		width: 100%;
-		height: 250px;
+		height: 100%;
 		display: flex;
 		justify-content: space-around;
 		transition: 0.6s;

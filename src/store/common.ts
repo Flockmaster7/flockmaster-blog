@@ -9,6 +9,7 @@ import { ACTIVENAV } from '@/constant';
 import { HOME_URL } from '@/config';
 
 export const useCommonStore = defineStore('common', () => {
+	const mobileNavOpen = ref(false);
 	const zhankai = ref(false);
 	const commentOpen = ref(false);
 	const isMobile = ref(false);
@@ -81,6 +82,7 @@ export const useCommonStore = defineStore('common', () => {
 		getHomeBlogs,
 		hotBlogs,
 		latestComments,
-		commentOpen
+		commentOpen,
+		mobileNavOpen
 	};
 });

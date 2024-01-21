@@ -1,13 +1,13 @@
 <template>
-	<el-card>
-		<div class="settings-container">
-			<div class="settings-title">设置</div>
-			<el-divider border-style="dashed" />
+	<div class="settings-container">
+		<zbCard title="主题">
 			<div class="change-dark">
 				黑夜:
 				<zb-theme></zb-theme>
 			</div>
-			<div class="change-dark">
+		</zbCard>
+
+		<!-- <div class="change-dark">
 				主题:
 				<span
 					v-for="(item, index) in allTheme"
@@ -19,9 +19,8 @@
 						:name="theme === item.theme ? 'colorselect' : 'color'"
 						:color="item.icon"></zb-svg-icon
 				></span>
-			</div>
-		</div>
-	</el-card>
+			</div> -->
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -37,20 +36,18 @@
 		margin: 5px 0 !important;
 	}
 	.settings-container {
+		box-sizing: border-box;
+		padding: 10px 20px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		.settings-title {
-			margin-left: 15px;
-			font-size: 20px;
-			font-weight: 700;
-		}
+		height: calc(100vh - 275px);
+
 		.change-dark {
 			display: flex;
 			align-items: center;
 			gap: 10px;
-			font-size: 18px;
-			padding: 0 15px;
+			font-size: 16px;
 
 			.active {
 				color: var(--theme-tool-active-color);

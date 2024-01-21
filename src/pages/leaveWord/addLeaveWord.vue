@@ -51,7 +51,6 @@
 	.addLeaveWord-container {
 		display: flex;
 		flex-direction: column;
-		padding: 0 30px;
 
 		.comfirm {
 			margin-top: 6px !important;

@@ -4,12 +4,7 @@
 			<span
 				>全部留言 {{ leaveWordTotal === 0 ? '' : leaveWordTotal }}</span
 			>
-			<el-button
-				link
-				:icon="Edit"
-				@click="() => (dialogVisible = !dialogVisible)"
-				>留言</el-button
-			>
+			<el-button link :icon="Edit" @click="openAdd">留言</el-button>
 		</div>
 		<div
 			class="list"
@@ -36,11 +31,19 @@
 		<el-dialog v-model="dialogVisible" title="留言" draggable>
 			<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>
 		</el-dialog>
+
+		<el-drawer
+			title="留言"
+			v-model="drawerVisible"
+			size="100%"
+			direction="btt"
+			:lock-scroll="false">
+			<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>
+		</el-drawer>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { useLeaveWordStore } from '@/store/leaveWord';
 	import { storeToRefs } from 'pinia';
 	import { computed, ref } from 'vue';
 	import { Edit } from '@element-plus/icons-vue';
@@ -48,12 +51,15 @@
 	import leaveWordItem from './leaveWordItem.vue';
 	import addLeaveWord from './addLeaveWord.vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+	import useStore from '@/store';
+	import useIsMobile from '@/hooks/useIsMobile';
 
-	const leaveWordStore = useLeaveWordStore();
-	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWordStore);
+	const { leaveWord } = useStore();
+	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWord);
+	const { isMobileRef } = useIsMobile();
 
 	const getLeaveWordList = async (pageNum: number) => {
-		const res = await leaveWordStore.getLeaveWord(pageNum, 9);
+		const res = await leaveWord.getLeaveWord(pageNum, 9);
 		return res;
 	};
 	const { isLoading, loadMore } = useInfiniteScroll(getLeaveWordList);
@@ -63,39 +69,30 @@
 	});
 
 	// 留言
+	const drawerVisible = ref(false);
 	const dialogVisible = ref(false);
+	const openAdd = () => {
+		if (isMobileRef.value) {
+			drawerVisible.value = !drawerVisible.value;
+		} else {
+			dialogVisible.value = !dialogVisible.value;
+		}
+	};
 
 	const closeDialog = async () => {
 		// 重新获取留言
 		await getLeaveWordList(1);
 		dialogVisible.value = false;
+		drawerVisible.value = false;
 	};
 </script>
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.leaveWord-container {
-			padding: 40px 10px !important;
+			padding: 0px 15px !important;
 			.leaveWord-title {
 				font-size: 25px !important;
-			}
-		}
-
-		.top {
-			.title {
-				font-size: 18px !important;
-			}
-			.text-input {
-				gap: 12px !important;
-				.avatar {
-					width: 50px !important;
-					height: 50px !important;
-				}
-			}
-			.comfirm {
-				:deep(.el-button) {
-					width: 80px !important;
-				}
 			}
 		}
 
@@ -106,6 +103,7 @@
 		}
 	}
 	.leaveWord-container {
+		box-sizing: border-box;
 		padding: 20px 40px;
 		display: flex;
 		justify-content: center;
@@ -124,7 +122,6 @@
 		}
 
 		.list {
-			width: 100%;
 			padding: 0 20px;
 
 			.comment {

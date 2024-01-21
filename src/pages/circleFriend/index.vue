@@ -21,8 +21,13 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.circleFriend-container {
+			padding: 0 16px !important;
+		}
+	}
+
 	.circleFriend-container {
 		padding: 20px 105px 0;
-		// width: 100%;
 	}
 </style>

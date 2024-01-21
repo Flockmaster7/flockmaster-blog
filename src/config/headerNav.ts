@@ -47,23 +47,29 @@ export const navLinkList: HeaderNavType[] = [
 
 export const mobileNav: HeaderNavType[] = [
 	{
-		title: '首页',
+		title: '博客',
 		src: '/home',
 		name: '',
-		icon: 'home'
+		icon: 'blog'
 	},
 	{
-		title: '个人',
-		src: '/my',
+		title: '朋友圈',
+		src: '/circleFriend',
 		name: '',
-		icon: 'my'
+		icon: 'circleFriend'
 	},
-	{
-		title: '归档',
-		src: '/pigeonhole',
-		name: '',
-		icon: 'guidang'
-	},
+	// {
+	// 	title: '个人',
+	// 	src: '/my',
+	// 	name: '',
+	// 	icon: 'my'
+	// },
+	// {
+	// 	title: '归档',
+	// 	src: '/pigeonhole',
+	// 	name: '',
+	// 	icon: 'guidang'
+	// },
 	{
 		title: '标签',
 		src: '/tag',
@@ -93,6 +99,13 @@ export const mobileNav: HeaderNavType[] = [
 		src: '/settings',
 		name: '',
 		icon: 'shezhi'
+	},
+	{
+		title: '登录',
+		type: 'login',
+		src: '/login',
+		name: '',
+		icon: 'login'
 	},
 	{
 		title: '退出',

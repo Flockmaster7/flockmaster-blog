@@ -75,7 +75,7 @@
 
 		.tag-List {
 			width: 100%;
-			max-height: 200px;
+			// max-height: 200px;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;

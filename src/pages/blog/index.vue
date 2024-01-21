@@ -1,6 +1,5 @@
 <template>
-	<div class="blogDetail-container">
-		<!-- <div
+	<!-- <div
 			class="blog-header"
 			:style="{
 				transform: !isShowHeader
@@ -35,62 +34,61 @@
 			</div>
 		</div> -->
 
-		<div class="blog-container">
-			<!-- 左侧 -->
-			<div class="blog-card">
-				<div class="blog-detail-card">
-					<blogInfo :blogDeatil="blogDeatil" />
-					<div class="mainImg">
-						<zb-image :src="blogDeatil.blog_image" />
-					</div>
-					<!-- 文章预览 -->
-					<MdPreview
-						:editorId="previewId"
-						v-model="content"
-						:theme="isDark ? 'dark' : 'light'"
-						:showCodeRowNumber="true" />
-					<el-divider></el-divider>
-					<blogFooter :blogDeatil="blogDeatil"></blogFooter>
+	<div class="blog-container">
+		<!-- 左侧 -->
+		<div class="blog-card">
+			<div class="blog-detail-card">
+				<blogInfo :blogDeatil="blogDeatil" />
+				<div class="mainImg">
+					<zb-image
+						:src="blogDeatil.blog_image"
+						:style="{ height: (isMobileRef ? 240 : 400) + 'px' }" />
 				</div>
-				<div class="blog-detail-card">
-					<commentPost
-						:blogId="blogDeatil.id"
-						:userImage="userInfo.user_image"
-						@refreshComment="getCommentList"></commentPost>
-					<CommentList></CommentList>
-				</div>
+				<!-- 文章预览 -->
+				<MdPreview
+					:editorId="previewId"
+					v-model="content"
+					:theme="isDark ? 'dark' : 'light'"
+					:showCodeRowNumber="true" />
+				<el-divider></el-divider>
+				<blogFooter :blogDeatil="blogDeatil"></blogFooter>
+			</div>
+			<div class="blog-detail-card">
+				<commentPost
+					:blogId="blogDeatil.id"
+					:userImage="userInfo.user_image"
+					@refreshComment="getCommentList"></commentPost>
+				<CommentList></CommentList>
 			</div>
 		</div>
-
-		<!-- 右侧抽屉 -->
-		<el-drawer
-			:show-close="false"
-			v-model="rightOpen"
-			size="25%"
-			direction="rtl"
-			:lock-scroll="false">
-			<ZbCard title="操作">
-				<BlogOperator :id="id"></BlogOperator>
-			</ZbCard>
-			<ZbCard title="目录">
-				<MdCatalog
-					:editorId="previewId"
-					:scrollElement="scrollElement" />
-			</ZbCard>
-		</el-drawer>
-
-		<el-drawer
-			v-model="commentOpen"
-			title="评论"
-			:lock-scroll="false"
-			direction="rtl">
-			<commentPost
-				:blogId="blogDeatil.id"
-				:userImage="userInfo.user_image"
-				@refreshComment="getCommentList"></commentPost>
-			<CommentList></CommentList>
-		</el-drawer>
 	</div>
+
+	<!-- 右侧抽屉 -->
+	<el-drawer
+		v-model="rightOpen"
+		:size="drawerOption.size"
+		:direction="drawerOption.direction"
+		:lock-scroll="false">
+		<ZbCard title="操作">
+			<BlogOperator :id="id"></BlogOperator>
+		</ZbCard>
+		<ZbCard title="目录">
+			<MdCatalog :editorId="previewId" :scrollElement="scrollElement" />
+		</ZbCard>
+	</el-drawer>
+
+	<el-drawer
+		v-model="commentOpen"
+		title="评论"
+		:size="drawerOption.size"
+		:lock-scroll="false"
+		:direction="drawerOption.direction">
+		<commentPost
+			:blogId="blogDeatil.id"
+			:userImage="userInfo.user_image"
+			@refreshComment="getCommentList"></commentPost>
+		<CommentList></CommentList>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">
@@ -104,7 +102,6 @@
 	} from 'vue';
 	import { storeToRefs } from 'pinia';
 	import { LocationQueryValue, useRoute } from 'vue-router';
-	import { imgUrl } from '@/utils/common';
 	import { isLogin } from '@/utils/login';
 	import { MdPreview, MdCatalog } from 'md-editor-v3';
 	import 'md-editor-v3/lib/style.css';
@@ -116,7 +113,9 @@
 	import CommentList from './commentList.vue';
 	import BlogOperator from './blogOperator.vue';
 	import ZbCard from '@/components/common/zb-card.vue';
+	import useIsMobile from '@/hooks/useIsMobile';
 
+	const { isMobileRef } = useIsMobile();
 	const { common, blog, user } = useStore();
 	const { isDark, rightOpen, commentOpen } = storeToRefs(common);
 
@@ -126,6 +125,20 @@
 
 	const content = ref('');
 	const id = route.query.id as string;
+
+	const drawerOption = computed(() => {
+		if (isMobileRef.value) {
+			return {
+				size: '100%',
+				direction: 'btt'
+			};
+		} else {
+			return {
+				size: '25%',
+				direction: 'rtl'
+			};
+		}
+	});
 
 	const blogId = computed(() => {
 		return route.query.id;
@@ -264,6 +277,58 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.blog-container {
+			padding: 40px 0 !important;
+			.blog-card {
+				box-sizing: border-box;
+				padding: 0 12px;
+				width: 100vw;
+			}
+		}
+	}
+
+	.blog-container {
+		display: flex;
+		gap: 10px;
+		padding: 40px 20px;
+
+		.blog-card {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			position: relative;
+
+			.mainImg {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				img {
+					width: 100%;
+					border-radius: 5px;
+				}
+			}
+		}
+	}
+
+	.active {
+		background-color: var(--theme-color) !important;
+	}
+
+	:deep(.md-editor-catalog-active > span) {
+		color: var(--theme-active-show) !important;
+	}
+
+	:deep(.md-editor-preview-wrapper) {
+		padding: 0;
+	}
+
+	:deep(.md-editor-catalog-link span:hover) {
+		color: var(--theme-active-show) !important;
+	}
+
 	// 分割线
 	.el-divider--horizontal {
 		margin: 9px 0 !important;
@@ -273,275 +338,108 @@
 		margin-bottom: 0px !important;
 	}
 
-	@media screen and (max-width: 540px) {
-		:deep(.el-card__body) {
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-		}
+	// .blog-header {
+	// 	z-index: 1000;
+	// 	width: 100%;
+	// 	height: 58px;
+	// 	position: fixed;
+	// 	top: 0;
+	// 	left: 0;
+	// 	background-color: var(--theme-color);
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// 	transition: 0.4s;
 
-		.bottom {
-			gap: 10px !important;
-		}
+	// 	.blog-header-box {
+	// 		padding: 20px;
+	// 		width: 1100px;
+	// 		display: flex;
+	// 		justify-content: space-between;
+	// 		align-items: center;
+	// 		opacity: 0.7;
+	// 		.header-title {
+	// 			font-size: 20px;
+	// 			font-weight: 700;
+	// 		}
 
-		.author {
-			font-size: 15px !important;
-		}
+	// 		.header-author {
+	// 			display: flex;
+	// 			align-items: center;
+	// 			gap: 8px;
+	// 			font-size: 17px;
 
-		.tag {
-			padding-left: 15px !important;
-		}
+	// 			:deep(.el-button--primary) {
+	// 				width: 50px;
+	// 				background-color: var(--theme-active-color);
+	// 				border-radius: 6px;
+	// 				transition: 1s;
+	// 			}
+	// 			:deep(.el-button--primary:hover) {
+	// 				width: 73px;
+	// 			}
 
-		.top {
-			.title {
-				font-size: 25px !important;
-			}
-			.text-input {
-				gap: 12px !important;
-				.avatar {
-					width: 50px !important;
-					height: 50px !important;
-				}
-			}
-			.comfirm {
-				:deep(.el-button) {
-					width: 80px !important;
-				}
-			}
-		}
+	// 			.follow {
+	// 				padding: 4px 8px;
+	// 				border-radius: 5px;
+	// 				font-size: 14px;
+	// 			}
 
-		.list {
-			.title {
-				font-size: 20px !important;
-			}
+	// 			.follow:hover {
+	// 				cursor: pointer;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-			.comment {
-				gap: 10px !important;
-				.avatar {
-					width: 35px !important;
-					height: 35px !important;
-				}
+	// .scrollToTop {
+	// 	z-index: 10;
+	// 	opacity: 0.6;
+	// 	position: absolute;
+	// 	right: 100px;
+	// 	.icon {
+	// 		border-radius: 40%;
+	// 		position: fixed;
+	// 		bottom: 50px;
+	// 		width: 50px;
+	// 		height: 50px;
+	// 		text-align: center;
+	// 		line-height: 50px;
+	// 	}
 
-				.info {
-					.name {
-						font-size: 16px !important;
-					}
+	// 	.icon:hover {
+	// 		cursor: pointer;
+	// 		animation: translate 1.2s ease-in-out infinite;
+	// 	}
 
-					.time {
-						font-size: 14px !important;
-					}
+	// 	@keyframes translate {
+	// 		from {
+	// 			transform: translateY(15px);
+	// 		}
 
-					.reply,
-					.content {
-						font-size: 15px !important;
-					}
-				}
-			}
+	// 		to {
+	// 			transform: translateY(0);
+	// 		}
+	// 	}
+	// }
 
-			.secondList {
-				.comment {
-					gap: 10px !important;
-					.avatar {
-						width: 30px !important;
-						height: 30px !important;
-					}
+	// .tool-list {
+	// 	position: relative;
+	// 	.tool-card {
+	// 		position: absolute;
+	// 		left: -75px;
+	// 		top: 140px;
+	// 	}
 
-					.info {
-						gap: 5px;
-						.name-name {
-							font-size: 15px !important;
-						}
+	// 	.progress-card {
+	// 		position: absolute;
+	// 		left: -60px;
+	// 		// bottom: 200px;
 
-						.name-reply,
-						.name-replyName {
-							display: none !important;
-						}
-
-						.time {
-							font-size: 13px !important;
-						}
-
-						.reply,
-						.content,
-						.replied-content {
-							font-size: 14px !important;
-						}
-					}
-				}
-			}
-		}
-
-		.scrollToTop {
-			right: 60px !important;
-			.icon {
-				bottom: 70px !important;
-				width: 40px !important;
-				height: 40px !important;
-				line-height: 40px !important;
-			}
-		}
-
-		.right-card {
-			display: none !important;
-		}
-
-		.blog-header {
-			.header-title {
-				font-size: 16px !important;
-			}
-			.header-author {
-				font-size: 14px !important;
-			}
-		}
-	}
-
-	.blogDetail-container {
-		display: flex;
-		justify-content: center;
-	}
-
-	.blog-header {
-		z-index: 1000;
-		width: 100%;
-		height: 58px;
-		position: fixed;
-		top: 0;
-		left: 0;
-		background-color: var(--theme-color);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition: 0.4s;
-
-		.blog-header-box {
-			padding: 20px;
-			width: 1100px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			opacity: 0.7;
-			.header-title {
-				font-size: 20px;
-				font-weight: 700;
-			}
-
-			.header-author {
-				display: flex;
-				align-items: center;
-				gap: 8px;
-				font-size: 17px;
-
-				:deep(.el-button--primary) {
-					width: 50px;
-					background-color: var(--theme-active-color);
-					border-radius: 6px;
-					transition: 1s;
-				}
-				:deep(.el-button--primary:hover) {
-					width: 73px;
-				}
-
-				.follow {
-					padding: 4px 8px;
-					border-radius: 5px;
-					font-size: 14px;
-				}
-
-				.follow:hover {
-					cursor: pointer;
-				}
-			}
-		}
-	}
-
-	.scrollToTop {
-		z-index: 10;
-		opacity: 0.6;
-		position: absolute;
-		right: 100px;
-		.icon {
-			border-radius: 40%;
-			position: fixed;
-			bottom: 50px;
-			width: 50px;
-			height: 50px;
-			text-align: center;
-			line-height: 50px;
-		}
-
-		.icon:hover {
-			cursor: pointer;
-			animation: translate 1.2s ease-in-out infinite;
-		}
-
-		@keyframes translate {
-			from {
-				transform: translateY(15px);
-			}
-
-			to {
-				transform: translateY(0);
-			}
-		}
-	}
-
-	.blog-container {
-		display: flex;
-		gap: 10px;
-		// margin: 15px;
-		padding: 30px 50px;
-
-		.blog-card {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-			position: relative;
-
-			.blog-detail-card {
-			}
-		}
-	}
-
-	.active {
-		background-color: var(--theme-color) !important;
-	}
-
-	.tool-list {
-		position: relative;
-		.tool-card {
-			position: absolute;
-			left: -75px;
-			top: 140px;
-		}
-
-		.progress-card {
-			position: absolute;
-			left: -60px;
-			// bottom: 200px;
-
-			.progress-container {
-				position: fixed;
-				bottom: 100px;
-			}
-		}
-	}
-
-	.mainImg {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		img {
-			width: 100%;
-			border-radius: 5px;
-		}
-	}
-
-	:deep(.md-editor-catalog-active > span) {
-		color: var(--theme-active-show) !important;
-	}
-
-	:deep(.md-editor-catalog-link span:hover) {
-		color: var(--theme-active-show) !important;
-	}
+	// 		.progress-container {
+	// 			position: fixed;
+	// 			bottom: 100px;
+	// 		}
+	// 	}
+	// }
 </style>

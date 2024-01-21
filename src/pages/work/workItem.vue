@@ -1,7 +1,7 @@
 <template>
 	<div class="work-item">
 		<div class="left">
-			<img :src="imgUrl(work.work_image)" alt="" />
+			<zb-image :src="work.work_image" :style="{ height: 200 + 'px' }" />
 		</div>
 		<div class="right">
 			<div class="title">{{ work.work_title }}</div>
@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-	import { imgUrl } from '@/utils/common';
 	import { Work } from '@/types';
 
 	interface PropType {
@@ -32,41 +31,37 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.work-item {
-			height: 180px !important;
+			flex-wrap: wrap;
+			height: 100% !important;
+
+			.left {
+				width: 100% !important;
+			}
+
+			.des {
+				margin: 5px 0 20px !important;
+			}
 		}
 	}
 	.work-item {
 		position: relative;
 		width: 100%;
 		height: 200px;
-		// background-color: var(--theme-color);
 		display: flex;
 		gap: 20px;
 
 		.left {
 			width: 300px;
 			height: 200px;
-			border-radius: 10px;
-			background-size: cover;
-			background-repeat: no-repeat;
-
-			img {
-				width: 100%;
-				height: 100%;
-				border-radius: 10px;
-				background-size: cover;
-				background-repeat: no-repeat;
-			}
 		}
 
 		.right {
-			width: calc(100% - 300px);
+			flex: 1;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			gap: 5px;
-			padding-top: 10px;
-			padding-left: 20px;
+			justify-content: center;
+			gap: 10px;
 			// border-bottom: 1px solid #e8e8e8;
 			border-bottom: 1px solid var(--theme-divider);
 
@@ -83,7 +78,7 @@
 					'Trebuchet MS', sans-serif;
 				color: #8b8b8b;
 				transition: all 1s linear;
-				margin: 5px 0 60px;
+				margin: 5px 0 50px;
 			}
 
 			.link {
@@ -91,6 +86,7 @@
 				align-items: center;
 				font-size: 16px;
 				text-decoration: underline;
+				margin-bottom: 10px;
 			}
 
 			.link:hover {

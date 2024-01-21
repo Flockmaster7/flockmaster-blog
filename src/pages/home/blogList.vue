@@ -11,13 +11,14 @@
 				</template>
 				<template #default>
 					<div v-for="item in blogList" :key="item.id" class="item">
-						<zbBlogItemRectangleMobile
+						<BlogItem :blog="(item as Blog)"></BlogItem>
+						<!-- <zbBlogItemRectangleMobile
 							:blog="(item as Blog)"
 							v-if="isMobile"
 							:isLoading="isLoading"></zbBlogItemRectangleMobile>
 						<BlogItem
 							:blog="(item as Blog)"
-							v-if="!isMobile"></BlogItem>
+							v-if="!isMobile"></BlogItem> -->
 					</div>
 				</template>
 			</el-skeleton>
@@ -85,7 +86,7 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.blog-container {
-			padding: 20px 0 !important;
+			padding: 0 10px !important;
 		}
 	}
 

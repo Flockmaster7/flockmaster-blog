@@ -30,7 +30,6 @@
 
 <style lang="scss" scoped>
 	.el-image {
-		padding: 0 5px;
 		width: 100%;
 	}
 
@@ -43,7 +42,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 250px;
+		height: 100%;
 		background: #1d1f34;
 		color: var(--el-text-color-secondary);
 		gap: 10px;

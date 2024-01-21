@@ -34,6 +34,12 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.work-container {
+			padding: 25px 18px !important;
+		}
+	}
+
 	.work-container {
 		// background: var(--card-reset-bg);
 		display: flex;

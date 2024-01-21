@@ -21,8 +21,9 @@
 			<RightAside></RightAside>
 		</div>
 	</div>
+	<MobileNav />
 	<ZbBacktop></ZbBacktop>
-	<MusicPlayer></MusicPlayer>
+	<MusicPlayer v-if="!isMobile"></MusicPlayer>
 </template>
 
 <script setup lang="ts">
@@ -34,18 +35,21 @@
 	import ZbBacktop from '@/components/common/zb-backtop.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
+	import MobileNav from './mobileNav.vue';
 
 	const { common } = useStore();
-	const { zhankai } = storeToRefs(common);
+	const { zhankai, isMobile } = storeToRefs(common);
 </script>
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
-		.main-area {
-			flex-basis: 100% !important;
-			width: 100% !important;
+		.layout-container {
+			max-width: 100vw;
+			margin: 0 !important;
 		}
-		.aside-area {
+
+		.left-aside,
+		.right-aside {
 			display: none !important;
 		}
 	}
@@ -53,7 +57,6 @@
 	.layout-container {
 		display: flex;
 		gap: 10px;
-		margin: 15px 8px 15px;
 		background: var(--theme-card-bg-color);
 		border-radius: 10px;
 		height: 100%;

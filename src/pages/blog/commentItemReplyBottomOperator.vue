@@ -97,6 +97,12 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.bottom {
+			gap: 10px !important;
+		}
+	}
+
 	.bottom {
 		display: flex;
 		align-items: center;

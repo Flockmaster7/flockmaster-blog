@@ -39,8 +39,7 @@
 	}
 	.login-container {
 		display: flex;
-		min-height: 95vh;
-		padding: 20px 0;
+		min-height: 100vh;
 
 		&--leftBox {
 			flex-basis: 50%;

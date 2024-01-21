@@ -66,8 +66,12 @@
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
-		.album-content {
-			grid-template-columns: repeat(2, 160px) !important;
+		.album-container {
+			margin: 20px 0 !important;
+			.album-content {
+				grid-template-columns: repeat(2, 160px) !important;
+				grid-column-gap: 16px !important;
+			}
 		}
 	}
 	.album-container {

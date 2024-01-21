@@ -5,19 +5,34 @@
 				<p class="name">{{ admin.name }}</p>
 				<div class="description">{{ admin.description }}</div>
 			</div>
-			<img class="avatar" v-lazy="imgUrl(admin.user_image)" />
+			<zb-image
+				:src="admin.user_image"
+				:style="{
+					borderRadius: 8 + 'px',
+					width: 50 + 'px',
+					height: 50 + 'px'
+				}" />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import useAdminInfo from '@/hooks/useAdminInfo';
-	import { imgUrl } from '@/utils/common';
 
 	const { admin } = useAdminInfo();
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.top-bg-container {
+			height: 220px !important;
+
+			.top-info {
+				right: 16px !important;
+			}
+		}
+	}
+
 	.top-bg-container {
 		height: 290px;
 		position: relative;
@@ -47,12 +62,6 @@
 					color: #d4cfcf;
 					font-size: 12px;
 				}
-			}
-
-			.avatar {
-				border-radius: 8px;
-				width: 50px;
-				height: 50px;
 			}
 		}
 	}

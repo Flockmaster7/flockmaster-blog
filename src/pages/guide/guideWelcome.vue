@@ -33,10 +33,12 @@
 	}
 
 	.guide-welcome-container {
+		height: 100%;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		gap: 80px;
-		padding: 60px 80px;
+		padding: 0 80px;
 
 		.center {
 			.center-top {

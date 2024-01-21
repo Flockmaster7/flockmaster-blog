@@ -30,6 +30,7 @@
 
 		.leftBox {
 			flex: 1;
+			height: 100vh;
 		}
 
 		.rightBox {
