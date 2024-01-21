@@ -1,7 +1,9 @@
 <template>
 	<div class="card">
 		<div class="blogImg">
-			<zb-image :src="blog.blog_image" :style="{ height: 250 + 'px' }" />
+			<zb-image
+				:src="blog.blog_image"
+				:style="{ height: (isMobile ? 180 : 250) + 'px' }" />
 		</div>
 		<div class="blogInfo" @click="gotoBlogDetail(blog.id)">
 			<div class="top">
@@ -60,12 +62,16 @@
 	import zbImage from '@/components/common/zb-image.vue';
 	import { getTimeFormNow } from '@/utils/dayFormat';
 	import { useRouter } from 'vue-router';
+	import { storeToRefs } from 'pinia';
+	import useStore from '@/store';
 
 	interface PropType {
 		blog: Blog;
 	}
 
 	const router = useRouter();
+	const { common } = useStore();
+	const { isMobile } = storeToRefs(common);
 
 	defineProps<PropType>();
 
