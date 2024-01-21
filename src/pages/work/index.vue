@@ -36,12 +36,12 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.work-container {
+			min-height: calc(100vh - 275px);
 			padding: 25px 18px !important;
 		}
 	}
 
 	.work-container {
-		// background: var(--card-reset-bg);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

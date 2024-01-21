@@ -12,13 +12,6 @@
 				<template #default>
 					<div v-for="item in blogList" :key="item.id" class="item">
 						<BlogItem :blog="(item as Blog)"></BlogItem>
-						<!-- <zbBlogItemRectangleMobile
-							:blog="(item as Blog)"
-							v-if="isMobile"
-							:isLoading="isLoading"></zbBlogItemRectangleMobile>
-						<BlogItem
-							:blog="(item as Blog)"
-							v-if="!isMobile"></BlogItem> -->
 					</div>
 				</template>
 			</el-skeleton>
@@ -29,18 +22,6 @@
 			direction="center"
 			:isLoadMore="isLoadMore"></zb-load-more>
 		<zb-empty v-if="blogList.length === 0 && !isLoading"></zb-empty>
-
-		<!-- <div class="pagination" v-if="blogList.length > 0">
-			<el-pagination
-				v-model:current-page="pageNum"
-				v-model:page-size="pageSize"
-				:page-sizes="[9, 12, 15, 18, 36]"
-				:background="true"
-				layout="sizes, prev, pager, next"
-				:total="blogTotal"
-				@size-change="handleSizeChange"
-				@current-change="handleCurrentChange" />
-		</div> -->
 	</div>
 </template>
 
@@ -50,29 +31,13 @@
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import BlogItem from './blogItem.vue';
-	import zbBlogItemRectangleMobile from '@/components/mobile/zb-blogItem-rectangle-mobile.vue';
-	import usePagination from '@/hooks/usePagination';
-	import useIsMobile from '@/hooks/useIsMobile';
 	import { Blog } from '@/types';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 	import { computed } from 'vue';
 
-	const { blog, common } = useStore();
+	const { blog } = useStore();
 
 	const { blogList, blogTotal } = storeToRefs(blog);
-
-	// const {
-	// 	pageNum,
-	// 	pageSize,
-	// 	handleSizeChange,
-	// 	handleCurrentChange,
-	// 	isLoading,
-	// 	getBlogListParams
-	// } = usePagination(blog.getBlogList);
-
-	// 获取设备
-	useIsMobile();
-	const { isMobile } = storeToRefs(common);
 
 	// 无线滚动加载
 	const getBlogs = async (pageNum: number) => {

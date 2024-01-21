@@ -23,6 +23,7 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.circleFriend-container {
+			min-height: calc(100vh - 275px);
 			padding: 0 16px !important;
 		}
 	}

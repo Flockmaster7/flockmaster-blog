@@ -23,7 +23,7 @@
 	</div>
 	<MobileNav />
 	<ZbBacktop></ZbBacktop>
-	<MusicPlayer v-if="!isMobile"></MusicPlayer>
+	<MusicPlayer v-if="!isMobileRef"></MusicPlayer>
 </template>
 
 <script setup lang="ts">
@@ -36,9 +36,11 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import MobileNav from './mobileNav.vue';
+	import useIsMobile from '@/hooks/useIsMobile';
 
 	const { common } = useStore();
-	const { zhankai, isMobile } = storeToRefs(common);
+	const { zhankai } = storeToRefs(common);
+	const { isMobileRef } = useIsMobile();
 </script>
 
 <style lang="scss" scoped>

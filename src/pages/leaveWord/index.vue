@@ -52,11 +52,10 @@
 	import addLeaveWord from './addLeaveWord.vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 	import useStore from '@/store';
-	import useIsMobile from '@/hooks/useIsMobile';
 
-	const { leaveWord } = useStore();
+	const { leaveWord, common } = useStore();
 	const { leaveWordList, leaveWordTotal } = storeToRefs(leaveWord);
-	const { isMobileRef } = useIsMobile();
+	const { isMobile } = storeToRefs(common);
 
 	const getLeaveWordList = async (pageNum: number) => {
 		const res = await leaveWord.getLeaveWord(pageNum, 9);
@@ -72,7 +71,7 @@
 	const drawerVisible = ref(false);
 	const dialogVisible = ref(false);
 	const openAdd = () => {
-		if (isMobileRef.value) {
+		if (isMobile.value) {
 			drawerVisible.value = !drawerVisible.value;
 		} else {
 			dialogVisible.value = !dialogVisible.value;
@@ -90,6 +89,7 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.leaveWord-container {
+			min-height: calc(100vh - 275px);
 			padding: 0px 15px !important;
 			.leaveWord-title {
 				font-size: 25px !important;

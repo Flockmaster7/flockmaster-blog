@@ -21,19 +21,12 @@
 	import { storeToRefs } from 'pinia';
 	import { useRouter } from 'vue-router';
 
-	import useIsMobile from '@/hooks/useIsMobile';
-	import { useCommonStore } from '@/store/common';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { Tag } from '@/types';
 	import useStore from '@/store';
 	import { tagPropMap } from '@/config/tag';
 
 	const router = useRouter();
-
-	// 获取设备
-	useIsMobile();
-	const commonStore = useCommonStore();
-	const { isMobile } = storeToRefs(commonStore);
 
 	// 标签
 	const { tag } = useStore();
@@ -49,7 +42,8 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.tag-container {
-			padding: 20px 0 !important;
+			min-height: calc(100vh - 275px);
+			padding: 20px 12px !important;
 		}
 		.tag {
 			padding: 0 10px 0 !important;
@@ -80,7 +74,6 @@
 			flex-wrap: wrap;
 			justify-content: center;
 			align-items: center;
-			padding: 0 20px;
 			gap: 10px;
 
 			.tag-item:hover {

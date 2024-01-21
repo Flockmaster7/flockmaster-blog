@@ -42,7 +42,7 @@
 				<div class="mainImg">
 					<zb-image
 						:src="blogDeatil.blog_image"
-						:style="{ height: (isMobileRef ? 240 : 400) + 'px' }" />
+						:style="{ height: (isMobile ? 240 : 400) + 'px' }" />
 				</div>
 				<!-- 文章预览 -->
 				<MdPreview
@@ -113,11 +113,9 @@
 	import CommentList from './commentList.vue';
 	import BlogOperator from './blogOperator.vue';
 	import ZbCard from '@/components/common/zb-card.vue';
-	import useIsMobile from '@/hooks/useIsMobile';
 
-	const { isMobileRef } = useIsMobile();
 	const { common, blog, user } = useStore();
-	const { isDark, rightOpen, commentOpen } = storeToRefs(common);
+	const { isDark, rightOpen, commentOpen, isMobile } = storeToRefs(common);
 
 	const { blogDeatil, blogStatus } = storeToRefs(blog);
 	const { userInfo } = storeToRefs(user);
@@ -127,7 +125,7 @@
 	const id = route.query.id as string;
 
 	const drawerOption = computed(() => {
-		if (isMobileRef.value) {
+		if (isMobile.value) {
 			return {
 				size: '100%',
 				direction: 'btt'

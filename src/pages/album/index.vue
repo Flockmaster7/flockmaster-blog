@@ -67,6 +67,7 @@
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
 		.album-container {
+			min-height: calc(100vh - 275px);
 			margin: 20px 0 !important;
 			.album-content {
 				grid-template-columns: repeat(2, 160px) !important;
