@@ -101,6 +101,7 @@
 
 	@media screen and (max-width: 540px) {
 		.tagDetail-container {
+			min-height: calc(100vh - 275px);
 			padding: 50px 18px !important;
 		}
 	}
