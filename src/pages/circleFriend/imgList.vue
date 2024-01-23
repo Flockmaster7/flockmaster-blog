@@ -5,6 +5,8 @@
 			v-if="urls.length === 1"
 			:src="urls[0]"
 			:preview-src-list="urls"
+			:hide-on-click-modal="true"
+			:preview-teleported="true"
 			alt="" />
 		<el-image
 			class="multiImg"
@@ -13,6 +15,8 @@
 			v-for="(url, index) in urls"
 			:preview-src-list="urls"
 			:initial-index="index"
+			:hide-on-click-modal="true"
+			:preview-teleported="true"
 			:key="index" />
 	</div>
 </template>

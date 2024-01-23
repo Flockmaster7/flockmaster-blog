@@ -3,6 +3,8 @@
 		:style="style"
 		:src="imgUrl(src)"
 		:preview-src-list="[imgUrl(src)]"
+		:hide-on-click-modal="true"
+		:preview-teleported="true"
 		:zoom-rate="1.2"
 		:max-scale="7"
 		:min-scale="0.2"
