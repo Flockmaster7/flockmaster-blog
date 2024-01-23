@@ -1,0 +1,1 @@
+import{d as s,o as a,c as t,l as o,w as e,al as l,F as d}from"./vendor-178c6cbf.js";import{_ as i}from"./index-72685b17.js";const r={class:"title"},c={class:"content"},n=i(s({__name:"zb-card",props:{title:{}},setup:s=>(s,i)=>(a(),t(d,null,[o("div",r,e(s.title),1),o("div",c,[l(s.$slots,"default",{},void 0,!0)])],64))}),[["__scopeId","data-v-00952111"]]);export{n as Z};

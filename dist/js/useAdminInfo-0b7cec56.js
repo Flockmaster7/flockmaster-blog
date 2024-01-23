@@ -1,0 +1,1 @@
+import{u as n}from"./index-72685b17.js";import{s,Z as a}from"./vendor-178c6cbf.js";function o(){const{user:o}=n(),{admin:r}=s(o);return a((async()=>{await o.getAdminInfo()})),{admin:r}}export{o as u};

@@ -1,0 +1,1 @@
+import{h as a,Z as e}from"./vendor-178c6cbf.js";function o(o){const u=a(1),n=a(!1),r=async a=>{a&&(u.value=1),n.value=!0;await o(u.value)&&(n.value=!1,u.value+=1)};return e((()=>{r()})),{pageNum:u,isLoading:n,loadMore:r}}export{o as u};

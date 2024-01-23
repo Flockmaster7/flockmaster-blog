@@ -1,0 +1,1 @@
+import{M as s}from"./musicPlayer-50b2c878.js";import{d as a,o,c as e,a as r}from"./vendor-178c6cbf.js";import"./index-72685b17.js";const i=a({__name:"index",setup:a=>(a,i)=>(o(),e("div",null,[r(s)]))});export{i as default};

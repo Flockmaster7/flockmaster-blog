@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>Flockmaster-blogs</title>
+
+
+
+  <style>
+    .spinner {
+      margin: 300px auto;
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .spinner>div {
+      background-color: #5cbfef;
+      height: 100%;
+      width: 6px;
+      display: inline-block;
+      animation: stretchDelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+      animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+      animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+      animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+      animation-delay: -0.8s;
+    }
+
+    @keyframes stretchDelay {
+
+      0%,
+      40%,
+      100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+      }
+
+      20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+      }
+    }
+  </style>
+
+  <script type="module" crossorigin src="./js/index-72685b17.js"></script>
+  <link rel="modulepreload" crossorigin href="./js/vendor-178c6cbf.js">
+  <link rel="stylesheet" href="./css/vendor-5cd95f51.css">
+  <link rel="stylesheet" href="./css/index-949ea323.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
+
+  
+
+  <!-- <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script> -->
+</body>
+
+
+
+</html>
