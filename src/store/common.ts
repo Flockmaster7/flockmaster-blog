@@ -5,7 +5,7 @@ import { WebSiteInfoType } from '@/types/http';
 import cache from '@/utils/cache';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { ACTIVENAV } from '@/constant';
+import { ACTIVENAV, DARK } from '@/constant';
 import { HOME_URL } from '@/config';
 
 export const useCommonStore = defineStore('common', () => {
@@ -15,7 +15,7 @@ export const useCommonStore = defineStore('common', () => {
 	const isMobile = ref(false);
 	const isLoading = ref(false);
 	const isShowStickyBar = ref(false);
-	const isDark = ref(false);
+	const isDark = ref(cache.getCache(DARK) || false);
 	const currentTheme = ref('default');
 	const websiteInfo = ref<WebSiteInfoType>({
 		website_visit: 0,

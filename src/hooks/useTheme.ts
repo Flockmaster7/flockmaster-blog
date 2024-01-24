@@ -1,4 +1,6 @@
+import { DARK } from '@/constant';
 import useStore from '@/store';
+import cache from '@/utils/cache';
 import { minDelay } from '@/utils/common';
 import { ElLoading } from 'element-plus';
 import { storeToRefs } from 'pinia';
@@ -11,15 +13,21 @@ export default function () {
 	// 现在主题
 	const theme = ref('default');
 
+	const setDark = () => {
+		const htmlElement = document.documentElement;
+		htmlElement.classList.add('dark');
+	};
+
 	// 切换黑夜白天
 	const changeDark = () => {
-		const htmlElement = document.documentElement;
 		if (isDark.value) {
 			removeAllTheme();
+			cache.setCache<boolean>(DARK, false);
 			isDark.value = false;
 		} else {
 			removeAllTheme();
-			htmlElement.classList.add('dark');
+			setDark();
+			cache.setCache<boolean>(DARK, true);
 			isDark.value = true;
 		}
 	};
@@ -68,7 +76,11 @@ export default function () {
 		if (currentTheme.value !== 'default') {
 			changeActiveTheme(currentTheme.value);
 		} else {
-			nowIsDark();
+			if (cache.getCache<boolean>(DARK) === null) {
+				nowIsDark();
+			} else {
+				if (isDark.value) setDark();
+			}
 		}
 	});
 

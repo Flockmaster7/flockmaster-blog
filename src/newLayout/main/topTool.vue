@@ -15,6 +15,7 @@
 				@click="onBack"></zb-svg-icon>
 		</div>
 		<div class="right">
+			<zb-theme v-if="isMobile" />
 			<zb-svg-icon
 				v-if="showOperator"
 				class="icon"

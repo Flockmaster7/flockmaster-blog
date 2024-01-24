@@ -97,6 +97,7 @@
 		nextTick,
 		onBeforeUnmount,
 		onMounted,
+		onUnmounted,
 		ref,
 		watch
 	} from 'vue';
@@ -115,7 +116,8 @@
 	import ZbCard from '@/components/common/zb-card.vue';
 
 	const { common, blog, user } = useStore();
-	const { isDark, rightOpen, commentOpen, isMobile } = storeToRefs(common);
+	const { isDark, rightOpen, commentOpen, isMobile, zhankai } =
+		storeToRefs(common);
 
 	const { blogDeatil, blogStatus } = storeToRefs(blog);
 	const { userInfo } = storeToRefs(user);
@@ -183,6 +185,7 @@
 	});
 
 	onBeforeUnmount(() => {
+		zhankai.value = false;
 		blogStatus.value.read = false;
 	});
 
@@ -190,40 +193,6 @@
 	const getCommentList = async () => {
 		await blog.getComment(blogDeatil.value.id, 1, 9);
 	};
-
-	// 滚动到顶部
-	// const scrollToTopRef = ref<HTMLDivElement>();
-	// const gotoTop = () => {
-	// 	window.scrollTo({
-	// 		top: 0,
-	// 		behavior: 'smooth'
-	// 	});
-	// };
-	// const isShowScrollToTop = ref(false);
-
-	// const { y } = useGetPageScroll(commentRef.value);
-	// // 阅读进度
-	// const progressDepth = ref(0);
-	// const isShowHeader = ref(false);
-	// // 获取高度
-	// const getEndHeight = (y: number) => {
-	// 	nextTick(() => {
-	// 		progressDepth.value = Math.min(
-	// 			(y / commentRef.value?.offsetTop!) * 100,
-	// 			100
-	// 		);
-	// 	});
-	// };
-	// watch(y, (newVal) => {
-	// 	getEndHeight(newVal);
-	// 	if (newVal >= 600) isShowHeader.value = true;
-	// 	else isShowHeader.value = false;
-	// 	if (newVal >= 1000) {
-	// 		isShowScrollToTop.value = true;
-	// 	} else {
-	// 		isShowScrollToTop.value = false;
-	// 	}
-	// });
 
 	// 跳转到文章详情
 	const gotoBlogDetail = async (
@@ -297,7 +266,7 @@
 			flex-direction: column;
 			gap: 10px;
 			position: relative;
-			max-width: 720px;
+			max-width: 100%;
 
 			.mainImg {
 				width: 100%;
@@ -337,109 +306,4 @@
 	:deep(.el-drawer__header) {
 		margin-bottom: 0px !important;
 	}
-
-	// .blog-header {
-	// 	z-index: 1000;
-	// 	width: 100%;
-	// 	height: 58px;
-	// 	position: fixed;
-	// 	top: 0;
-	// 	left: 0;
-	// 	background-color: var(--theme-color);
-	// 	display: flex;
-	// 	justify-content: center;
-	// 	align-items: center;
-	// 	transition: 0.4s;
-
-	// 	.blog-header-box {
-	// 		padding: 20px;
-	// 		width: 1100px;
-	// 		display: flex;
-	// 		justify-content: space-between;
-	// 		align-items: center;
-	// 		opacity: 0.7;
-	// 		.header-title {
-	// 			font-size: 20px;
-	// 			font-weight: 700;
-	// 		}
-
-	// 		.header-author {
-	// 			display: flex;
-	// 			align-items: center;
-	// 			gap: 8px;
-	// 			font-size: 17px;
-
-	// 			:deep(.el-button--primary) {
-	// 				width: 50px;
-	// 				background-color: var(--theme-active-color);
-	// 				border-radius: 6px;
-	// 				transition: 1s;
-	// 			}
-	// 			:deep(.el-button--primary:hover) {
-	// 				width: 73px;
-	// 			}
-
-	// 			.follow {
-	// 				padding: 4px 8px;
-	// 				border-radius: 5px;
-	// 				font-size: 14px;
-	// 			}
-
-	// 			.follow:hover {
-	// 				cursor: pointer;
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// .scrollToTop {
-	// 	z-index: 10;
-	// 	opacity: 0.6;
-	// 	position: absolute;
-	// 	right: 100px;
-	// 	.icon {
-	// 		border-radius: 40%;
-	// 		position: fixed;
-	// 		bottom: 50px;
-	// 		width: 50px;
-	// 		height: 50px;
-	// 		text-align: center;
-	// 		line-height: 50px;
-	// 	}
-
-	// 	.icon:hover {
-	// 		cursor: pointer;
-	// 		animation: translate 1.2s ease-in-out infinite;
-	// 	}
-
-	// 	@keyframes translate {
-	// 		from {
-	// 			transform: translateY(15px);
-	// 		}
-
-	// 		to {
-	// 			transform: translateY(0);
-	// 		}
-	// 	}
-	// }
-
-	// .tool-list {
-	// 	position: relative;
-	// 	.tool-card {
-	// 		position: absolute;
-	// 		left: -75px;
-	// 		top: 140px;
-	// 	}
-
-	// 	.progress-card {
-	// 		position: absolute;
-	// 		left: -60px;
-	// 		// bottom: 200px;
-
-	// 		.progress-container {
-	// 			position: fixed;
-	// 			bottom: 100px;
-	// 		}
-	// 	}
-	// }
 </style>

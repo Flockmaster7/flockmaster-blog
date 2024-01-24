@@ -30,12 +30,21 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.imgList-container {
+			gap: 5px !important;
+			.multiImg {
+				width: 32% !important;
+				height: 23.7vw !important;
+			}
+		}
+	}
+
 	.imgList-container {
 		max-width: 100%;
 		gap: 8px;
 		display: flex;
 		flex-wrap: wrap;
-		// padding: 3px;
 
 		.singleImg {
 			max-width: 100%;

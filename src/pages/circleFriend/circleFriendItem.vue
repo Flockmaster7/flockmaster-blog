@@ -85,8 +85,28 @@
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.circleFriendItem-container {
+			gap: 8px !important;
+			.left {
+				width: 48px !important;
+				height: 48px !important;
+			}
+			.top {
+				.name {
+					height: 27px !important;
+					line-height: 27px !important;
+					font-size: 18px !important;
+				}
+			}
+			.center {
+				margin: 14px 0 !important;
+				font-size: 16px !important;
+			}
+		}
+	}
+
 	.circleFriendItem-container {
-		// width: 100%;
 		display: flex;
 		padding: 30px 0;
 		gap: 15px;
@@ -147,27 +167,6 @@
 						max-height: 100%;
 						object-fit: cover;
 					}
-				}
-			}
-
-			.bottom {
-				display: flex;
-				justify-content: space-between;
-				border-radius: 6px;
-				padding: 10px 20px;
-				background: #faecfa;
-
-				.dianzan {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					gap: 2px;
-					font-size: 14px;
-					color: $gray;
-				}
-
-				.dianzan:hover {
-					cursor: pointer;
 				}
 			}
 		}

@@ -43,6 +43,7 @@
 	--theme-text-2: #8a919f;
 	--theme-text-3: #494949;
 	--theme-box-show-1: #e8e8e8;
+	--theme-box-show-2: #eef9fc;
 }
 
 .dark {
@@ -78,6 +79,7 @@
 	--theme-active-show: #5cbfef;
 	--theme-text-3: #ffffff;
 	--theme-box-show-1: #1d1f34;
+	--theme-box-show-2: #343441;
 }
 
 .skyblue {

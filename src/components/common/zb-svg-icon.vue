@@ -1,6 +1,6 @@
 <template>
 	<svg
-		:style="{ width: size + 'px', height: size + 'px' }"
+		:style="{ maxWidth: size + 'px', maxHeight: size + 'px' }"
 		:fill="fillColor"
 		aria-hidden="true">
 		<use :href="`#icon-${name}`" />

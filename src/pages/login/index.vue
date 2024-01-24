@@ -49,7 +49,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: 1rem;
-			background-color: var(--theme-color);
+			background-color: var(--theme-box-show-2);
 			opacity: 0.8;
 
 			img {
@@ -70,7 +70,7 @@
 		}
 
 		&--rightBox {
-			background-color: var(--theme-tool-color);
+			background-color: var(--theme-box-show-2);
 			flex-basis: 50%;
 			display: flex;
 			flex-direction: column;
@@ -88,92 +88,6 @@
 			.icon:hover {
 				cursor: pointer;
 			}
-
-			.logo {
-				max-width: 150px;
-			}
-
-			.header {
-				margin-bottom: 1rem;
-				font-size: 1.2rem;
-				font-weight: 500;
-				color: $gray;
-				text-align: center;
-			}
-
-			.form {
-				:deep(.el-input) {
-					border-bottom: 2px solid #b2b3b2;
-				}
-
-				:deep(.el-input__wrapper) {
-					border: 0;
-					border-bottom: #a4c4b5;
-					box-shadow: none;
-				}
-
-				.form-list {
-					transition: 1s;
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-					gap: 10px;
-					.forgot {
-						font-size: 14px;
-						color: #717775;
-					}
-				}
-			}
-
-			.create-account {
-				display: flex;
-
-				font-size: 14px;
-				color: #717775;
-				.create {
-					color: var(--theme-active-color);
-					margin-left: 10px;
-					text-decoration: underline;
-				}
-				.create:hover {
-					cursor: pointer;
-				}
-			}
-
-			.bottom-button {
-				margin-top: 20px;
-				:deep(.el-button) {
-					width: 130px;
-					// background-color: #a4c4b5;
-					border-radius: 15px;
-					transition: 1s;
-				}
-				:deep(.el-button:hover) {
-					color: #fff;
-					width: 160px;
-					background-color: var(--theme-color);
-					border-radius: 15px;
-				}
-			}
 		}
-
-		&--logo {
-			width: 100px;
-			height: 100px;
-			border-radius: 50%;
-			position: relative;
-			.logo {
-				position: absolute;
-				width: 100px;
-				height: 100px;
-				border-radius: 50%;
-				bottom: -15%;
-			}
-		}
-	}
-
-	.el-form {
-		margin-left: 36px;
 	}
 </style>
