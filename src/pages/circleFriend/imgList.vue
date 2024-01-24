@@ -41,7 +41,7 @@
 	}
 
 	.imgList-container {
-		max-width: 100%;
+		width: 100%;
 		gap: 8px;
 		display: flex;
 		flex-wrap: wrap;
