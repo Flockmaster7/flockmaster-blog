@@ -1,18 +1,53 @@
-# Vue 3 + TypeScript + Vite
+## :rocket:  Flockmaster Blog 个人博客   :rocket:
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### :pencil:  ​前言
 
-## Recommended IDE Setup
+本项目是用 Vue3 开发的个人博客，内置了 `博客` `朋友圈` `留言`等功能
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### :hammer:  技术栈​
 
-## Type Support For `.vue` Imports in TS
+- 框架：Vue3
+- 状态管理：Pinia
+- 语言：Typescript
+- 构建工具：Vite
+- 网络请求：Axios
+- UI组件库：Element Plus
+- Css预处理器：Sass
+- 代码质量和风格：Eslint、Prettier
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### :airplane:  快速开始 ​
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+```shell
+npm install
+```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```shell
+npm run dev
+```
+
+### :mailbox:  ​功能模块
+
+-  :page_facing_up:  **博客模块**
+  - 文章列表
+  - 文章详情
+  - 文章目录
+  - 文章点赞
+  - 文章收藏
+  - 文章评论
+-  :page_facing_up:  **朋友圈模块**
+  - 朋友圈列表
+  - 朋友圈点赞
+-  :page_facing_up:  **留言模块**
+  - 留言列表
+  - 留言点赞
+-  :page_facing_up:  **标签模块**
+  - 标签列表
+  - 标签对应文章
+  - 标签种类
+-  :page_facing_up:  **作品模块**
+  - 作品列表
+-  :page_facing_up:  **相册模块**
+  - 相册列表
+  - 相册详情
+  - 照片列表
+
