@@ -43,6 +43,12 @@ export const navLinkList: HeaderNavType[] = [
 		name: '',
 		icon: 'liuyan'
 	}
+	// {
+	// 	title: '关于',
+	// 	src: '/about',
+	// 	name: '',
+	// 	icon: 'liuyan'
+	// }
 ];
 
 export const mobileNav: HeaderNavType[] = [
@@ -94,6 +100,12 @@ export const mobileNav: HeaderNavType[] = [
 		name: '',
 		icon: 'album'
 	},
+	// {
+	// 	title: '关于',
+	// 	src: '/about',
+	// 	name: '',
+	// 	icon: 'liuyan'
+	// },
 	{
 		title: '设置',
 		src: '/settings',
