@@ -9,6 +9,10 @@
 					<div class="infoBox">
 						<div class="user-name">
 							{{ item.user.name }}
+							<zb-svg-icon
+								v-if="admin.id === item.user.id"
+								:size="14"
+								name="admin"></zb-svg-icon>
 						</div>
 						<div class="time">
 							{{ getTimeFormNow(item.createdAt) }}
@@ -51,8 +55,9 @@
 
 	const props = defineProps<propsType>();
 
-	const { leaveWord } = useStore();
+	const { leaveWord, user } = useStore();
 	const { dianzanList } = storeToRefs(leaveWord);
+	const { admin } = storeToRefs(user);
 
 	const isDianzan = computed(() => {
 		return dianzanList.value.includes(props.item.id);

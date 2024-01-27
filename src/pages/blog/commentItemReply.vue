@@ -6,7 +6,13 @@
 		<div class="box">
 			<div class="info">
 				<div class="comment" v-if="type === 'comment'">
-					<span class="name">{{ commentInfo.user.name }}</span>
+					<span class="name"
+						>{{ commentInfo.user.name }}
+						<zb-svg-icon
+							v-if="admin.id === commentInfo.user.id"
+							:size="14"
+							name="admin"></zb-svg-icon>
+					</span>
 					<div class="content">{{ commentInfo.content }}</div>
 				</div>
 				<div class="reply" v-else>
@@ -39,6 +45,8 @@
 	import { Comment } from '@/types';
 	import { imgUrl } from '@/utils/common';
 	import CommentItemReplyBottomOperator from './commentItemReplyBottomOperator.vue';
+	import useStore from '@/store';
+	import { storeToRefs } from 'pinia';
 
 	interface PropsType {
 		commentInfo: Comment;
@@ -48,6 +56,9 @@
 	}
 
 	defineProps<PropsType>();
+
+	const { user } = useStore();
+	const { admin } = storeToRefs(user);
 </script>
 
 <style lang="scss" scoped>
