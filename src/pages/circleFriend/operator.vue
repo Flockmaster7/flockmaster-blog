@@ -9,13 +9,31 @@
 				:color="isDianzan ? '#5cbfef' : ''" />
 			{{ dianzanCount }}
 		</div>
+		<div
+			:class="{ dianzan: true, active: commentVisible }"
+			@click="handlerComment">
+			<zb-svg-icon
+				name="comment"
+				:size="17"
+				:color="commentVisible ? '#5cbfef' : ''" />
+			{{ commentVisible ? '取消评论' : commentCount }}
+		</div>
 	</div>
+
+	<CricleFriendCommentPost
+		v-show="commentVisible"
+		:circle-friend-id="circleFriendId"
+		@handler-comment="handlerComment"></CricleFriendCommentPost>
 </template>
 
 <script setup lang="ts">
+	import { ref } from 'vue';
+	import CricleFriendCommentPost from './circleFriendCommentPost.vue';
+
 	interface PropsType {
 		circleFriendId: number;
 		dianzanCount: number;
+		commentCount: number;
 		isDianzan: boolean;
 	}
 
@@ -39,12 +57,18 @@
 	const cancelDianzan = () => {
 		emits('cancelDianzan', props.circleFriendId);
 	};
+
+	const commentVisible = ref(false);
+	const handlerComment = () => {
+		commentVisible.value = !commentVisible.value;
+	};
 </script>
 
 <style lang="scss" scoped>
 	.operator-container {
 		display: flex;
-		justify-content: space-between;
+		gap: 15px;
+		align-items: center;
 		border-radius: 6px;
 		padding: 10px 20px;
 		// background: #fff7ff;

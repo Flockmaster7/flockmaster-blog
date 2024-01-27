@@ -1,0 +1,42 @@
+@mixin avatar($size, $radius) {
+	width: $size;
+	height: $size;
+	border-radius: $radius;
+
+	img {
+		width: 100%;
+		height: 100%;
+		border-radius: $radius;
+	}
+}
+
+@mixin flex-box($gap) {
+	display: flex;
+	gap: $gap;
+}
+@mixin flex-column-box($gap) {
+	display: flex;
+	flex-direction: column;
+	gap: $gap;
+}
+
+@mixin flex-center($gap) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: $gap;
+}
+
+@mixin flex-between($gap) {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: $gap;
+}
+
+@mixin flex-around($gap) {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: $gap;
+}

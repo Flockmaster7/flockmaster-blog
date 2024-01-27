@@ -25,9 +25,13 @@
 			<Operator
 				:isDianzan="userDianzanList.includes(cirFriend.id)"
 				:dianzanCount="count"
+				:commentCount="cirFriend.commentCount"
 				:circleFriendId="cirFriend.id"
 				@dianzan="dianzanCircleFriend"
 				@cancelDianzan="cancelDianzanCircleFriend"></Operator>
+			<CircleFriendCommentList
+				v-if="cirFriend.comments.length > 0"
+				:list="cirFriend.comments"></CircleFriendCommentList>
 		</div>
 	</div>
 </template>
@@ -36,6 +40,7 @@
 	import ImgList from './imgList.vue';
 	import VideoList from './videoList.vue';
 	import Operator from './operator.vue';
+	import CircleFriendCommentList from './circleFriendCommentList.vue';
 	import useStore from '@/store';
 	import { imgUrl } from '@/utils/common';
 	import { CircleFriend } from '@/types';
@@ -156,6 +161,10 @@
 				gap: 15px;
 				font-size: 18px;
 				margin: 20px 0;
+
+				.text {
+					line-height: 1.4;
+				}
 
 				.img {
 					max-width: 100%;

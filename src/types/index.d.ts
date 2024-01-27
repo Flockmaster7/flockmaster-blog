@@ -187,6 +187,30 @@ export interface ModuleNum {
 	[key: string]: any;
 }
 
+export interface CircleFriendComment {
+	id: number;
+	content: string;
+	user_id: number;
+	reply_to: number;
+	user: UserInfo;
+	circle_friend_id: number;
+	createdAt: string;
+	targetComment: CircleFriendComment;
+}
+
+export interface CircleFriendForm {
+	content: string;
+	replyTo?: number;
+	circleFriendId: number;
+	userId: number;
+}
+
+export interface CircleFriendCommentForm {
+	pageNum: number;
+	pageSize: number;
+	circleFriendId: number;
+}
+
 export interface CircleFriend {
 	id: number;
 	user_id: number;
@@ -194,6 +218,7 @@ export interface CircleFriend {
 	createdAt: string;
 	updatedAt: string;
 	dianzanCount: number;
+	commentCount: number;
 	user: UserInfo;
 	top: number;
 	images: {
@@ -204,6 +229,7 @@ export interface CircleFriend {
 		id: number;
 		video_url: string;
 	}[];
+	comments: CircleFriendComment[];
 }
 
 export interface SubField {

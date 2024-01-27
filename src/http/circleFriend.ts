@@ -1,6 +1,11 @@
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
-import { CircleFriend } from '@/types/index.js';
+import {
+	CircleFriend,
+	CircleFriendComment,
+	CircleFriendCommentForm,
+	CircleFriendForm
+} from '@/types/index.js';
 
 export const getCircleFriendList = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<CircleFriend>>>({
@@ -27,5 +32,23 @@ export const cancelDianzanCircleFriend = (id: number) => {
 	return request<HttpResponse<string>>({
 		url: `/circleFriend/cancelDianzan/${id}`,
 		method: 'post'
+	});
+};
+
+export const commentCircleFriend = (comment: CircleFriendForm) => {
+	return request<HttpResponse<string>>({
+		url: `/circleFriend/comment/add`,
+		method: 'post',
+		data: comment
+	});
+};
+
+export const getCommentListByCircleFriendId = (
+	data: CircleFriendCommentForm
+) => {
+	return request<HttpResponse<PageRequest<CircleFriendComment>>>({
+		url: `/circleFriend/comment/getListByCirFriId`,
+		method: 'post',
+		data
 	});
 };

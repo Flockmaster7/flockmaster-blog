@@ -1,10 +1,16 @@
 import {
 	cancelDianzanCircleFriend,
+	commentCircleFriend,
 	dianzanCircleFriend,
 	getCircleFriendList,
+	getCommentListByCircleFriendId,
 	getUserDianzanList
 } from '@/http/circleFriend';
-import { CircleFriend } from '@/types/index.js';
+import {
+	CircleFriend,
+	CircleFriendCommentForm,
+	CircleFriendForm
+} from '@/types/index.js';
 import { isLogin } from '@/utils/login';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -45,12 +51,33 @@ export const useCircleFriendStore = defineStore('circleFriend', () => {
 		return false;
 	};
 
+	const comment = async (data: CircleFriendForm) => {
+		const { data: res } = await commentCircleFriend(data);
+		return res.code === 200 ? true : false;
+	};
+
+	const getCommentListById = async (data: CircleFriendCommentForm) => {
+		const { data: res } = await getCommentListByCircleFriendId(data);
+		if (res.code === 200) {
+			const targetIndex = circleFriendList.value.findIndex(
+				(item) => item.id === data.circleFriendId
+			);
+			circleFriendList.value[targetIndex].comments = res.data.rows;
+			circleFriendList.value[targetIndex].commentCount = res.data.total;
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	return {
 		circleFriendList,
 		getList,
 		dianzan,
+		comment,
 		cancelDianzan,
 		getUserDianzan,
-		userDianzanList
+		userDianzanList,
+		getCommentListById
 	};
 });
