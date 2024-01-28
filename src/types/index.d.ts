@@ -233,6 +233,10 @@ export interface CircleFriend {
 }
 
 export interface SubField {
-	count?: number;
-	classify: number;
+	id: number;
+	name: string;
+	description: string;
+	blogCount: numebr;
+	createdAt: string;
+	updatedAt: string;
 }

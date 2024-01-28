@@ -3,16 +3,15 @@
 		<div
 			class="subfield-item"
 			v-for="item in blogSubfield"
-			:key="item.classify"
-			@click="gotoSubfield(item.classify)">
-			<div class="title">{{ allClassify[item.classify - 1].text }}</div>
-			<div class="value">{{ item.count }}篇</div>
+			:key="item.id"
+			@click="gotoSubfield(item.id)">
+			<div class="title">{{ item.name }}</div>
+			<div class="value">{{ item.blogCount }}篇</div>
 		</div>
 	</zb-card>
 </template>
 
 <script setup lang="ts">
-	import { allClassify } from '@/config/classify';
 	import useStore from '@/store';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';

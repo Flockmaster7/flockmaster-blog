@@ -226,7 +226,7 @@ export const getUserCommentDianzanList = () => {
 };
 
 export const getSubfield = () => {
-	return request<HttpResponse<SubField[]>>({
+	return request<HttpResponse<PageRequest<SubField>>>({
 		url: `/blog/subfield/list`,
 		method: 'get'
 	});

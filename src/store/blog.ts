@@ -249,7 +249,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const getSubfieldList = async () => {
 		const { data: res } = await getSubfield();
 		if (res.code === 200) {
-			blogSubfield.value = res.data;
+			blogSubfield.value = res.data.rows;
 		}
 	};
 

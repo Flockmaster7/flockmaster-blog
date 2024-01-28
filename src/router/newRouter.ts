@@ -132,6 +132,11 @@ export const routers = [
 		component: () => import('@/pages/dataVisualize/index.vue')
 	},
 	{
+		path: '/500',
+		name: 500,
+		component: () => import('@/components/common/zb-error.vue')
+	},
+	{
 		path: '/:pathMatch(.*)',
 		component: () => import('@/components/common/zb-notFound.vue')
 	}

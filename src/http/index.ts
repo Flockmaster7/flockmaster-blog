@@ -9,6 +9,7 @@ import { clearInfo, isLogin } from '@/utils/login';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import router from '@/router';
 import { AxiosCanceler } from './helper/axiosCancel';
+import { checkStatus } from './helper/checkStatus';
 
 const axiosCanceler = new AxiosCanceler();
 
@@ -37,7 +38,11 @@ instance.interceptors.response.use(
 		return res;
 	},
 	(err: AxiosError<HttpError>) => {
-		const code = err.response?.data.code;
+		if (!err.response) {
+			window.location.hash = '/500';
+			return Promise.reject(err);
+		}
+		const code = err.response.data.code;
 		if (err.message.indexOf('timeout') !== -1)
 			ElMessage.error('请求超时，请稍后再试');
 		// 登录权限控制
@@ -59,7 +64,7 @@ instance.interceptors.response.use(
 			});
 		}
 		// token过期判断
-		if (code === '401') {
+		else if (code === '10101') {
 			ElMessageBox.confirm('登录状态已过期，是否重新登录', 'Warning', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
@@ -77,6 +82,8 @@ instance.interceptors.response.use(
 					clearInfo();
 				});
 		}
+		// 根据响应的错误状态码，做不同的处理
+		else if (err.response) checkStatus(err.response.status);
 		return Promise.reject(err.response?.data);
 	}
 );
