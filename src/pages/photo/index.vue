@@ -6,10 +6,12 @@
 			:infinite-scroll-disabled="isLoadMore"
 			:infinite-scroll-delay="600">
 			<div class="img" v-for="item in photoList" :key="item.id">
-				<img v-lazy="imgUrl(item.photo_url)" alt="" />
+				<zb-image
+					:src="item.photo_url"
+					:style="{ height: 200 + 'px' }" />
 			</div>
 		</div>
-		<zb-empty :height="400" v-if="photoList.length === 0"></zb-empty>
+		<zb-empty :height="500" v-if="photoList.length === 0"></zb-empty>
 		<zb-load-more
 			v-if="!isLoadMore"
 			:isLoading="isLoading"
@@ -21,7 +23,6 @@
 <script setup lang="ts">
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
-	import { imgUrl } from '@/utils/common';
 	import { useRoute } from 'vue-router';
 	import { computed, onMounted } from 'vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -68,12 +69,15 @@
 
 <style lang="scss" scoped>
 	@media screen and (max-width: 540px) {
-		.photo-list {
-			column-count: 2 !important;
+		.photo-container {
+			min-height: calc(100vh - 275px);
+
+			.photo-list {
+				column-count: 2 !important;
+			}
 		}
 	}
 	.photo-container {
-		padding: 10px 0;
 		width: 100%;
 		.photo-bg {
 			width: 100%;
@@ -95,6 +99,7 @@
 		.photo-list {
 			column-count: 4;
 			column-gap: 5px;
+			padding: 10px;
 
 			.img {
 				img {
