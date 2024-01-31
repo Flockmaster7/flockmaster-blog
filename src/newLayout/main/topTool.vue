@@ -13,6 +13,7 @@
 				class="icon"
 				name="back"
 				@click="onBack"></zb-svg-icon>
+			<SearchBar v-if="showSearch"></SearchBar>
 		</div>
 		<div class="right">
 			<zb-theme v-if="isMobile" />
@@ -43,6 +44,7 @@
 	import { storeToRefs } from 'pinia';
 	import { computed } from 'vue';
 	import { useRoute, useRouter } from 'vue-router';
+	import SearchBar from './searchBar.vue';
 
 	const router = useRouter();
 	const route = useRoute();
@@ -57,6 +59,10 @@
 
 	const showOperator = computed(() => {
 		return route.meta.operator ? true : false;
+	});
+
+	const showSearch = computed(() => {
+		return route.meta.search ? true : false;
 	});
 
 	const openOperator = () => {

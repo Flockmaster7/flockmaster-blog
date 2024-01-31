@@ -14,6 +14,7 @@ export const useCommonStore = defineStore('common', () => {
 	const commentOpen = ref(false);
 	const isMobile = ref(false);
 	const isLoading = ref(false);
+	const searchOpen = ref(false);
 	const isShowStickyBar = ref(false);
 	const isDark = ref(cache.getCache(DARK) || false);
 	const currentTheme = ref('default');
@@ -66,6 +67,7 @@ export const useCommonStore = defineStore('common', () => {
 	};
 
 	return {
+		searchOpen,
 		zhankai,
 		isDark,
 		isMobile,

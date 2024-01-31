@@ -18,7 +18,10 @@ export const routers = [
 			{
 				path: '/home',
 				name: 'Home',
-				component: () => import('@/pages/home/blogList.vue')
+				component: () => import('@/pages/home/blogList.vue'),
+				meta: {
+					search: true
+				}
 			},
 			{
 				path: '/subfield/:classify',
@@ -89,6 +92,7 @@ export const routers = [
 				component: () => import('@/pages/blog/index.vue'),
 				meta: {
 					operator: true,
+					search: true,
 					scrollTop: true
 				}
 			},
