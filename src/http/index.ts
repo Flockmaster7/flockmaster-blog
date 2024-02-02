@@ -42,7 +42,7 @@ instance.interceptors.response.use(
 			window.location.hash = '/500';
 			return Promise.reject(err);
 		}
-		const code = err.response.data.code;
+		const code = err.response?.data.code;
 		if (err.message.indexOf('timeout') !== -1)
 			ElMessage.error('请求超时，请稍后再试');
 		// 登录权限控制

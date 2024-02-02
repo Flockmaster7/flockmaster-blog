@@ -30,18 +30,15 @@ export const useAlbumStore = defineStore('album', () => {
 		pageNum: number,
 		pageSize: number
 	) => {
-		const timeout = pageNum === 1 ? 0 : 500;
-		const { data: res } = await minDelay(
-			getPhoto(id, pageNum, pageSize),
-			timeout
-		);
+		const { data: res } = await getPhoto(id, pageNum, pageSize);
+		if (res.code !== 200) return false;
 		photoTotal.value = res.data.total;
 		if (pageNum === 1) {
 			photoList.value = res.data.rows;
 		} else {
 			photoList.value = [...photoList.value, ...res.data.rows];
 		}
-		return Promise.resolve(true);
+		return true;
 	};
 
 	return {

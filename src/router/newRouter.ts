@@ -137,7 +137,7 @@ export const routers = [
 	},
 	{
 		path: '/500',
-		name: 500,
+		name: '500',
 		component: () => import('@/components/common/zb-error.vue')
 	},
 	{

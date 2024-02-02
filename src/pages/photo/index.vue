@@ -24,7 +24,7 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { useRoute } from 'vue-router';
-	import { computed, onMounted } from 'vue';
+	import { computed } from 'vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 	const route = useRoute();
@@ -42,29 +42,9 @@
 
 	const { isLoading, loadMore } = useInfiniteScroll(getPhoto);
 
-	// const pageNum = ref(1);
-	// const isLoading = ref(false);
-	// const loadMore = async () => {
-	// 	isLoading.value = true;
-	// 	const isSuccess = await album.getPhotoList(
-	// 		Number(id),
-	// 		pageNum.value,
-	// 		12
-	// 	);
-	// 	if (isSuccess) {
-	// 		isLoading.value = false;
-	// 		pageNum.value += 1;
-	// 		console.log(pageNum.value);
-	// 	}
-	// };
-
 	const isLoadMore = computed(
 		() => photoTotal.value <= photoList.value.length
 	);
-
-	onMounted(async () => {
-		loadMore();
-	});
 </script>
 
 <style lang="scss" scoped>
