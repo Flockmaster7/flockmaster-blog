@@ -1,4 +1,4 @@
-import { getSubfield } from './../http/blog';
+import { getSubfield, searchBlog } from './../http/blog';
 import { minDelay } from './../utils/common';
 import {
 	blogRead,
@@ -25,10 +25,10 @@ import {
 	CommentParamsType,
 	Comment,
 	UserInfo,
-	SubField
+	SubField,
+	SearchResult
 } from '@/types';
 import { isLogin } from '@/utils/login';
-import { fa } from 'element-plus/es/locale';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -48,7 +48,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const getBlogListParams = ref<Partial<BlogListForm>>({});
 	const blogTotal = ref(0);
 	const blogList = ref<Partial<Blog>[]>([]);
-	const searchList = ref<Partial<Blog>[]>([]);
+	const searchList = ref<SearchResult[]>([]);
 	const blogDeatil = ref<Blog>({
 		id: 0,
 		author: '',
@@ -255,11 +255,11 @@ export const useBlogStore = defineStore('blog', () => {
 	};
 
 	const search = async (query: string) => {
-		const { data: res } = await getArticleList(1, 9, {
+		const { data: res } = await searchBlog({
 			querySearch: query
 		});
 		if (res.code === 200) {
-			searchList.value = res.data.rows;
+			searchList.value = res.data;
 			return true;
 		}
 		return false;

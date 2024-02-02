@@ -20,12 +20,14 @@
 				:style="{ width: searchWidth + 'px' }"
 				clearable></el-input>
 		</template>
-		<div
-			class="search-result"
-			v-for="item in searchList"
-			:key="item.id"
-			@click="gotoBlogDetail(item.id)">
-			{{ item.title }}
+		<div class="search-result">
+			<div
+				class="search-item"
+				v-for="item in searchList"
+				:key="item.id"
+				@click="gotoBlogDetail(item.id)">
+				{{ item.title }}
+			</div>
 		</div>
 		<zb-empty v-if="searchList.length === 0" :height="200" />
 	</el-popover>
@@ -72,24 +74,41 @@
 	};
 
 	onMounted(() => {
+		console.log(searchInputRef.value);
 		searchInputRef.value?.focus();
 	});
 </script>
 
 <style lang="scss" scoped>
+	@media screen and (max-width: 540px) {
+		.search-item {
+			font-size: 14px;
+			height: 16px !important;
+			line-height: 16px !important;
+			padding: 4px !important;
+		}
+	}
+
 	.icon:hover {
 		cursor: pointer;
 	}
 
 	.search-result {
-		height: 20px;
-		line-height: 20px;
-		padding: 8px 16px;
-		border-radius: 6px;
-	}
+		overflow: auto;
+		max-height: 200px;
+		.search-item {
+			height: 20px;
+			line-height: 20px;
+			padding: 8px 16px;
+			border-radius: 6px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
 
-	.search-result:hover {
-		cursor: pointer;
-		background: var(--theme-data-show);
+		.search-item:hover {
+			cursor: pointer;
+			background: var(--theme-data-show);
+		}
 	}
 </style>

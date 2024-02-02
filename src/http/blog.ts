@@ -3,7 +3,8 @@ import {
 	Comment,
 	BlogListForm,
 	Blog,
-	SubField
+	SubField,
+	SearchResult
 } from '@/types';
 import { HttpResponse, PageRequest } from '@/types/http';
 import request from './index.ts';
@@ -229,5 +230,13 @@ export const getSubfield = () => {
 	return request<HttpResponse<PageRequest<SubField>>>({
 		url: `/blog/subfield/list`,
 		method: 'get'
+	});
+};
+
+export const searchBlog = (data: { querySearch: string }) => {
+	return request<HttpResponse<SearchResult[]>>({
+		url: `/blog/search`,
+		method: 'post',
+		data: data
 	});
 };

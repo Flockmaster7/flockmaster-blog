@@ -240,3 +240,5 @@ export interface SubField {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export type SearchResult = Pick<Blog, 'title' | 'id'>;
