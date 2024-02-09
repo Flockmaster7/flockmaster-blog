@@ -10,7 +10,7 @@
 			</div>
 			<zb-theme></zb-theme>
 			<div class="avater" @click="toUserDetail">
-				<img :src="imgUrl(userInfo.user_image)" alt="" />
+				<img v-lazy="userInfo.user_image" alt="" />
 			</div>
 			<div
 				class="right-open"
@@ -24,9 +24,8 @@
 
 <script setup lang="ts">
 	import { useRoute, useRouter } from 'vue-router';
-	import { isLogin, logout } from '@/utils/login';
+	import { isLogin } from '@/utils/login';
 	import { storeToRefs } from 'pinia';
-	import { imgUrl } from '@/utils/common';
 	import { ElMessageBox } from 'element-plus';
 	import zbTheme from '@/components/common/zb-theme.vue';
 	import useStore from '@/store';

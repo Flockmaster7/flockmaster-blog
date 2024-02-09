@@ -4,7 +4,7 @@
 			<img class="info-bg" :src="adminBg" alt="" />
 			<div class="info-center">
 				<div class="info-center-top">
-					<img class="avatar" :src="imgUrl(admin.user_image)" />
+					<img class="avatar" :src="admin.user_image" />
 					<p class="name">{{ admin.name }}</p>
 				</div>
 				<div class="description">{{ admin.description }}</div>
@@ -54,7 +54,6 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, computed } from 'vue';
-	import { imgUrl } from '@/utils/common';
 
 	const { user, common } = useStore();
 	const { admin } = storeToRefs(user);

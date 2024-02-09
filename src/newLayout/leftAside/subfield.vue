@@ -23,7 +23,7 @@
 	blog.getSubfieldList();
 
 	const gotoSubfield = (classify: number) => {
-		ElMessage({
+		return ElMessage({
 			message: '正在维护中，敬请期待',
 			type: 'info'
 		});

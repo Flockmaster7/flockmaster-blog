@@ -240,3 +240,17 @@ export const searchBlog = (data: { querySearch: string }) => {
 		data: data
 	});
 };
+
+export const getSubfieldDetail = (id: number) => {
+	return request<HttpResponse<SubField>>({
+		url: `/blog/subfield/detail/${id}`,
+		method: 'get'
+	});
+};
+
+export const getSubfieldBlogList = (id: number) => {
+	return request<HttpResponse<Blog[]>>({
+		url: `/blog/subfield/blogList/${id}`,
+		method: 'get'
+	});
+};

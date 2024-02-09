@@ -21,7 +21,7 @@
 	<el-drawer v-model="showOperator" size="30%" title="导航" direction="ltr">
 		<div class="operatorMain">
 			<div class="operator-avatar">
-				<img :src="imgUrl(userInfo.user_image)" alt="" />
+				<img v-lazy="userInfo.user_image" alt="" />
 			</div>
 			<div class="operator-list">
 				<div
@@ -47,7 +47,6 @@
 	import { navLinkList, mobileNav } from '@/config/headerNav';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
-	import { imgUrl } from '@/utils/common';
 	import useStore from '@/store';
 	import Logo from './logo.vue';
 

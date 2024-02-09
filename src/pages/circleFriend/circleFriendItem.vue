@@ -1,7 +1,7 @@
 <template>
 	<div class="circleFriendItem-container">
 		<div class="left">
-			<img :src="imgUrl(cirFriend.user.user_image)" alt="" />
+			<img :src="cirFriend.user.user_image" alt="" />
 		</div>
 		<div class="right">
 			<div class="top">
@@ -42,7 +42,6 @@
 	import Operator from './operator.vue';
 	import CircleFriendCommentList from './circleFriendCommentList.vue';
 	import useStore from '@/store';
-	import { imgUrl } from '@/utils/common';
 	import { CircleFriend } from '@/types';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';

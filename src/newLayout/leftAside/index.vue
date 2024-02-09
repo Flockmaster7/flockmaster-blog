@@ -1,7 +1,7 @@
 <template>
 	<div class="leftAside-container" ref="leftAside">
 		<div class="top">
-			<img :src="imgUrl(userInfo.user_image)" alt="" />
+			<img v-lazy="userInfo.user_image" alt="" />
 			<p class="name">{{ userInfo.name }}</p>
 		</div>
 		<div class="center">
@@ -18,7 +18,6 @@
 	import useStore from '@/store';
 	import navBar from './navBar.vue';
 	import SiteSratistics from './siteStatistics.vue';
-	import { imgUrl } from '@/utils/common';
 	import { storeToRefs } from 'pinia';
 	import { isLogin } from '@/utils/login';
 	import useSkeleton from '@/hooks/useSkeleton';

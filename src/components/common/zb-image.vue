@@ -1,8 +1,8 @@
 <template>
 	<el-image
 		:style="style"
-		:src="imgUrl(src)"
-		:preview-src-list="[imgUrl(src)]"
+		:src="src"
+		:preview-src-list="[src]"
 		:hide-on-click-modal="true"
 		:preview-teleported="true"
 		:zoom-rate="1.2"
@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-	import { imgUrl } from '@/utils/common';
 	import { Picture as IconPicture } from '@element-plus/icons-vue';
 
 	interface PropsType {

@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-	import { StarFilled } from '@element-plus/icons-vue';
 	import workItem from '@/pages/work/workItem.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { useWorkStore } from '@/store/work';

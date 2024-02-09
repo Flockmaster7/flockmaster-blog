@@ -1,7 +1,7 @@
 <template>
 	<div class="leaveWord-item-container">
 		<div class="avatar">
-			<img :src="imgUrl(item.user.user_image)" alt="" />
+			<img :src="item.user.user_image" alt="" />
 		</div>
 		<div class="box">
 			<div class="info">
@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { imgUrl } from '@/utils/common';
 	import { LeaveWord } from '@/types';
 	import useStore from '@/store';
 	import { computed, ref } from 'vue';

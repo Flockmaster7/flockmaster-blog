@@ -1,7 +1,7 @@
 <template>
 	<div class="guide-userInfo-container">
 		<div class="avatar-info">
-			<img :src="imgUrl(admin.user_image)" alt="" />
+			<img :src="admin.user_image" alt="" />
 			<span class="user-name">Flockmaster</span>
 		</div>
 		<div class="description">
@@ -32,7 +32,6 @@
 
 <script setup lang="ts">
 	import useAdminInfo from '@/hooks/useAdminInfo';
-	import { imgUrl } from '@/utils/common';
 
 	const { admin } = useAdminInfo();
 </script>
@@ -57,6 +56,12 @@
 				width: 120px;
 				height: 120px;
 				border-radius: 50%;
+				transition: 1s ease-in-out;
+			}
+
+			img:hover {
+				cursor: pointer;
+				transform: rotate3d(1, 1, 1, 360deg);
 			}
 
 			.user-name {

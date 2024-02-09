@@ -37,7 +37,8 @@ export const clearInfo = () => {
 		is_admin: false,
 		name: '游客',
 		description: '这个人很懒，什么都没有留下',
-		user_image: '/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
+		user_image:
+			'https://ggkt-atguigu-1313888024.cos.ap-guangzhou.myqcloud.com/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
 		user_focus: 0,
 		user_fans: 0
 	};

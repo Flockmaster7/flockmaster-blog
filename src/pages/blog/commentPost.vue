@@ -2,7 +2,7 @@
 	<div class="commentPost-container" ref="commentRef">
 		<div class="text-input">
 			<div class="avatar">
-				<img :src="imgUrl(userImage)" alt="" />
+				<img :src="userImage" alt="" />
 			</div>
 			<div class="input">
 				<el-input
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 	import useStore from '@/store';
-	import { imgUrl, validatorNotEmpty } from '@/utils/common';
+	import { validatorNotEmpty } from '@/utils/common';
 	import { ElMessage } from 'element-plus';
 	import { ref } from 'vue';
 

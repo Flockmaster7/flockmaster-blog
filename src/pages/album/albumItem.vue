@@ -3,14 +3,13 @@
 		<div
 			class="img"
 			:style="{
-				backgroundImage: `url(${imgUrl(album.album_cover)})`
+				backgroundImage: `url(${album.album_cover})`
 			}"></div>
 		<span class="title">{{ album.album_name }}</span>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { imgUrl } from '@/utils/common';
 	import type { Album } from '@/types/index.d.ts';
 	interface PropsType {
 		album: Album;

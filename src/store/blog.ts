@@ -1,4 +1,9 @@
-import { getSubfield, searchBlog } from './../http/blog';
+import {
+	getSubfield,
+	getSubfieldBlogList,
+	getSubfieldDetail,
+	searchBlog
+} from './../http/blog';
 import { minDelay } from './../utils/common';
 import {
 	blogRead,
@@ -75,6 +80,8 @@ export const useBlogStore = defineStore('blog', () => {
 
 	// 文章推荐列表
 	const recommendList = ref<Partial<Blog>[]>([]);
+	const subfieldBlogList = ref<Blog[]>();
+	const subfieldDetail = ref<SubField>();
 
 	// 获取文章推荐列表
 	const getRecommendBlogList = async (id: number) => {
@@ -265,7 +272,27 @@ export const useBlogStore = defineStore('blog', () => {
 		return false;
 	};
 
+	const getSubfieldDetailInfo = async (id: number) => {
+		const { data: res } = await getSubfieldDetail(id);
+		if (res.code !== 200) {
+			return false;
+		}
+		subfieldDetail.value = res.data;
+		return true;
+	};
+
+	const getSubfieldBlog = async (id: number) => {
+		const { data: res } = await getSubfieldBlogList(id);
+		if (res.code !== 200) return false;
+		subfieldBlogList.value = res.data;
+		return true;
+	};
+
 	return {
+		getSubfieldBlog,
+		getSubfieldDetailInfo,
+		subfieldBlogList,
+		subfieldDetail,
 		searchList,
 		search,
 		blogSubfield,

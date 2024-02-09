@@ -38,8 +38,8 @@ instance.interceptors.response.use(
 		return res;
 	},
 	(err: AxiosError<HttpError>) => {
-		if (!err.response) {
-			window.location.hash = '/500';
+		if (!err.response && err.code !== 'ERR_CANCELED') {
+			ElMessage.error('服务异常！');
 			return Promise.reject(err);
 		}
 		const code = err.response?.data.code;

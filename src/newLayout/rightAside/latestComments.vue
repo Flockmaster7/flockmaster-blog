@@ -12,9 +12,7 @@
 							v-for="item in latestComments"
 							:key="item.id">
 							<div class="comment-item-avatar">
-								<img
-									v-lazy="imgUrl(item.user.user_image)"
-									alt="" />
+								<img v-lazy="item.user.user_image" alt="" />
 							</div>
 							<div class="comment-item-info">
 								<div class="top">
@@ -40,7 +38,6 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import { getTimeFormNow } from '@/utils/dayFormat';
-	import { imgUrl } from '@/utils/common';
 	import Skeleton from './rightSkeleton.vue';
 	import useSkeleton from '@/hooks/useSkeleton';
 

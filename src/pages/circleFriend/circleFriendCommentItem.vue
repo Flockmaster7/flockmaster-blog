@@ -1,7 +1,7 @@
 <template>
 	<div class="circleFriendCommentItem-container" @click="handlerComment">
 		<div class="avatar">
-			<img :src="imgUrl(data.user.user_image)" alt="" />
+			<img :src="data.user.user_image" alt="" />
 		</div>
 		<div class="info-box">
 			<div class="info">
@@ -29,7 +29,6 @@
 <script setup lang="ts">
 	import { CircleFriendComment } from '@/types';
 	import zbTime from '@/components/common/zb-time.vue';
-	import { imgUrl } from '@/utils/common';
 	import CricleFriendCommentPost from './circleFriendCommentPost.vue';
 
 	interface PropsType {

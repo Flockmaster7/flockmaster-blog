@@ -13,7 +13,7 @@
 							@click="gotoBlogDetail(item.id)"
 							:key="item.id">
 							<div class="comment-item-avatar">
-								<img v-lazy="imgUrl(item.blog_image!)" alt="" />
+								<img v-lazy="item.blog_image!" alt="" />
 							</div>
 							<div class="comment-item-info">
 								<div class="top">
@@ -38,7 +38,6 @@
 	import zbCard from '@/components/common/zb-card.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
-	import { imgUrl } from '@/utils/common';
 	import { useRouter } from 'vue-router';
 	import Skeleton from './rightSkeleton.vue';
 	import useSkeleton from '@/hooks/useSkeleton';

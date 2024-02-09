@@ -1,7 +1,7 @@
 <template>
 	<div class="comment-container">
 		<div class="avatar">
-			<img :src="imgUrl(commentInfo.user.user_image)" alt="" />
+			<img :src="commentInfo.user.user_image" alt="" />
 		</div>
 		<div class="box">
 			<div class="info">
@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
 	import { Comment } from '@/types';
-	import { imgUrl } from '@/utils/common';
 	import CommentItemReplyBottomOperator from './commentItemReplyBottomOperator.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
