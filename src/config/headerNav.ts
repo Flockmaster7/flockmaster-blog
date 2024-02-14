@@ -42,6 +42,12 @@ export const navLinkList: HeaderNavType[] = [
 		src: '/leaveWord',
 		name: '',
 		icon: 'liuyan'
+	},
+	{
+		title: '音乐',
+		src: '/music',
+		name: '',
+		icon: 'music'
 	}
 	// {
 	// 	title: '关于',

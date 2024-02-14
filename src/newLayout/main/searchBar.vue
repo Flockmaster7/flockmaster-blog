@@ -93,6 +93,10 @@
 		cursor: pointer;
 	}
 
+	:deep(.el-input__wrapper) {
+		border-radius: 30px;
+	}
+
 	.search-result {
 		overflow: auto;
 		max-height: 200px;
@@ -104,11 +108,11 @@
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
-		}
 
-		.search-item:hover {
-			cursor: pointer;
-			background: var(--theme-data-show);
+			&:hover {
+				cursor: pointer;
+				background: var(--theme-data-show);
+			}
 		}
 	}
 </style>

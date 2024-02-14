@@ -1,4 +1,4 @@
-const music = [
+const musicConfig = [
 	{
 		name: '多远都要在一起', //歌名
 		artist: '邓紫棋', //歌手
@@ -65,4 +65,4 @@ const music = [
 	}
 ];
 
-export default music;
+export default musicConfig;

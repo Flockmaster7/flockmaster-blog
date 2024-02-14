@@ -121,6 +121,11 @@ export const routers = [
 			loginRequest: true
 		}
 	},
+	{
+		path: '/music/detail',
+		name: 'MusicDetail',
+		component: () => import('@/pages/music/musicDetail.vue')
+	},
 	// {
 	// 	path: '/blog/detail',
 	// 	name: 'Detail',

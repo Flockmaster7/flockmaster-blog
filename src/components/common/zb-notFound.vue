@@ -27,5 +27,6 @@
 		height: 100vh;
 		display: flex;
 		justify-content: center;
+		background-color: var(--theme-card-bg-color);
 	}
 </style>

@@ -10,6 +10,18 @@
 	}
 }
 
+@mixin image($size, $radius) {
+	width: $size;
+	height: $size;
+	border-radius: $radius;
+
+	img {
+		width: 100%;
+		height: 100%;
+		border-radius: $radius;
+	}
+}
+
 @mixin flex-box($gap) {
 	display: flex;
 	gap: $gap;
@@ -39,4 +51,16 @@
 	justify-content: space-around;
 	align-items: center;
 	gap: $gap;
+}
+
+@mixin close-icon {
+	.icon {
+		position: absolute;
+		top: 20px;
+		right: 40px;
+	}
+
+	.icon:hover {
+		cursor: pointer;
+	}
 }
