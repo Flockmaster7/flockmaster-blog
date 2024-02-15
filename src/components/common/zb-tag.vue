@@ -42,6 +42,7 @@
 		border-radius: 8px;
 		color: $white;
 		font-size: 16px;
+		white-space: nowrap;
 		font-family: 'Courier New', Courier, monospace;
 		background: var(--theme-tag-color);
 	}

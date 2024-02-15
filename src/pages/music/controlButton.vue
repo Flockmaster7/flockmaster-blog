@@ -13,10 +13,16 @@
 <script setup lang="ts">
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
+	import { onUnmounted } from 'vue';
 
 	const { music } = useStore();
 
-	const { isPlay } = storeToRefs(music);
+	const { isPlay, currentIndex } = storeToRefs(music);
+
+	onUnmounted(() => {
+		isPlay.value = false;
+		currentIndex.value -= 1;
+	});
 </script>
 
 <style lang="scss" scoped>

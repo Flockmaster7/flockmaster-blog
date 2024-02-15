@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted, onUnmounted, watch } from 'vue';
+	import { onMounted, watch } from 'vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	// import musicConfig from '@/config/music';
@@ -76,10 +76,6 @@
 
 	onMounted(() => {
 		music.initMusic();
-	});
-
-	onUnmounted(() => {
-		music.pauseMusic();
 	});
 
 	const changeTime = (val: number) => {
