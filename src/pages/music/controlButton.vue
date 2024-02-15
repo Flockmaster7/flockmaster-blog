@@ -3,6 +3,7 @@
 		<zb-svg-icon :size="26" name="presong" @click="music.pre" />
 		<zb-svg-icon
 			:size="36"
+			color="#5cbfef"
 			:name="isPlay ? 'pause' : 'play'"
 			@click="music.playOrPause" />
 		<zb-svg-icon :size="26" name="nextsong" @click="music.next" />
@@ -21,7 +22,7 @@
 <style lang="scss" scoped>
 	@import '../../static/css/mixins.scss';
 	.musicButton-container {
-		@include flex-center(5px);
+		@include flex-center(20px);
 		&:hover {
 			cursor: pointer;
 		}

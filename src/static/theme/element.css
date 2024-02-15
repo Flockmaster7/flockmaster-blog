@@ -7,6 +7,11 @@
 	--el-fill-color-blank: hsla(0, 0%, 100%, 0.3);
 }
 
+.el-slider {
+	--el-slider-height: 4px !important;
+	--el-slider-button-size: 13px !important;
+}
+
 .el-collapse {
 	--el-collapse-header-bg-color: transparent !important;
 	--el-collapse-content-bg-color: transparent !important;

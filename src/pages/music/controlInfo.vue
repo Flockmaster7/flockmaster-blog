@@ -26,13 +26,14 @@
 	const musicInfo = computed(
 		() =>
 			musicConfig[currentIndex.value].name +
-			'-' +
+			' - ' +
 			musicConfig[currentIndex.value].artist
 	);
 	const musicCover = computed(() => musicConfig[currentIndex.value].cover);
 
 	const gotoMusicDetail = () => {
-		router.push('/music/detail');
+		return;
+		// router.push('/music/detail');
 	};
 </script>
 

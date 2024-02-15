@@ -1,5 +1,5 @@
 <template>
-	<div class="title">{{ title }}</div>
+	<div class="title" :style="{ fontSize: titleSize + 'px' }">{{ title }}</div>
 	<div class="content">
 		<slot></slot>
 	</div>
@@ -8,9 +8,12 @@
 <script setup lang="ts">
 	interface PropType {
 		title: string;
+		titleSize?: string | number;
 	}
 
-	defineProps<PropType>();
+	withDefaults(defineProps<PropType>(), {
+		titleSize: 17
+	});
 </script>
 
 <style lang="scss" scoped>

@@ -33,11 +33,13 @@ export const useMusicStore = defineStore('data', () => {
 	};
 
 	const next = () => {
+		if (currentIndex.value === musicConfig.length - 1) return;
 		currentIndex.value += 1;
 		changeMusic();
 	};
 
 	const pre = () => {
+		if (currentIndex.value === 0) return;
 		currentIndex.value -= 1;
 		changeMusic();
 	};
@@ -57,7 +59,7 @@ export const useMusicStore = defineStore('data', () => {
 	};
 
 	const changeSlider = () => {
-		currentTime.value = audio.value.currentTime;
+		currentTime.value = audio.value?.currentTime as number;
 		if (currentTime.value === audio.value?.duration) {
 			currentIndex.value += 1;
 			changeMusic();

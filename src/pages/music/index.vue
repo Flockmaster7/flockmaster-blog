@@ -7,6 +7,7 @@
 		ref="audio"
 		@canplay="music.changeDuration"
 		@timeupdate="music.changeSlider"></audio>
+
 	<div class="music-container">
 		<MusicList />
 		<Control />
@@ -109,6 +110,7 @@
 		flex-direction: column;
 		padding: 10px;
 		box-sizing: border-box;
+		position: relative;
 	}
 
 	.canvas {

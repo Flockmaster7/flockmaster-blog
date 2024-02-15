@@ -7,15 +7,17 @@
 	<div class="control-container">
 		<div class="music-slider">
 			<el-slider
+				:show-tooltip="false"
 				v-model="currentTime"
 				size="small"
 				:max="sliderLength"
-				@change="changeTime" />
+				@input="changeTime" />
 		</div>
 
 		<div class="music-control">
 			<ControlInfo />
 			<ControlButton />
+			<ControlOperator />
 			<!-- <div class="music-info" @click="gotoMusicDetail">
 				<div class="music-cover">
 					<img :src="musicCover" alt="" />
@@ -46,6 +48,7 @@
 	// import { useRouter } from 'vue-router';
 	import ControlButton from './controlButton.vue';
 	import ControlInfo from './controlInfo.vue';
+	import ControlOperator from './controlOperator.vue';
 
 	// interface Props {
 	// 	audio: Ref<HTMLAudioElement | null>;
@@ -153,23 +156,28 @@
 
 <style lang="scss" scoped>
 	@import '../../static/css/mixins.scss';
+
+	.el-slider--small {
+		height: 0px !important;
+	}
+
 	.control-container {
 		@include flex-column-box(0);
 		@include flex-center(0);
 		width: 100%;
 		box-sizing: border-box;
-		padding: 10px 20px;
-		border-radius: 200px;
-		background: var(--theme-box-show-2);
+
+		// background: var(--theme-box-show-2);
 
 		.music-slider {
 			@include flex-center(0);
-			width: 96%;
+			width: 100%;
 		}
 
 		.music-control {
-			width: 96%;
+			width: 90%;
 			box-sizing: border-box;
+			margin: 10px 0;
 			@include flex-between(10px);
 
 			// .music-info {
