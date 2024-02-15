@@ -50,6 +50,7 @@ declare module 'vue' {
     ZbSearchResultBlogItemMobile: typeof import('./src/components/mobile/zb-searchResult-blogItem-mobile.vue')['default']
     ZbStickyBar: typeof import('./src/components/common/zb-sticky-bar.vue')['default']
     ZbSvgIcon: typeof import('./src/components/common/zb-svg-icon.vue')['default']
+    ZbTag: typeof import('./src/components/common/zb-tag.vue')['default']
     ZbTheme: typeof import('./src/components/common/zb-theme.vue')['default']
     ZbTime: typeof import('./src/components/common/zb-time.vue')['default']
   }

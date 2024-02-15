@@ -3,14 +3,14 @@
 		<p class="title">博客标签</p>
 		<div class="desc">目前共有{{ tagTotal }}个标签</div>
 		<div class="tag-List" v-if="tagList.length !== 0">
-			<el-tag
+			<zb-tag
 				v-for="item in tagList"
 				:key="item.id"
 				:color="tagPropMap[Number(item.tag_classify)].color"
 				:size="tagPropMap[Number(item.tag_classify)].size"
 				class="tag-item"
 				@click="gotoTagDetail(item)"
-				>{{ item.tag_name }}</el-tag
+				>{{ item.tag_name }}</zb-tag
 			>
 		</div>
 		<zb-empty v-else>空空如也</zb-empty>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 	import { storeToRefs } from 'pinia';
 	import { useRouter } from 'vue-router';
-
+	import zbTag from '@/components/common/zb-tag.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import { Tag } from '@/types';
 	import useStore from '@/store';

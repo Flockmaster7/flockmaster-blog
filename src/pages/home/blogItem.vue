@@ -22,11 +22,12 @@
 					{{ blog.content_html }}
 				</div>
 				<div class="tag">
-					<el-tag
+					<zb-tag
 						v-for="item in blog.tags"
 						:key="item.id"
-						color="#5cbfef">
-						{{ item.tag_name }}</el-tag
+						color="#5cbfef"
+						size="small">
+						{{ item.tag_name }}</zb-tag
 					>
 				</div>
 			</div>
@@ -64,6 +65,7 @@
 	import { useRouter } from 'vue-router';
 	import { storeToRefs } from 'pinia';
 	import useStore from '@/store';
+	import zbTag from '@/components/common/zb-tag.vue';
 
 	interface PropType {
 		blog: Blog;

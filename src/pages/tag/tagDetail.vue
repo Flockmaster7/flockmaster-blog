@@ -18,9 +18,7 @@
 					:key="blog.id"
 					@click="gotoBlogDetail(blog.id)"
 					class="blog-item">
-					<el-tag color="#5cbfef" size="large">{{
-						blog.date
-					}}</el-tag>
+					<zb-tag color="#5cbfef">{{ blog.date }}</zb-tag>
 					<div class="info-item">
 						<zb-svg-icon name="tag" :size="28"></zb-svg-icon>
 						<span>{{ blog.title }}</span>
@@ -40,6 +38,7 @@
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
 	import { useRoute, useRouter } from 'vue-router';
+	import zbTag from '@/components/common/zb-tag.vue';
 
 	const route = useRoute();
 	const router = useRouter();
