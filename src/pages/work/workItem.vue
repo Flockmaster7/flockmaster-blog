@@ -74,9 +74,11 @@
 
 			.des {
 				font-size: 16px;
-				font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
-					'Trebuchet MS', sans-serif;
+				font-family: sans-serif;
 				color: #8b8b8b;
+				height: 22px;
+				line-height: 22px;
+				word-break: break-all;
 				transition: all 1s linear;
 				margin: 5px 0 50px;
 			}

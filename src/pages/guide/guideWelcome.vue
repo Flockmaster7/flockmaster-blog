@@ -41,15 +41,31 @@
 		padding: 0 80px;
 
 		.center {
+			filter: contrast(2);
+
 			.center-top {
 				color: rgb(88, 88, 87);
 				font-size: 40px;
+				margin-bottom: 3px;
 			}
 
 			.center-bottom {
-				font-size: 80px;
+				font-size: 70px;
 				color: var(--theme-text-1);
-				font-weight: 800;
+				font-weight: 600;
+				animation: showup 3s forwards;
+			}
+
+			@keyframes showup {
+				from {
+					letter-spacing: -70px;
+					filter: blur(10px);
+				}
+
+				to {
+					letter-spacing: 8px;
+					filter: blur(0);
+				}
 			}
 		}
 
