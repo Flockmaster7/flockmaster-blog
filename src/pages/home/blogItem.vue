@@ -141,6 +141,9 @@
 					justify-content: space-between;
 					align-items: center;
 					.title {
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
 						font-weight: 700;
 						font-size: 25px;
 					}

@@ -107,6 +107,12 @@ export const mobileNav: HeaderNavType[] = [
 		icon: 'album'
 	},
 	// {
+	// 	title: '音乐',
+	// 	src: '/music',
+	// 	name: '',
+	// 	icon: 'music'
+	// },
+	// {
 	// 	title: '关于',
 	// 	src: '/about',
 	// 	name: '',
