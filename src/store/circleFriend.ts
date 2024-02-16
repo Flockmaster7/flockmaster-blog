@@ -17,13 +17,21 @@ import { ref } from 'vue';
 
 export const useCircleFriendStore = defineStore('circleFriend', () => {
 	const circleFriendList = ref<CircleFriend[]>([]);
+	const circleFriendTotal = ref(0);
 	const userDianzanList = ref<number[]>([]);
 
 	const getList = async (pageNum: number, pageSize: number) => {
 		const { data: res } = await getCircleFriendList(pageNum, pageSize);
 		if (res.code === 200) {
-			circleFriendList.value = res.data.rows;
+			if (pageNum === 1) {
+				circleFriendList.value = res.data.rows;
+			} else {
+				circleFriendList.value.push(...res.data.rows);
+			}
+			circleFriendTotal.value = res.data.total;
+			return true;
 		}
+		return false;
 	};
 
 	const getUserDianzan = async () => {
@@ -72,6 +80,7 @@ export const useCircleFriendStore = defineStore('circleFriend', () => {
 
 	return {
 		circleFriendList,
+		circleFriendTotal,
 		getList,
 		dianzan,
 		comment,
