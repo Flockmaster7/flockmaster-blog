@@ -41,7 +41,7 @@
 		padding: 0 80px;
 
 		.center {
-			filter: contrast(2);
+			filter: contrast(5);
 
 			.center-top {
 				color: rgb(88, 88, 87);
@@ -53,7 +53,7 @@
 				font-size: 70px;
 				color: var(--theme-text-1);
 				font-weight: 600;
-				animation: showup 3s forwards;
+				animation: showup 1.5s forwards;
 			}
 
 			@keyframes showup {
