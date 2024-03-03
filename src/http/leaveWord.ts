@@ -25,7 +25,7 @@ export const leaveWord = (data: CommentParamsType) => {
 export const getLeaveWordList = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<LeaveWord>>>({
 		url: `/getLeaveWordList/${pageNum}/${pageSize}`,
-		method: 'GET'
+		method: 'POST'
 	});
 };
 

@@ -11,6 +11,6 @@ import type { Tag } from '@/types/index.d.ts';
 export const getTagList = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<Tag>>>({
 		url: `/blog/tag/getTagList/${pageNum}/${pageSize}`,
-		method: 'GET'
+		method: 'POST'
 	});
 };

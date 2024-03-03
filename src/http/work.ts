@@ -11,6 +11,6 @@ import type { HttpResponse, PageRequest } from '@/types/http.d.ts';
 export const getWorkList = async (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<Work>>>({
 		url: `work/getList/${pageNum}/${pageSize}`,
-		method: 'GET'
+		method: 'POST'
 	});
 };
