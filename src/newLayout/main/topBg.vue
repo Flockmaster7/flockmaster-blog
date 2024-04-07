@@ -1,6 +1,9 @@
 <template>
 	<div class="top-bg-container">
-		<el-carousel :height="carouselHeight">
+		<el-carousel
+			:height="carouselHeight"
+			arrow="never"
+			indicator-position="none">
 			<el-carousel-item v-for="item in carouselImg" :key="item">
 				<el-image :src="item" fit="cover" />
 			</el-carousel-item>

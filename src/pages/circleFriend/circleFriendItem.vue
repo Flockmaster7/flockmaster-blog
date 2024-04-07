@@ -12,7 +12,7 @@
 				<img src="../../static/images/top.png" v-if="cirFriend.top" />
 			</div>
 			<div class="center">
-				<div class="text">
+				<div class="text" v-if="cirFriend.content !== null">
 					{{ cirFriend.content }}
 				</div>
 				<div class="img" v-if="images.length !== 0">

@@ -8,10 +8,10 @@ export const navLinkList: HeaderNavType[] = [
 		icon: 'blog'
 	},
 	{
-		title: '朋友圈',
+		title: '树洞',
 		src: '/circleFriend',
 		name: '',
-		icon: 'circleFriend'
+		icon: 'shudong'
 	},
 	// {
 	// 	title: '归档',
@@ -65,10 +65,10 @@ export const mobileNav: HeaderNavType[] = [
 		icon: 'blog'
 	},
 	{
-		title: '朋友圈',
+		title: '树洞',
 		src: '/circleFriend',
 		name: '',
-		icon: 'circleFriend'
+		icon: 'shudong'
 	},
 	// {
 	// 	title: '个人',

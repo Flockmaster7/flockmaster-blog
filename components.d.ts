@@ -37,6 +37,8 @@ declare module 'vue' {
     ZbCard: typeof import('./src/components/common/zb-card.vue')['default']
     ZbClassifyTool: typeof import('./src/components/common/zb-classify-tool.vue')['default']
     ZbCommentArea: typeof import('./src/components/common/zb-comment-area.vue')['default']
+    ZbEmojiInput: typeof import('./src/components/common/zb-emoji-input.vue')['default']
+    ZbEmojiSelect: typeof import('./src/components/common/zb-emoji-select.vue')['default']
     ZbEmpty: typeof import('./src/components/common/zb-empty.vue')['default']
     ZbError: typeof import('./src/components/common/zb-error.vue')['default']
     ZbImage: typeof import('./src/components/common/zb-image.vue')['default']

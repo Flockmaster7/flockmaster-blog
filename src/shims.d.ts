@@ -8,3 +8,4 @@ declare module 'prismjs';
 declare module 'aplayer';
 declare module '@tsparticles/vue3';
 declare module 'tsparticles';
+declare module 'vue3-emoji-picker';

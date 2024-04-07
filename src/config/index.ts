@@ -86,3 +86,15 @@ export const particleOption = {
 		}
 	}
 };
+
+export const optionsName = {
+	'Smileys & Emotion': '笑脸&表情',
+	'Food & Drink': '食物&饮料',
+	'Animals & Nature': '动物&自然',
+	'Travel & Places': '旅行&地点',
+	'People & Body': '人物&身体',
+	Objects: '物品',
+	Symbols: '符号',
+	Flags: '旗帜',
+	Activities: '活动'
+};

@@ -5,6 +5,7 @@
 			clearable
 			placeholder="评论"
 			ref="inputRef"></el-input>
+		<!-- <ZbEmojiSelect @selectEmoji="selectEmoji"></ZbEmojiSelect> -->
 		<el-button type="primary" @click="comment">发送</el-button>
 	</div>
 </template>
@@ -15,6 +16,7 @@
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
+	// import ZbEmojiSelect from '@/components/common/zb-emoji-select.vue';
 
 	interface PropsType {
 		circleFriendId: number;
@@ -58,11 +60,16 @@
 	onMounted(() => {
 		inputRef.value?.focus();
 	});
+
+	const selectEmoji = (emoji: string) => {
+		console.log(emoji);
+		// commentQuery.value += emoji;
+	};
 </script>
 
 <style lang="scss" scoped>
+	@import '../../static/css/mixins.scss';
 	.circleFriendCommentPost-container {
-		display: flex;
-		gap: 4px;
+		@include flex-center(4px);
 	}
 </style>

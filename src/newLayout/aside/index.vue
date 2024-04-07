@@ -8,28 +8,6 @@
 		<WebsiteInfo></WebsiteInfo>
 		<!-- 站点信息卡片 -->
 		<SiteInfo></SiteInfo>
-
-		<!-- 标签云卡片 -->
-		<!-- <el-card>
-			<el-collapse v-model="activeTag">
-				<el-collapse-item name="1">
-					<template #title>
-						<el-icon class="head-icon"><Guide /></el-icon>
-						<text class="head-text"> 标签云 </text>
-					</template>
-					<div class="tag-List">
-						<el-check-tag
-							v-for="item in tagAsideList"
-							:key="item.id"
-							:checked="tagChecked.includes(item.id)"
-							color="skyblue"
-							@change="(status: boolean) => onChangeTag(status, item.id)"
-							>{{ item.tag_name }}</el-check-tag
-						>
-					</div>
-				</el-collapse-item>
-			</el-collapse>
-		</el-card> -->
 	</div>
 </template>
 
@@ -38,28 +16,6 @@
 	import SiteInfo from './siteInfo.vue';
 	import WebsiteInfo from './websiteInfo.vue';
 	import UserInfo from './userInfo.vue';
-
-	//标签云
-	// const tgStore = useTagStore();
-	// const { tagAsideList } = storeToRefs(tgStore);
-	// const activeTag = ref(['1']);
-
-	// tgStore.getAsideTgLIst(1, 9);
-	// // 标签选中
-	// const { getBlogListParams } = storeToRefs(blog);
-	// const tagChecked = ref<number[]>([]);
-	// const onChangeTag = async (status: boolean, id: number) => {
-	// 	if (status) tagChecked.value.push(id);
-	// 	else {
-	// 		let index = tagChecked.value.indexOf(id);
-	// 		if (index !== -1) tagChecked.value.splice(index, 1);
-	// 	}
-	// 	//获取标签对应的文章列表
-	// 	getBlogListParams.value = {
-	// 		tags: tagChecked.value
-	// 	};
-	// 	blog.getBlogList(1, 9, getBlogListParams.value);
-	// };
 </script>
 
 <style lang="scss" scoped>
