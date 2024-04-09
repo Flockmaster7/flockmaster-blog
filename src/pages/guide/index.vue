@@ -10,8 +10,15 @@
 </template>
 
 <script setup lang="ts">
+	import { onMounted } from 'vue';
 	import GuideUserInfo from './guideUserInfo.vue';
 	import GuideWelcome from './guideWelcome.vue';
+	import Cache from '@/utils/cache';
+	import { HASVISIT } from '@/constant';
+
+	onMounted(() => {
+		Cache.setCache(HASVISIT, true);
+	});
 </script>
 
 <style lang="scss" scoped>

@@ -5,7 +5,7 @@
 			<span class="user-name">Flockmaster</span>
 		</div>
 		<div class="description">
-			酸甜苦辣是食物的味道，喜怒哀乐是生活的味道。
+			生活就像一场无止境的流浪，心患旧伤我却更坚强
 		</div>
 		<div class="info-data">
 			<div class="data-item">

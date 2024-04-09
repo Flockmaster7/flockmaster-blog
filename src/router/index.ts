@@ -48,6 +48,9 @@ router.beforeEach(
 				next();
 			});
 		} else {
+			if (to.meta.hasVisit) {
+				router.replace('/home');
+			}
 			startProgress();
 			next();
 		}

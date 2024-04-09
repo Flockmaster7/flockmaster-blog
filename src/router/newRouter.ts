@@ -1,8 +1,14 @@
+import { HASVISIT } from '@/constant';
+import Cache from '@/utils/cache';
+
 export const routers = [
 	{
 		path: '/',
 		name: 'Guide',
-		component: () => import('@/pages/guide/index.vue')
+		component: () => import('@/pages/guide/index.vue'),
+		meta: {
+			hasVisit: Cache.getCache(HASVISIT)
+		}
 	},
 	{
 		path: '/home',
