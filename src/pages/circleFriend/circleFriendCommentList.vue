@@ -6,9 +6,13 @@
 			:commentInputActive="commentInputActive"
 			@changeActiveCommentInput="handlerComment"
 			:key="item.id"></CircleFriendCommentItem>
-		<div v-if="list.length > 3" class="allComment" @click="showAllComment">
+		<div
+			v-if="list.length > 3 && !isLoading"
+			class="allComment"
+			@click="showAllComment">
 			{{ allCommentText }}
 		</div>
+		<zb-loading :height="20" v-if="isLoading"></zb-loading>
 	</div>
 </template>
 
@@ -33,8 +37,19 @@
 	const allCommentText = computed(() => {
 		return allCommentVisible.value ? '全部评论' : '收起';
 	});
+	const isLoading = ref(false);
 	const showAllComment = () => {
-		allCommentVisible.value = !allCommentVisible.value;
+		if (allCommentVisible.value) {
+			// 点击全部评论
+			isLoading.value = true;
+			setTimeout(() => {
+				allCommentVisible.value = !allCommentVisible.value;
+				isLoading.value = false;
+			}, 500);
+		} else {
+			// 点击收起
+			allCommentVisible.value = !allCommentVisible.value;
+		}
 	};
 	const renderList = computed(() => {
 		if (allCommentVisible.value) return props.list.slice(0, 3);
