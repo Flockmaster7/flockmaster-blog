@@ -5,7 +5,7 @@
 			:infinite-scroll-disabled="!isLoadMore"
 			v-infinite-scroll="loadMore"
 			:infinite-scroll-delay="600">
-			<el-skeleton animated :loading="isLoading">
+			<el-skeleton animated :loading="pageNum === 1 && isLoading">
 				<template #template>
 					<CircleFriendSkeleton></CircleFriendSkeleton>
 				</template>
@@ -21,6 +21,7 @@
 			v-if="circleFriendList.length !== 0"
 			:isLoading="isLoading"
 			direction="center"
+			@clickLoadMore="loadMore"
 			:isLoadMore="isLoadMore"></zb-load-more>
 		<zb-empty
 			:height="500"
@@ -46,7 +47,8 @@
 		const res = await circleFriend.getList(pageNum, 9);
 		return res;
 	};
-	const { isLoading, loadMore } = useInfiniteScroll(getCircleFriends);
+	const { isLoading, loadMore, pageNum } =
+		useInfiniteScroll(getCircleFriends);
 	const isLoadMore = computed(() => {
 		return circleFriendTotal.value > circleFriendList.value.length;
 	});

@@ -1,9 +1,10 @@
 <template>
 	<div class="loadMore-container">
 		<div
-			class="loadMore-default"
 			v-if="!isLoading && isLoadMore"
-			:style="{ justifyContent: direction }">
+			class="loadMore-default"
+			:style="{ justifyContent: direction }"
+			@click="clickLoadMore">
 			<zb-svg-icon name="more"></zb-svg-icon>
 			{{ text }}
 		</div>
@@ -23,11 +24,19 @@
 		isLoadMore: boolean;
 		direction?: 'left' | 'center' | 'right';
 	}
+	interface EmitsType {
+		(e: 'clickLoadMore'): void;
+	}
 	withDefaults(defineProps<PropsType>(), {
 		text: '加载更多',
 		isLoading: false,
 		direction: 'left'
 	});
+	const emit = defineEmits<EmitsType>();
+
+	const clickLoadMore = () => {
+		emit('clickLoadMore');
+	};
 </script>
 
 <style lang="scss" scoped>
