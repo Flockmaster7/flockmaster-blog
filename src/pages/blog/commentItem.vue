@@ -14,8 +14,7 @@
 				:commentInfo="childReply"></CommentItemReply>
 			<CommentItemAllReplayOperator
 				v-if="showAllReply"
-				:id="item.id"
-				@closeAllReply="closeAllReply"></CommentItemAllReplayOperator>
+				:id="item.id"></CommentItemAllReplayOperator>
 		</div>
 	</div>
 </template>
@@ -23,7 +22,7 @@
 <script setup lang="ts">
 	import { Comment } from '@/types';
 	import CommentItemReply from './commentItemReply.vue';
-	import { ref } from 'vue';
+	import { computed } from 'vue';
 	import CommentItemAllReplayOperator from './commentItemAllReplayOperator.vue';
 
 	interface propsType {
@@ -32,11 +31,9 @@
 
 	const props = defineProps<propsType>();
 
-	const showAllReply = ref(props.item.children.length === 3);
-
-	const closeAllReply = () => {
-		showAllReply.value = false;
-	};
+	const showAllReply = computed(() => {
+		return props.item.children.length === 3;
+	});
 </script>
 
 <style lang="scss" scoped>

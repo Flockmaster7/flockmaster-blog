@@ -82,7 +82,7 @@
 			  }
 			: {
 					user_name: 'admin',
-					password: '123456'
+					password: '101010'
 			  }
 	);
 	const loginFormRef = ref<FormInstance>();

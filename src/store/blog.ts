@@ -162,7 +162,12 @@ export const useBlogStore = defineStore('blog', () => {
 	// 获取文章详情
 	const getBlogDetail = async (id: number) => {
 		const { data: res } = await getArticleDetail(id);
-		if (res.code === 200) blogDeatil.value = res.data;
+		if (res.code === 200) {
+			blogDeatil.value = res.data;
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	const getBlogListByTag = async (

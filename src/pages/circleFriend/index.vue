@@ -5,10 +5,17 @@
 			:infinite-scroll-disabled="!isLoadMore"
 			v-infinite-scroll="loadMore"
 			:infinite-scroll-delay="600">
-			<CircleFriendItem
-				:cirFriend="item"
-				v-for="item in circleFriendList"
-				:key="item.id"></CircleFriendItem>
+			<el-skeleton animated :loading="isLoading">
+				<template #template>
+					<CircleFriendSkeleton></CircleFriendSkeleton>
+				</template>
+				<template #default>
+					<CircleFriendItem
+						:cirFriend="item"
+						v-for="item in circleFriendList"
+						:key="item.id"></CircleFriendItem>
+				</template>
+			</el-skeleton>
 		</div>
 		<zb-load-more
 			v-if="circleFriendList.length !== 0"
@@ -25,6 +32,7 @@
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
 	import CircleFriendItem from './circleFriendItem.vue';
+	import CircleFriendSkeleton from './circleFriendSkeleton.vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 	import { computed } from 'vue';
 	const { circleFriend } = useStore();

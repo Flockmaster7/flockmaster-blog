@@ -33,27 +33,36 @@
 				</div>
 			</div>
 		</div> -->
-
 	<div class="blog-container">
 		<!-- 左侧 -->
 		<div class="blog-card">
-			<div class="blog-detail-card">
-				<blogInfo :blogDeatil="blogDeatil" />
-				<div class="mainImg">
-					<zb-image
-						:src="blogDeatil.blog_image"
-						:style="{ height: (isMobile ? 240 : 400) + 'px' }" />
-				</div>
-				<!-- 文章预览 -->
-				<MdPreview
-					:editorId="previewId"
-					v-model="content"
-					:theme="isDark ? 'dark' : 'light'"
-					:showCodeRowNumber="true" />
-				<el-divider></el-divider>
-				<blogFooter :blogDeatil="blogDeatil"></blogFooter>
-			</div>
-			<div class="blog-detail-card">
+			<el-skeleton animated :loading="isLoading">
+				<template #template>
+					<BlogSkeleton></BlogSkeleton>
+				</template>
+				<template #default>
+					<div class="blog-detail-card">
+						<blogInfo :blogDeatil="blogDeatil" />
+						<div class="mainImg">
+							<zb-image
+								:src="blogDeatil.blog_image"
+								:style="{
+									height: (isMobile ? 240 : 400) + 'px'
+								}" />
+						</div>
+						<!-- 文章预览 -->
+						<MdPreview
+							:editorId="previewId"
+							v-model="content"
+							:theme="isDark ? 'dark' : 'light'"
+							:showCodeRowNumber="true" />
+						<el-divider></el-divider>
+						<blogFooter :blogDeatil="blogDeatil"></blogFooter>
+					</div>
+				</template>
+			</el-skeleton>
+
+			<div class="blog-detail-card" v-show="!isLoading">
 				<commentPost
 					:blogId="blogDeatil.id"
 					:userImage="userInfo.user_image"
@@ -97,7 +106,6 @@
 		nextTick,
 		onBeforeUnmount,
 		onMounted,
-		onUnmounted,
 		ref,
 		watch
 	} from 'vue';
@@ -113,6 +121,7 @@
 	import commentPost from './commentPost.vue';
 	import CommentList from './commentList.vue';
 	import BlogOperator from './blogOperator.vue';
+	import BlogSkeleton from './blogSkeleton.vue';
 	import ZbCard from '@/components/common/zb-card.vue';
 
 	const { common, blog, user } = useStore();
@@ -148,11 +157,20 @@
 
 	const previewId = ref('myPreview');
 
+	const isLoading = ref(false);
+
 	watch(blogId, (newVal) => {
 		gotoBlogDetail(newVal);
 	});
 
+	const getBlogData = async () => {
+		// isLoading.value = true;
+		await blog.getBlogDetail(Number(id));
+		// isLoading.value = false;
+	};
+
 	onMounted(async () => {
+		isLoading.value = true;
 		// 获取状态
 		if (isLogin()) {
 			blog.isBlogLike(Number(id));
@@ -164,12 +182,13 @@
 			blogStatus.value.read = true;
 		}
 		// 获取信息
-		await blog.getBlogDetail(Number(id));
+		await getBlogData();
+
 		nextTick(() => {
 			content.value = blogDeatil.value.content_text;
 		});
 		// 获取评论
-		getCommentList();
+		await getCommentList();
 		// 获取推荐文章
 		blog.getRecommendBlogList(Number(id));
 		// 是否关注
@@ -182,6 +201,7 @@
 		window.scrollTo({
 			top: 0
 		});
+		isLoading.value = false;
 	});
 
 	onBeforeUnmount(() => {
@@ -266,7 +286,7 @@
 			flex-direction: column;
 			gap: 10px;
 			position: relative;
-			max-width: 100%;
+			width: 100%;
 
 			.mainImg {
 				width: 100%;

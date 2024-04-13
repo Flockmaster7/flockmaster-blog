@@ -106,7 +106,7 @@
 	.bottom {
 		display: flex;
 		align-items: center;
-		gap: 20px;
+		gap: 12px;
 		font-size: 14px;
 		color: #8a919f;
 

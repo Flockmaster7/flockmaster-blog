@@ -1,29 +1,25 @@
 <template>
 	<div class="comment-container">
 		<div class="avatar">
-			<img :src="commentInfo.user.user_image" alt="" />
+			<img :src="userImage" alt="" />
 		</div>
 		<div class="box">
 			<div class="info">
 				<div class="comment" v-if="type === 'comment'">
 					<span class="name"
-						>{{ commentInfo.user.name }}
+						>{{ userName }}
 						<zb-svg-icon
-							v-if="admin.id === commentInfo.user.id"
+							v-if="admin.id === commentInfo.user?.id"
 							:size="14"
 							name="admin"></zb-svg-icon>
 					</span>
 					<div class="content">{{ commentInfo.content }}</div>
 				</div>
 				<div class="reply" v-else>
-					<span class="name">{{ commentInfo.user.name }}</span>
+					<span class="name">{{ userName }}</span>
 					<span class="name-reply" v-if="commentInfo.targetComment">
 						{{ ' 回复 ' }}
-						<span class="name">{{
-							commentInfo.targetComment
-								? commentInfo.targetComment?.user.name
-								: ''
-						}}</span>
+						<span class="name">{{ userTargetImage }}</span>
 					</span>
 					：{{ commentInfo.content }}
 				</div>
@@ -46,6 +42,7 @@
 	import CommentItemReplyBottomOperator from './commentItemReplyBottomOperator.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
+	import { computed } from 'vue';
 
 	interface PropsType {
 		commentInfo: Comment;
@@ -54,10 +51,23 @@
 		type: 'comment' | 'reply';
 	}
 
-	defineProps<PropsType>();
+	const { commentInfo } = defineProps<PropsType>();
 
 	const { user } = useStore();
 	const { admin } = storeToRefs(user);
+
+	const userImage = computed(() => {
+		return (
+			commentInfo.user?.user_image ??
+			new URL('../../static/images/user.png', import.meta.url).href
+		);
+	});
+	const userTargetImage = computed(() => {
+		return commentInfo.targetComment?.user ?? '已注销用户';
+	});
+	const userName = computed(() => {
+		return commentInfo.user?.name ?? '已注销用户';
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -72,7 +82,7 @@
 		justify-content: space-between;
 
 		.avatar {
-			width: 40px;
+			min-width: 40px;
 			height: 40px;
 			border-radius: 50%;
 
