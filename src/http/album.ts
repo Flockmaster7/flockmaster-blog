@@ -11,7 +11,7 @@ import type { Album, Photo } from '@/types/index.d.ts';
 export const getAlbum = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<Album>>>({
 		url: `/album/getList/${pageNum}/${pageSize}`,
-		method: 'GET'
+		method: 'POST'
 	});
 };
 
