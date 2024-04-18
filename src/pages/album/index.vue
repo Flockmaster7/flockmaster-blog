@@ -5,16 +5,24 @@
 			<span class="album-bg-title">相册</span>
 		</div> -->
 		<div
-			class="album-content"
 			v-infinite-scroll="loadMore"
 			:infinite-scroll-disabled="isLoadMore"
 			:infinite-scroll-delay="600">
-			<div
-				v-for="item in albumList"
-				:key="item.id"
-				@click="gotoPhoto(item)">
-				<zb-album-item :album="item"></zb-album-item>
-			</div>
+			<el-skeleton animated :loading="pageNum === 1 && isLoading">
+				<template #template>
+					<AlbumSkeleton></AlbumSkeleton>
+				</template>
+				<template #default>
+					<div class="album-content">
+						<div
+							v-for="item in albumList"
+							:key="item.id"
+							@click="gotoPhoto(item)">
+							<zb-album-item :album="item"></zb-album-item>
+						</div>
+					</div>
+				</template>
+			</el-skeleton>
 		</div>
 		<zb-load-more
 			v-if="!isLoadMore && albumList.length > 0"
@@ -31,6 +39,7 @@
 	import { computed, onMounted, ref } from 'vue';
 	import zbAlbumItem from './albumItem.vue';
 	import ZbLoadMore from '@/components/common/zb-loadMore.vue';
+	import AlbumSkeleton from './albumSkeleton.vue';
 	import { useRouter } from 'vue-router';
 	import { Album } from '@/types';
 
@@ -51,7 +60,6 @@
 		if (isSuccess) {
 			isLoading.value = false;
 			pageNum.value += 1;
-			console.log(pageNum.value);
 		}
 	};
 	// 跳转到图片

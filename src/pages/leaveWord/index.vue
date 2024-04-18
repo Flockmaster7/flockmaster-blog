@@ -11,15 +11,22 @@
 			:infinite-scroll-disabled="!isLoadMore"
 			v-infinite-scroll="loadMore"
 			:infinite-scroll-delay="600">
-			<div
-				class="comment"
-				v-for="(item, index) in leaveWordList"
-				:key="item.id">
-				<leaveWordItem
-					type="leaveWord"
-					:item="item"
-					@getCommentList="getLeaveWordList"></leaveWordItem>
-			</div>
+			<el-skeleton animated :loading="pageNum === 1 && isLoading">
+				<template #template>
+					<LeaveWordSkeleton></LeaveWordSkeleton>
+				</template>
+				<template #default>
+					<div
+						class="comment"
+						v-for="(item, index) in leaveWordList"
+						:key="item.id">
+						<leaveWordItem
+							type="leaveWord"
+							:item="item"
+							@getCommentList="getLeaveWordList"></leaveWordItem>
+					</div>
+				</template>
+			</el-skeleton>
 		</div>
 		<zb-load-more
 			v-if="leaveWordList.length !== 0"
@@ -49,6 +56,7 @@
 	import { Edit } from '@element-plus/icons-vue';
 
 	import leaveWordItem from './leaveWordItem.vue';
+	import LeaveWordSkeleton from './leaveWordSkeleton.vue';
 	import addLeaveWord from './addLeaveWord.vue';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 	import useStore from '@/store';
@@ -61,7 +69,8 @@
 		const res = await leaveWord.getLeaveWord(pageNum, 9);
 		return res;
 	};
-	const { isLoading, loadMore } = useInfiniteScroll(getLeaveWordList);
+	const { isLoading, loadMore, pageNum } =
+		useInfiniteScroll(getLeaveWordList);
 
 	const isLoadMore = computed(() => {
 		return leaveWordTotal.value > leaveWordList.value.length;

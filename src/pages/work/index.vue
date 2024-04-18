@@ -1,16 +1,19 @@
 <template>
 	<div class="work-container">
-		<!-- <div class="header">作品集</div>
-		<el-divider>
-			<el-icon><star-filled /></el-icon>
-		</el-divider> -->
 		<div class="work-list">
-			<div
-				v-for="item in workList"
-				:key="item.id"
-				:style="{ width: 100 + '%' }">
-				<work-item :work="item"></work-item>
-			</div>
+			<el-skeleton animated :loading="isLoading">
+				<template #template>
+					<WorkSkeleton></WorkSkeleton>
+				</template>
+				<template #default>
+					<div
+						v-for="item in workList"
+						:key="item.id"
+						:style="{ width: 100 + '%' }">
+						<work-item :work="item"></work-item>
+					</div>
+				</template>
+			</el-skeleton>
 		</div>
 		<zb-empty v-if="workList.length === 0" :height="500"></zb-empty>
 	</div>
@@ -19,6 +22,7 @@
 <script setup lang="ts">
 	import workItem from '@/pages/work/workItem.vue';
 	import zbEmpty from '@/components/common/zb-empty.vue';
+	import WorkSkeleton from './workSkeleton.vue';
 	import { useWorkStore } from '@/store/work';
 	import { storeToRefs } from 'pinia';
 	import { ref } from 'vue';
@@ -28,7 +32,13 @@
 		pageNum: 1,
 		pageSize: 10
 	});
-	workStore.getWork(params.value.pageNum, params.value.pageSize);
+	const isLoading = ref(false);
+	const getWork = async () => {
+		isLoading.value = true;
+		await workStore.getWork(params.value.pageNum, params.value.pageSize);
+		isLoading.value = false;
+	};
+	getWork();
 	const { workList } = storeToRefs(workStore);
 </script>
 

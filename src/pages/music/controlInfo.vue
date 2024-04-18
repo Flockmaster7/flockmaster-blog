@@ -25,11 +25,11 @@
 
 	const musicInfo = computed(
 		() =>
-			musicConfig[currentIndex.value].name +
+			musicConfig[currentIndex.value]?.name +
 			' - ' +
-			musicConfig[currentIndex.value].artist
+			musicConfig[currentIndex.value]?.artist
 	);
-	const musicCover = computed(() => musicConfig[currentIndex.value].cover);
+	const musicCover = computed(() => musicConfig[currentIndex.value]?.cover);
 
 	const gotoMusicDetail = () => {
 		return;
