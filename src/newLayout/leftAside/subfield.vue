@@ -23,11 +23,11 @@
 	blog.getSubfieldList();
 
 	const gotoSubfield = (classify: number) => {
-		return ElMessage({
-			message: '正在维护中，敬请期待',
-			type: 'info'
-		});
-		// router.push(`/subfield/${classify}`);
+		// return ElMessage({
+		// 	message: '正在维护中，敬请期待',
+		// 	type: 'info'
+		// });
+		router.push(`/subfield/${classify}`);
 	};
 </script>
 

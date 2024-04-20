@@ -81,6 +81,7 @@ export const useBlogStore = defineStore('blog', () => {
 	// 文章推荐列表
 	const recommendList = ref<Partial<Blog>[]>([]);
 	const subfieldBlogList = ref<Blog[]>();
+	const subfieldBlogTotal = ref(0);
 	const subfieldDetail = ref<SubField>();
 
 	// 获取文章推荐列表
@@ -286,14 +287,20 @@ export const useBlogStore = defineStore('blog', () => {
 		return true;
 	};
 
-	const getSubfieldBlog = async (id: number) => {
-		const { data: res } = await getSubfieldBlogList(id);
+	const getSubfieldBlog = async (
+		id: number,
+		pageNum: number = 1,
+		pageSize: number = 9
+	) => {
+		const { data: res } = await getSubfieldBlogList(id, pageNum, pageSize);
 		if (res.code !== 200) return false;
-		subfieldBlogList.value = res.data;
+		subfieldBlogList.value = res.data.rows;
+		subfieldBlogTotal.value = res.data.total;
 		return true;
 	};
 
 	return {
+		subfieldBlogTotal,
 		getSubfieldBlog,
 		getSubfieldDetailInfo,
 		subfieldBlogList,

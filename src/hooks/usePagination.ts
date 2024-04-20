@@ -1,5 +1,4 @@
 import { BlogListForm } from '@/types';
-import { minDelay } from '@/utils/common';
 import { onMounted, ref } from 'vue';
 
 // 分页器
@@ -8,40 +7,38 @@ export default function (
 		pageNum: number,
 		pageSize: number,
 		arg: Partial<BlogListForm>
-	) => any
+	) => Promise<void>
 ) {
 	const pageNum = ref(1);
 	const pageSize = ref(9);
 	const isLoading = ref(false);
 	const getBlogListParams = ref<Partial<BlogListForm>>({});
 
-	const delay = 500;
-
-	const delayGetList = () => {
+	const delayGetList = async () => {
 		if (typeof getList !== 'function') return Promise.reject(false);
 		isLoading.value = true;
-		getList(pageNum.value, pageSize.value, getBlogListParams.value);
+		await getList(pageNum.value, pageSize.value, getBlogListParams.value);
 		window.scrollTo({
 			top: 0
 		});
+		isLoading.value = false;
 		return Promise.resolve(true);
 	};
 
 	const handleSizeChange = async (val: number) => {
 		pageSize.value = val;
-		await minDelay<boolean>(delayGetList(), delay);
+		await delayGetList();
 		isLoading.value = false;
 	};
 
 	const handleCurrentChange = async (val: number) => {
 		pageNum.value = val;
-		await minDelay<boolean>(delayGetList(), delay);
+		await delayGetList();
 		isLoading.value = false;
 	};
 
 	onMounted(async () => {
-		await minDelay<boolean>(delayGetList(), delay);
-		isLoading.value = false;
+		await delayGetList();
 	});
 
 	return {

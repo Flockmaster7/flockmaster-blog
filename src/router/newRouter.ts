@@ -68,6 +68,11 @@ export const routers = [
 				component: () => import('@/pages/about/index.vue')
 			},
 			{
+				path: '/subfield/:id?',
+				name: 'Subfield',
+				component: () => import('@/pages/subfield/index.vue')
+			},
+			{
 				path: '/pigeonhole',
 				name: 'Pigeonhole',
 				component: () => import('@/pages/pigeonhole/index.vue')

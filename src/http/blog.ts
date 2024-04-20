@@ -248,9 +248,17 @@ export const getSubfieldDetail = (id: number) => {
 	});
 };
 
-export const getSubfieldBlogList = (id: number) => {
-	return request<HttpResponse<Blog[]>>({
+export const getSubfieldBlogList = (
+	id: number,
+	pageNum: number,
+	pageSize: number
+) => {
+	return request<HttpResponse<PageRequest<Blog>>>({
 		url: `/blog/subfield/blogList/${id}`,
-		method: 'get'
+		method: 'post',
+		data: {
+			pageNum,
+			pageSize
+		}
 	});
 };

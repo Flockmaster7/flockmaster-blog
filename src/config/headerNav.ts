@@ -26,6 +26,12 @@ export const navLinkList: HeaderNavType[] = [
 		icon: 'tag'
 	},
 	{
+		title: '分栏',
+		src: '/subfield',
+		name: '',
+		icon: 'guidang'
+	},
+	{
 		title: '作品',
 		src: '/work',
 		name: '',
@@ -87,6 +93,12 @@ export const mobileNav: HeaderNavType[] = [
 		src: '/tag',
 		name: '',
 		icon: 'tag'
+	},
+	{
+		title: '分栏',
+		src: '/subfield',
+		name: '',
+		icon: 'guidang'
 	},
 	{
 		title: '作品',
