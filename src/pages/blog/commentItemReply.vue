@@ -19,7 +19,7 @@
 					<span class="name">{{ userName }}</span>
 					<span class="name-reply" v-if="commentInfo.targetComment">
 						{{ ' 回复 ' }}
-						<span class="name">{{ userTargetImage }}</span>
+						<span class="name">{{ userTargetName }}</span>
 					</span>
 					：{{ commentInfo.content }}
 				</div>
@@ -62,8 +62,8 @@
 			new URL('../../static/images/user.png', import.meta.url).href
 		);
 	});
-	const userTargetImage = computed(() => {
-		return commentInfo.targetComment?.user ?? '已注销用户';
+	const userTargetName = computed(() => {
+		return commentInfo.targetComment?.user?.name ?? '已注销用户';
 	});
 	const userName = computed(() => {
 		return commentInfo.user?.name ?? '已注销用户';
