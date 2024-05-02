@@ -32,7 +32,7 @@
 	const props = defineProps<propsType>();
 
 	const showAllReply = computed(() => {
-		return props.item.children.length === 3;
+		return props.item.children.length > 3;
 	});
 </script>
 
