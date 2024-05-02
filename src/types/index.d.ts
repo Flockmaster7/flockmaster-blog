@@ -242,3 +242,26 @@ export interface SubField {
 }
 
 export type SearchResult = Pick<Blog, 'title' | 'id'>;
+
+export interface Message {
+	id: number;
+	content: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface Notice {
+	id: number;
+	isRead: number;
+	userId: number;
+	messageId: number;
+	user: UserInfo;
+	message: Message;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface NoticeParams {
+	userId: number;
+	messageId: number;
+}

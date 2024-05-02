@@ -47,6 +47,8 @@
 	import { storeToRefs } from 'pinia';
 	import ZbTime from '@/components/common/zb-time.vue';
 	import { ref } from 'vue';
+	import { systemNotice } from '@/utils/notice';
+	import { DIANZANPYQ } from '@/constant';
 
 	interface PropsType {
 		cirFriend: CircleFriend;
@@ -73,6 +75,7 @@
 		if (flag) {
 			userDianzanList.value.push(id);
 			count.value += 1;
+			systemNotice(DIANZANPYQ);
 			ElMessage.success('感谢支持！');
 		}
 	};

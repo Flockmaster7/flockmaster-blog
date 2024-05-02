@@ -1,8 +1,9 @@
 <template>
 	<div class="rightAside-container">
 		<div class="top">
+			<NoticeOperator></NoticeOperator>
 			<zb-theme></zb-theme>
-			<loginOperator></loginOperator>
+			<LoginOperator></LoginOperator>
 		</div>
 		<div class="center">
 			<FindMe></FindMe>
@@ -17,7 +18,8 @@
 	import LastestComments from './latestComments.vue';
 	import HotBlogs from './hotBlogs.vue';
 	import FindMe from './findMe.vue';
-	import loginOperator from './loginOperator.vue';
+	import LoginOperator from './loginOperator.vue';
+	import NoticeOperator from './noticeOperator.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -29,7 +31,7 @@
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-			gap: 15px;
+			gap: 30px;
 
 			img {
 				width: 100%;

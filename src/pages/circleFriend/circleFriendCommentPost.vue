@@ -11,8 +11,10 @@
 </template>
 
 <script setup lang="ts">
+	import { PINGLUNPYQ } from '@/constant';
 	import useStore from '@/store';
 	import { CircleFriendForm } from '@/types';
+	import { systemNotice } from '@/utils/notice';
 	import { ElMessage } from 'element-plus';
 	import { storeToRefs } from 'pinia';
 	import { onMounted, ref } from 'vue';
@@ -50,6 +52,7 @@
 		});
 		if (res1 && res2) {
 			ElMessage.success('评论成功');
+			systemNotice(PINGLUNPYQ);
 			commentQuery.value = '';
 			emits('handlerComment');
 		}

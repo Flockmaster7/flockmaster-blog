@@ -23,9 +23,16 @@
 	import useSkeleton from '@/hooks/useSkeleton';
 	import Subfield from './subfield.vue';
 
-	const { common, user } = useStore();
+	const { common, user, notice } = useStore();
 	const { userInfo } = storeToRefs(user);
-	if (isLogin()) user.getUserProfile();
+
+	const getInfo = async () => {
+		if (isLogin()) {
+			await user.getUserProfile();
+			await notice.getNoRead(userInfo.value?.id);
+		}
+	};
+	getInfo();
 
 	const { isLoading } = useSkeleton(common.getWebsite);
 </script>

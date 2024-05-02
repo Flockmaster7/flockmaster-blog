@@ -7,7 +7,7 @@ export default function (
 		pageNum: number,
 		pageSize: number,
 		arg: Partial<BlogListForm>
-	) => Promise<void>
+	) => void
 ) {
 	const pageNum = ref(1);
 	const pageSize = ref(9);

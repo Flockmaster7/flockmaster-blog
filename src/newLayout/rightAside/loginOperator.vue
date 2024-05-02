@@ -7,7 +7,7 @@
 			v-if="!loginState"></zb-svg-icon>
 		<zb-svg-icon name="logout" autoDark :size="18" v-else></zb-svg-icon>
 	</div>
-	<el-dialog v-model="loginVisible" width="30%">
+	<el-dialog v-model="loginVisible" width="30%" :append-to-body="true">
 		<login @closeLogin="closeLogin"></login>
 	</el-dialog>
 </template>

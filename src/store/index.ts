@@ -5,6 +5,7 @@ import { useCommonStore } from './common';
 import { useDataStore } from './data';
 import { useLeaveWordStore } from './leaveWord';
 import { useMusicStore } from './music';
+import { useNoticeStore } from './notice';
 import { useTagStore } from './tag';
 import { useUserStore } from './user';
 import { useWorkStore } from './work';
@@ -21,6 +22,7 @@ export default function useStore() {
 		leaveWord: useLeaveWordStore(pinia),
 		album: useAlbumStore(pinia),
 		data: useDataStore(pinia),
-		circleFriend: useCircleFriendStore(pinia)
+		circleFriend: useCircleFriendStore(pinia),
+		notice: useNoticeStore(pinia)
 	};
 }

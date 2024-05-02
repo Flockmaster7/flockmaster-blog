@@ -1,3 +1,4 @@
+import { ADMIN } from '@/constant';
 import {
 	adminInfo,
 	cancelFollowUser,
@@ -8,6 +9,7 @@ import {
 } from './../http/user';
 import { getFansList, getFollowList, getUserInfo } from '@/http/user';
 import { AdminInfo, Blog, UserInfo } from '@/types';
+import cache from '@/utils/cache';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -103,6 +105,7 @@ export const useUserStore = defineStore('user', () => {
 		const { data: res } = await adminInfo();
 		if (res.code === 200) {
 			admin.value = res.data;
+			cache.setCache(ADMIN, res.data);
 		}
 	};
 
