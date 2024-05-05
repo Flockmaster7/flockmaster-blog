@@ -83,7 +83,7 @@ instance.interceptors.response.use(
 				});
 		}
 		// 根据响应的错误状态码，做不同的处理
-		else if (err.response) checkStatus(err.response.status);
+		else if (err.response) checkStatus(err.response);
 		return Promise.reject(err.response?.data);
 	}
 );

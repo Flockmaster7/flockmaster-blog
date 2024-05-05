@@ -1,3 +1,5 @@
+import { HttpError } from '@/types/http';
+import { AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
 
 /**
@@ -5,8 +7,8 @@ import { ElMessage } from 'element-plus';
  * @param {Number} status
  * @return void
  */
-export const checkStatus = (status: number): void => {
-	switch (status) {
+export const checkStatus = (response: AxiosResponse<HttpError>): void => {
+	switch (response.status) {
 		case 400:
 			ElMessage.error('请求失败！请您稍后重试');
 			break;
@@ -26,7 +28,11 @@ export const checkStatus = (status: number): void => {
 			ElMessage.error('请求超时！请您稍后重试');
 			break;
 		case 500:
-			ElMessage.error('服务异常！');
+			if (response && response.data && response.data.message) {
+				ElMessage.error(response.data.message + '！');
+			} else {
+				ElMessage.error('服务器异常，请您稍后重试！');
+			}
 			break;
 		case 502:
 			ElMessage.error('网关错误！');

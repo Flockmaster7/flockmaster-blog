@@ -23,7 +23,10 @@ export const getArticleList = (
 	return request<HttpResponse<PageRequest<Partial<Blog>>>>({
 		url: `/blog/getList/${pageNum}/${pageSize}`,
 		method: 'POST',
-		data
+		data: {
+			...data,
+			visible: 0
+		}
 	});
 };
 

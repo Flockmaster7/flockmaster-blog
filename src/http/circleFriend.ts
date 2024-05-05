@@ -10,7 +10,12 @@ import {
 export const getCircleFriendList = (pageNum: number, pageSize: number) => {
 	return request<HttpResponse<PageRequest<CircleFriend>>>({
 		url: `/circleFriend/getList/${pageNum}/${pageSize}`,
-		method: 'post'
+		method: 'post',
+		data: {
+			wrapper: {
+				visible: 0
+			}
+		}
 	});
 };
 
