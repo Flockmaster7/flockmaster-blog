@@ -17,6 +17,10 @@ export default function useInfiniteScroll(fn: Fn) {
 		}
 	};
 
+	const resetPageNum = (page: number) => {
+		pageNum.value = page;
+	};
+
 	onMounted(() => {
 		loadMore();
 	});
@@ -24,6 +28,7 @@ export default function useInfiniteScroll(fn: Fn) {
 	return {
 		pageNum,
 		isLoading,
-		loadMore
+		loadMore,
+		resetPageNum
 	};
 }

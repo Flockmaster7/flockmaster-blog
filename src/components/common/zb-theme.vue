@@ -7,8 +7,8 @@
 			:active-icon="Sunny"
 			:inactive-icon="Moon"
 			@change="changeDark" /> -->
-		<el-icon size="24" v-if="isDark"><Sunny /></el-icon>
-		<el-icon size="23" v-if="!isDark"><Moon /></el-icon>
+		<el-icon size="22" v-if="isDark"><Sunny /></el-icon>
+		<el-icon size="22" v-if="!isDark"><Moon /></el-icon>
 		<!-- <zb-svg-icon v-if="isDark" name="baitian" :size="22"></zb-svg-icon>
 		<zb-svg-icon v-if="!isDark" name="heiye" :size="23"></zb-svg-icon> -->
 	</div>

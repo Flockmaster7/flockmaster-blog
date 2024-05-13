@@ -38,6 +38,7 @@ export interface BlogListForm {
 	classify: string;
 	tags: number[];
 	querySearch: string;
+	orderByRead: boolean;
 }
 
 // 博客

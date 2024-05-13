@@ -24,3 +24,8 @@
 .md-editor-dark {
 	/* --md-bk-color: #1d1e1f !important; */
 }
+
+.el-dropdown__popper {
+	/* --el-dropdown-menuItem-hover-color: var(--theme-data-show-1) */
+	--el-dropdown-menuItem-hover-fill: var(--theme-data-show-1) !important;
+}

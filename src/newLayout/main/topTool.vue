@@ -18,6 +18,7 @@
 		<div class="right">
 			<zb-theme v-if="isMobile" />
 			<NoticeOperator v-if="isMobile"></NoticeOperator>
+			<FilterOperator v-if="showBlogFilter"></FilterOperator>
 			<zb-svg-icon
 				v-if="showOperator"
 				class="icon"
@@ -47,6 +48,7 @@
 	import { useRoute, useRouter } from 'vue-router';
 	import SearchBar from './searchBar.vue';
 	import NoticeOperator from '../rightAside/noticeOperator.vue';
+	import FilterOperator from './filterOperator.vue';
 
 	const router = useRouter();
 	const route = useRoute();
@@ -65,6 +67,10 @@
 
 	const showSearch = computed(() => {
 		return route.meta.search ? true : false;
+	});
+
+	const showBlogFilter = computed(() => {
+		return route.meta.blogFilter ? true : false;
 	});
 
 	const openOperator = () => {

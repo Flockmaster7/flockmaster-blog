@@ -26,7 +26,8 @@ export const routers = [
 				name: 'Home',
 				component: () => import('@/pages/home/blogList.vue'),
 				meta: {
-					search: true
+					search: true,
+					blogFilter: true
 				}
 			},
 			{

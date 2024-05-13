@@ -83,6 +83,7 @@ export const useBlogStore = defineStore('blog', () => {
 	const subfieldBlogList = ref<Blog[]>();
 	const subfieldBlogTotal = ref(0);
 	const subfieldDetail = ref<SubField>();
+	const filter = ref<'time' | 'hot'>('time');
 
 	// 获取文章推荐列表
 	const getRecommendBlogList = async (id: number) => {
@@ -300,6 +301,7 @@ export const useBlogStore = defineStore('blog', () => {
 	};
 
 	return {
+		filter,
 		subfieldBlogTotal,
 		getSubfieldBlog,
 		getSubfieldDetailInfo,

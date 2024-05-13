@@ -31,19 +31,35 @@
 	import { storeToRefs } from 'pinia';
 	import zbEmpty from '@/components/common/zb-empty.vue';
 	import BlogItem from './blogItem.vue';
-	import { Blog } from '@/types';
+	import { Blog, BlogListForm } from '@/types';
 	import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-	import { computed } from 'vue';
+	import { computed, watch } from 'vue';
 
 	const { blog } = useStore();
 
-	const { blogList, blogTotal } = storeToRefs(blog);
+	const { blogList, blogTotal, filter } = storeToRefs(blog);
 
 	// 无线滚动加载
 	const getBlogs = async (pageNum: number) => {
-		const res = await blog.getBlogList(pageNum, 9);
+		const wrapper: Partial<BlogListForm> = {};
+		if (filter.value === 'time') {
+			wrapper.order = 'DESC';
+		} else {
+			wrapper.orderByRead = true;
+		}
+		const res = await blog.getBlogList(pageNum, 9, wrapper);
 		return res;
 	};
+
+	watch(filter, () => {
+		// 筛选后重置滚动条
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+		loadMore(true);
+	});
+
 	const { isLoading, loadMore, pageNum } = useInfiniteScroll(getBlogs);
 	const isLoadMore = computed(() => blogTotal.value > blogList.value.length);
 </script>
