@@ -20,7 +20,7 @@
 			<NoticeOperator v-if="isMobile"></NoticeOperator>
 			<FilterOperator v-if="showBlogFilter"></FilterOperator>
 			<zb-svg-icon
-				v-if="showOperator"
+				v-if="showZhankai"
 				class="icon"
 				name="zhankai"
 				:size="18"
@@ -63,6 +63,10 @@
 
 	const showOperator = computed(() => {
 		return route.meta.operator ? true : false;
+	});
+
+	const showZhankai = computed(() => {
+		return route.meta.zhankai || route.meta.operator ? true : false;
 	});
 
 	const showSearch = computed(() => {

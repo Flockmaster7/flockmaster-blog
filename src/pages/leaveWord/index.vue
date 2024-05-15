@@ -1,5 +1,7 @@
 <template>
 	<div class="leaveWord-container">
+		<div class="barrage-title">留言弹幕墙</div>
+		<BarrageWall></BarrageWall>
 		<div class="title">
 			<span
 				>全部留言 {{ leaveWordTotal === 0 ? '' : leaveWordTotal }}</span
@@ -18,7 +20,7 @@
 				<template #default>
 					<div
 						class="comment"
-						v-for="(item, index) in leaveWordList"
+						v-for="item in leaveWordList"
 						:key="item.id">
 						<leaveWordItem
 							type="leaveWord"
@@ -54,7 +56,7 @@
 	import { storeToRefs } from 'pinia';
 	import { computed, ref } from 'vue';
 	import { Edit } from '@element-plus/icons-vue';
-
+	import BarrageWall from './barrageWall.vue';
 	import leaveWordItem from './leaveWordItem.vue';
 	import LeaveWordSkeleton from './leaveWordSkeleton.vue';
 	import addLeaveWord from './addLeaveWord.vue';
@@ -117,6 +119,17 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+
+		.barrage-title {
+			width: 100%;
+			font-size: 23px;
+			font-weight: 700;
+			height: 100px;
+			line-height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 
 		.title {
 			width: 100%;

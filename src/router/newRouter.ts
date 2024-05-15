@@ -96,7 +96,10 @@ export const routers = [
 			{
 				path: '/leaveWord',
 				name: 'LeaveWord',
-				component: () => import('@/pages/leaveWord/index.vue')
+				component: () => import('@/pages/leaveWord/index.vue'),
+				meta: {
+					zhankai: true
+				}
 			},
 			{
 				path: '/blog/detail',
