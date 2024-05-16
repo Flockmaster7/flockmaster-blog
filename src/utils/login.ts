@@ -3,7 +3,7 @@ import cache from './cache';
 import router from '@/router/index';
 import { storeToRefs } from 'pinia';
 import useStore from '@/store';
-import { DIANZAN_LEAVEWORD } from '@/constant';
+import { defaultUserInfo } from '@/constant';
 
 const { user, circleFriend, leaveWord } = useStore();
 const { userInfo } = storeToRefs(user);
@@ -31,17 +31,7 @@ export const redirectToLogin = (path: string) => {
 export const clearInfo = () => {
 	cache.removeCache(import.meta.env.VITE_ACCESS_TOKEN);
 	// 清除用户信息
-	userInfo.value = {
-		id: 0,
-		user_name: '游客',
-		is_admin: false,
-		name: '游客',
-		description: '这个人很懒，什么都没有留下',
-		user_image:
-			'https://ggkt-atguigu-1313888024.cos.ap-guangzhou.myqcloud.com/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
-		user_focus: 0,
-		user_fans: 0
-	};
+	userInfo.value = defaultUserInfo;
 	// 清除点赞
 	userDianzanList.value = [];
 	// 清除用户信息

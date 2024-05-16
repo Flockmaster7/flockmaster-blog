@@ -22,12 +22,14 @@
 					color="#72767b"
 					autoDark
 					:size="18"></zb-svg-icon> -->
-				<zb-svg-icon
-					@click="refreshNotice"
-					name="refresh"
-					color="#72767b"
-					autoDark
-					:size="20"></zb-svg-icon>
+				<div :class="['icon', isRefreshing ? 'rotate-icon' : '']">
+					<zb-svg-icon
+						@click="refreshNotice"
+						name="refresh"
+						color="#72767b"
+						autoDark
+						:size="20"></zb-svg-icon>
+				</div>
 			</div>
 		</template>
 	</el-drawer>
@@ -38,6 +40,7 @@
 	import NoticeList from './noticeList.vue';
 	import useStore from '@/store';
 	import { storeToRefs } from 'pinia';
+	import { ElMessage } from 'element-plus';
 
 	const noticeVisible = ref(false);
 	const badgeHidden = computed(() => {
@@ -67,18 +70,34 @@
 		noticeVisible.value = !noticeVisible.value;
 	};
 
-	const allRead = () => {};
-
+	const isRefreshing = ref(false);
 	const refreshNotice = async () => {
-		await notice.getNoticeList(1, 999, {
+		isRefreshing.value = true;
+		const res = await notice.getNoticeList(1, 999, {
 			userId: userInfo.value.id
 		});
+		if (res) {
+			ElMessage.success('刷新消息成功！');
+		}
+		setTimeout(() => {
+			isRefreshing.value = false;
+		}, 500);
 	};
 </script>
 
 <style lang="scss" scoped>
 	@import '../../static/css/mixins.scss';
+
+	@include icon-rotate();
+
 	.header-container {
 		@include flex-box(15px);
+	}
+
+	.item,
+	.icon {
+		&:hover {
+			cursor: pointer;
+		}
 	}
 </style>

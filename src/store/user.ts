@@ -1,4 +1,4 @@
-import { ADMIN } from '@/constant';
+import { ADMIN, defaultUserInfo } from '@/constant';
 import {
 	adminInfo,
 	cancelFollowUser,
@@ -28,17 +28,7 @@ export const useUserStore = defineStore('user', () => {
 		blogNum: 0,
 		workNum: 0
 	});
-	const userInfo = ref<UserInfo>({
-		id: 0,
-		user_name: '登录',
-		is_admin: false,
-		name: '登录',
-		description: '这个人很懒，什么都没有留下',
-		user_image:
-			'https://ggkt-atguigu-1313888024.cos.ap-guangzhou.myqcloud.com/flockmaster-blogs/images/ed37644d426c7bcd4f9ca5c00.png',
-		user_focus: 0,
-		user_fans: 0
-	});
+	const userInfo = ref<UserInfo>(defaultUserInfo);
 
 	// 关注列表
 	const followingList = ref<UserInfo[]>([]);

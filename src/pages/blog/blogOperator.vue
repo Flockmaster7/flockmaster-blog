@@ -8,7 +8,7 @@
 				@click="handleClick(item.type)">
 				<zb-svg-icon
 					:name="item.icon"
-					size="25"
+					:size="25"
 					:color="
 						blogStatus[item.type] ? 'var(--theme-active-show)' : ''
 					"></zb-svg-icon>

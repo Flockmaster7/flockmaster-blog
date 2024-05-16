@@ -11,6 +11,7 @@
 			<zb-svg-icon
 				v-if="!zhankai"
 				class="icon"
+				:size="20"
 				name="back"
 				@click="onBack"></zb-svg-icon>
 			<SearchBar v-if="showSearch"></SearchBar>
@@ -23,19 +24,19 @@
 				v-if="showZhankai"
 				class="icon"
 				name="zhankai"
-				:size="18"
+				:size="20"
 				@click="onZhankai"></zb-svg-icon>
 			<zb-svg-icon
 				v-if="showOperator"
 				class="icon"
 				name="comment"
-				:size="18"
+				:size="20"
 				@click="openComment"></zb-svg-icon>
 			<zb-svg-icon
 				v-if="showOperator"
 				class="icon"
 				name="leftzhankai"
-				:size="18"
+				:size="20"
 				@click="openOperator"></zb-svg-icon>
 		</div>
 	</div>
