@@ -5,6 +5,7 @@
 	--el-text-color-primary: var(--theme-text-color);
 	--el-color-info-light-9: hsla(0, 0%, 100%, 0.3);
 	--el-fill-color-blank: hsla(0, 0%, 100%, 0.3);
+	--el-bg-color-overlay: var(--theme-center-card-bg-color) !important;
 }
 
 .el-slider {
@@ -28,4 +29,8 @@
 .el-dropdown__popper {
 	/* --el-dropdown-menuItem-hover-color: var(--theme-data-show-1) */
 	--el-dropdown-menuItem-hover-fill: var(--theme-data-show-1) !important;
+}
+
+.el-popover {
+	--el-popover-bg-color: var(--theme-center-card-bg-color) !important;
 }

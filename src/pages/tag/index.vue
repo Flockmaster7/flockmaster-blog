@@ -18,7 +18,9 @@
 						>{{ item.tag_name }}</zb-tag
 					>
 				</div>
-				<zb-empty v-else>空空如也</zb-empty>
+				<zb-empty v-if="tagList.length === 0 && !isLoading"
+					>空空如也</zb-empty
+				>
 			</template>
 		</el-skeleton>
 	</div>

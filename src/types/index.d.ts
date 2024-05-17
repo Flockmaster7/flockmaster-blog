@@ -111,6 +111,7 @@ export interface Comment {
 	updatedAt: string;
 	user: UserInfo;
 	children: CommentType[];
+	childrenCount: number;
 	targetComment?: CommentType;
 	targetLeaveWords?: CommentType;
 	dianzanCount: number;

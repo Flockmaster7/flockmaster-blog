@@ -1,6 +1,6 @@
 <template>
 	<div class="leaveWord-container">
-		<div class="barrage-title">留言弹幕墙</div>
+		<div class="barrage-title">留言弹幕墙(beta)</div>
 		<BarrageWall></BarrageWall>
 		<div class="title">
 			<span
@@ -35,7 +35,9 @@
 			:isLoading="isLoading"
 			direction="center"
 			:isLoadMore="isLoadMore"></zb-load-more>
-		<zb-empty v-else :height="400"></zb-empty>
+		<zb-empty
+			v-if="leaveWordList.length === 0 && !isLoading"
+			:height="400"></zb-empty>
 
 		<el-dialog v-model="dialogVisible" title="留言" draggable>
 			<addLeaveWord @closeDialog="closeDialog"></addLeaveWord>

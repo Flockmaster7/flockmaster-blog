@@ -11,14 +11,17 @@
 		:width="searchWidth"
 		:visible="popVisible">
 		<template #reference>
-			<el-input
+			<div
 				v-if="searchOpen"
-				ref-="searchInputRef"
-				v-model="searchQuery"
-				@input="search"
-				@blur="() => (popVisible = false)"
-				:style="{ width: searchWidth + 'px' }"
-				clearable></el-input>
+				class="animate__animated animate__fadeInRight">
+				<el-input
+					ref="searchInputRef"
+					v-model="searchQuery"
+					@input="search"
+					@blur="() => (popVisible = false)"
+					:style="{ width: searchWidth + 'px' }"
+					clearable></el-input>
+			</div>
 		</template>
 		<div class="search-result">
 			<div
@@ -53,7 +56,7 @@
 	};
 
 	const searchWidth = computed(() => {
-		return isMobile.value ? 150 : 300;
+		return isMobile.value ? 100 : 300;
 	});
 
 	const openSearch = () => {

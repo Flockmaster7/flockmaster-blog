@@ -32,7 +32,7 @@
 	}
 
 	interface EmitsType {
-		(e: 'refreshComment', flag: boolean): any;
+		(e: 'refreshComment', flag: boolean): void;
 	}
 
 	const props = defineProps<PropsType>();

@@ -1,5 +1,5 @@
 <template>
-	<div class="replyArea">
+	<div class="replyArea animate__animated animate__fadeIn">
 		<div class="input">
 			<el-input
 				:rows="3"

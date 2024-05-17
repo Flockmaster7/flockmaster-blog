@@ -15,7 +15,9 @@
 				</template>
 			</el-skeleton>
 		</div>
-		<zb-empty v-if="workList.length === 0" :height="500"></zb-empty>
+		<zb-empty
+			v-if="workList.length === 0 && !isLoading"
+			:height="500"></zb-empty>
 	</div>
 </template>
 

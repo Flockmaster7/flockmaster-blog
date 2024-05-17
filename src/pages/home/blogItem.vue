@@ -102,7 +102,11 @@
 		}
 
 		.blogInfo {
-			padding: 0 30px !important;
+			width: 100% !important;
+		}
+
+		.blogImg {
+			flex-basis: 100% !important;
 		}
 
 		.bottom {
@@ -195,6 +199,7 @@
 		.blogImg {
 			width: 100%;
 			height: 100%;
+			flex-basis: 40%;
 
 			img {
 				width: 100%;
@@ -206,8 +211,6 @@
 
 	.card:hover {
 		cursor: pointer;
-		// width: 95%;
-		// height: 180px;
-		// transform: translate(-5px, -5px);
+		transform: translate(-5px, -5px);
 	}
 </style>

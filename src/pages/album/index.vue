@@ -28,7 +28,9 @@
 			v-if="!isLoadMore && albumList.length > 0"
 			:isLoading="isLoading"
 			:isLoadMore="!isLoadMore"></zb-load-more>
-		<zb-empty :height="500" v-if="albumList.length === 0"></zb-empty>
+		<zb-empty
+			:height="500"
+			v-if="albumList.length === 0 && !isLoading"></zb-empty>
 	</div>
 	<!-- </el-card> -->
 </template>

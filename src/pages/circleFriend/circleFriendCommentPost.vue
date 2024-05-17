@@ -1,5 +1,6 @@
 <template>
-	<div class="circleFriendCommentPost-container">
+	<div
+		class="circleFriendCommentPost-container animate__animated animate__fadeIn">
 		<el-input
 			v-model="commentQuery"
 			clearable
